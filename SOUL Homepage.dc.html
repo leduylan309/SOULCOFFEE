@@ -1,0 +1,1478 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,200..600;1,6..72,200..400&amp;family=Be+Vietnam+Pro:wght@300;400;500;600&amp;display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+  body { margin: 0; background: #E3DCCC; font-family: "Be Vietnam Pro", system-ui, sans-serif; color: #27292D; }
+  a { color: inherit; text-decoration: none; }
+  a:hover { color: #8E4B33; }
+  img { display: block; max-width: 100%; }
+  ::selection { background: #FFD35B; color: #27292D; }
+  @keyframes soulScrollHint { 0%,100% { transform: translateY(0); opacity: .45 } 50% { transform: translateY(9px); opacity: 1 } }
+</style>
+</helmet>
+
+<div style="width: 100%; overflow-x: clip; background: #DED6C4;">
+
+  <!-- ══════════════ DELIVERABLE A — DESKTOP HOMEPAGE ══════════════ -->
+  <div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 10px 32px; padding: 30px 34px 26px; background: #DED6C4; border-bottom: 1px solid rgba(39,41,45,.2);">
+    <div style="display: flex; align-items: baseline; gap: 20px;">
+      <span style="font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: #8E4B33;">Deliverable A</span>
+      <span style="font-family: Newsreader, Georgia, serif; font-size: 25px; letter-spacing: -.015em;">Homepage — Desktop</span>
+    </div>
+    <span style="font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: #625A4C;">1440 × auto · 12 cột · lề 56px</span>
+  </div>
+  <div id="desk-viewport" style="position: relative; width: 100%; overflow: hidden;">
+  <div id="desk-canvas" style="width: 1440px; transform-origin: 0 0; background: #F4EFE5; position: relative;">
+
+    <!-- SECTION 00 — GLOBAL NAVIGATION -->
+    <header id="soul-nav" style="position: relative; z-index: 90;">
+      <div style="max-width: 1440px; margin: 0 auto; padding: 22px 56px; display: grid; grid-template-columns: 210px 1fr auto; align-items: center; gap: 40px;">
+        <a href="#" style="display: flex; align-items: center; gap: 13px;">
+          <img src="assets/soul-elephant-ink.svg" alt="SOUL elephant symbol" style="width: 38px; height: auto;" />
+          <img src="assets/soul-lockup-text-ink.svg" alt="SOUL Fine Robusta" style="width: 74px; height: auto;" />
+        </a>
+        <nav style="display: flex; justify-content: center; gap: 38px; font-size: 12.5px; font-weight: 400; letter-spacing: .07em; text-transform: uppercase;">
+          <a href="#story" style="padding: 6px 0; border-bottom: 1px solid rgba(39,41,45,0); transition: border-color 260ms;" style-hover="border-bottom: 1px solid #27292D; color: #27292D;">Câu chuyện</a>
+          <a href="#coffee" style="padding: 6px 0; border-bottom: 1px solid rgba(39,41,45,0); transition: border-color 260ms;" style-hover="border-bottom: 1px solid #27292D; color: #27292D;">Cà phê</a>
+          <a href="#solution" style="padding: 6px 0; border-bottom: 1px solid rgba(39,41,45,0); transition: border-color 260ms;" style-hover="border-bottom: 1px solid #27292D; color: #27292D;">Coffee Solution</a>
+          <a href="#journal" style="padding: 6px 0; border-bottom: 1px solid rgba(39,41,45,0); transition: border-color 260ms;" style-hover="border-bottom: 1px solid #27292D; color: #27292D;">Journal</a>
+          <a href="#spaces" style="padding: 6px 0; border-bottom: 1px solid rgba(39,41,45,0); transition: border-color 260ms;" style-hover="border-bottom: 1px solid #27292D; color: #27292D;">Không gian</a>
+        </nav>
+        <div style="display: flex; align-items: center; gap: 26px; font-size: 11.5px; letter-spacing: .12em; text-transform: uppercase;">
+          <div style="display: flex; gap: 7px; color: #736C5E;">
+            <span style="color: #27292D; font-weight: 500;">VI</span>
+            <span aria-hidden="true">/</span>
+            <a href="#" style="color: #736C5E;">EN</a>
+          </div>
+          <a href="#" style="display: inline-flex; align-items: center; gap: 9px; padding: 11px 20px; border: 1px solid #27292D; font-weight: 500; letter-spacing: .12em; transition: background 300ms, color 300ms;" style-hover="background: #27292D; color: #F4EFE5;">Shop</a>
+        </div>
+      </div>
+    </header>
+
+    <!-- SECTION 01 — HERO -->
+    <section data-screen-label="01 Hero" style="position: relative; max-width: 1440px; margin: 0 auto; padding: 0 56px;">
+      <img src="assets/contour-ink.svg" alt="" aria-hidden="true" style="position: absolute; right: -180px; top: -40px; width: 780px; opacity: .28; pointer-events: none;" />
+      <img src="assets/soul-elephant-ink.svg" alt="" aria-hidden="true" style="position: absolute; left: -132px; bottom: 84px; width: 460px; opacity: .055; pointer-events: none;" />
+
+      <div style="position: relative; display: grid; grid-template-columns: minmax(0,1.32fr) minmax(0,1fr); gap: 56px; align-items: end; padding-top: 46px;">
+        <div>
+          <div data-reveal="up" style="display: flex; align-items: baseline; gap: 20px; padding-bottom: 30px; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: #8E4B33;">
+            <span>Buôn Ma Thuột, Việt Nam</span>
+            <span style="flex: 1; height: 1px; background: rgba(142,75,51,.32);"></span>
+            <span style="color: #6A6458;">Est. 2018</span>
+          </div>
+          <h1 data-reveal="up" data-delay="90" style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 300; font-size: 130px; line-height: .86; letter-spacing: -.035em; text-wrap: balance;">
+            Crafted<br />
+            by <span style="font-style: italic; font-weight: 200;">Vietnamese</span><br />
+            Soul
+          </h1>
+          <div style="display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 46px; padding-top: 52px; align-items: start;">
+            <p data-reveal="up" data-delay="220" style="margin: 0; font-family: Newsreader, Georgia, serif; font-size: 20px; line-height: 1.58; color: #4A4741; text-wrap: pretty;">
+              Từ Buôn Ma Thuột, chúng tôi bắt đầu một hành trình rất đơn giản: làm cà phê Việt Nam theo cách đúng.
+            </p>
+            <div data-reveal="up" data-delay="300" style="display: flex; flex-direction: column; gap: 16px; padding-top: 4px;">
+              <a href="#story" style="display: inline-flex; align-items: center; justify-content: space-between; gap: 18px; padding: 14px 0; border-top: 1px solid #27292D; border-bottom: 1px solid rgba(39,41,45,.16); font-size: 13px; letter-spacing: .04em; transition: padding 320ms cubic-bezier(.16,1,.3,1);" style-hover="padding-left: 10px; color: #8E4B33;">
+                Khám phá câu chuyện <span aria-hidden="true">→</span>
+              </a>
+              <a href="#coffee" style="display: inline-flex; align-items: center; justify-content: space-between; gap: 18px; padding: 14px 0; border-bottom: 1px solid rgba(39,41,45,.16); font-size: 13px; letter-spacing: .04em; transition: padding 320ms cubic-bezier(.16,1,.3,1);" style-hover="padding-left: 10px; color: #8E4B33;">
+                Khám phá cà phê <span aria-hidden="true">→</span>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <figure data-reveal="img" style="margin: 0; position: relative;">
+          <img src="assets/hero-cherries-dark.jpg" alt="Đôi tay chọn quả cà phê chín tại vườn Buôn Ma Thuột" style="width: 100%; height: 628px; object-fit: cover; object-position: 50% 42%;" />
+          <figcaption style="padding-top: 12px; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: #736C5E;">Thu hái chọn quả chín — Đắk Lắk</figcaption>
+        </figure>
+      </div>
+
+      <div style="display: flex; align-items: center; justify-content: space-between; padding: 64px 0 74px; border-bottom: 1px solid rgba(39,41,45,.16);">
+        <div style="display: flex; align-items: center; gap: 14px; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: #736C5E;">
+          <span style="animation: soulScrollHint 2.6s ease-in-out infinite; display: inline-block;" aria-hidden="true">↓</span>
+          <span>Cuộn để đọc tiếp</span>
+        </div>
+        <p style="margin: 0; font-family: Newsreader, Georgia, serif; font-style: italic; font-size: 17px; color: #6A6458;">Fine Robusta từ cao nguyên Việt Nam</p>
+      </div>
+    </section>
+
+    <!-- SECTION 02 — THE QUESTION -->
+    <section id="story" data-screen-label="02 The Question" style="max-width: 1440px; margin: 0 auto; padding: 148px 56px 0;">
+      <div style="display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 56px; align-items: end;">
+        <div>
+          <sc-if value="{{ showSectionNumbers }}" hint-placeholder-val="{{ true }}">
+            <div style="padding-bottom: 34px; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: #736C5E;">02 — Triết lý</div>
+          </sc-if>
+          <h2 data-reveal="up" style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 300; font-size: 94px; line-height: .9; letter-spacing: -.03em;">
+            Làm cà phê<br />thế nào<br /><span style="font-style: italic; font-weight: 200;">cho đúng?</span>
+          </h2>
+        </div>
+        <div data-reveal="up" data-delay="140" style="padding-bottom: 14px; max-width: 460px;">
+          <p style="margin: 0 0 22px; font-size: 16.5px; line-height: 1.78; color: #4A4741; text-wrap: pretty;">
+            Chúng tôi không hỏi <em style="font-family: Newsreader, Georgia, serif; font-size: 18px;">làm thế nào cho ngon</em>. Chúng tôi hỏi <em style="font-family: Newsreader, Georgia, serif; font-size: 18px;">làm thế nào cho đúng</em> — và câu trả lời buộc phải đi hết chặng đường, từ gốc cây đến đáy tách.
+          </p>
+          <p style="margin: 0; font-size: 15px; line-height: 1.78; color: #6A6458; text-wrap: pretty;">
+            Đúng trong cách trồng và thu hái. Đúng trong cách sơ chế và rang. Đúng trong cách làm việc với người nông dân, để từng giọt mồ hôi của họ rơi xuống là xứng đáng. Và đúng cả trong cách kết nối với người uống.
+          </p>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(6, minmax(0,1fr)); border-top: 1px solid #27292D; margin-top: 92px;">
+        <div data-reveal="up" style="padding: 26px 20px 30px 0; border-right: 1px solid rgba(39,41,45,.16);">
+          <div style="font-size: 10.5px; letter-spacing: .18em; color: #736C5E; padding-bottom: 20px;">01</div>
+          <div style="font-family: Newsreader, Georgia, serif; font-size: 26px; letter-spacing: -.01em;">Trồng</div>
+        </div>
+        <div data-reveal="up" data-delay="70" style="padding: 26px 20px 30px; border-right: 1px solid rgba(39,41,45,.16);">
+          <div style="font-size: 10.5px; letter-spacing: .18em; color: #736C5E; padding-bottom: 20px;">02</div>
+          <div style="font-family: Newsreader, Georgia, serif; font-size: 26px; letter-spacing: -.01em;">Thu hái</div>
+        </div>
+        <div data-reveal="up" data-delay="140" style="padding: 26px 20px 30px; border-right: 1px solid rgba(39,41,45,.16);">
+          <div style="font-size: 10.5px; letter-spacing: .18em; color: #736C5E; padding-bottom: 20px;">03</div>
+          <div style="font-family: Newsreader, Georgia, serif; font-size: 26px; letter-spacing: -.01em;">Sơ chế</div>
+        </div>
+        <div data-reveal="up" data-delay="210" style="padding: 26px 20px 30px; border-right: 1px solid rgba(39,41,45,.16);">
+          <div style="font-size: 10.5px; letter-spacing: .18em; color: #736C5E; padding-bottom: 20px;">04</div>
+          <div style="font-family: Newsreader, Georgia, serif; font-size: 26px; letter-spacing: -.01em;">Rang</div>
+        </div>
+        <div data-reveal="up" data-delay="280" style="padding: 26px 20px 30px; border-right: 1px solid rgba(39,41,45,.16);">
+          <div style="font-size: 10.5px; letter-spacing: .18em; color: #736C5E; padding-bottom: 20px;">05</div>
+          <div style="font-family: Newsreader, Georgia, serif; font-size: 26px; letter-spacing: -.01em;">Pha</div>
+        </div>
+        <div data-reveal="up" data-delay="350" style="padding: 26px 0 30px 20px;">
+          <div style="font-size: 10.5px; letter-spacing: .18em; color: #8E4B33; padding-bottom: 20px;">06</div>
+          <div style="font-family: Newsreader, Georgia, serif; font-size: 26px; letter-spacing: -.01em; color: #8E4B33;">Kết nối</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 03 — FROM BUÔN MA THUỘT -->
+    <section data-screen-label="03 From Buon Ma Thuot" style="position: relative; padding: 150px 0 0;">
+      <div style="max-width: 1440px; margin: 0 auto; padding: 0 56px;">
+        <div style="display: grid; grid-template-columns: minmax(0,1.05fr) minmax(0,.95fr); gap: 64px; align-items: start;">
+          <figure data-reveal="img" style="margin: 0;">
+            <img src="assets/farm-landscape.jpg" alt="Vườn cà phê Robusta trên đất bazan cao nguyên" style="width: 100%; height: 560px; object-fit: cover; object-position: 50% 64%;" />
+            <figcaption style="display: flex; justify-content: space-between; padding-top: 12px; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: #736C5E;">
+              <span>Vùng liên kết — Đắk Lắk</span>
+              <span>SOUL OWNED</span>
+            </figcaption>
+          </figure>
+          <div style="position: relative; padding-top: 8px;">
+            <img src="assets/contour-basalt.svg" alt="" aria-hidden="true" style="position: absolute; right: -190px; top: -80px; width: 640px; opacity: .5; pointer-events: none;" />
+            <sc-if value="{{ showSectionNumbers }}" hint-placeholder-val="{{ true }}">
+              <div style="position: relative; padding-bottom: 32px; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: #736C5E;">03 — Nơi bắt đầu</div>
+            </sc-if>
+            <h2 data-reveal="up" style="position: relative; margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 300; font-size: 88px; line-height: .9; letter-spacing: -.03em;">
+              Mọi thứ<br />bắt đầu<br /><span style="color: #8E4B33;">từ đất.</span>
+            </h2>
+            <div data-reveal="up" data-delay="140" style="position: relative; display: flex; gap: 40px; padding: 44px 0 36px; margin-top: 40px; border-top: 1px solid rgba(142,75,51,.34); font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: #8E4B33;">
+              <span>Buôn Ma Thuột</span>
+              <span>12.6666° N</span>
+              <span>108.0500° E</span>
+            </div>
+            <p data-reveal="up" data-delay="200" style="position: relative; margin: 0 0 22px; max-width: 480px; font-family: Newsreader, Georgia, serif; font-size: 21px; line-height: 1.56; color: #3B3833; text-wrap: pretty;">
+              Đất bazan đỏ, mùa khô dài, mùa mưa dày. Robusta ở đây không cần được cứu — nó cần được làm đúng.
+            </p>
+            <p data-reveal="up" data-delay="250" style="position: relative; margin: 0 0 40px; max-width: 480px; font-size: 15px; line-height: 1.8; color: #6A6458; text-wrap: pretty;">
+              SOUL được tạo nên bởi hai chị em lớn lên trong một trang trại cà phê ở Buôn Ma Thuột. Caffeine đã len vào tâm trí chúng tôi như một lẽ thường — và cũng chính từ đó, chúng tôi nhìn thấy những điều chưa đúng trong cách cà phê Việt được làm ra.
+            </p>
+            <a href="#story" style="position: relative; display: inline-flex; align-items: center; gap: 12px; padding-bottom: 8px; border-bottom: 1px solid #27292D; font-size: 13px; letter-spacing: .04em;" style-hover="color: #8E4B33; border-color: #8E4B33;">Câu chuyện của SOUL <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 3px; padding-top: 96px;">
+        <figure data-reveal="img" style="margin: 0;"><img src="assets/cherry-picking.jpg" alt="Bàn tay chọn quả cà phê chín trên cành" style="width: 100%; height: 380px; object-fit: cover;" /></figure>
+        <figure data-reveal="img" data-delay="120" style="margin: 0;"><img src="assets/cherries-hands.jpg" alt="Quả cà phê chín trên tay người thu hái" style="width: 100%; height: 380px; object-fit: cover;" /></figure>
+        <figure data-reveal="img" data-delay="240" style="margin: 0;"><img src="assets/soil-bag.jpg" alt="Bao cà phê SOUL đặt trên nền đất bazan" style="width: 100%; height: 380px; object-fit: cover;" /></figure>
+      </div>
+    </section>
+
+    <!-- SECTION 04 — FINE ROBUSTA -->
+    <section id="coffee" data-screen-label="04 Fine Robusta" style="background: #27292D; color: #F4EFE5; margin-top: 0;">
+      <div style="max-width: 1440px; margin: 0 auto; padding: 150px 56px 130px;">
+        <div style="display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 64px; align-items: start;">
+          <div>
+            <sc-if value="{{ showSectionNumbers }}" hint-placeholder-val="{{ true }}">
+              <div style="padding-bottom: 34px; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: #FFD35B;">04 — Fine Robusta</div>
+            </sc-if>
+            <h2 data-reveal="up" style="margin: 0 0 40px; font-family: Newsreader, Georgia, serif; font-weight: 300; font-size: 90px; line-height: .88; letter-spacing: -.03em;">
+              Robusta<br />can be<br /><span style="font-style: italic; font-weight: 200; color: #FFD35B;">more.</span>
+            </h2>
+            <p data-reveal="up" data-delay="120" style="margin: 0; max-width: 470px; font-size: 16.5px; line-height: 1.8; color: rgba(244,239,229,.74); text-wrap: pretty;">
+              Fine Robusta là cà phê Robusta được đánh giá đạt ngưỡng <span style="color: #F4EFE5;">“Fine”</span> bởi Q-Grader, theo tiêu chuẩn CQI &amp; SCA. “Fine” không đơn thuần là ngon — đó là kết quả của kiểm soát chất lượng nghiêm ngặt ở từng công đoạn.
+            </p>
+            <p data-reveal="up" data-delay="170" style="margin: 22px 0 0; max-width: 470px; font-size: 15px; line-height: 1.8; color: rgba(244,239,229,.6); text-wrap: pretty;">
+              Chúng tôi không cố biến Robusta thành Arabica. Chúng tôi làm cho Robusta trở thành điều tốt nhất mà nó có thể là.
+            </p>
+          </div>
+          <figure data-reveal="img" style="margin: 0;">
+            <img src="assets/cherries-macro.jpg" alt="Macro quả cà phê chín trong lòng bàn tay" style="width: 100%; height: 560px; object-fit: cover;" />
+          </figure>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); border-top: 1px solid rgba(244,239,229,.2); margin-top: 92px;">
+          <div data-reveal="up" style="padding: 26px 22px 0 0; border-right: 1px solid rgba(244,239,229,.14);"><div style="font-size: 11px; letter-spacing: .14em; text-transform: uppercase; line-height: 1.6;">Ripe<br />cherry</div><div style="padding-top: 10px; font-size: 12.5px; color: rgba(244,239,229,.58);">Chỉ hái quả chín</div></div>
+          <div data-reveal="up" data-delay="80" style="padding: 26px 22px 0; border-right: 1px solid rgba(244,239,229,.14);"><div style="font-size: 11px; letter-spacing: .14em; text-transform: uppercase; line-height: 1.6;">Hand<br />sorted</div><div style="padding-top: 10px; font-size: 12.5px; color: rgba(244,239,229,.58);">Phân loại thủ công</div></div>
+          <div data-reveal="up" data-delay="160" style="padding: 26px 22px 0; border-right: 1px solid rgba(244,239,229,.14);"><div style="font-size: 11px; letter-spacing: .14em; text-transform: uppercase; line-height: 1.6;">Controlled<br />processing</div><div style="padding-top: 10px; font-size: 12.5px; color: rgba(244,239,229,.58);">Men Soul · men trái cây · men rượu cần</div></div>
+          <div data-reveal="up" data-delay="240" style="padding: 26px 22px 0; border-right: 1px solid rgba(244,239,229,.14);"><div style="font-size: 11px; letter-spacing: .14em; text-transform: uppercase; line-height: 1.6;">Specialty<br />grade</div><div style="padding-top: 10px; font-size: 12.5px; color: rgba(244,239,229,.58);">Q-Grader · CQI · SCA</div></div>
+          <div data-reveal="up" data-delay="320" style="padding: 26px 0 0 22px;"><div style="font-size: 11px; letter-spacing: .14em; text-transform: uppercase; line-height: 1.6; color: #FFD35B;">Roasted<br />with intent</div><div style="padding-top: 10px; font-size: 12.5px; color: rgba(244,239,229,.58);">Profile riêng cho từng lô</div></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 05 — THE CRAFT -->
+    <section data-screen-label="05 The Craft" style="max-width: 1440px; margin: 0 auto; padding: 150px 56px 0;">
+      <div style="display: flex; align-items: baseline; justify-content: space-between; gap: 40px; padding-bottom: 84px; border-bottom: 1px solid #27292D;">
+        <div>
+          <sc-if value="{{ showSectionNumbers }}" hint-placeholder-val="{{ true }}">
+            <div style="padding-bottom: 30px; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: #736C5E;">05 — Handcraft</div>
+          </sc-if>
+          <h2 data-reveal="up" style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 300; font-size: 76px; line-height: .92; letter-spacing: -.03em;">Từ quả chín<br />đến tách cà phê</h2>
+        </div>
+        <p data-reveal="up" data-delay="120" style="margin: 0; max-width: 330px; font-size: 15px; line-height: 1.78; color: #6A6458; text-wrap: pretty;">Năm công đoạn. Không công đoạn nào được phép thỏa hiệp. Đây là nơi “đúng” trở thành một việc làm bằng tay.</p>
+      </div>
+
+      <div data-reveal="up" style="display: grid; grid-template-columns: 96px minmax(0,.72fr) minmax(0,1fr); gap: 48px; align-items: start; padding: 62px 0; border-bottom: 1px solid rgba(39,41,45,.16);">
+        <div style="font-family: Newsreader, Georgia, serif; font-size: 62px; line-height: .8; color: #8F8471;">01</div>
+        <div>
+          <h3 style="margin: 0 0 8px; font-size: 12px; letter-spacing: .2em; text-transform: uppercase;">Trồng · Grow</h3>
+          <p style="margin: 0 0 18px; font-family: Newsreader, Georgia, serif; font-size: 27px; line-height: 1.3; letter-spacing: -.015em;">Cây Robusta trên đất bazan, ở độ cao của Tây Nguyên.</p>
+          <p style="margin: 0; font-size: 14.5px; line-height: 1.78; color: #6A6458; text-wrap: pretty;">Hơn 500 ha vùng trồng liên kết, canh tác theo hướng bền vững cùng các nông hộ địa phương.</p>
+        </div>
+        <figure style="margin: 0; display: grid; grid-template-columns: 1.4fr 1fr; gap: 3px;">
+          <img src="assets/farm-green.jpg" alt="Vườn Robusta xanh trước vụ chín" style="width: 100%; height: 300px; object-fit: cover;" />
+          <img src="assets/farm-branch.jpg" alt="Cành cà phê với quả đang chuyển màu" style="width: 100%; height: 300px; object-fit: cover;" />
+        </figure>
+      </div>
+
+      <div data-reveal="up" style="display: grid; grid-template-columns: 96px minmax(0,1fr) minmax(0,.72fr); gap: 48px; align-items: start; padding: 62px 0; border-bottom: 1px solid rgba(39,41,45,.16);">
+        <div style="font-family: Newsreader, Georgia, serif; font-size: 62px; line-height: .8; color: #8F8471;">02</div>
+        <figure style="margin: 0;">
+          <img src="assets/cherries-hands.jpg" alt="Hai bàn tay đầy quả cà phê chín đỏ" style="width: 100%; height: 340px; object-fit: cover;" />
+        </figure>
+        <div>
+          <h3 style="margin: 0 0 8px; font-size: 12px; letter-spacing: .2em; text-transform: uppercase;">Thu hái · Harvest</h3>
+          <p style="margin: 0 0 18px; font-family: Newsreader, Georgia, serif; font-size: 27px; line-height: 1.3; letter-spacing: -.015em;">Hái chọn bằng tay. Chỉ quả chín được đi tiếp.</p>
+          <p style="margin: 0; font-size: 14.5px; line-height: 1.78; color: #6A6458; text-wrap: pretty;">Thu hái và phân loại thủ công là điều kiện đầu tiên để kiểm soát chất lượng — và là điều khó nhất để duy trì.</p>
+        </div>
+      </div>
+
+      <div data-reveal="up" style="display: grid; grid-template-columns: 96px minmax(0,.72fr) minmax(0,1fr); gap: 48px; align-items: start; padding: 62px 0; border-bottom: 1px solid rgba(39,41,45,.16);">
+        <div style="font-family: Newsreader, Georgia, serif; font-size: 62px; line-height: .8; color: #8E4B33;">03</div>
+        <div>
+          <h3 style="margin: 0 0 8px; font-size: 12px; letter-spacing: .2em; text-transform: uppercase; color: #8E4B33;">Sơ chế · Process</h3>
+          <p style="margin: 0 0 18px; font-family: Newsreader, Georgia, serif; font-size: 27px; line-height: 1.3; letter-spacing: -.015em;">Men Soul, men trái cây địa phương, men rượu cần.</p>
+          <p style="margin: 0 0 22px; font-size: 14.5px; line-height: 1.78; color: #6A6458; text-wrap: pretty;">Với mong muốn lưu giữ và phát triển văn hoá Tây Nguyên, SOUL nghiên cứu và thử nghiệm phương pháp sơ chế riêng, tạo nên hương men đặc trưng không thể lẫn.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <span style="padding: 7px 13px; border: 1px solid rgba(142,75,51,.4); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: #8E4B33;">Natural</span>
+            <span style="padding: 7px 13px; border: 1px solid rgba(142,75,51,.4); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: #8E4B33;">Anaerobic</span>
+            <span style="padding: 7px 13px; border: 1px solid rgba(142,75,51,.4); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: #8E4B33;">Soul yeast</span>
+            <span style="padding: 7px 13px; border: 1px solid rgba(142,75,51,.4); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: #8E4B33;">Local fruits yeast</span>
+            <span style="padding: 7px 13px; border: 1px solid rgba(142,75,51,.4); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: #8E4B33;">Cần wine yeast</span>
+            <span style="padding: 7px 13px; border: 1px solid rgba(142,75,51,.4); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: #8E4B33;">Red honey</span>
+          </div>
+        </div>
+        <figure style="margin: 0; display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3px;">
+          <img src="assets/ferment-hands.jpg" alt="Bàn tay đảo khối cà phê đang lên men" style="width: 100%; height: 320px; object-fit: cover;" />
+          <img src="assets/drying-beds.jpg" alt="Giàn phơi cà phê trên luống cao" style="width: 100%; height: 320px; object-fit: cover;" />
+          <img src="assets/drying-trays.jpg" alt="Sân phơi cà phê nhìn từ trên" style="width: 100%; height: 320px; object-fit: cover;" />
+        </figure>
+      </div>
+
+      <div data-reveal="up" style="display: grid; grid-template-columns: 96px minmax(0,1fr) minmax(0,.72fr); gap: 48px; align-items: start; padding: 62px 0; border-bottom: 1px solid rgba(39,41,45,.16);">
+        <div style="font-family: Newsreader, Georgia, serif; font-size: 62px; line-height: .8; color: #8F8471;">04</div>
+        <figure style="margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 3px;">
+          <img src="assets/roastery.jpg" alt="Nạp hạt vào máy rang tại xưởng SOUL" style="width: 100%; height: 320px; object-fit: cover;" />
+          <img src="assets/roasted-hands.jpg" alt="Hạt cà phê đã rang trong tay" style="width: 100%; height: 320px; object-fit: cover;" />
+        </figure>
+        <div>
+          <h3 style="margin: 0 0 8px; font-size: 12px; letter-spacing: .2em; text-transform: uppercase;">Rang · Roast</h3>
+          <p style="margin: 0 0 18px; font-family: Newsreader, Georgia, serif; font-size: 27px; line-height: 1.3; letter-spacing: -.015em;">Mỗi lô một profile. Rang để giữ, không để che.</p>
+          <p style="margin: 0; font-size: 14.5px; line-height: 1.78; color: #6A6458; text-wrap: pretty;">Năng lực rang trung bình 20 tấn/tháng, tối đa 60 tấn/tháng, trên dây chuyền đạt chứng nhận an toàn thực phẩm.</p>
+        </div>
+      </div>
+
+      <div data-reveal="up" style="display: grid; grid-template-columns: 96px minmax(0,.72fr) minmax(0,1fr); gap: 48px; align-items: start; padding: 62px 0 96px;">
+        <div style="font-family: Newsreader, Georgia, serif; font-size: 62px; line-height: .8; color: #8F8471;">05</div>
+        <div>
+          <h3 style="margin: 0 0 8px; font-size: 12px; letter-spacing: .2em; text-transform: uppercase;">Pha · Brew</h3>
+          <p style="margin: 0 0 18px; font-family: Newsreader, Georgia, serif; font-size: 27px; line-height: 1.3; letter-spacing: -.015em;">Phin, espresso, brewing, cold brew — bốn cách để cùng một hạt lên tiếng.</p>
+          <p style="margin: 0; font-size: 14.5px; line-height: 1.78; color: #6A6458; text-wrap: pretty;">Chúng tôi tôn trọng gu của từng người uống. Nhiệm vụ của SOUL là để hạt cà phê không bị mất đi điều gì trên đường đến tách của bạn.</p>
+        </div>
+        <figure style="margin: 0; display: grid; grid-template-columns: repeat(4, 1fr); gap: 3px;">
+          <img src="assets/brew-phin-dark.jpg" alt="Barista chuẩn bị phin cà phê" style="width: 100%; height: 300px; object-fit: cover;" />
+          <img src="assets/brew-espresso.jpg" alt="Espresso chảy xuống ly thủy tinh" style="width: 100%; height: 300px; object-fit: cover;" />
+          <img src="assets/brew-pourover.jpg" alt="Rót nước pour-over vào tách" style="width: 100%; height: 300px; object-fit: cover;" />
+          <img src="assets/brew-chemex.jpg" alt="Dụng cụ brewing trên quầy bar" style="width: 100%; height: 300px; object-fit: cover;" />
+        </figure>
+      </div>
+    </section>
+
+    <!-- SECTION 06 — THE JOURNEY OF SENSES -->
+    <section data-screen-label="06 Journey of Senses" style="background: #1B1C1F; color: #F4EFE5;">
+      <div style="max-width: 1440px; margin: 0 auto; padding: 148px 56px 130px;">
+        <div style="display: grid; grid-template-columns: minmax(0,1fr) minmax(0,.86fr); gap: 64px; align-items: end; padding-bottom: 88px;">
+          <div>
+            <sc-if value="{{ showSectionNumbers }}" hint-placeholder-val="{{ true }}">
+              <div style="padding-bottom: 30px; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: rgba(244,239,229,.58);">06 — Sense</div>
+            </sc-if>
+            <p data-reveal="up" style="margin: 0 0 26px; font-size: 11px; letter-spacing: .3em; text-transform: uppercase; color: #FFD35B;">The Journey of Senses</p>
+            <h2 data-reveal="up" data-delay="80" style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 300; font-size: 82px; line-height: .92; letter-spacing: -.03em;">Một tách cà phê<br /><span style="font-style: italic; font-weight: 200;">không chỉ có vị.</span></h2>
+          </div>
+          <p data-reveal="up" data-delay="160" style="margin: 0; max-width: 420px; font-size: 16px; line-height: 1.8; color: rgba(244,239,229,.62); text-wrap: pretty;">Sense là giá trị đầu tiên trong hệ giá trị của SOUL: kết nối cảm xúc qua từng điểm chạm giác quan. Âm thanh của cối rang. Hương bánh mới. Chất liệu của bao bì. Cách một barista kể chuyện.</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(5, minmax(0,1fr)); gap: 3px;">
+          <figure data-reveal="img" style="margin: 0;">
+            <img src="assets/grounds-macro.jpg" alt="Cà phê vừa xay trong phễu lọc" style="width: 100%; height: 300px; object-fit: cover;" />
+            <div style="padding: 20px 0 0;">
+              <div style="font-size: 10.5px; letter-spacing: .22em; text-transform: uppercase; color: #FFD35B; padding-bottom: 10px;">Nghe · Hear</div>
+              <p style="margin: 0; font-family: Newsreader, Georgia, serif; font-size: 17px; line-height: 1.45; color: rgba(244,239,229,.86);">Tiếng cối xay trước khi quán mở cửa.</p>
+            </div>
+          </figure>
+          <figure data-reveal="img" data-delay="90" style="margin: 0;">
+            <img src="assets/roasted-hands.jpg" alt="Hạt rang trong lòng bàn tay" style="width: 100%; height: 300px; object-fit: cover;" />
+            <div style="padding: 20px 0 0;">
+              <div style="font-size: 10.5px; letter-spacing: .22em; text-transform: uppercase; color: #FFD35B; padding-bottom: 10px;">Ngửi · Smell</div>
+              <p style="margin: 0; font-family: Newsreader, Georgia, serif; font-size: 17px; line-height: 1.45; color: rgba(244,239,229,.86);">Hương men còn đọng lại sau khi rang.</p>
+            </div>
+          </figure>
+          <figure data-reveal="img" data-delay="180" style="margin: 0;">
+            <img src="assets/cup-hand.jpg" alt="Bàn tay giữ tách gốm cà phê đen" style="width: 100%; height: 300px; object-fit: cover;" />
+            <div style="padding: 20px 0 0;">
+              <div style="font-size: 10.5px; letter-spacing: .22em; text-transform: uppercase; color: #FFD35B; padding-bottom: 10px;">Chạm · Touch</div>
+              <p style="margin: 0; font-family: Newsreader, Georgia, serif; font-size: 17px; line-height: 1.45; color: rgba(244,239,229,.86);">Men gốm còn ấm trong lòng bàn tay.</p>
+            </div>
+          </figure>
+          <figure data-reveal="img" data-delay="270" style="margin: 0;">
+            <img src="assets/brew-espresso.jpg" alt="Dòng espresso chảy trong ly" style="width: 100%; height: 300px; object-fit: cover;" />
+            <div style="padding: 20px 0 0;">
+              <div style="font-size: 10.5px; letter-spacing: .22em; text-transform: uppercase; color: #FFD35B; padding-bottom: 10px;">Thấy · See</div>
+              <p style="margin: 0; font-family: Newsreader, Georgia, serif; font-size: 17px; line-height: 1.45; color: rgba(244,239,229,.86);">Màu của dòng chiết đổi theo từng giây.</p>
+            </div>
+          </figure>
+          <figure data-reveal="img" data-delay="360" style="margin: 0;">
+            <img src="assets/senses-pour.jpg" alt="Rót cà phê vào tách gốm" style="width: 100%; height: 300px; object-fit: cover;" />
+            <div style="padding: 20px 0 0;">
+              <div style="font-size: 10.5px; letter-spacing: .22em; text-transform: uppercase; color: #FFD35B; padding-bottom: 10px;">Nếm · Taste</div>
+              <p style="margin: 0; font-family: Newsreader, Georgia, serif; font-size: 17px; line-height: 1.45; color: rgba(244,239,229,.86);">Hậu vị béo bùi ở lại lâu hơn ngụm cuối.</p>
+            </div>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 07 — SOULFUL COLLECTION 2026 -->
+    <section data-screen-label="07 Soulful Collection" style="max-width: 1440px; margin: 0 auto; padding: 150px 56px 0;">
+      <div style="display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 64px; align-items: end; padding-bottom: 76px;">
+        <div>
+          <sc-if value="{{ showSectionNumbers }}" hint-placeholder-val="{{ true }}">
+            <div style="padding-bottom: 30px; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: #736C5E;">07 — Sản phẩm</div>
+          </sc-if>
+          <h2 data-reveal="up" style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 300; font-size: 79px; line-height: .92; letter-spacing: -.03em;">Soulful<br />Collection <span style="font-style: italic; font-weight: 200;">2026</span></h2>
+        </div>
+        <div data-reveal="up" data-delay="120" style="padding-bottom: 10px;">
+          <p style="margin: 0 0 22px; max-width: 480px; font-size: 16px; line-height: 1.8; color: #4A4741; text-wrap: pretty;">Bốn tính cách hương vị, gọi tên bốn sắc thái của Tây Nguyên. Mỗi sản phẩm nối một vùng đất với một cách pha, và một cảm giác ở lại sau khi tách cà phê khép lại.</p>
+          <a href="#" style="display: inline-flex; align-items: center; gap: 12px; padding-bottom: 8px; border-bottom: 1px solid #27292D; font-size: 13px; letter-spacing: .04em;" style-hover="color: #8E4B33; border-color: #8E4B33;">Khám phá Soulful Collection <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 3px; align-items: end;">
+        <article data-reveal="img" style="background: #EAE3D5;">
+          <img src="assets/pack-black-bag.jpg" alt="Bao bì cà phê phin truyền thống SOUL — Soulful CAY" style="width: 100%; height: 420px; object-fit: cover;" />
+          <div style="padding: 30px 26px 36px;">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 18px; border-bottom: 1px solid rgba(39,41,45,.18);">
+              <h3 style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: 40px; letter-spacing: -.02em;">Cay</h3>
+              <span style="font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: #8E4B33;">Krông Năng</span>
+            </div>
+            <div style="padding-top: 18px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #6A6458;">Vietnamese Phin</div>
+            <p style="margin: 14px 0 0; font-family: Newsreader, Georgia, serif; font-size: 19px; line-height: 1.42;">Chắc · có lực · dứt khoát</p>
+            <p style="margin: 14px 0 0; font-size: 13.5px; line-height: 1.7; color: #6A6458; text-wrap: pretty;">Đất bazan dày và giàu nội lực. Cấu trúc vị hiện lên rõ ngay từ cái chạm đầu tiên.</p>
+          </div>
+        </article>
+        <article data-reveal="img" data-delay="110" style="background: #27292D; color: #F4EFE5;">
+          <img src="assets/pack-origin-a.jpg" alt="Bao bì Origin SOUL — Soulful NỒNG, pha máy" style="width: 100%; height: 480px; object-fit: cover;" />
+          <div style="padding: 30px 26px 36px;">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 18px; border-bottom: 1px solid rgba(244,239,229,.22);">
+              <h3 style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: 40px; letter-spacing: -.02em;">Nồng</h3>
+              <span style="font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: #FFD35B;">Buôn Ma Thuột</span>
+            </div>
+            <div style="padding-top: 18px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: rgba(244,239,229,.56);">Espresso</div>
+            <p style="margin: 14px 0 0; font-family: Newsreader, Georgia, serif; font-size: 19px; line-height: 1.42;">Mạnh · rõ · dễ nhớ</p>
+            <p style="margin: 14px 0 0; font-size: 13.5px; line-height: 1.7; color: rgba(244,239,229,.6); text-wrap: pretty;">Vùng đất mà chính tên gọi đã là một dấu ấn của cà phê Việt Nam.</p>
+          </div>
+        </article>
+        <article data-reveal="img" data-delay="220" style="background: #EAE3D5;">
+          <img src="assets/pack-origin-b.jpg" alt="Bao bì Soulful THƠM — ủ lạnh" style="width: 100%; height: 420px; object-fit: cover;" />
+          <div style="padding: 30px 26px 36px;">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 18px; border-bottom: 1px solid rgba(39,41,45,.18);">
+              <h3 style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: 40px; letter-spacing: -.02em;">Thơm</h3>
+              <span style="font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: #8E4B33;">Cư M’gar</span>
+            </div>
+            <div style="padding-top: 18px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #6A6458;">Cold Brew</div>
+            <p style="margin: 14px 0 0; font-family: Newsreader, Georgia, serif; font-size: 19px; line-height: 1.42;">Nhiều tầng · mở dần</p>
+            <p style="margin: 14px 0 0; font-size: 13.5px; line-height: 1.7; color: #6A6458; text-wrap: pretty;">Vùng đất của độ chuyển và ký ức. Hương không đi thẳng, mà mở ra theo từng lớp.</p>
+          </div>
+        </article>
+        <article data-reveal="img" data-delay="330" style="background: #EAE3D5;">
+          <img src="assets/pack-white-bag.jpg" alt="Bao bì Soulful NGỌT — pha dụng cụ" style="width: 100%; height: 460px; object-fit: cover;" />
+          <div style="padding: 30px 26px 36px;">
+            <div style="display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 18px; border-bottom: 1px solid rgba(39,41,45,.18);">
+              <h3 style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: 40px; letter-spacing: -.02em;">Ngọt</h3>
+              <span style="font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: #8E4B33;">Krông Pắc</span>
+            </div>
+            <div style="padding-top: 18px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #6A6458;">Brewing</div>
+            <p style="margin: 14px 0 0; font-family: Newsreader, Georgia, serif; font-size: 19px; line-height: 1.42;">Dịu · cân bằng · ở lại</p>
+            <p style="margin: 14px 0 0; font-size: 13.5px; line-height: 1.7; color: #6A6458; text-wrap: pretty;">Vùng đất của thích nghi và bền bỉ. Ngọt đến chậm hơn, rồi lưu lại lâu hơn.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SECTION 08 — PROOF OF CRAFT -->
+    <section data-screen-label="08 Proof of Craft" style="background: #FFD35B; margin-top: 150px;">
+      <div style="max-width: 1440px; margin: 0 auto; padding: 130px 56px;">
+        <div style="display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 64px; align-items: end; padding-bottom: 84px;">
+          <div>
+            <sc-if value="{{ showSectionNumbers }}" hint-placeholder-val="{{ true }}">
+              <div style="padding-bottom: 30px; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: rgba(39,41,45,.72);">08 — Bằng chứng</div>
+            </sc-if>
+            <h2 data-reveal="up" style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 300; font-size: 82px; line-height: .9; letter-spacing: -.03em;">Craft<br />you can<br /><span style="font-style: italic; font-weight: 200;">measure.</span></h2>
+          </div>
+          <p data-reveal="up" data-delay="120" style="margin: 0; max-width: 430px; padding-bottom: 10px; font-size: 16px; line-height: 1.8; color: rgba(39,41,45,.76); text-wrap: pretty;">Cảm xúc là phần đọng lại. Nhưng trước đó, chất lượng phải đo được — bằng điểm cup, bằng chứng chỉ, bằng sản lượng và bằng diện tích vùng trồng.</p>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); border-top: 1px solid rgba(39,41,45,.34);">
+          <div data-reveal="up" style="padding: 34px 24px 40px 0; border-right: 1px solid rgba(39,41,45,.24);">
+            <div style="font-family: Newsreader, Georgia, serif; font-size: 74px; line-height: .9; letter-spacing: -.03em;">87.21</div>
+            <div style="padding-top: 18px; font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase; line-height: 1.7;">Top 1 Robusta<br />VCPC 2026</div>
+            <p style="margin: 12px 0 0; font-size: 13px; line-height: 1.65; color: rgba(39,41,45,.74);">Năm thứ ba liên tiếp giữ Top 1 tại Vietnam Coffee Producer Competition.</p>
+          </div>
+          <div data-reveal="up" data-delay="90" style="padding: 34px 24px 40px; border-right: 1px solid rgba(39,41,45,.24);">
+            <div style="font-family: Newsreader, Georgia, serif; font-size: 74px; line-height: .9; letter-spacing: -.03em;">500<span style="font-size: .52em;"> ha</span></div>
+            <div style="padding-top: 18px; font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase; line-height: 1.7;">Vùng trồng<br />liên kết</div>
+            <p style="margin: 12px 0 0; font-size: 13px; line-height: 1.65; color: rgba(39,41,45,.74);">Canh tác cùng các nông hộ địa phương theo hướng bền vững.</p>
+          </div>
+          <div data-reveal="up" data-delay="180" style="padding: 34px 24px 40px; border-right: 1px solid rgba(39,41,45,.24);">
+            <div style="font-family: Newsreader, Georgia, serif; font-size: 74px; line-height: .9; letter-spacing: -.03em;">20<span style="font-size: .42em;"> tấn/tháng</span></div>
+            <div style="padding-top: 18px; font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase; line-height: 1.7;">Năng lực rang<br />trung bình</div>
+            <p style="margin: 12px 0 0; font-size: 13px; line-height: 1.65; color: rgba(39,41,45,.74);">Tối đa 60 tấn/tháng. Chứng nhận an toàn nhà máy và vệ sinh thực phẩm.</p>
+          </div>
+          <div data-reveal="up" data-delay="270" style="padding: 34px 0 40px 24px;">
+            <div style="font-family: Newsreader, Georgia, serif; font-size: 74px; line-height: .9; letter-spacing: -.03em;">2018</div>
+            <div style="padding-top: 18px; font-size: 11.5px; letter-spacing: .16em; text-transform: uppercase; line-height: 1.7;">Thành lập tại<br />Buôn Ma Thuột</div>
+            <p style="margin: 12px 0 0; font-size: 13px; line-height: 1.65; color: rgba(39,41,45,.74);">Thương hiệu tiên phong trong lĩnh vực Fine Robusta tại Việt Nam.</p>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr) minmax(0,1.1fr); gap: 40px; align-items: start; padding-top: 74px; border-top: 1px solid rgba(39,41,45,.24); margin-top: 4px;">
+          <div data-reveal="up">
+            <div style="font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; color: rgba(39,41,45,.72); padding-bottom: 18px;">Chuyên môn</div>
+            <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 11px; font-size: 14.5px; line-height: 1.5;">
+              <li>Q-Grader Certificate — CQI</li>
+              <li>SCA Roaster</li>
+              <li>Processing Certificate</li>
+              <li>FDA Registered</li>
+            </ul>
+          </div>
+          <div data-reveal="up" data-delay="90">
+            <div style="font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; color: rgba(39,41,45,.72); padding-bottom: 18px;">Giải thưởng gần đây</div>
+            <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 11px; font-size: 14.5px; line-height: 1.5;">
+              <li>Top 1 &amp; Top 3 Robusta — VCPC 2026</li>
+              <li>Top 1 Liberica — SEA Green Coffee 2025</li>
+              <li>Top 10 SEA Green Coffee, Robusta 2025</li>
+              <li>Top 1 Vietnam Green Coffee 2024</li>
+            </ul>
+          </div>
+          <figure data-reveal="img" data-delay="180" style="margin: 0; display: grid; grid-template-columns: 1fr 1fr; gap: 3px;">
+            <img src="assets/award-1.jpg" alt="Đại diện SOUL nhận chứng nhận Fine Robusta" style="width: 100%; height: 210px; object-fit: cover;" />
+            <img src="assets/award-2.jpg" alt="Chứng nhận Top Vietnam Robusta Coffee Producer" style="width: 100%; height: 210px; object-fit: cover;" />
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 09 — FROM BUÔN MA THUỘT TO THE WORLD -->
+    <section data-screen-label="09 To The World" style="max-width: 1440px; margin: 0 auto; padding: 148px 56px 0;">
+      <div style="display: grid; grid-template-columns: minmax(0,1.15fr) minmax(0,.85fr); gap: 64px; align-items: end; padding-bottom: 78px; border-bottom: 1px solid #27292D;">
+        <div>
+          <sc-if value="{{ showSectionNumbers }}" hint-placeholder-val="{{ true }}">
+            <div style="padding-bottom: 30px; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: #736C5E;">09 — Quốc tế</div>
+          </sc-if>
+          <h2 data-reveal="up" style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 300; font-size: 76px; line-height: .92; letter-spacing: -.03em;">From Buôn Ma Thuột<br /><span style="font-style: italic; font-weight: 200;">to the world.</span></h2>
+        </div>
+        <p data-reveal="up" data-delay="120" style="margin: 0; max-width: 400px; padding-bottom: 8px; font-size: 15.5px; line-height: 1.8; color: #6A6458; text-wrap: pretty;">Chúng tôi mang Fine Robusta Việt Nam đi gặp thế giới — không phải để chứng minh, mà để có mặt trong cuộc trò chuyện.</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(2, minmax(0,1fr)); gap: 0;">
+        <div data-reveal="up" style="display: grid; grid-template-columns: 92px 1fr; gap: 28px; align-items: baseline; padding: 40px 40px 40px 0; border-bottom: 1px solid rgba(39,41,45,.16); border-right: 1px solid rgba(39,41,45,.16);">
+          <span style="font-size: 11px; letter-spacing: .16em; color: #8E4B33;">2026</span>
+          <div>
+            <div style="font-family: Newsreader, Georgia, serif; font-size: 47px; line-height: 1.02; letter-spacing: -.025em;">Bangkok</div>
+            <div style="padding-top: 8px; font-size: 12.5px; color: #6A6458;">World of Coffee</div>
+          </div>
+        </div>
+        <div data-reveal="up" data-delay="80" style="display: grid; grid-template-columns: 92px 1fr; gap: 28px; align-items: baseline; padding: 40px 0 40px 40px; border-bottom: 1px solid rgba(39,41,45,.16);">
+          <span style="font-size: 11px; letter-spacing: .16em; color: #8E4B33;">2025</span>
+          <div>
+            <div style="font-family: Newsreader, Georgia, serif; font-size: 47px; line-height: 1.02; letter-spacing: -.025em;">Jakarta</div>
+            <div style="padding-top: 8px; font-size: 12.5px; color: #6A6458;">World of Coffee — cùng HTX Cà Phê Việt Nam</div>
+          </div>
+        </div>
+        <div data-reveal="up" data-delay="160" style="display: grid; grid-template-columns: 92px 1fr; gap: 28px; align-items: baseline; padding: 40px 40px 40px 0; border-bottom: 1px solid rgba(39,41,45,.16); border-right: 1px solid rgba(39,41,45,.16);">
+          <span style="font-size: 11px; letter-spacing: .16em; color: #8E4B33;">—</span>
+          <div>
+            <div style="font-family: Newsreader, Georgia, serif; font-size: 47px; line-height: 1.02; letter-spacing: -.025em;">Busan</div>
+            <div style="padding-top: 8px; font-size: 12.5px; color: #6A6458;">World of Coffee</div>
+          </div>
+        </div>
+        <div data-reveal="up" data-delay="240" style="display: grid; grid-template-columns: 92px 1fr; gap: 28px; align-items: baseline; padding: 40px 0 40px 40px; border-bottom: 1px solid rgba(39,41,45,.16);">
+          <span style="font-size: 11px; letter-spacing: .16em; color: #8E4B33;">—</span>
+          <div>
+            <div style="font-family: Newsreader, Georgia, serif; font-size: 47px; line-height: 1.02; letter-spacing: -.025em;">Portland</div>
+            <div style="padding-top: 8px; font-size: 12.5px; color: #6A6458;">SCA Specialty Coffee Expo, Hoa Kỳ</div>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 3px; padding-top: 56px;">
+        <figure data-reveal="img" style="margin: 0;">
+          <img src="assets/expo-jakarta.jpg" alt="Gian hàng Việt Nam tại World of Coffee Jakarta" style="width: 100%; height: 300px; object-fit: cover;" />
+          <figcaption style="padding-top: 12px; font-size: 11.5px; color: #6A6458;">World of Coffee Jakarta, 2025</figcaption>
+        </figure>
+        <figure data-reveal="img" data-delay="110" style="margin: 0;">
+          <img src="assets/expo-booth.jpg" alt="Quầy giới thiệu Vietnam Coffee Cooperative" style="width: 100%; height: 300px; object-fit: cover;" />
+          <figcaption style="padding-top: 12px; font-size: 11.5px; color: #6A6458;">Vietnam Coffee Cooperative</figcaption>
+        </figure>
+        <figure data-reveal="img" data-delay="220" style="margin: 0;">
+          <img src="assets/expo-coop.jpg" alt="SOUL trò chuyện với khách quốc tế tại triển lãm" style="width: 100%; height: 300px; object-fit: cover;" />
+          <figcaption style="padding-top: 12px; font-size: 11.5px; color: #6A6458;">Giới thiệu Fine Robusta Việt Nam</figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- SECTION 10 — COFFEE SOLUTION -->
+    <section id="solution" data-screen-label="10 Coffee Solution" style="max-width: 1440px; margin: 0 auto; padding: 148px 56px 0;">
+      <div style="display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 64px; align-items: end; padding-bottom: 76px;">
+        <div>
+          <sc-if value="{{ showSectionNumbers }}" hint-placeholder-val="{{ true }}">
+            <div style="padding-bottom: 30px; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: #736C5E;">10 — Coffee Solution</div>
+          </sc-if>
+          <h2 data-reveal="up" style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 300; font-size: 79px; line-height: .92; letter-spacing: -.03em;">Coffee,<br />beyond <span style="font-style: italic; font-weight: 200;">the cup.</span></h2>
+        </div>
+        <div data-reveal="up" data-delay="120" style="padding-bottom: 10px;">
+          <p style="margin: 0 0 26px; max-width: 470px; font-size: 16px; line-height: 1.8; color: #4A4741; text-wrap: pretty;">SOUL đồng hành với doanh nghiệp từ nguồn nguyên liệu đến vận hành: cà phê nhân xanh, cà phê rang, thiết kế menu &amp; quầy bar, đào tạo và tư vấn.</p>
+          <div style="display: flex; gap: 28px; align-items: center;">
+            <a href="#" style="display: inline-flex; align-items: center; gap: 12px; padding: 13px 22px; border: 1px solid #27292D; font-size: 12.5px; letter-spacing: .1em; text-transform: uppercase; transition: background 300ms, color 300ms;" style-hover="background: #27292D; color: #F4EFE5;">Coffee Solution <span aria-hidden="true">→</span></a>
+            <a href="#" style="display: inline-flex; align-items: center; gap: 10px; padding-bottom: 6px; border-bottom: 1px solid rgba(39,41,45,.4); font-size: 12.5px; letter-spacing: .1em; text-transform: uppercase;" style-hover="color: #8E4B33; border-color: #8E4B33;">Talk to SOUL <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 3px;">
+        <article data-reveal="img" style="background: #EAE3D5;">
+          <img src="assets/green-beans.jpg" alt="Cà phê nhân xanh Fine Robusta" style="width: 100%; height: 240px; object-fit: cover;" />
+          <div style="padding: 28px 24px 34px;">
+            <div style="font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #736C5E; padding-bottom: 14px;">01</div>
+            <h3 style="margin: 0 0 14px; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: 25px; line-height: 1.2; letter-spacing: -.015em;">Cà phê nhân xanh</h3>
+            <p style="margin: 0; font-size: 13.5px; line-height: 1.72; color: #6A6458; text-wrap: pretty;">Fine Robusta, Specialty Arabica và Premium — cung cấp cho nhà rang trong nước và xuất khẩu.</p>
+          </div>
+        </article>
+        <article data-reveal="img" data-delay="90" style="background: #EAE3D5;">
+          <img src="assets/roastery.jpg" alt="Xưởng rang SOUL" style="width: 100%; height: 240px; object-fit: cover;" />
+          <div style="padding: 28px 24px 34px;">
+            <div style="font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #736C5E; padding-bottom: 14px;">02</div>
+            <h3 style="margin: 0 0 14px; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: 25px; line-height: 1.2; letter-spacing: -.015em;">Cà phê rang</h3>
+            <p style="margin: 0; font-size: 13.5px; line-height: 1.72; color: #6A6458; text-wrap: pretty;">Rang theo profile riêng, đóng gói bán tự động, đạt chứng nhận an toàn thực phẩm.</p>
+          </div>
+        </article>
+        <article data-reveal="img" data-delay="180" style="background: #EAE3D5;">
+          <img src="assets/space-bar.jpg" alt="Quầy bar và menu tại không gian SOUL" style="width: 100%; height: 240px; object-fit: cover;" />
+          <div style="padding: 28px 24px 34px;">
+            <div style="font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #736C5E; padding-bottom: 14px;">03</div>
+            <h3 style="margin: 0 0 14px; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: 25px; line-height: 1.2; letter-spacing: -.015em;">Menu &amp; bar setup</h3>
+            <p style="margin: 0; font-size: 13.5px; line-height: 1.72; color: #6A6458; text-wrap: pretty;">Lên ý tưởng món, thiết kế menu và thiết lập quầy bar cho chuỗi quán, nhà hàng, khách sạn.</p>
+          </div>
+        </article>
+        <article data-reveal="img" data-delay="270" style="background: #EAE3D5;">
+          <img src="assets/workshop-latte.jpg" alt="Buổi đào tạo pha chế cùng SOUL" style="width: 100%; height: 240px; object-fit: cover;" />
+          <div style="padding: 28px 24px 34px;">
+            <div style="font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #736C5E; padding-bottom: 14px;">04</div>
+            <h3 style="margin: 0 0 14px; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: 25px; line-height: 1.2; letter-spacing: -.015em;">Đào tạo &amp; tư vấn</h3>
+            <p style="margin: 0; font-size: 13.5px; line-height: 1.72; color: #6A6458; text-wrap: pretty;">Đào tạo vận hành, cảm quan và pha chế cho đội ngũ của đối tác.</p>
+          </div>
+        </article>
+      </div>
+      <div data-reveal="up" style="display: flex; flex-wrap: wrap; gap: 12px 40px; padding: 34px 0 0; font-size: 11.5px; letter-spacing: .14em; text-transform: uppercase; color: #736C5E;">
+        <span>Khách sạn</span><span>Nhà hàng</span><span>Chuỗi cà phê</span><span>Nhà rang</span><span>Đối tác quốc tế</span>
+      </div>
+    </section>
+
+    <!-- SECTION 11 — SOUL SPACES -->
+    <section id="spaces" data-screen-label="11 Soul Spaces" style="max-width: 1440px; margin: 0 auto; padding: 148px 56px 0;">
+      <div style="display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 64px; align-items: end; padding-bottom: 72px;">
+        <div>
+          <sc-if value="{{ showSectionNumbers }}" hint-placeholder-val="{{ true }}">
+            <div style="padding-bottom: 30px; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: #736C5E;">11 — Không gian</div>
+          </sc-if>
+          <h2 data-reveal="up" style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 300; font-size: 79px; line-height: .92; letter-spacing: -.03em;">Come closer<br />to <span style="font-style: italic; font-weight: 200;">Soul.</span></h2>
+        </div>
+        <p data-reveal="up" data-delay="120" style="margin: 0; max-width: 420px; padding-bottom: 10px; font-size: 15.5px; line-height: 1.8; color: #6A6458; text-wrap: pretty;">Soul Specialty Coffee — nơi mọi thứ chúng tôi làm ở vùng trồng và xưởng rang cuối cùng đến được tay bạn.</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(4, minmax(0,1fr)); gap: 3px;">
+        <article data-reveal="img">
+          <img src="assets/space-interior.jpg" alt="Không gian Soul Specialty Coffee tại Buôn Ma Thuột" style="width: 100%; height: 340px; object-fit: cover;" />
+          <div style="padding: 26px 0 0;">
+            <h3 style="margin: 0 0 14px; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: 33px; line-height: 1.05; letter-spacing: -.02em;">Buôn Ma Thuột</h3>
+            <p style="margin: 0 0 6px; font-size: 13.5px; line-height: 1.6; color: #6A6458;">87 Nguyễn Khuyến, P. Buôn Ma Thuột, Đắk Lắk</p>
+            <p style="margin: 0 0 18px; font-size: 11.5px; letter-spacing: .12em; text-transform: uppercase; color: #8E4B33;">Roastery &amp; nhà</p>
+            <a href="#" style="display: inline-flex; align-items: center; gap: 9px; padding-bottom: 6px; border-bottom: 1px solid rgba(39,41,45,.3); font-size: 12px; letter-spacing: .06em;" style-hover="color: #8E4B33; border-color: #8E4B33;">Xem không gian <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+        <article data-reveal="img" data-delay="90">
+          <img src="assets/space-bar.jpg" alt="Quầy bar Soul Specialty Coffee tại Sài Gòn" style="width: 100%; height: 340px; object-fit: cover;" />
+          <div style="padding: 26px 0 0;">
+            <h3 style="margin: 0 0 14px; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: 33px; line-height: 1.05; letter-spacing: -.02em;">Sài Gòn</h3>
+            <p style="margin: 0 0 6px; font-size: 13.5px; line-height: 1.6; color: #6A6458;">386/11 Lê Văn Sỹ, P. Nhiêu Lộc, TP. Hồ Chí Minh</p>
+            <p style="margin: 0 0 18px; font-size: 11.5px; letter-spacing: .12em; text-transform: uppercase; color: #736C5E;">SR1</p>
+            <a href="#" style="display: inline-flex; align-items: center; gap: 9px; padding-bottom: 6px; border-bottom: 1px solid rgba(39,41,45,.3); font-size: 12px; letter-spacing: .06em;" style-hover="color: #8E4B33; border-color: #8E4B33;">Xem không gian <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+        <article data-reveal="img" data-delay="180">
+          <img src="assets/barista-pour.jpg" alt="Barista rót cà phê tại Soul Specialty Coffee Hà Nội" style="width: 100%; height: 340px; object-fit: cover;" />
+          <div style="padding: 26px 0 0;">
+            <h3 style="margin: 0 0 14px; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: 33px; line-height: 1.05; letter-spacing: -.02em;">Hà Nội</h3>
+            <p style="margin: 0 0 6px; font-size: 13.5px; line-height: 1.6; color: #6A6458;">12 Phố Đường Thành, P. Hoàn Kiếm, Hà Nội</p>
+            <p style="margin: 0 0 18px; font-size: 11.5px; letter-spacing: .12em; text-transform: uppercase; color: #736C5E;">SR4</p>
+            <a href="#" style="display: inline-flex; align-items: center; gap: 9px; padding-bottom: 6px; border-bottom: 1px solid rgba(39,41,45,.3); font-size: 12px; letter-spacing: .06em;" style-hover="color: #8E4B33; border-color: #8E4B33;">Xem không gian <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+        <article data-reveal="img" data-delay="270">
+          <img src="assets/glass-dark.jpg" alt="Ly cà phê đặc sản tại Soul Specialty Coffee Đà Nẵng" style="width: 100%; height: 340px; object-fit: cover;" />
+          <div style="padding: 26px 0 0;">
+            <h3 style="margin: 0 0 14px; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: 33px; line-height: 1.05; letter-spacing: -.02em;">Đà Nẵng</h3>
+            <p style="margin: 0 0 6px; font-size: 13.5px; line-height: 1.6; color: #6A6458;">Tầng 2 Kavkaz, Quảng trường Hội Tụ — Sun World Bà Nà</p>
+            <p style="margin: 0 0 18px; font-size: 11.5px; letter-spacing: .12em; text-transform: uppercase; color: #736C5E;">SR5</p>
+            <a href="#" style="display: inline-flex; align-items: center; gap: 9px; padding-bottom: 6px; border-bottom: 1px solid rgba(39,41,45,.3); font-size: 12px; letter-spacing: .06em;" style-hover="color: #8E4B33; border-color: #8E4B33;">Xem không gian <span aria-hidden="true">→</span></a>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SECTION 12 — SOUL COMMUNITY -->
+    <section data-screen-label="12 Community" style="max-width: 1440px; margin: 0 auto; padding: 148px 56px 0;">
+      <div style="display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 64px; align-items: end; padding-bottom: 74px; border-bottom: 1px solid #27292D;">
+        <div>
+          <sc-if value="{{ showSectionNumbers }}" hint-placeholder-val="{{ true }}">
+            <div style="padding-bottom: 30px; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: #736C5E;">12 — Cộng đồng</div>
+          </sc-if>
+          <h2 data-reveal="up" style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 300; font-size: 79px; line-height: .92; letter-spacing: -.03em;">Coffee is better<br />when <span style="font-style: italic; font-weight: 200;">shared.</span></h2>
+        </div>
+        <p data-reveal="up" data-delay="120" style="margin: 0; max-width: 420px; padding-bottom: 10px; font-size: 15.5px; line-height: 1.8; color: #6A6458; text-wrap: pretty;">Cupping, tasting, brewing, latte art. Chúng tôi mở workshop không để bán thêm, mà để có thêm người hiểu Fine Robusta Việt Nam.</p>
+      </div>
+
+      <div style="display: grid; grid-template-columns: repeat(3, minmax(0,1fr)); gap: 3px; padding-top: 56px;">
+        <article data-reveal="img">
+          <img src="assets/workshop-cupping.jpg" alt="Buổi cupping trong chuỗi workshop Fine Robusta" style="width: 100%; height: 420px; object-fit: cover;" />
+          <div style="padding: 28px 0 0;">
+            <div style="display: flex; gap: 18px; padding-bottom: 14px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #736C5E;"><span>Tasting &amp; Cupping</span><span>2025</span></div>
+            <h3 style="margin: 0 0 12px; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: 25px; line-height: 1.28; letter-spacing: -.015em;">Chuỗi workshop Fine Robusta — Lễ hội Cà phê Buôn Ma Thuột</h3>
+            <p style="margin: 0; font-size: 13.5px; line-height: 1.72; color: #6A6458; text-wrap: pretty;">Đi qua Buôn Ma Thuột, Đà Nẵng và Sài Gòn với các mẫu cà phê mới của mùa vụ và những phương pháp lên men bằng men bản địa.</p>
+          </div>
+        </article>
+        <article data-reveal="img" data-delay="110">
+          <img src="assets/workshop-talk.jpg" alt="Host Linh Hứa dẫn dắt buổi workshop" style="width: 100%; height: 420px; object-fit: cover;" />
+          <div style="padding: 28px 0 0;">
+            <div style="display: flex; gap: 18px; padding-bottom: 14px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #736C5E;"><span>Host</span><span>Linh Hứa</span></div>
+            <h3 style="margin: 0 0 12px; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: 25px; line-height: 1.28; letter-spacing: -.015em;">Người đồng sáng lập, và người kể chuyện Fine Robusta</h3>
+            <p style="margin: 0; font-size: 13.5px; line-height: 1.72; color: #6A6458; text-wrap: pretty;">Đồng sáng lập Soul Specialty Coffee &amp; Soul Fine Robusta, tiên phong trong việc định hình và nâng cao giá trị Fine Robusta Việt Nam.</p>
+          </div>
+        </article>
+        <article data-reveal="img" data-delay="220">
+          <img src="assets/workshop-group.jpg" alt="Người tham dự workshop latte art của SOUL" style="width: 100%; height: 420px; object-fit: cover;" />
+          <div style="padding: 28px 0 0;">
+            <div style="display: flex; gap: 18px; padding-bottom: 14px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #736C5E;"><span>Latte Art</span><span>Hoàng Thảo</span></div>
+            <h3 style="margin: 0 0 12px; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: 25px; line-height: 1.28; letter-spacing: -.015em;">Chuỗi workshop Latte Art cùng Quán quân quốc gia</h3>
+            <p style="margin: 0; font-size: 13.5px; line-height: 1.72; color: #6A6458; text-wrap: pretty;">Hoàng Thảo — Quán quân Vietnam National Latte Art Championship 2019, Top 10 World Latte Art Championship 2019.</p>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SECTION 13 — JOURNAL -->
+    <section id="journal" data-screen-label="13 Journal" style="max-width: 1440px; margin: 0 auto; padding: 148px 56px 0;">
+      <div style="display: flex; align-items: end; justify-content: space-between; gap: 40px; padding-bottom: 62px;">
+        <div>
+          <sc-if value="{{ showSectionNumbers }}" hint-placeholder-val="{{ true }}">
+            <div style="padding-bottom: 30px; font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: #736C5E;">13 — Journal</div>
+          </sc-if>
+          <h2 data-reveal="up" style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 300; font-size: 64px; line-height: .95; letter-spacing: -.03em;">Soul Megazine</h2>
+        </div>
+        <div style="display: flex; align-items: center; gap: 34px;">
+          <div style="display: flex; gap: 22px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #736C5E;"><span style="color: #27292D;">Soul</span><span>Sense</span><span>Products</span><span>Farm</span><span>Partners</span></div>
+          <a href="#" style="display: inline-flex; align-items: center; gap: 10px; padding-bottom: 6px; border-bottom: 1px solid #27292D; font-size: 12.5px; letter-spacing: .06em;" style-hover="color: #8E4B33; border-color: #8E4B33;">Tất cả bài viết <span aria-hidden="true">→</span></a>
+        </div>
+      </div>
+
+      <div style="display: grid; grid-template-columns: minmax(0,1.5fr) minmax(0,1fr) minmax(0,1fr); gap: 3px;">
+        <article data-reveal="img">
+          <img src="assets/award-1.jpg" alt="SOUL nhận Top 1 Robusta tại VCPC 2026" style="width: 100%; height: 400px; object-fit: cover;" />
+          <div style="padding: 28px 0 0; max-width: 560px;">
+            <div style="display: flex; gap: 18px; padding-bottom: 14px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #8E4B33;"><span>Soul</span><span style="color: #736C5E;">29.06.2026</span></div>
+            <h3 style="margin: 0 0 12px; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: 32px; line-height: 1.22; letter-spacing: -.02em;">Top 1 và Top 3 Robusta tại Vietnam Coffee Producer Competition 2026</h3>
+            <p style="margin: 0; font-size: 14px; line-height: 1.75; color: #6A6458; text-wrap: pretty;">Mẫu đạt Top 1 là Fine Robusta TR Natural Cần Wine Yeast — năm thứ ba liên tiếp SOUL giữ ngôi đầu tại VCPC.</p>
+          </div>
+        </article>
+        <article data-reveal="img" data-delay="110">
+          <img src="assets/ferment-hands.jpg" alt="Quá trình lên men với men rượu cần" style="width: 100%; height: 400px; object-fit: cover;" />
+          <div style="padding: 28px 0 0;">
+            <div style="display: flex; gap: 18px; padding-bottom: 14px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #8E4B33;"><span>Farm</span><span style="color: #736C5E;">New Crop 2026</span></div>
+            <h3 style="margin: 0 0 12px; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: 23px; line-height: 1.28; letter-spacing: -.015em;">Men rượu cần: khi văn hoá Tây Nguyên đi vào hạt cà phê</h3>
+          </div>
+        </article>
+        <article data-reveal="img" data-delay="220">
+          <img src="assets/glass-hold.jpg" alt="Ly cà phê sữa đá kiểu Việt Nam" style="width: 100%; height: 400px; object-fit: cover;" />
+          <div style="padding: 28px 0 0;">
+            <div style="display: flex; gap: 18px; padding-bottom: 14px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #8E4B33;"><span>Sense</span><span style="color: #736C5E;">How to</span></div>
+            <h3 style="margin: 0 0 12px; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: 23px; line-height: 1.28; letter-spacing: -.015em;">Cà phê sữa đá, đọc theo từng vùng miền</h3>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- SECTION 14 — CLOSING MANIFESTO -->
+    <section data-screen-label="14 Manifesto" style="background: #1B1C1F; color: #FFD35B; margin-top: 148px; position: relative; overflow: hidden;">
+      <img src="assets/soul-elephant-yellow.svg" alt="" aria-hidden="true" style="position: absolute; right: -170px; bottom: -110px; width: 720px; opacity: .055; pointer-events: none;" />
+      <div style="position: relative; max-width: 1440px; margin: 0 auto; padding: 172px 56px 176px;">
+        <div style="max-width: 1190px;">
+          <div data-reveal="up" style="padding-bottom: 54px; font-size: 11px; letter-spacing: .26em; text-transform: uppercase; color: rgba(255,211,91,.66);">Crafted by Vietnamese Soul</div>
+          <blockquote data-reveal="up" data-delay="120" style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 200; font-size: 66px; line-height: 1.14; letter-spacing: -.025em;">
+            Vì tính nguyên bản sẽ<br />không bao giờ bị nhầm lẫn,<br />và lòng nhiệt thành <span style="font-style: italic;">thường nhận ra nhau.</span>
+          </blockquote>
+          <p data-reveal="up" data-delay="240" style="margin: 62px 0 0; max-width: 420px; font-size: 14.5px; line-height: 1.8; color: rgba(244,239,229,.58); text-wrap: pretty;">Và chúng tôi mong rằng, khi bạn mở cánh cửa ở SOUL ra, chúng tôi được gần hơn một bước — chạm đến tâm hồn bạn.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- SECTION 15 — FOOTER -->
+    <footer data-screen-label="15 Footer" style="background: #27292D; color: #F4EFE5;">
+      <div style="max-width: 1440px; margin: 0 auto; padding: 96px 56px 44px;">
+        <div style="display: grid; grid-template-columns: minmax(0,1.2fr) repeat(3, minmax(0,1fr)); gap: 48px; padding-bottom: 76px; border-bottom: 1px solid rgba(244,239,229,.16);">
+          <div>
+            <img src="assets/soul-logo-full-paper.svg" alt="SOUL Fine Robusta" style="width: 116px; height: auto;" />
+            <p style="margin: 34px 0 26px; max-width: 300px; font-family: Newsreader, Georgia, serif; font-size: 18px; line-height: 1.5; color: rgba(244,239,229,.7);">Nhận thư của SOUL: mùa vụ mới, sản phẩm mới, và những buổi cupping gần bạn.</p>
+            <form style="display: flex; align-items: center; gap: 0; max-width: 330px; border-bottom: 1px solid rgba(244,239,229,.4);">
+              <input type="email" placeholder="Email của bạn" aria-label="Email của bạn" style="flex: 1; min-width: 0; padding: 12px 0; border: 0; background: transparent; color: #F4EFE5; font-family: inherit; font-size: 14px; outline: none;" />
+              <button type="button" style="padding: 12px 0 12px 16px; border: 0; background: transparent; color: #FFD35B; font-family: inherit; font-size: 13px; letter-spacing: .1em; text-transform: uppercase; cursor: pointer;">Gửi →</button>
+            </form>
+          </div>
+          <div>
+            <div style="padding-bottom: 22px; font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; color: rgba(244,239,229,.58);">Khám phá</div>
+            <nav style="display: flex; flex-direction: column; gap: 12px; font-size: 14px;">
+              <a href="#story" style-hover="color: #FFD35B;">Câu chuyện của SOUL</a>
+              <a href="#coffee" style-hover="color: #FFD35B;">Cà phê của chúng tôi</a>
+              <a href="#" style-hover="color: #FFD35B;">Soulful Collection 2026</a>
+              <a href="#solution" style-hover="color: #FFD35B;">Coffee Solution</a>
+              <a href="#journal" style-hover="color: #FFD35B;">Soul Megazine</a>
+              <a href="#spaces" style-hover="color: #FFD35B;">Không gian</a>
+              <a href="#" style-hover="color: #FFD35B;">Shop</a>
+            </nav>
+          </div>
+          <div>
+            <div style="padding-bottom: 22px; font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; color: rgba(244,239,229,.58);">Không gian</div>
+            <div style="display: flex; flex-direction: column; gap: 16px; font-size: 13.5px; line-height: 1.55; color: rgba(244,239,229,.72);">
+              <div><span style="color: #F4EFE5;">Buôn Ma Thuột</span><br />87 Nguyễn Khuyến, Đắk Lắk</div>
+              <div><span style="color: #F4EFE5;">Sài Gòn</span><br />386/11 Lê Văn Sỹ, P. Nhiêu Lộc</div>
+              <div><span style="color: #F4EFE5;">Hà Nội</span><br />12 Phố Đường Thành, Hoàn Kiếm</div>
+              <div><span style="color: #F4EFE5;">Đà Nẵng</span><br />Tầng 2 Kavkaz, Sun World Bà Nà</div>
+            </div>
+          </div>
+          <div>
+            <div style="padding-bottom: 22px; font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; color: rgba(244,239,229,.58);">Liên hệ</div>
+            <div style="display: flex; flex-direction: column; gap: 12px; font-size: 13.5px; color: rgba(244,239,229,.72);">
+              <a href="mailto:contact@soulcoffee.vn" style-hover="color: #FFD35B;">contact@soulcoffee.vn</a>
+              <a href="mailto:finerobusta@soulcoffee.vn" style-hover="color: #FFD35B;">finerobusta@soulcoffee.vn</a>
+              <a href="tel:+84987592220" style-hover="color: #FFD35B;">+84 987 592 220 — Specialty Coffee</a>
+              <a href="tel:+84908267710" style-hover="color: #FFD35B;">+84 908 267 710 — Fine Robusta</a>
+            </div>
+            <div style="padding: 30px 0 18px; font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; color: rgba(244,239,229,.58);">Kết nối</div>
+            <div style="display: flex; flex-wrap: wrap; gap: 10px 20px; font-size: 13px; color: rgba(244,239,229,.72);">
+              <a href="https://www.facebook.com/soulfinerobusta" style-hover="color: #FFD35B;">Facebook</a>
+              <a href="https://www.instagram.com/soul.finerobusta" style-hover="color: #FFD35B;">Instagram</a>
+              <a href="https://shopee.vn/soulcoffee" style-hover="color: #FFD35B;">Shopee</a>
+              <a href="https://zalo.me/soulspecialtycoffee" style-hover="color: #FFD35B;">Zalo</a>
+            </div>
+          </div>
+        </div>
+        <div style="display: flex; align-items: end; justify-content: space-between; gap: 40px; padding-top: 40px;">
+          <div style="font-family: Newsreader, Georgia, serif; font-size: 50px; line-height: 1; letter-spacing: -.03em; color: #FFD35B;">Crafted by Vietnamese Soul</div>
+          <div style="display: flex; align-items: center; gap: 30px; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: rgba(244,239,229,.58); white-space: nowrap;">
+            <span>Buôn Ma Thuột — Việt Nam</span>
+            <span style="display: flex; gap: 7px;"><span style="color: #F4EFE5;">VI</span><span aria-hidden="true">/</span><a href="#" style="color: rgba(244,239,229,.58);">EN</a></span>
+            <span>© 2026 Soul Fine Robusta</span>
+          </div>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+  </div>
+
+  <!-- ══════════════ DELIVERABLE B — MOBILE HOMEPAGE (390px) ══════════════ -->
+  <div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 10px 32px; padding: 30px 34px 26px; background: #DED6C4; border-top: 1px solid rgba(39,41,45,.2); border-bottom: 1px solid rgba(39,41,45,.2);">
+    <div style="display: flex; align-items: baseline; gap: 20px;">
+      <span style="font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: #8E4B33;">Deliverable B</span>
+      <span style="font-family: Newsreader, Georgia, serif; font-size: 25px; letter-spacing: -.015em;">Homepage — Mobile</span>
+    </div>
+    <span style="font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: #625A4C;">390 × 844 · lề 22px · bố cục dựng lại, không xếp dọc bản desktop</span>
+  </div>
+  <div style="background: #DED6C4; padding: 46px 34px 60px;">
+    <div style="display: flex; flex-wrap: wrap; gap: 46px 34px;">
+
+      <!-- M01 — HERO -->
+      <div>
+        <div style="padding-bottom: 12px; font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; color: #625A4C;">M01 — Hero</div>
+        <div style="width: 390px; height: 844px; overflow: hidden; background: #F4EFE5; border: 1px solid rgba(39,41,45,.2); position: relative;">
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: 20px 22px 0;">
+            <div style="display: flex; flex-direction: column; gap: 4px; width: 22px; padding: 11px 0;" aria-hidden="true">
+              <span style="height: 1px; background: #27292D;"></span>
+              <span style="height: 1px; background: #27292D;"></span>
+            </div>
+            <div style="display: flex; align-items: center; gap: 8px;">
+              <img src="assets/soul-elephant-ink.svg" alt="SOUL" style="width: 26px;" />
+              <img src="assets/soul-lockup-text-ink.svg" alt="Fine Robusta" style="width: 50px;" />
+            </div>
+            <div style="display: flex; gap: 6px; font-size: 10px; letter-spacing: .1em;"><span style="font-weight: 500;">VI</span><span style="color: #736C5E;">/ EN</span></div>
+          </div>
+          <div style="padding: 34px 22px 0;">
+            <div style="display: flex; align-items: baseline; gap: 12px; font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase; color: #8E4B33;">
+              <span>Buôn Ma Thuột</span><span style="flex: 1; height: 1px; background: rgba(142,75,51,.3);"></span><span style="color: #6A6458;">Est. 2018</span>
+            </div>
+            <h2 style="margin: 22px 0 0; font-family: Newsreader, Georgia, serif; font-weight: 300; font-size: 52px; line-height: .9; letter-spacing: -.032em;">Crafted<br />by <span style="font-style: italic; font-weight: 200;">Việt</span><br />Soul</h2>
+          </div>
+          <img src="assets/hero-cherries-dark.jpg" alt="Thu hái quả chín" style="width: 100%; height: 320px; object-fit: cover; object-position: 50% 45%; margin-top: 28px;" />
+          <div style="padding: 24px 22px 0;">
+            <p style="margin: 0 0 22px; font-family: Newsreader, Georgia, serif; font-size: 17px; line-height: 1.5; color: #4A4741;">Từ Buôn Ma Thuột, chúng tôi bắt đầu một hành trình rất đơn giản: làm cà phê Việt Nam theo cách đúng.</p>
+            <a href="#" style="display: flex; align-items: center; justify-content: space-between; min-height: 48px; border-top: 1px solid #27292D; border-bottom: 1px solid rgba(39,41,45,.16); font-size: 13px;">Khám phá câu chuyện <span aria-hidden="true">→</span></a>
+            <a href="#" style="display: flex; align-items: center; justify-content: space-between; min-height: 48px; border-bottom: 1px solid rgba(39,41,45,.16); font-size: 13px;">Khám phá cà phê <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- M02 — THE QUESTION -->
+      <div>
+        <div style="padding-bottom: 12px; font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; color: #625A4C;">M02 — Triết lý</div>
+        <div style="width: 390px; height: 844px; overflow: hidden; background: #F4EFE5; border: 1px solid rgba(39,41,45,.2); padding: 46px 22px 0;">
+          <div style="padding-bottom: 26px; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: #736C5E;">02 — Triết lý</div>
+          <h2 style="margin: 0 0 26px; font-family: Newsreader, Georgia, serif; font-weight: 300; font-size: 44px; line-height: .94; letter-spacing: -.03em;">Làm cà phê<br />thế nào<br /><span style="font-style: italic; font-weight: 200;">cho đúng?</span></h2>
+          <p style="margin: 0 0 16px; font-size: 15px; line-height: 1.74; color: #4A4741;">Chúng tôi không hỏi <em style="font-family: Newsreader, Georgia, serif; font-size: 16.5px;">làm thế nào cho ngon</em>. Chúng tôi hỏi <em style="font-family: Newsreader, Georgia, serif; font-size: 16.5px;">làm thế nào cho đúng</em>.</p>
+          <p style="margin: 0 0 34px; font-size: 14px; line-height: 1.74; color: #6A6458;">“Đúng” là nhận trách nhiệm suốt chặng đường — từ gốc cây đến đáy tách.</p>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid #27292D;">
+            <div style="padding: 18px 14px 20px 0; border-right: 1px solid rgba(39,41,45,.16); border-bottom: 1px solid rgba(39,41,45,.16);"><div style="font-size: 10px; letter-spacing: .16em; color: #736C5E; padding-bottom: 10px;">01</div><div style="font-family: Newsreader, Georgia, serif; font-size: 23px;">Trồng</div></div>
+            <div style="padding: 18px 0 20px 14px; border-bottom: 1px solid rgba(39,41,45,.16);"><div style="font-size: 10px; letter-spacing: .16em; color: #736C5E; padding-bottom: 10px;">02</div><div style="font-family: Newsreader, Georgia, serif; font-size: 23px;">Thu hái</div></div>
+            <div style="padding: 18px 14px 20px 0; border-right: 1px solid rgba(39,41,45,.16); border-bottom: 1px solid rgba(39,41,45,.16);"><div style="font-size: 10px; letter-spacing: .16em; color: #736C5E; padding-bottom: 10px;">03</div><div style="font-family: Newsreader, Georgia, serif; font-size: 23px;">Sơ chế</div></div>
+            <div style="padding: 18px 0 20px 14px; border-bottom: 1px solid rgba(39,41,45,.16);"><div style="font-size: 10px; letter-spacing: .16em; color: #736C5E; padding-bottom: 10px;">04</div><div style="font-family: Newsreader, Georgia, serif; font-size: 23px;">Rang</div></div>
+            <div style="padding: 18px 14px 20px 0; border-right: 1px solid rgba(39,41,45,.16);"><div style="font-size: 10px; letter-spacing: .16em; color: #736C5E; padding-bottom: 10px;">05</div><div style="font-family: Newsreader, Georgia, serif; font-size: 23px;">Pha</div></div>
+            <div style="padding: 18px 0 20px 14px;"><div style="font-size: 10px; letter-spacing: .16em; color: #8E4B33; padding-bottom: 10px;">06</div><div style="font-family: Newsreader, Georgia, serif; font-size: 23px; color: #8E4B33;">Kết nối</div></div>
+          </div>
+          <figure style="margin: 34px -22px 0;">
+            <img src="assets/drying-trays.jpg" alt="Sân phơi cà phê nhìn từ trên" style="width: 100%; height: 224px; object-fit: cover;" />
+            <figcaption style="padding: 12px 22px 0; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: #736C5E;">Sơ chế khô — sân phơi Đắk Lắk</figcaption>
+          </figure>
+        </div>
+      </div>
+
+      <!-- M03 — ORIGIN -->
+      <div>
+        <div style="padding-bottom: 12px; font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; color: #625A4C;">M03 — Nơi bắt đầu</div>
+        <div style="width: 390px; height: 844px; overflow: hidden; background: #F4EFE5; border: 1px solid rgba(39,41,45,.2); position: relative;">
+          <img src="assets/contour-basalt.svg" alt="" aria-hidden="true" style="position: absolute; right: -160px; top: 300px; width: 520px; opacity: .5;" />
+          <img src="assets/farm-landscape.jpg" alt="Vườn cà phê trên đất bazan" style="width: 100%; height: 300px; object-fit: cover;" />
+          <div style="position: relative; padding: 30px 22px 0;">
+            <div style="padding-bottom: 22px; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: #736C5E;">03 — Nơi bắt đầu</div>
+            <h2 style="margin: 0 0 26px; font-family: Newsreader, Georgia, serif; font-weight: 300; font-size: 46px; line-height: .92; letter-spacing: -.03em;">Mọi thứ<br />bắt đầu<br /><span style="color: #8E4B33;">từ đất.</span></h2>
+            <div style="display: flex; flex-wrap: wrap; gap: 6px 18px; padding: 18px 0 20px; border-top: 1px solid rgba(142,75,51,.32); font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: #8E4B33;">
+              <span>Buôn Ma Thuột</span><span>12.6666° N</span><span>108.0500° E</span>
+            </div>
+            <p style="margin: 0 0 16px; font-family: Newsreader, Georgia, serif; font-size: 19px; line-height: 1.5; color: #3B3833;">Đất bazan đỏ, mùa khô dài, mùa mưa dày. Robusta ở đây không cần được cứu — nó cần được làm đúng.</p>
+            <p style="margin: 0 0 26px; font-size: 14px; line-height: 1.74; color: #6A6458;">SOUL được tạo nên bởi hai chị em lớn lên trong một trang trại cà phê ở Buôn Ma Thuột.</p>
+            <a href="#" style="display: inline-flex; align-items: center; gap: 10px; min-height: 44px; border-bottom: 1px solid #27292D; font-size: 13px;">Câu chuyện của SOUL <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- M04 — CRAFT -->
+      <div>
+        <div style="padding-bottom: 12px; font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; color: #625A4C;">M04 — Handcraft</div>
+        <div style="width: 390px; height: 844px; overflow: hidden; background: #F4EFE5; border: 1px solid rgba(39,41,45,.2); padding: 40px 0 0;">
+          <div style="padding: 0 22px;">
+            <div style="padding-bottom: 22px; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: #736C5E;">05 — Handcraft</div>
+            <h2 style="margin: 0 0 30px; font-family: Newsreader, Georgia, serif; font-weight: 300; font-size: 40px; line-height: .96; letter-spacing: -.03em;">Từ quả chín<br />đến tách cà phê</h2>
+          </div>
+          <div style="display: flex; gap: 3px; padding-left: 22px; overflow: hidden;">
+            <img src="assets/cherries-hands.jpg" alt="Quả chín trên tay" style="width: 250px; height: 300px; object-fit: cover; flex: 0 0 auto;" />
+            <img src="assets/ferment-hands.jpg" alt="Lên men" style="width: 250px; height: 300px; object-fit: cover; flex: 0 0 auto;" />
+          </div>
+          <div style="display: grid; grid-template-columns: 52px 1fr; gap: 16px; padding: 28px 22px 0; align-items: start;">
+            <div style="font-family: Newsreader, Georgia, serif; font-size: 44px; line-height: .8; color: #8E4B33;">03</div>
+            <div>
+              <div style="font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: #8E4B33; padding-bottom: 10px;">Sơ chế · Process</div>
+              <p style="margin: 0 0 14px; font-family: Newsreader, Georgia, serif; font-size: 22px; line-height: 1.32;">Men Soul, men trái cây địa phương, men rượu cần.</p>
+              <p style="margin: 0 0 16px; font-size: 13.5px; line-height: 1.72; color: #6A6458;">SOUL nghiên cứu và thử nghiệm phương pháp sơ chế riêng, tạo nên hương men đặc trưng.</p>
+              <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                <span style="padding: 6px 11px; border: 1px solid rgba(142,75,51,.4); font-size: 9.5px; letter-spacing: .12em; text-transform: uppercase; color: #8E4B33;">Soul yeast</span>
+                <span style="padding: 6px 11px; border: 1px solid rgba(142,75,51,.4); font-size: 9.5px; letter-spacing: .12em; text-transform: uppercase; color: #8E4B33;">Local fruits</span>
+                <span style="padding: 6px 11px; border: 1px solid rgba(142,75,51,.4); font-size: 9.5px; letter-spacing: .12em; text-transform: uppercase; color: #8E4B33;">Cần wine</span>
+              </div>
+            </div>
+          </div>
+          <div style="display: flex; align-items: center; gap: 10px; padding: 26px 22px 0; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; color: #736C5E;"><span aria-hidden="true">←→</span><span>Trượt ngang để xem 5 công đoạn</span></div>
+        </div>
+      </div>
+
+      <!-- M05 — SENSES -->
+      <div>
+        <div style="padding-bottom: 12px; font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; color: #625A4C;">M05 — Sense</div>
+        <div style="width: 390px; height: 844px; overflow: hidden; background: #1B1C1F; color: #F4EFE5; border: 1px solid rgba(39,41,45,.2); padding: 46px 0 0;">
+          <div style="padding: 0 22px;">
+            <div style="padding-bottom: 18px; font-size: 10px; letter-spacing: .28em; text-transform: uppercase; color: #FFD35B;">The Journey of Senses</div>
+            <h2 style="margin: 0 0 22px; font-family: Newsreader, Georgia, serif; font-weight: 300; font-size: 42px; line-height: .94; letter-spacing: -.03em;">Một tách cà phê<br /><span style="font-style: italic; font-weight: 200;">không chỉ có vị.</span></h2>
+            <p style="margin: 0 0 30px; font-size: 14px; line-height: 1.76; color: rgba(244,239,229,.6);">Sense là giá trị đầu tiên của SOUL: kết nối cảm xúc qua từng điểm chạm giác quan.</p>
+          </div>
+          <div style="display: flex; gap: 3px; padding-left: 22px; overflow: hidden;">
+            <figure style="margin: 0; flex: 0 0 auto; width: 220px;">
+              <img src="assets/grounds-macro.jpg" alt="Cà phê vừa xay" style="width: 220px; height: 260px; object-fit: cover;" />
+              <div style="padding: 16px 0 0;">
+                <div style="font-size: 9.5px; letter-spacing: .2em; text-transform: uppercase; color: #FFD35B; padding-bottom: 8px;">Nghe · Hear</div>
+                <p style="margin: 0; font-family: Newsreader, Georgia, serif; font-size: 16px; line-height: 1.42; color: rgba(244,239,229,.86);">Tiếng cối xay trước khi quán mở cửa.</p>
+              </div>
+            </figure>
+            <figure style="margin: 0; flex: 0 0 auto; width: 220px;">
+              <img src="assets/cup-hand.jpg" alt="Tách gốm" style="width: 220px; height: 260px; object-fit: cover;" />
+              <div style="padding: 16px 0 0;">
+                <div style="font-size: 9.5px; letter-spacing: .2em; text-transform: uppercase; color: #FFD35B; padding-bottom: 8px;">Chạm · Touch</div>
+                <p style="margin: 0; font-family: Newsreader, Georgia, serif; font-size: 16px; line-height: 1.42; color: rgba(244,239,229,.86);">Men gốm còn ấm trong lòng bàn tay.</p>
+              </div>
+            </figure>
+          </div>
+          <div style="display: flex; gap: 18px; padding: 30px 22px 26px; font-size: 9.5px; letter-spacing: .18em; text-transform: uppercase; color: rgba(244,239,229,.58); border-bottom: 1px solid rgba(244,239,229,.16); margin: 0 22px;">
+            <span style="color: #FFD35B;">Nghe</span><span>Ngửi</span><span style="color: #FFD35B;">Chạm</span><span>Thấy</span><span>Nếm</span>
+          </div>
+          <p style="margin: 0; padding: 26px 22px 24px; font-family: Newsreader, Georgia, serif; font-style: italic; font-weight: 200; font-size: 21px; line-height: 1.4; color: rgba(255,211,91,.9);">Sau mỗi tách cà phê không chỉ đọng lại hương vị.</p>
+          <img src="assets/senses-pour.jpg" alt="Rót cà phê vào tách gốm" style="width: 100%; height: 168px; object-fit: cover;" />
+        </div>
+      </div>
+
+      <!-- M06 — SOULFUL COLLECTION -->
+      <div>
+        <div style="padding-bottom: 12px; font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; color: #625A4C;">M06 — Soulful Collection</div>
+        <div style="width: 390px; height: 844px; overflow: hidden; background: #F4EFE5; border: 1px solid rgba(39,41,45,.2); padding: 44px 0 0;">
+          <div style="padding: 0 22px 26px;">
+            <div style="padding-bottom: 20px; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: #736C5E;">07 — Sản phẩm</div>
+            <h2 style="margin: 0 0 16px; font-family: Newsreader, Georgia, serif; font-weight: 300; font-size: 40px; line-height: .96; letter-spacing: -.03em;">Soulful<br />Collection <span style="font-style: italic; font-weight: 200;">2026</span></h2>
+            <p style="margin: 0; font-size: 14px; line-height: 1.74; color: #4A4741;">Bốn tính cách hương vị, gọi tên bốn sắc thái của Tây Nguyên.</p>
+          </div>
+          <div style="display: flex; gap: 3px; padding-left: 22px; overflow: hidden;">
+            <article style="flex: 0 0 auto; width: 262px; background: #EAE3D5;">
+              <img src="assets/pack-black-bag.jpg" alt="Bao bì cà phê phin truyền thống SOUL" style="width: 100%; height: 300px; object-fit: cover;" />
+              <div style="padding: 22px 20px 26px;">
+                <div style="display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 14px; border-bottom: 1px solid rgba(39,41,45,.18);">
+                  <h3 style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: 32px; letter-spacing: -.02em;">Cay</h3>
+                  <span style="font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase; color: #8E4B33;">Krông Năng</span>
+                </div>
+                <div style="padding-top: 14px; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; color: #6A6458;">Vietnamese Phin</div>
+                <p style="margin: 10px 0 0; font-family: Newsreader, Georgia, serif; font-size: 17px; line-height: 1.4;">Chắc · có lực · dứt khoát</p>
+              </div>
+            </article>
+            <article style="flex: 0 0 auto; width: 262px; background: #27292D; color: #F4EFE5;">
+              <img src="assets/pack-origin-a.jpg" alt="Bao bì Origin SOUL" style="width: 100%; height: 300px; object-fit: cover;" />
+              <div style="padding: 22px 20px 26px;">
+                <div style="display: flex; justify-content: space-between; align-items: baseline; padding-bottom: 14px; border-bottom: 1px solid rgba(244,239,229,.22);">
+                  <h3 style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: 32px; letter-spacing: -.02em;">Nồng</h3>
+                  <span style="font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase; color: #FFD35B;">BMT</span>
+                </div>
+              </div>
+            </article>
+          </div>
+          <div style="display: flex; align-items: center; justify-content: space-between; padding: 30px 22px 0;">
+            <div style="display: flex; gap: 6px;" aria-hidden="true">
+              <span style="width: 22px; height: 2px; background: #27292D;"></span>
+              <span style="width: 22px; height: 2px; background: rgba(39,41,45,.2);"></span>
+              <span style="width: 22px; height: 2px; background: rgba(39,41,45,.2);"></span>
+              <span style="width: 22px; height: 2px; background: rgba(39,41,45,.2);"></span>
+            </div>
+            <a href="#" style="display: inline-flex; align-items: center; gap: 9px; min-height: 44px; border-bottom: 1px solid #27292D; font-size: 12.5px;">Xem tất cả <span aria-hidden="true">→</span></a>
+          </div>
+        </div>
+      </div>
+
+      <!-- M07 — PROOF -->
+      <div>
+        <div style="padding-bottom: 12px; font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; color: #625A4C;">M07 — Bằng chứng</div>
+        <div style="width: 390px; height: 844px; overflow: hidden; background: #FFD35B; border: 1px solid rgba(39,41,45,.2); padding: 46px 22px 0;">
+          <div style="padding-bottom: 22px; font-size: 10px; letter-spacing: .2em; text-transform: uppercase; color: rgba(39,41,45,.72);">08 — Bằng chứng</div>
+          <h2 style="margin: 0 0 30px; font-family: Newsreader, Georgia, serif; font-weight: 300; font-size: 44px; line-height: .92; letter-spacing: -.03em;">Craft<br />you can<br /><span style="font-style: italic; font-weight: 200;">measure.</span></h2>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; border-top: 1px solid rgba(39,41,45,.34);">
+            <div style="padding: 20px 14px 22px 0; border-right: 1px solid rgba(39,41,45,.24); border-bottom: 1px solid rgba(39,41,45,.24);">
+              <div style="font-family: Newsreader, Georgia, serif; font-size: 42px; line-height: .9; letter-spacing: -.03em;">87.21</div>
+              <div style="padding-top: 12px; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; line-height: 1.6;">Top 1 Robusta<br />VCPC 2026</div>
+            </div>
+            <div style="padding: 20px 0 22px 14px; border-bottom: 1px solid rgba(39,41,45,.24);">
+              <div style="font-family: Newsreader, Georgia, serif; font-size: 42px; line-height: .9; letter-spacing: -.03em;">500<span style="font-size: .5em;"> ha</span></div>
+              <div style="padding-top: 12px; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; line-height: 1.6;">Vùng trồng<br />liên kết</div>
+            </div>
+            <div style="padding: 20px 14px 22px 0; border-right: 1px solid rgba(39,41,45,.24);">
+              <div style="font-family: Newsreader, Georgia, serif; font-size: 42px; line-height: .9; letter-spacing: -.03em;">20<span style="font-size: .38em;"> tấn/tháng</span></div>
+              <div style="padding-top: 12px; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; line-height: 1.6;">Năng lực rang<br />trung bình</div>
+            </div>
+            <div style="padding: 20px 0 22px 14px;">
+              <div style="font-family: Newsreader, Georgia, serif; font-size: 42px; line-height: .9; letter-spacing: -.03em;">2018</div>
+              <div style="padding-top: 12px; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; line-height: 1.6;">Thành lập tại<br />Buôn Ma Thuột</div>
+            </div>
+          </div>
+          <div style="padding-top: 30px;">
+            <div style="font-size: 10px; letter-spacing: .18em; text-transform: uppercase; color: rgba(39,41,45,.72); padding-bottom: 14px;">Chuyên môn</div>
+            <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 9px; font-size: 13.5px;">
+              <li>Q-Grader Certificate — CQI</li>
+              <li>SCA Roaster</li>
+              <li>Processing Certificate</li>
+              <li>FDA Registered</li>
+            </ul>
+          </div>
+          <img src="assets/award-2.jpg" alt="Chứng nhận Top Vietnam Robusta Coffee Producer" style="width: 100%; height: 150px; object-fit: cover; margin-top: 26px;" />
+        </div>
+      </div>
+
+      <!-- M08 — MANIFESTO + FOOTER -->
+      <div>
+        <div style="padding-bottom: 12px; font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; color: #625A4C;">M08 — Manifesto &amp; Footer</div>
+        <div style="width: 390px; height: 844px; overflow: hidden; background: #1B1C1F; border: 1px solid rgba(39,41,45,.2); position: relative;">
+          <img src="assets/soul-elephant-yellow.svg" alt="" aria-hidden="true" style="position: absolute; right: -100px; top: 210px; width: 360px; opacity: .06;" />
+          <div style="position: relative; padding: 62px 22px 54px; color: #FFD35B;">
+            <div style="padding-bottom: 30px; font-size: 9.5px; letter-spacing: .24em; text-transform: uppercase; color: rgba(255,211,91,.66);">Crafted by Vietnamese Soul</div>
+            <blockquote style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 200; font-size: 32px; line-height: 1.18; letter-spacing: -.025em;">Vì tính nguyên bản sẽ không bao giờ bị nhầm lẫn, và lòng nhiệt thành <span style="font-style: italic;">thường nhận ra nhau.</span></blockquote>
+          </div>
+          <div style="position: relative; background: #27292D; color: #F4EFE5; padding: 34px 22px 30px;">
+            <img src="assets/soul-logo-full-paper.svg" alt="SOUL Fine Robusta" style="width: 76px; height: auto;" />
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 26px; padding: 28px 0 26px; border-bottom: 1px solid rgba(244,239,229,.16);">
+              <nav style="display: flex; flex-direction: column; gap: 9px; font-size: 12.5px;">
+                <a href="#">Câu chuyện</a><a href="#">Cà phê</a><a href="#">Coffee Solution</a><a href="#">Journal</a><a href="#">Không gian</a>
+              </nav>
+              <div style="display: flex; flex-direction: column; gap: 9px; font-size: 12.5px; color: rgba(244,239,229,.72);">
+                <span>Buôn Ma Thuột</span><span>Sài Gòn</span><span>Hà Nội</span><span>Đà Nẵng</span>
+                <a href="mailto:contact@soulcoffee.vn" style="color: #FFD35B;">contact@soulcoffee.vn</a>
+              </div>
+            </div>
+            <div style="padding-top: 22px; font-family: Newsreader, Georgia, serif; font-size: 26px; line-height: 1.05; letter-spacing: -.025em; color: #FFD35B;">Crafted by<br />Vietnamese Soul</div>
+            <div style="display: flex; justify-content: space-between; padding: 20px 0 22px; margin-bottom: 22px; border-bottom: 1px solid rgba(244,239,229,.16); font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase; color: rgba(244,239,229,.58);"><span>Buôn Ma Thuột — Việt Nam</span><span>VI / EN</span></div>
+            <div style="display: flex; flex-wrap: wrap; gap: 8px 18px; padding-bottom: 26px; font-size: 12px; color: rgba(244,239,229,.6);"><a href="#">Facebook</a><a href="#">Instagram</a><a href="#">Shopee</a><a href="#">Zalo</a></div>
+            <div style="font-size: 9.5px; letter-spacing: .14em; text-transform: uppercase; color: rgba(244,239,229,.56);">© 2026 Soul Fine Robusta</div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ══════════════ DELIVERABLE C — MINI DESIGN SYSTEM ══════════════ -->
+  <div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 10px 32px; padding: 30px 34px 26px; background: #DED6C4; border-top: 1px solid rgba(39,41,45,.2); border-bottom: 1px solid rgba(39,41,45,.2);">
+    <div style="display: flex; align-items: baseline; gap: 20px;">
+      <span style="font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: #8E4B33;">Deliverable C</span>
+      <span style="font-family: Newsreader, Georgia, serif; font-size: 25px; letter-spacing: -.015em;">Mini design system</span>
+    </div>
+    <span style="font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: #625A4C;">Rút từ SOUL Master Logo &amp; New Brand Identity</span>
+  </div>
+  <div style="background: #F4EFE5; padding: 62px 34px 76px;">
+    <div style="max-width: 1372px; margin: 0 auto; display: flex; flex-direction: column; gap: 62px;">
+
+      <!-- LOGO -->
+      <section>
+        <div style="display: flex; align-items: baseline; gap: 16px; padding-bottom: 26px; border-bottom: 1px solid #27292D;">
+          <span style="font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; color: #736C5E;">01</span>
+          <h3 style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: 26px; letter-spacing: -.015em;">Logo — ba quan hệ màu duy nhất</h3>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 3px; padding-top: 26px;">
+          <div style="background: #FFD35B; aspect-ratio: 4/3; display: grid; place-items: center;"><img src="assets/soul-logo-full-ink.svg" alt="Logo đen trên nền SOUL Yellow" style="width: 46%;" /></div>
+          <div style="background: #27292D; aspect-ratio: 4/3; display: grid; place-items: center;"><img src="assets/soul-logo-full-paper.svg" alt="Logo trắng trên nền charcoal" style="width: 46%;" /></div>
+          <div style="background: #27292D; aspect-ratio: 4/3; display: grid; place-items: center;"><img src="assets/soul-logo-full-yellow.svg" alt="Logo SOUL Yellow trên nền charcoal" style="width: 46%;" /></div>
+          <div style="background: #EAE3D5; aspect-ratio: 4/3; display: grid; place-items: center; padding: 26px; overflow: hidden;"><img src="assets/soul-elephant-ink.svg" alt="Voi SOUL dùng như ký hiệu cắt lát" style="width: 128%; opacity: .14;" /></div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(210px, 1fr)); gap: 3px; padding-top: 14px; font-size: 12px; line-height: 1.6; color: #6A6458;">
+          <p style="margin: 0;">Đen trên SOUL Yellow — dùng cho điểm nhấn thương hiệu.</p>
+          <p style="margin: 0;">Trắng trên charcoal — mặc định cho vùng tối và footer.</p>
+          <p style="margin: 0;">Vàng trên charcoal — dành riêng cho manifesto.</p>
+          <p style="margin: 0;">Voi cắt lát ở 5–6% opacity, dưới nội dung. Không đóng khung, không viền, không hiệu ứng.</p>
+        </div>
+      </section>
+
+      <!-- COLOR -->
+      <section>
+        <div style="display: flex; align-items: baseline; gap: 16px; padding-bottom: 26px; border-bottom: 1px solid #27292D;">
+          <span style="font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; color: #736C5E;">02</span>
+          <h3 style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: 26px; letter-spacing: -.015em;">Màu</h3>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(178px, 1fr)); gap: 3px; padding-top: 26px;">
+          <div><div style="height: 150px; background: #FFD35B;"></div><div style="padding: 16px 0 0;"><div style="font-size: 12.5px; font-weight: 500;">SOUL Yellow</div><div style="font-size: 11.5px; color: #6A6458; padding-top: 4px;">#FFD35B</div><p style="margin: 8px 0 0; font-size: 11.5px; line-height: 1.6; color: #736C5E;">Tín hiệu thương hiệu. Một khối lớn duy nhất trên trang (mục 08) + chi tiết nhỏ.</p></div></div>
+          <div><div style="height: 150px; background: #27292D;"></div><div style="padding: 16px 0 0;"><div style="font-size: 12.5px; font-weight: 500;">Charcoal</div><div style="font-size: 11.5px; color: #6A6458; padding-top: 4px;">#27292D</div><p style="margin: 8px 0 0; font-size: 11.5px; line-height: 1.6; color: #736C5E;">Chữ chính. Nền cho Fine Robusta &amp; footer.</p></div></div>
+          <div><div style="height: 150px; background: #1B1C1F;"></div><div style="padding: 16px 0 0;"><div style="font-size: 12.5px; font-weight: 500;">Charcoal Deep</div><div style="font-size: 11.5px; color: #6A6458; padding-top: 4px;">#1B1C1F</div><p style="margin: 8px 0 0; font-size: 11.5px; line-height: 1.6; color: #736C5E;">Senses &amp; manifesto — tối hơn một bậc để ảnh nổi lên.</p></div></div>
+          <div><div style="height: 150px; background: #F4EFE5; border: 1px solid rgba(39,41,45,.3);"></div><div style="padding: 16px 0 0;"><div style="font-size: 12.5px; font-weight: 500;">Paper</div><div style="font-size: 11.5px; color: #6A6458; padding-top: 4px;">#F4EFE5</div><p style="margin: 8px 0 0; font-size: 11.5px; line-height: 1.6; color: #736C5E;">Nền editorial chính. Không dùng trắng tinh.</p></div></div>
+          <div><div style="height: 150px; background: #EAE3D5; border: 1px solid rgba(39,41,45,.18);"></div><div style="padding: 16px 0 0;"><div style="font-size: 12.5px; font-weight: 500;">Paper Deep</div><div style="font-size: 11.5px; color: #6A6458; padding-top: 4px;">#EAE3D5</div><p style="margin: 8px 0 0; font-size: 11.5px; line-height: 1.6; color: #736C5E;">Nền thẻ sản phẩm, phân tầng nhẹ.</p></div></div>
+          <div><div style="height: 150px; background: #8E4B33;"></div><div style="padding: 16px 0 0;"><div style="font-size: 12.5px; font-weight: 500;">Basalt</div><div style="font-size: 11.5px; color: #6A6458; padding-top: 4px;">#8E4B33</div><p style="margin: 8px 0 0; font-size: 11.5px; line-height: 1.6; color: #736C5E;">Đất bazan. Chỉ dùng cho toạ độ, nhãn nguồn gốc, chuyển mục — không làm màu UI.</p></div></div>
+          <div><div style="height: 150px; background: #6A6458;"></div><div style="padding: 16px 0 0;"><div style="font-size: 12.5px; font-weight: 500;">Ink Muted</div><div style="font-size: 11.5px; color: #6A6458; padding-top: 4px;">#6A6458</div><p style="margin: 8px 0 0; font-size: 11.5px; line-height: 1.6; color: #736C5E;">Body phụ, caption.</p></div></div>
+          <div><div style="height: 150px; background: #736C5E;"></div><div style="padding: 16px 0 0;"><div style="font-size: 12.5px; font-weight: 500;">Ink Faint</div><div style="font-size: 11.5px; color: #6A6458; padding-top: 4px;">#736C5E</div><p style="margin: 8px 0 0; font-size: 11.5px; line-height: 1.6; color: #736C5E;">Metadata, số mục, nhãn nhỏ. Đã hạ tông để đạt AA ở cỡ 11px.</p></div></div>
+        </div>
+        <div style="display: grid; grid-template-columns: 190px 1fr; gap: 10px 20px; padding-top: 30px; margin-top: 30px; border-top: 1px solid rgba(39,41,45,.16); font-size: 12.5px; color: #6A6458;">
+          <span style="color: #27292D;">Tương phản đã kiểm</span><span>Charcoal / Paper 12.7:1 · Ink Muted / Paper 5.1:1 · Ink Faint / Paper 4.6:1 · Basalt / Paper 5.7:1 · Charcoal 74% / SOUL Yellow 4.9:1 · Paper 58% / Charcoal 5.0:1 — toàn bộ chữ đạt WCAG AA.</span>
+          <span style="color: #27292D;">Không bao giờ</span><span>SOUL Yellow làm màu chữ trên Paper (1.2:1) · Basalt làm nền lớn · chữ dưới 12px cho nội dung đọc.</span>
+        </div>
+      </section>
+
+      <!-- TYPOGRAPHY -->
+      <section>
+        <div style="display: flex; align-items: baseline; gap: 16px; padding-bottom: 26px; border-bottom: 1px solid #27292D;">
+          <span style="font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; color: #736C5E;">03</span>
+          <h3 style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: 26px; letter-spacing: -.015em;">Chữ — hệ hai phông, dấu tiếng Việt đầy đủ</h3>
+        </div>
+        <div style="display: grid; grid-template-columns: minmax(0,1.15fr) minmax(0,.85fr); gap: 56px; padding-top: 32px;">
+          <div>
+            <div style="display: flex; align-items: baseline; gap: 14px; padding-bottom: 20px;">
+              <span style="font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #8E4B33;">Display</span>
+              <span style="font-family: Newsreader, Georgia, serif; font-size: 19px;">Newsreader</span>
+              <span style="font-size: 11.5px; color: #736C5E;">200 · 300 · 400 · italic</span>
+            </div>
+            <div style="font-family: Newsreader, Georgia, serif; font-weight: 300; font-size: 74px; line-height: .92; letter-spacing: -.032em; padding-bottom: 6px;">Cà phê đúng</div>
+            <div style="font-family: Newsreader, Georgia, serif; font-weight: 200; font-style: italic; font-size: 44px; line-height: 1; letter-spacing: -.025em; padding-bottom: 18px;">Ừ, ể, ỗ, ữ, ạ, ặ, ẫ, ợ</div>
+            <p style="margin: 0; font-size: 12.5px; line-height: 1.7; color: #6A6458; max-width: 460px;">Hero, tiêu đề mục, trích dẫn, tên sản phẩm, số liệu. Dấu tiếng Việt của Newsreader đặt cao, không chạm chân chữ — an toàn ở cỡ lớn.</p>
+            <div style="display: grid; grid-template-columns: 130px 1fr; gap: 10px 20px; padding-top: 26px; font-size: 12.5px; color: #6A6458; border-top: 1px solid rgba(39,41,45,.16); margin-top: 26px;">
+              <span style="color: #27292D;">Hero</span><span>130 / 0.86 / −0.035em · weight 300</span>
+              <span style="color: #27292D;">H2 mục</span><span>76–94 / 0.90 / −0.03em · weight 300</span>
+              <span style="color: #27292D;">H3</span><span>25–40 / 1.20 / −0.015em · weight 400</span>
+              <span style="color: #27292D;">Số liệu</span><span>74 / 0.90 / −0.03em</span>
+              <span style="color: #27292D;">Lead</span><span>19–21 / 1.55</span>
+            </div>
+          </div>
+          <div>
+            <div style="display: flex; align-items: baseline; gap: 14px; padding-bottom: 20px;">
+              <span style="font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #8E4B33;">Functional</span>
+              <span style="font-size: 19px; font-weight: 500;">Be Vietnam Pro</span>
+              <span style="font-size: 11.5px; color: #736C5E;">300 · 400 · 500</span>
+            </div>
+            <div style="font-size: 30px; font-weight: 400; line-height: 1.25; padding-bottom: 14px;">Nghiên cứu, thử nghiệm, sơ chế</div>
+            <div style="font-size: 12px; letter-spacing: .2em; text-transform: uppercase; padding-bottom: 18px;">Buôn Ma Thuột · Est. 2018</div>
+            <p style="margin: 0; font-size: 12.5px; line-height: 1.7; color: #6A6458;">Điều hướng, nhãn, UI, caption, metadata, thông tin sản phẩm, nút. Thiết kế cho tiếng Việt ngay từ đầu — dấu không bị cắt ở cỡ nhỏ.</p>
+            <div style="display: grid; grid-template-columns: 96px 1fr; gap: 10px 20px; padding-top: 26px; font-size: 12.5px; color: #6A6458; border-top: 1px solid rgba(39,41,45,.16); margin-top: 26px;">
+              <span style="color: #27292D;">Body</span><span>16.5 / 1.78</span>
+              <span style="color: #27292D;">Body S</span><span>14.5 / 1.78</span>
+              <span style="color: #27292D;">Caption</span><span>12.5 / 1.65</span>
+              <span style="color: #27292D;">Label</span><span>11 / +0.20em / uppercase</span>
+              <span style="color: #27292D;">Nav</span><span>12.5 / +0.07em / uppercase</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- GRID + SPACING -->
+      <section>
+        <div style="display: flex; align-items: baseline; gap: 16px; padding-bottom: 26px; border-bottom: 1px solid #27292D;">
+          <span style="font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; color: #736C5E;">04</span>
+          <h3 style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: 26px; letter-spacing: -.015em;">Lưới &amp; khoảng cách</h3>
+        </div>
+        <div style="display: grid; grid-template-columns: minmax(0,1.3fr) minmax(0,.7fr); gap: 56px; padding-top: 32px;">
+          <div>
+            <div style="display: grid; grid-template-columns: repeat(12, 1fr); gap: 24px; height: 128px; padding: 0 0;">
+              <span style="background: rgba(142,75,51,.14);"></span><span style="background: rgba(142,75,51,.14);"></span><span style="background: rgba(142,75,51,.14);"></span><span style="background: rgba(142,75,51,.14);"></span><span style="background: rgba(142,75,51,.14);"></span><span style="background: rgba(142,75,51,.14);"></span><span style="background: rgba(142,75,51,.14);"></span><span style="background: rgba(142,75,51,.14);"></span><span style="background: rgba(142,75,51,.14);"></span><span style="background: rgba(142,75,51,.14);"></span><span style="background: rgba(142,75,51,.14);"></span><span style="background: rgba(142,75,51,.14);"></span>
+            </div>
+            <div style="display: grid; grid-template-columns: 130px 1fr; gap: 10px 20px; padding-top: 26px; font-size: 12.5px; color: #6A6458;">
+              <span style="color: #27292D;">Desktop</span><span>1440 · 12 cột · gutter 24 · lề ngoài 56</span>
+              <span style="color: #27292D;">Mobile</span><span>390 · 4 cột · gutter 14 · lề ngoài 22</span>
+              <span style="color: #27292D;">Full-bleed</span><span>Ảnh chuyển mục và dải ảnh 3–5 khung phá lề, khe 3px</span>
+              <span style="color: #27292D;">Cột chữ</span><span>Tối đa 480 để giữ 62–72 ký tự / dòng</span>
+            </div>
+          </div>
+          <div>
+            <div style="font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #8E4B33; padding-bottom: 18px;">Thang khoảng cách</div>
+            <div style="display: flex; flex-direction: column; gap: 8px;">
+              <div style="display: flex; align-items: center; gap: 14px;"><span style="width: 3px; height: 14px; background: #27292D;"></span><span style="font-size: 12.5px; color: #6A6458;">3 — khe ảnh</span></div>
+              <div style="display: flex; align-items: center; gap: 14px;"><span style="width: 24px; height: 14px; background: #27292D;"></span><span style="font-size: 12.5px; color: #6A6458;">24 — gutter</span></div>
+              <div style="display: flex; align-items: center; gap: 14px;"><span style="width: 56px; height: 14px; background: #27292D;"></span><span style="font-size: 12.5px; color: #6A6458;">56 — lề ngoài, gap trong mục</span></div>
+              <div style="display: flex; align-items: center; gap: 14px;"><span style="width: 92px; height: 14px; background: #27292D;"></span><span style="font-size: 12.5px; color: #6A6458;">92 — chân tiêu đề mục</span></div>
+              <div style="display: flex; align-items: center; gap: 14px;"><span style="width: 150px; height: 14px; background: #27292D;"></span><span style="font-size: 12.5px; color: #6A6458;">150 — nhịp giữa hai mục</span></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- UI -->
+      <section>
+        <div style="display: flex; align-items: baseline; gap: 16px; padding-bottom: 26px; border-bottom: 1px solid #27292D;">
+          <span style="font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; color: #736C5E;">05</span>
+          <h3 style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: 26px; letter-spacing: -.015em;">Nút, liên kết, nhãn, số mục</h3>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 46px; padding-top: 32px;">
+          <div>
+            <div style="font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #8E4B33; padding-bottom: 20px;">Nút viền</div>
+            <a href="#" style="display: inline-flex; align-items: center; gap: 11px; padding: 13px 22px; border: 1px solid #27292D; font-size: 12.5px; letter-spacing: .1em; text-transform: uppercase; transition: background 300ms, color 300ms;" style-hover="background: #27292D; color: #F4EFE5;">Coffee Solution <span aria-hidden="true">→</span></a>
+            <p style="margin: 18px 0 0; font-size: 12px; line-height: 1.65; color: #736C5E;">Góc vuông, 1px, không bóng, không bo. Hover: đảo nền/chữ trong 300ms.</p>
+          </div>
+          <div>
+            <div style="font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #8E4B33; padding-bottom: 20px;">Liên kết chính</div>
+            <a href="#" style="display: inline-flex; align-items: center; gap: 12px; padding-bottom: 8px; border-bottom: 1px solid #27292D; font-size: 13px;" style-hover="color: #8E4B33; border-color: #8E4B33;">Câu chuyện của SOUL <span aria-hidden="true">→</span></a>
+            <p style="margin: 18px 0 0; font-size: 12px; line-height: 1.65; color: #736C5E;">Kiểu mặc định của trang. Hover chuyển sang Basalt, không gạch chân kép.</p>
+          </div>
+          <div>
+            <div style="font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #8E4B33; padding-bottom: 20px;">Liên kết hàng đầy</div>
+            <a href="#" style="display: flex; align-items: center; justify-content: space-between; gap: 18px; padding: 14px 0; border-top: 1px solid #27292D; border-bottom: 1px solid rgba(39,41,45,.16); font-size: 13px; transition: padding 320ms cubic-bezier(.16,1,.3,1);" style-hover="padding-left: 10px; color: #8E4B33;">Khám phá cà phê <span aria-hidden="true">→</span></a>
+            <p style="margin: 18px 0 0; font-size: 12px; line-height: 1.65; color: #736C5E;">Dùng ở hero và mobile. Hover thụt vào 10px — chuyển động duy nhất được phép trên UI.</p>
+          </div>
+          <div>
+            <div style="font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #8E4B33; padding-bottom: 20px;">Nhãn &amp; số mục</div>
+            <div style="display: flex; flex-wrap: wrap; gap: 10px; align-items: center;">
+              <span style="font-size: 11px; letter-spacing: .2em; text-transform: uppercase; color: #736C5E;">07 — Sản phẩm</span>
+              <span style="padding: 7px 13px; border: 1px solid rgba(142,75,51,.4); font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; color: #8E4B33;">Soul yeast</span>
+              <span style="font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: #8E4B33;">12.6666° N</span>
+            </div>
+            <p style="margin: 18px 0 0; font-size: 12px; line-height: 1.65; color: #736C5E;">Số mục 01–15 đặt trên tiêu đề, Ink Faint. Chip xuất xứ/sơ chế dùng viền Basalt.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- IMAGE TREATMENT + MOTION -->
+      <section>
+        <div style="display: flex; align-items: baseline; gap: 16px; padding-bottom: 26px; border-bottom: 1px solid #27292D;">
+          <span style="font-size: 10.5px; letter-spacing: .2em; text-transform: uppercase; color: #736C5E;">06</span>
+          <h3 style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: 26px; letter-spacing: -.015em;">Xử lý ảnh &amp; chuyển động</h3>
+        </div>
+        <div style="display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 56px; padding-top: 32px;">
+          <div>
+            <div style="display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 3px;">
+              <img src="assets/cherries-macro.jpg" alt="Ví dụ ảnh macro" style="width: 100%; height: 190px; object-fit: cover;" />
+              <img src="assets/drying-beds.jpg" alt="Ví dụ ảnh quy trình" style="width: 100%; height: 190px; object-fit: cover;" />
+              <img src="assets/cup-hand.jpg" alt="Ví dụ ảnh giác quan" style="width: 100%; height: 190px; object-fit: cover;" />
+            </div>
+            <div style="display: grid; grid-template-columns: 120px 1fr; gap: 10px 20px; padding-top: 22px; font-size: 12.5px; color: #6A6458;">
+              <span style="color: #27292D;">Tinh thần</span><span>Tài liệu, có thật, ấm, có bàn tay người trong khung</span>
+              <span style="color: #27292D;">Cắt</span><span>Góc vuông tuyệt đối. Không bo, không viền, không overlay gradient</span>
+              <span style="color: #27292D;">Màu</span><span>Giữ nguyên màu gốc. Không filter, không duotone</span>
+              <span style="color: #27292D;">Khe</span><span>3px giữa các ảnh trong một dải</span>
+              <span style="color: #27292D;">Alt</span><span>Bắt buộc, tiếng Việt, tả nội dung — không tả cảm xúc</span>
+            </div>
+          </div>
+          <div>
+            <div style="font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #8E4B33; padding-bottom: 20px;">Chuyển động</div>
+            <div style="display: grid; grid-template-columns: 150px 1fr; gap: 12px 20px; font-size: 12.5px; color: #6A6458;">
+              <span style="color: #27292D;">Ảnh vào khung</span><span>Wipe từ chân lên, clip-path 1150ms, kèm scale 1.05 → 1</span>
+              <span style="color: #27292D;">Chữ vào khung</span><span>Nâng 26px + fade, 1000ms</span>
+              <span style="color: #27292D;">Easing</span><span>cubic-bezier(.16, 1, .3, 1) — vào nhanh, dừng mềm</span>
+              <span style="color: #27292D;">Stagger</span><span>70–120ms giữa các phần tử cùng hàng, tối đa 360ms</span>
+              <span style="color: #27292D;">Trigger</span><span>Một lần duy nhất, ngưỡng 2%, không phát lại khi cuộn lên</span>
+              <span style="color: #27292D;">Nav</span><span>Nền paper 92% + blur 14px khi cuộn quá 90px</span>
+              <span style="color: #27292D;">Không dùng</span><span>Nảy, bay, parallax mạnh, hiệu ứng con trỏ, hạt cà phê 3D</span>
+              <span style="color: #27292D;">Tôn trọng</span><span>prefers-reduced-motion → hiển thị tĩnh, không mất nội dung</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    </div>
+  </div>
+
+  <!-- ══════════════ DELIVERABLE D — IMAGE SOURCE NOTES ══════════════ -->
+  <sc-if value="{{ showImageNotes }}" hint-placeholder-val="{{ true }}">
+  <div>
+    <div style="display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: 10px 32px; padding: 30px 34px 26px; background: #DED6C4; border-top: 1px solid rgba(39,41,45,.2); border-bottom: 1px solid rgba(39,41,45,.2);">
+      <div style="display: flex; align-items: baseline; gap: 20px;">
+        <span style="font-size: 11px; letter-spacing: .22em; text-transform: uppercase; color: #8E4B33;">Deliverable D</span>
+        <span style="font-family: Newsreader, Georgia, serif; font-size: 25px; letter-spacing: -.015em;">Nguồn hình ảnh</span>
+      </div>
+      <span style="font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: #625A4C;">0 ảnh stock · 100% từ tài liệu SOUL</span>
+    </div>
+    <div style="background: #27292D; color: #F4EFE5; padding: 62px 34px 78px;">
+      <div style="max-width: 1372px; margin: 0 auto;">
+        <div style="display: grid; grid-template-columns: minmax(0,1fr) minmax(0,1fr); gap: 56px; padding-bottom: 52px;">
+          <p style="margin: 0; font-family: Newsreader, Georgia, serif; font-size: 25px; line-height: 1.42; letter-spacing: -.01em;">Toàn bộ 30 hình trong bản thiết kế được lấy từ tài liệu SOUL cung cấp. Không dùng ảnh stock, không dùng ảnh AI, không dùng Pinterest hay Google Images.</p>
+          <div style="font-size: 14px; line-height: 1.8; color: rgba(244,239,229,.62);">
+            <p style="margin: 0 0 14px;">Logo được bóc trực tiếp từ <span style="color: #F4EFE5;">SFR_MasterLogo.pdf</span> thành SVG vector — nguyên tỉ lệ, nguyên hình voi, không vẽ lại. Màu <span style="color: #FFD35B;">#FFD35B</span> và <span style="color: #F4EFE5;">#27292D</span> đọc trực tiếp từ file gốc.</p>
+            <p style="margin: 0;">Đồ hoạ đường bình độ là hình vẽ vector gốc cho dự án này, không phải bản đồ thật của một địa danh cụ thể.</p>
+          </div>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1.5fr 1fr 1.1fr 1.4fr; gap: 20px 32px; padding: 20px 0 18px; border-top: 1px solid rgba(244,239,229,.3); border-bottom: 1px solid rgba(244,239,229,.3); font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: rgba(244,239,229,.58);">
+          <span>Nhóm ảnh</span><span>Số lượng</span><span>Phân loại</span><span>Nguồn gốc &amp; ghi chú</span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: 1.5fr 1fr 1.1fr 1.4fr; gap: 20px 32px; padding: 24px 0; border-bottom: 1px solid rgba(244,239,229,.14); font-size: 14px; line-height: 1.6;">
+          <span>Workshop, triển lãm, chứng nhận, không gian, bao bì</span>
+          <span style="color: rgba(244,239,229,.62);">13 ảnh</span>
+          <span style="color: #FFD35B;">SOUL OWNED</span>
+          <span style="color: rgba(244,239,229,.62);">Soul Fine Robusta Credential — có mặt người, thương hiệu và sản phẩm SOUL trong khung. Dùng được ngay.</span>
+        </div>
+        <div style="display: grid; grid-template-columns: 1.5fr 1fr 1.1fr 1.4fr; gap: 20px 32px; padding: 24px 0; border-bottom: 1px solid rgba(244,239,229,.14); font-size: 14px; line-height: 1.6;">
+          <span>Vùng trồng, thu hái, lên men, phơi, rang, pha</span>
+          <span style="color: rgba(244,239,229,.62);">17 ảnh</span>
+          <span style="color: #FFD35B;">SOUL BRAND DOC</span>
+          <span style="color: rgba(244,239,229,.62);">SFR23 Brand Comm — trang Photography/Video. Cần xác nhận với agency xem là ảnh SOUL tự chụp hay ảnh tham chiếu trước khi lên production.</span>
+        </div>
+        <div style="display: grid; grid-template-columns: 1.5fr 1fr 1.1fr 1.4fr; gap: 20px 32px; padding: 24px 0; border-bottom: 1px solid rgba(244,239,229,.14); font-size: 14px; line-height: 1.6;">
+          <span>Logo, voi, wordmark</span>
+          <span style="color: rgba(244,239,229,.62);">5 SVG</span>
+          <span style="color: #FFD35B;">SOUL OWNED</span>
+          <span style="color: rgba(244,239,229,.62);">SFR_MasterLogo.pdf, bóc vector nguyên bản. Ba quan hệ màu dùng đúng như file gốc.</span>
+        </div>
+        <div style="display: grid; grid-template-columns: 1.5fr 1fr 1.1fr 1.4fr; gap: 20px 32px; padding: 24px 0; border-bottom: 1px solid rgba(244,239,229,.14); font-size: 14px; line-height: 1.6;">
+          <span>Đường bình độ cao nguyên</span>
+          <span style="color: rgba(244,239,229,.62);">3 SVG</span>
+          <span style="color: #FFD35B;">TẠO CHO DỰ ÁN</span>
+          <span style="color: rgba(244,239,229,.62);">Hình abstract, không phải bản đồ địa lý thật. Chỉ dùng ở 5–50% opacity dưới nội dung.</span>
+        </div>
+        <div style="display: grid; grid-template-columns: 1.5fr 1fr 1.1fr 1.4fr; gap: 20px 32px; padding: 24px 0; border-bottom: 1px solid rgba(244,239,229,.14); font-size: 14px; line-height: 1.6;">
+          <span>Ảnh stock</span>
+          <span style="color: rgba(244,239,229,.62);">0 ảnh</span>
+          <span style="color: rgba(244,239,229,.58);">STOCK — LICENSE REQUIRED</span>
+          <span style="color: rgba(244,239,229,.62);">Không cần. Tài liệu SOUL đã đủ phủ toàn bộ trang chủ.</span>
+        </div>
+
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 40px; padding-top: 52px;">
+          <div>
+            <div style="font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: #FFD35B; padding-bottom: 16px;">Cần bổ sung trước khi lên production</div>
+            <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 11px; font-size: 14px; line-height: 1.6; color: rgba(244,239,229,.7);">
+              <li>Ảnh sản phẩm riêng cho từng SKU Soulful 2026 (Cay / Nồng / Thơm / Ngọt) — hiện đang dùng ảnh bao bì đại diện.</li>
+              <li>Ảnh không gian riêng cho từng cửa hàng SR1 / SR2 / SR4 / SR5.</li>
+              <li>Một khung phong cảnh cao nguyên rộng cho mục 03.</li>
+              <li>Chân dung hai nhà sáng lập, nếu đưa vào trang chủ.</li>
+            </ul>
+          </div>
+          <div>
+            <div style="font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: #FFD35B; padding-bottom: 16px;">Số liệu đã loại vì mâu thuẫn nguồn</div>
+            <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 11px; font-size: 14px; line-height: 1.6; color: rgba(244,239,229,.7);">
+              <li>Tổng lượng tiêu thụ hàng năm: bản tiếng Anh ghi 1.800–2.000 tấn, bản tiếng Việt ghi &gt;10.000 tấn — không dùng.</li>
+              <li>Điểm SCA 86.83 (Credential) so với 87.21 &amp; 86.85 (VCPC 2026, website) — chỉ dùng số liệu VCPC 2026 mới nhất, có nguồn rõ.</li>
+              <li>Địa chỉ Đà Nẵng: Credential ghi hai địa chỉ — dùng địa chỉ đang đăng trên website.</li>
+            </ul>
+          </div>
+          <div>
+            <div style="font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: #FFD35B; padding-bottom: 16px;">Nguồn nội dung</div>
+            <ul style="margin: 0; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 11px; font-size: 14px; line-height: 1.6; color: rgba(244,239,229,.7);">
+              <li>SFR23 New Brand Identity — định vị, câu chuyện, giá trị Sense / Handcraft / Vietnam Value.</li>
+              <li>Soul Fine Robusta Credential — Fine Robusta, sơ chế, năng lực, workshop, triển lãm, địa chỉ.</li>
+              <li>SFR23 Brand Comm — kiến trúc thông tin website, chủ đề Journal.</li>
+              <li>soulcoffee.vn — VCPC 2026, Soulful Collection 2026, danh mục sản phẩm, liên hệ.</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </sc-if>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;showSectionNumbers&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Editorial system&quot;},&quot;motionEnabled&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Motion&quot;},&quot;revealStyle&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;wipe&quot;,&quot;fade&quot;],&quot;default&quot;:&quot;wipe&quot;,&quot;tsType&quot;:&quot;'wipe' | 'fade'&quot;,&quot;section&quot;:&quot;Motion&quot;},&quot;showImageNotes&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Deliverables&quot;}}">
+class Component extends DCLogic {
+  componentDidMount() {
+    const reduced = window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    this._motion = this.props.motionEnabled !== false && !reduced;
+    this._fitCanvas();
+    if (this._motion) this._setupReveal();
+  }
+  componentWillUnmount() {
+    if (this._onResize) window.removeEventListener('resize', this._onResize);
+    if (this._ro) this._ro.disconnect();
+    if (this._io) this._io.disconnect();
+  }
+  /* Scale each fixed-width comp canvas to fit the review viewport, so the
+     1440 desktop and 390 mobile compositions always read at true proportion. */
+  _fitCanvas() {
+    const pairs = [['desk-viewport', 'desk-canvas', 1440]];
+    const apply = () => {
+      pairs.forEach(([vpId, cvId, designW]) => {
+        const vp = document.getElementById(vpId);
+        const cv = document.getElementById(cvId);
+        if (!vp || !cv) return;
+        const avail = vp.clientWidth || vp.getBoundingClientRect().width;
+        const s = Math.min(1, avail / designW);
+        cv.style.transform = s < 1 ? 'scale(' + s + ')' : 'none';
+        vp.style.height = Math.ceil(cv.getBoundingClientRect().height) + 'px';
+      });
+    };
+    this._onResize = apply;
+    window.addEventListener('resize', apply);
+    if ('ResizeObserver' in window) {
+      this._ro = new ResizeObserver(apply);
+      const cv = document.getElementById('desk-canvas');
+      if (cv) this._ro.observe(cv);
+    }
+    apply();
+    window.setTimeout(apply, 120);
+    window.setTimeout(apply, 700);
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(apply);
+    window.addEventListener('load', apply);
+  }
+  _setupReveal() {
+    if (!('IntersectionObserver' in window)) return;
+    const style = this.props.revealStyle || 'wipe';
+    const els = Array.from(document.querySelectorAll('[data-reveal]'));
+    const EASE = 'cubic-bezier(.16,1,.3,1)';
+    /* Image wipes are applied to the <img> children, never to the observed
+       element itself — a fully clipped target never intersects. */
+    const targets = (el) => el.getAttribute('data-reveal') === 'img' && style === 'wipe'
+      ? Array.from(el.querySelectorAll('img'))
+      : [el];
+    els.forEach((el) => {
+      const isImg = el.getAttribute('data-reveal') === 'img' && style === 'wipe';
+      targets(el).forEach((t, i) => {
+        t.style.willChange = 'opacity, transform, clip-path';
+        if (isImg) {
+          t.style.transition = 'clip-path 1150ms ' + EASE + ' ' + (i * 90) + 'ms, transform 1500ms ' + EASE + ' ' + (i * 90) + 'ms';
+          t.style.clipPath = 'inset(0 0 100% 0)';
+          t.style.transform = 'scale(1.05)';
+        } else {
+          t.style.transition = 'opacity 1000ms ' + EASE + ', transform 1000ms ' + EASE;
+          t.style.opacity = '0';
+          t.style.transform = style === 'wipe' ? 'translateY(26px)' : 'none';
+          t.style.clipPath = 'none';
+        }
+      });
+    });
+    this._io = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (!e.isIntersecting) return;
+        const el = e.target;
+        const d = parseFloat(el.getAttribute('data-delay') || '0');
+        const isImg = el.getAttribute('data-reveal') === 'img' && style === 'wipe';
+        window.setTimeout(() => {
+          targets(el).forEach((t) => {
+            /* clip-path only ever touches <img>. On text it would clip the
+               border box and slice ascenders off tight-leading display type. */
+            if (isImg) t.style.clipPath = 'inset(0 0 0 0)';
+            t.style.opacity = '1';
+            t.style.transform = 'none';
+            t.style.willChange = 'auto';
+          });
+        }, d);
+        this._io.unobserve(el);
+      });
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.02 });
+    els.forEach((el) => this._io.observe(el));
+  }
+  renderVals() {
+    return {
+      showSectionNumbers: this.props.showSectionNumbers !== false,
+      showImageNotes: this.props.showImageNotes !== false,
+    };
+  }
+}
+
+</script>
+</body>
+</html>
