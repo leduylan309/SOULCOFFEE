@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..500&amp;family=Be+Vietnam+Pro:wght@400;500;600&amp;display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-font-smoothing: antialiased; overflow-x: clip; scroll-behavior: smooth; }
+  body { margin: 0; background: #F4EFE5; color: #27292D; font-family: "Be Vietnam Pro", system-ui, sans-serif; font-size: 15px; line-height: 1.6; overflow-x: hidden; }
+  a { color: inherit; text-decoration: none; }
+  a:hover { color: #27292D; }
+  button { font-family: inherit; color: inherit; }
+  img { display: block; }
+  :focus-visible { outline: 2px solid #FFD35B; outline-offset: 3px; }
+  ::selection { background: #FFD35B; color: #27292D; }
+  .o3-scroll { scrollbar-width: none; } .o3-scroll::-webkit-scrollbar { display: none; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: 0.01ms !important; animation-duration: 0.01ms !important; scroll-behavior: auto !important; } }
+</style>
+</helmet>
+
+<div style="min-height: 100vh; background: #F4EFE5; color: #27292D;">
+
+  <!-- 01 ANNOUNCEMENT -->
+  <div style="background: #27292D; color: #F4EFE5; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; text-align: center; padding: 10px clamp(16px,4vw,64px); display: flex; justify-content: center; gap: 28px; flex-wrap: wrap;">
+    <span>Roasted in Buôn Ma Thuột · Shipped to Australia</span>
+    <span style="color: #FFD35B;">AU shipping message — to confirm</span>
+  </div>
+
+  <!-- 02 HEADER -->
+  <header style="position: sticky; top: 0; z-index: 60; background: #F4EFE5; border-bottom: 1px solid rgba(39,41,45,.14);" onMouseLeave="{{ closeMega }}">
+    <nav aria-label="Main" style="display: flex; align-items: center; justify-content: space-between; gap: 20px; height: 66px; padding: 0 clamp(16px,4vw,64px);">
+      <div style="display: flex; align-items: center; gap: clamp(20px,3vw,44px);">
+        <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+          <button type="button" aria-label="Open menu" onClick="{{ openMobile }}" style="width: 44px; height: 44px; margin-left: -10px; display: grid; place-items: center; background: none; border: 0; cursor: pointer;">
+            <span style="display: block; width: 22px; height: 1.5px; background: #27292D; box-shadow: 0 -7px 0 #27292D, 0 7px 0 #27292D;"></span>
+          </button>
+        </sc-if>
+        <a href="#top" aria-label="SOUL home" style="display: flex; align-items: center; gap: 12px;">
+          <img src="assets/soul-elephant-ink.svg" alt="" width="30" height="30" style="width: 30px; height: 30px;" />
+          <img src="assets/soul-wordmark-ink.svg" alt="SOUL" style="height: 15px; width: auto;" />
+        </a>
+        <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+          <div style="display: flex; align-items: center; gap: 2px; font-size: 12.5px; letter-spacing: .06em; font-weight: 500;">
+            <button type="button" aria-expanded="{{ megaOpen }}" onClick="{{ toggleMega }}" onMouseEnter="{{ openMega }}" style="display: flex; align-items: center; gap: 6px; height: 66px; padding: 0 14px; background: none; border: 0; border-bottom: 2px solid transparent; cursor: pointer; letter-spacing: .06em; font-weight: 500; font-size: 12.5px;" style-hover="border-bottom-color: #FFD35B;">SHOP <span style="font-size: 9px; opacity: .6;">▾</span></button>
+            <a href="#subscribe" onMouseEnter="{{ closeMega }}" style="display: flex; align-items: center; height: 66px; padding: 0 14px; border-bottom: 2px solid transparent;" style-hover="border-bottom-color: #FFD35B;">SUBSCRIPTIONS</a>
+            <a href="#soulful" onMouseEnter="{{ closeMega }}" style="display: flex; align-items: center; height: 66px; padding: 0 14px; border-bottom: 2px solid transparent;" style-hover="border-bottom-color: #FFD35B;">OUR COFFEE</a>
+            <a href="#story" onMouseEnter="{{ closeMega }}" style="display: flex; align-items: center; height: 66px; padding: 0 14px; border-bottom: 2px solid transparent;" style-hover="border-bottom-color: #FFD35B;">ABOUT</a>
+            <a href="#journal" onMouseEnter="{{ closeMega }}" style="display: flex; align-items: center; height: 66px; padding: 0 14px; border-bottom: 2px solid transparent;" style-hover="border-bottom-color: #FFD35B;">JOURNAL</a>
+            <a href="#solutions" onMouseEnter="{{ closeMega }}" style="display: flex; align-items: center; height: 66px; padding: 0 14px; border-bottom: 2px solid transparent;" style-hover="border-bottom-color: #FFD35B;">COFFEE SOLUTIONS</a>
+          </div>
+        </sc-if>
+      </div>
+      <div style="display: flex; align-items: center; gap: 4px; font-size: 12.5px; letter-spacing: .06em; font-weight: 500;">
+        <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+          <button type="button" aria-label="Currency: AUD" style="height: 44px; padding: 0 12px; background: none; border: 0; cursor: pointer; letter-spacing: .06em; font-weight: 500; font-size: 12.5px;">AUD ▾</button>
+          <button type="button" aria-label="Language: English" style="height: 44px; padding: 0 12px; background: none; border: 0; cursor: pointer; letter-spacing: .06em; font-weight: 500; font-size: 12.5px;">EN</button>
+        </sc-if>
+        <button type="button" aria-label="Search" onClick="{{ openSearch }}" style="height: 44px; padding: 0 12px; background: none; border: 0; cursor: pointer; letter-spacing: .06em; font-weight: 500; font-size: 12.5px; display: flex; align-items: center; gap: 8px;">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="7" cy="7" r="5"></circle><path d="M11 11l4 4"></path></svg>
+          <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}"><span>SEARCH</span></sc-if>
+        </button>
+        <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+          <a href="#account" aria-label="Account" style="height: 44px; padding: 0 12px; display: flex; align-items: center;">ACCOUNT</a>
+        </sc-if>
+        <button type="button" aria-label="Open cart" onClick="{{ openCart }}" style="height: 44px; padding: 0 0 0 12px; background: none; border: 0; cursor: pointer; letter-spacing: .06em; font-weight: 500; font-size: 12.5px; display: flex; align-items: center; gap: 8px;">
+          <span>CART</span>
+          <span style="min-width: 22px; height: 22px; padding: 0 6px; display: grid; place-items: center; background: #27292D; color: #F4EFE5; font-size: 11px; border-radius: 11px;">{{ cartCount }}</span>
+        </button>
+      </div>
+    </nav>
+
+    <!-- SHOP MEGA MENU -->
+    <sc-if value="{{ megaOpen }}" hint-placeholder-val="{{ false }}">
+      <div role="region" aria-label="Shop menu" style="position: absolute; left: 0; right: 0; top: 66px; background: #F4EFE5; border-bottom: 1px solid rgba(39,41,45,.14); box-shadow: 0 24px 40px -30px rgba(39,41,45,.35);">
+        <div style="display: grid; grid-template-columns: 1fr 1fr 1fr 1.5fr; gap: clamp(24px,3vw,56px); padding: 36px clamp(16px,4vw,64px) 44px; max-width: 1440px; margin: 0 auto;">
+          <div>
+            <div style="font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: #7C7365; padding-bottom: 16px; border-bottom: 1px solid rgba(39,41,45,.14); margin-bottom: 14px;">Shop coffee</div>
+            <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; font-family: Newsreader, Georgia, serif; font-size: 22px; line-height: 1.2;">
+              <li><a href="#best" onClick="{{ closeMega }}" style-hover="color: #8E4B33;">All coffee</a></li>
+              <li><a href="#best" onClick="{{ closeMega }}" style-hover="color: #8E4B33;">Best sellers</a></li>
+              <li><a href="#new" onClick="{{ closeMega }}" style-hover="color: #8E4B33;">New releases</a></li>
+              <li><a href="#soulful" onClick="{{ closeMega }}" style-hover="color: #8E4B33;">Soulful Collection 2026</a></li>
+            </ul>
+          </div>
+          <div>
+            <div style="font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: #7C7365; padding-bottom: 16px; border-bottom: 1px solid rgba(39,41,45,.14); margin-bottom: 14px;">By brew method</div>
+            <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; font-family: Newsreader, Georgia, serif; font-size: 22px; line-height: 1.2;">
+              <li><a href="#brew" onClick="{{ pickPhinClose }}" style-hover="color: #8E4B33;">Phin</a></li>
+              <li><a href="#brew" onClick="{{ pickEspressoClose }}" style-hover="color: #8E4B33;">Espresso</a></li>
+              <li><a href="#brew" onClick="{{ pickFilterClose }}" style-hover="color: #8E4B33;">Filter / Brewing</a></li>
+              <li><a href="#brew" onClick="{{ pickColdClose }}" style-hover="color: #8E4B33;">Cold brew</a></li>
+            </ul>
+          </div>
+          <div>
+            <div style="font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: #7C7365; padding-bottom: 16px; border-bottom: 1px solid rgba(39,41,45,.14); margin-bottom: 14px;">More</div>
+            <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; font-family: Newsreader, Georgia, serif; font-size: 22px; line-height: 1.2;">
+              <li><a href="#subscribe" onClick="{{ closeMega }}" style-hover="color: #8E4B33;">Subscriptions</a></li>
+              <li><a href="#solutions" onClick="{{ closeMega }}" style-hover="color: #8E4B33;">Green beans (wholesale)</a></li>
+              <li><a href="#spaces" onClick="{{ closeMega }}" style-hover="color: #8E4B33;">Visit a SOUL space</a></li>
+            </ul>
+            <p style="margin: 22px 0 0; font-size: 11px; line-height: 1.6; color: #7C7365;">Gift sets &amp; coffeeware — pending catalogue confirmation.</p>
+          </div>
+          <a href="#new" onClick="{{ closeMega }}" style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px; align-items: end; background: #27292D; color: #F4EFE5; padding: 18px;">
+            <img src="assets/pack-soulful-hands.jpg" alt="Soulful Collection 2026 packaging held in hands" style="width: 100%; aspect-ratio: 4/5; object-fit: cover;" />
+            <div>
+              <div style="font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: #FFD35B;">Featured</div>
+              <div style="font-family: Newsreader, Georgia, serif; font-size: 24px; line-height: 1.12; margin: 10px 0 8px;">Soulful Collection 2026</div>
+              <div style="font-size: 12px; color: rgba(244,239,229,.7);">Four highland expressions. Four brew methods.</div>
+              <div style="font-size: 12px; margin-top: 14px; letter-spacing: .08em;">SHOP SOULFUL ↗</div>
+            </div>
+          </a>
+        </div>
+      </div>
+    </sc-if>
+  </header>
+
+  <main id="top">
+
+    <!-- 03 HERO -->
+    <section aria-labelledby="hero-h" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); min-height: min(86vh, 820px); border-bottom: 1px solid rgba(39,41,45,.14);">
+      <div style="display: flex; flex-direction: column; justify-content: space-between; padding: clamp(36px,5vw,72px) clamp(16px,4vw,64px) clamp(32px,4vw,56px); order: 1;">
+        <div style="display: flex; gap: 18px; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: #7C7365;">
+          <span>Fine Robusta</span><span>·</span><span>Buôn Ma Thuột, Vietnam</span>
+        </div>
+        <div style="padding: clamp(36px,6vh,72px) 0;">
+          <h1 id="hero-h" style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: clamp(50px, 7.4vw, 118px); line-height: .94; letter-spacing: -.03em; text-wrap: balance;">Fine Robusta,<br /><em style="font-style: italic; font-weight: 300;">made differently.</em></h1>
+          <p style="margin: 28px 0 0; max-width: 46ch; font-size: clamp(15px,1.15vw,17px); line-height: 1.65; color: #514B42; text-wrap: pretty;">Specialty coffee from Buôn Ma Thuột — grown, processed and roasted through Vietnamese ingredients, knowledge and perspective. Choose by how you brew.</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px;">
+            <a href="#best" style="display: inline-flex; align-items: center; gap: 10px; height: 50px; padding: 0 26px; background: #27292D; color: #F4EFE5; font-size: 12.5px; letter-spacing: .12em; text-transform: uppercase; font-weight: 500;" style-hover="background: #FFD35B; color: #27292D;">Shop coffee <span aria-hidden="true">↗</span></a>
+            <a href="#soulful" style="display: inline-flex; align-items: center; gap: 10px; height: 50px; padding: 0 26px; border: 1px solid #27292D; font-size: 12.5px; letter-spacing: .12em; text-transform: uppercase; font-weight: 500;" style-hover="background: #27292D; color: #F4EFE5;">Shop Soulful <span aria-hidden="true">↗</span></a>
+            <a href="#story" style="display: inline-flex; align-items: center; height: 50px; padding: 0 8px; font-size: 12.5px; letter-spacing: .12em; text-transform: uppercase; text-decoration: underline; text-underline-offset: 6px; text-decoration-color: rgba(39,41,45,.3);" style-hover="text-decoration-color: #27292D;">Our story</a>
+          </div>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: 8px 28px; font-size: 11.5px; letter-spacing: .1em; text-transform: uppercase; color: #514B42;">
+          <span>Phin</span><span>Espresso</span><span>Filter</span><span>Cold brew</span>
+        </div>
+      </div>
+      <div style="position: relative; min-height: 420px; background: #27292D; order: 2;">
+        <img src="assets/pack-soulful-hands.jpg" alt="Soulful Collection 2026 bags held in hands" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;" loading="eager" />
+        <div style="position: absolute; left: 0; right: 0; bottom: 0; padding: 22px clamp(16px,3vw,36px); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 14px; background: linear-gradient(to top, rgba(39,41,45,.85), rgba(39,41,45,0)); color: #F4EFE5;">
+          <div>
+            <div style="font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: #FFD35B;">Now available</div>
+            <div style="font-family: Newsreader, Georgia, serif; font-size: 26px; line-height: 1.1; margin-top: 6px;">Soulful Collection 2026</div>
+            <div style="font-size: 12px; opacity: .78; margin-top: 4px;">Cay · Nồng · Thơm · Ngọt &nbsp;·&nbsp; from {{ heroPrice }}</div>
+          </div>
+          <a href="#soulful" style="display: inline-flex; align-items: center; height: 44px; padding: 0 20px; background: #FFD35B; color: #27292D; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; font-weight: 600;">Shop now</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- 04 SHOP BY CATEGORY -->
+    <section aria-labelledby="cat-h" style="padding: clamp(48px,6vw,88px) clamp(16px,4vw,64px) clamp(40px,5vw,72px);">
+      <div style="display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 16px; margin-bottom: clamp(24px,3vw,40px);">
+        <h2 id="cat-h" style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: clamp(34px,4.2vw,60px); line-height: 1; letter-spacing: -.025em;">What are you brewing?</h2>
+        <a href="#brew" style="font-size: 12px; letter-spacing: .12em; text-transform: uppercase; text-decoration: underline; text-underline-offset: 6px; text-decoration-color: rgba(39,41,45,.3);" style-hover="text-decoration-color: #27292D;">Help me choose ↗</a>
+      </div>
+      <div class="o3-scroll" style="display: grid; grid-template-columns: repeat(12, 1fr); grid-auto-rows: clamp(140px, 14vw, 200px); gap: 10px;">
+        <a href="#brew" onClick="{{ pickPhin }}" style="grid-column: span 4; grid-row: span 2; position: relative; overflow: hidden; background: #27292D; color: #F4EFE5;" style-hover="color: #FFD35B;">
+          <img src="assets/brew-phin-dark.jpg" alt="" loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .9; transition: transform 700ms ease;" />
+          <span style="position: absolute; left: 20px; bottom: 18px; right: 20px; display: flex; justify-content: space-between; align-items: end;"><span style="font-family: Newsreader, Georgia, serif; font-size: clamp(30px,3vw,44px); line-height: 1; text-shadow: 0 2px 20px rgba(0,0,0,.4);">Phin</span><span style="font-size: 11px; letter-spacing: .14em;">SHOP ↗</span></span>
+        </a>
+        <a href="#brew" onClick="{{ pickEspresso }}" style="grid-column: span 5; grid-row: span 1; position: relative; overflow: hidden; background: #27292D; color: #F4EFE5;" style-hover="color: #FFD35B;">
+          <img src="assets/brew-espresso.jpg" alt="" loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .9;" />
+          <span style="position: absolute; left: 20px; bottom: 18px; right: 20px; display: flex; justify-content: space-between; align-items: end;"><span style="font-family: Newsreader, Georgia, serif; font-size: clamp(30px,3vw,44px); line-height: 1; text-shadow: 0 2px 20px rgba(0,0,0,.4);">Espresso</span><span style="font-size: 11px; letter-spacing: .14em;">SHOP ↗</span></span>
+        </a>
+        <a href="#brew" onClick="{{ pickFilter }}" style="grid-column: span 3; grid-row: span 1; position: relative; overflow: hidden; background: #27292D; color: #F4EFE5;" style-hover="color: #FFD35B;">
+          <img src="assets/brew-pourover.jpg" alt="" loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .9;" />
+          <span style="position: absolute; left: 20px; bottom: 18px; right: 20px; display: flex; justify-content: space-between; align-items: end;"><span style="font-family: Newsreader, Georgia, serif; font-size: clamp(26px,2.4vw,34px); line-height: 1; text-shadow: 0 2px 20px rgba(0,0,0,.4);">Filter</span><span style="font-size: 11px; letter-spacing: .14em;">SHOP ↗</span></span>
+        </a>
+        <a href="#brew" onClick="{{ pickCold }}" style="grid-column: span 4; grid-row: span 1; position: relative; overflow: hidden; background: #EAE3D5; color: #27292D; display: flex; align-items: end; padding: 18px 20px;" style-hover="background: #FFD35B;">
+          <img src="assets/glass-dark.jpg" alt="" loading="lazy" style="position: absolute; right: 0; top: 0; bottom: 0; width: 44%; height: 100%; object-fit: cover;" />
+          <span style="position: relative; display: flex; flex-direction: column; gap: 6px;"><span style="font-family: Newsreader, Georgia, serif; font-size: clamp(26px,2.4vw,34px); line-height: 1;">Cold brew</span><span style="font-size: 11px; letter-spacing: .14em;">SHOP ↗</span></span>
+        </a>
+        <a href="#soulful" style="grid-column: span 4; grid-row: span 1; position: relative; overflow: hidden; background: #FFD35B; color: #27292D; display: flex; align-items: end; justify-content: space-between; padding: 18px 20px;" style-hover="background: #27292D; color: #FFD35B;">
+          <img src="assets/soul-elephant-ink.svg" alt="" style="position: absolute; right: -6%; top: -18%; width: 52%; height: auto; opacity: .12;" />
+          <span style="position: relative; font-family: Newsreader, Georgia, serif; font-size: clamp(26px,2.4vw,34px); line-height: 1;">Soulful<br />Collection</span><span style="position: relative; font-size: 11px; letter-spacing: .14em;">SHOP ↗</span>
+        </a>
+      </div>
+    </section>
+
+    <!-- 05 BEST SELLERS -->
+    <section id="best" aria-labelledby="best-h" style="padding: clamp(24px,3vw,40px) clamp(16px,4vw,64px) clamp(56px,7vw,96px);">
+      <div style="display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 16px; padding-bottom: 20px; border-bottom: 1px solid #27292D; margin-bottom: clamp(20px,2.4vw,32px);">
+        <h2 id="best-h" style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: clamp(34px,4.2vw,60px); line-height: 1; letter-spacing: -.025em;">Most loved</h2>
+        <div style="display: flex; gap: 22px; font-size: 12px; letter-spacing: .12em; text-transform: uppercase;">
+          <span style="color: #7C7365;">{{ priceNote }}</span>
+          <a href="#best" style="text-decoration: underline; text-underline-offset: 6px; text-decoration-color: rgba(39,41,45,.3);">All coffee ↗</a>
+        </div>
+      </div>
+      <div class="o3-scroll" style="display: grid; grid-auto-flow: column; grid-auto-columns: minmax(min(78vw, 300px), 1fr); gap: 10px; overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 4px;">
+        <sc-for list="{{ bestSellers }}" as="p" hint-placeholder-count="4">
+          <article style="scroll-snap-align: start; display: flex; flex-direction: column; background: #EAE3D5; position: relative;">
+            <a href="#new" aria-label="{{ p.name }}" style="position: relative; display: block; aspect-ratio: 4/5; overflow: hidden; background: #E2DACB;">
+              <img src="{{ p.img }}" alt="{{ p.alt }}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; transition: transform 800ms ease;" />
+              <span style="position: absolute; left: 12px; top: 12px; display: inline-block; padding: 5px 9px; background: #F4EFE5; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; font-weight: 600;">{{ p.badge }}</span>
+              <span aria-hidden="true" style="position: absolute; right: 10px; bottom: 6px; font-family: Newsreader, Georgia, serif; font-size: clamp(64px,7vw,110px); line-height: 1; color: rgba(244,239,229,.22); letter-spacing: -.04em; pointer-events: none;">{{ p.word }}</span>
+            </a>
+            <div style="padding: 16px 16px 18px; display: flex; flex-direction: column; gap: 10px; flex: 1;">
+              <div style="display: flex; justify-content: space-between; gap: 12px; align-items: start;">
+                <div>
+                  <h3 style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: 22px; line-height: 1.12;">{{ p.name }}</h3>
+                  <div style="margin-top: 4px; font-size: 12px; color: #514B42;">{{ p.type }}</div>
+                </div>
+                <div style="text-align: right; white-space: nowrap;">
+                  <div style="font-size: 15px; font-weight: 600;">{{ p.priceLabel }}</div>
+                  <div style="font-size: 11px; letter-spacing: .08em; color: #7C7365;">{{ p.sizes }}</div>
+                </div>
+              </div>
+              <div style="font-size: 12.5px; line-height: 1.5; color: #514B42; font-style: italic; font-family: Newsreader, Georgia, serif; font-size: 15px;">{{ p.notes }}</div>
+              <sc-if value="{{ p.qaOpen }}" hint-placeholder-val="{{ false }}">
+                <div style="display: flex; flex-direction: column; gap: 12px; padding-top: 10px; border-top: 1px solid rgba(39,41,45,.16);">
+                  <div>
+                    <div style="font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: #7C7365; margin-bottom: 8px;">Size</div>
+                    <div style="display: flex; gap: 6px;">
+                      <sc-for list="{{ p.sizeOpts }}" as="s" hint-placeholder-count="3">
+                        <button type="button" aria-pressed="{{ s.on }}" onClick="{{ s.pick }}" style="height: 40px; padding: 0 14px; border: 1px solid {{ s.border }}; background: {{ s.bg }}; font-size: 12px; font-weight: 500; cursor: pointer;">{{ s.label }}</button>
+                      </sc-for>
+                    </div>
+                  </div>
+                  <div>
+                    <div style="font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: #7C7365; margin-bottom: 8px;">Grind</div>
+                    <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                      <sc-for list="{{ p.grindOpts }}" as="g" hint-placeholder-count="4">
+                        <button type="button" aria-pressed="{{ g.on }}" onClick="{{ g.pick }}" style="height: 40px; padding: 0 12px; border: 1px solid {{ g.border }}; background: {{ g.bg }}; font-size: 12px; font-weight: 500; cursor: pointer;">{{ g.label }}</button>
+                      </sc-for>
+                    </div>
+                  </div>
+                  <button type="button" onClick="{{ p.add }}" style="height: 48px; background: #27292D; color: #F4EFE5; border: 0; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; font-weight: 600; cursor: pointer;" style-hover="background: #FFD35B; color: #27292D;">Add to cart — {{ p.qaPrice }}</button>
+                </div>
+              </sc-if>
+              <sc-if value="{{ p.qaClosed }}" hint-placeholder-val="{{ true }}">
+                <button type="button" onClick="{{ p.openQA }}" style="margin-top: auto; height: 46px; border: 1px solid #27292D; background: transparent; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; font-weight: 500; cursor: pointer;" style-hover="background: #27292D; color: #F4EFE5;">Quick add</button>
+              </sc-if>
+            </div>
+          </article>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- 06 BRAND INTERLUDE -->
+    <section id="story" aria-labelledby="story-h" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 460px), 1fr)); background: #27292D; color: #F4EFE5;">
+      <figure style="margin: 0; position: relative; min-height: 420px;">
+        <img src="assets/cherries-hands.jpg" alt="Hands sorting ripe red coffee cherries in Buôn Ma Thuột" loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;" />
+        <figcaption style="position: absolute; left: clamp(16px,3vw,36px); bottom: 20px; font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: rgba(244,239,229,.8);">Harvest · Đắk Lắk · SOUL owned</figcaption>
+      </figure>
+      <div style="padding: clamp(48px,6vw,96px) clamp(16px,4vw,64px); display: flex; flex-direction: column; justify-content: center; gap: 28px;">
+        <div style="display: flex; align-items: center; gap: 14px; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: rgba(244,239,229,.7);">
+          <span style="display: inline-block; width: 28px; height: 2px; background: #8E4B33;"></span>
+          <span>Buôn Ma Thuột · Đắk Lắk · Vietnam</span>
+        </div>
+        <h2 id="story-h" style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: clamp(42px,5.4vw,84px); line-height: .96; letter-spacing: -.03em;">Crafted<br />by Vietnamese<br /><span style="color: #FFD35B;">Soul.</span></h2>
+        <p style="margin: 0; max-width: 46ch; font-size: clamp(15px,1.15vw,17px); line-height: 1.7; color: rgba(244,239,229,.78); text-wrap: pretty;">SOUL began in Buôn Ma Thuột with a question that still guides every coffee we make — <em style="color: #F4EFE5;">“Làm cà phê thế nào cho đúng?”</em> How is coffee made properly? From the farmer to the roast to your cup.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: 24px; align-items: center;">
+          <a href="#story" style="display: inline-flex; align-items: center; gap: 10px; height: 48px; padding: 0 22px; border: 1px solid rgba(244,239,229,.5); font-size: 12px; letter-spacing: .12em; text-transform: uppercase;" style-hover="background: #F4EFE5; color: #27292D;">Discover our story ↗</a>
+          <svg viewBox="0 0 160 24" width="160" height="24" fill="none" stroke="#8E4B33" stroke-width="1" aria-hidden="true" style="opacity: .9;"><path d="M0 18 C20 18 28 8 44 8 S66 20 84 20 S110 4 128 6 S150 16 160 14"></path><path d="M0 22 C24 22 30 14 48 14 S70 23 88 23 S112 10 130 11 S150 20 160 19" opacity=".5"></path></svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- 07 NEW RELEASES -->
+    <section id="new" aria-labelledby="new-h" style="padding: clamp(56px,7vw,96px) clamp(16px,4vw,64px);">
+      <div style="display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 16px; margin-bottom: clamp(24px,3vw,40px);">
+        <h2 id="new-h" style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: clamp(34px,4.2vw,60px); line-height: 1; letter-spacing: -.025em;">New releases</h2>
+        <span style="font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: #7C7365;">Roasted to order · Dispatch timing to confirm</span>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 10px; align-items: stretch;">
+        <figure style="margin: 0; position: relative; min-height: 460px; background: #27292D;">
+          <img src="assets/roasted-hands.jpg" alt="Freshly roasted Fine Robusta beans in cupped hands" loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;" />
+          <span aria-hidden="true" style="position: absolute; left: clamp(12px,2vw,24px); top: clamp(12px,2vw,24px); display: inline-block; padding: 6px 10px; background: #FFD35B; color: #27292D; font-size: 10px; letter-spacing: .16em; text-transform: uppercase; font-weight: 600;">Limited release</span>
+        </figure>
+        <div style="background: #EAE3D5; padding: clamp(28px,3.4vw,48px); display: flex; flex-direction: column; gap: 22px;">
+          <div style="display: grid; grid-template-columns: auto 1fr; gap: 6px 22px; font-size: 12px; align-items: baseline;">
+            <span style="letter-spacing: .14em; text-transform: uppercase; color: #7C7365; font-size: 10.5px;">Origin</span><span>Buôn Ma Thuột, Đắk Lắk</span>
+            <span style="letter-spacing: .14em; text-transform: uppercase; color: #7C7365; font-size: 10.5px;">Process</span><span>Natural · Cần wine yeast fermentation</span>
+            <span style="letter-spacing: .14em; text-transform: uppercase; color: #7C7365; font-size: 10.5px;">Brew</span><span>Espresso · Filter</span>
+            <span style="letter-spacing: .14em; text-transform: uppercase; color: #7C7365; font-size: 10.5px;">Result</span><span>87.21 · Top 1 Robusta, VCPC 2026</span>
+          </div>
+          <h3 style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: clamp(34px,3.6vw,54px); line-height: 1.02; letter-spacing: -.025em;">Fine Robusta TR Natural — Cần Wine Yeast</h3>
+          <p style="margin: 0; max-width: 46ch; font-size: 15px; line-height: 1.65; color: #514B42; text-wrap: pretty;">The lot that took Top 1 Robusta at the 2026 Vietnam Coffee Producer Competition, fermented with a traditional Cần wine yeast culture from the highlands. Dark fruit, cocoa, long sweet finish.</p>
+          <div style="margin-top: auto; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 16px; padding-top: 22px; border-top: 1px solid rgba(39,41,45,.16);">
+            <div><div style="font-size: 20px; font-weight: 600;">{{ trPrice }}</div><div style="font-size: 11px; letter-spacing: .08em; color: #7C7365;">250G · Whole bean or ground</div></div>
+            <button type="button" onClick="{{ addTR }}" style="height: 50px; padding: 0 26px; background: #27292D; color: #F4EFE5; border: 0; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; font-weight: 600; cursor: pointer;" style-hover="background: #FFD35B; color: #27292D;">Add to cart</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 08 SHOP BY BREW METHOD -->
+    <section id="brew" aria-labelledby="brew-h" style="padding: clamp(40px,5vw,72px) clamp(16px,4vw,64px) clamp(64px,8vw,110px); border-top: 1px solid rgba(39,41,45,.14);">
+      <h2 id="brew-h" style="margin: 0 0 clamp(20px,2.6vw,36px); font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: clamp(34px,4.2vw,60px); line-height: 1; letter-spacing: -.025em;">How do you brew?</h2>
+      <div role="tablist" aria-label="Brew method" class="o3-scroll" style="display: flex; gap: 0; overflow-x: auto; border-bottom: 1px solid rgba(39,41,45,.2);">
+        <sc-for list="{{ brewTabs }}" as="t" hint-placeholder-count="4">
+          <button type="button" role="tab" aria-selected="{{ t.on }}" onClick="{{ t.pick }}" style="flex: 1 0 auto; min-width: 120px; height: 64px; padding: 0 clamp(14px,2vw,28px); background: none; border: 0; border-bottom: 3px solid {{ t.line }}; margin-bottom: -1px; font-family: Newsreader, Georgia, serif; font-size: clamp(22px,2.4vw,34px); letter-spacing: -.01em; color: {{ t.color }}; cursor: pointer; text-align: left;">{{ t.label }}</button>
+        </sc-for>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 10px; padding-top: 28px;">
+        <div style="padding: 8px 0 20px; display: flex; flex-direction: column; gap: 14px;">
+          <div style="font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: #7C7365;">Recommended for {{ brewLabel }}</div>
+          <p style="margin: 0; font-family: Newsreader, Georgia, serif; font-size: clamp(22px,2vw,28px); line-height: 1.25; letter-spacing: -.015em; max-width: 24ch;">{{ brewCopy }}</p>
+          <a href="#journal" style="font-size: 12px; letter-spacing: .12em; text-transform: uppercase; text-decoration: underline; text-underline-offset: 6px; text-decoration-color: rgba(39,41,45,.3);">{{ brewGuide }} ↗</a>
+        </div>
+        <sc-for list="{{ recProducts }}" as="p" hint-placeholder-count="3">
+          <article style="display: grid; grid-template-columns: 96px 1fr; gap: 16px; padding: 16px; background: #EAE3D5; align-items: center;">
+            <img src="{{ p.img }}" alt="{{ p.alt }}" loading="lazy" style="width: 96px; height: 120px; object-fit: cover;" />
+            <div style="display: flex; flex-direction: column; gap: 6px; min-width: 0;">
+              <h3 style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: 21px; line-height: 1.1;">{{ p.name }}</h3>
+              <div style="font-size: 12px; color: #514B42;">{{ p.type }}</div>
+              <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px; margin-top: 6px;">
+                <span style="font-size: 15px; font-weight: 600;">{{ p.priceLabel }}</span>
+                <button type="button" onClick="{{ p.quickDefault }}" style="height: 40px; padding: 0 14px; border: 1px solid #27292D; background: transparent; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; font-weight: 500; cursor: pointer;" style-hover="background: #27292D; color: #F4EFE5;">Quick add</button>
+              </div>
+            </div>
+          </article>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- 09 SOULFUL COLLECTION -->
+    <section id="soulful" aria-labelledby="soulful-h" style="background: #27292D; color: #F4EFE5; position: relative; overflow: hidden;">
+      <div style="position: absolute; inset: 0; background: {{ soulAccent }}; opacity: .18; transition: background 700ms ease;"></div>
+      <div style="position: relative; padding: clamp(56px,7vw,96px) clamp(16px,4vw,64px);">
+        <div style="display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 16px;">
+          <div>
+            <div style="font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #FFD35B;">Soulful Collection 2026</div>
+            <h2 id="soulful-h" style="margin: 12px 0 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: clamp(40px,5vw,78px); line-height: .98; letter-spacing: -.03em;">One land.<br />Four expressions.</h2>
+          </div>
+          <a href="#soulful" style="font-size: 12px; letter-spacing: .12em; text-transform: uppercase; text-decoration: underline; text-underline-offset: 6px; text-decoration-color: rgba(244,239,229,.4);">Explore the collection ↗</a>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr)); gap: clamp(24px,3vw,48px); margin-top: clamp(32px,4vw,56px); align-items: stretch;">
+          <div role="tablist" aria-label="Soulful products" style="display: flex; flex-direction: column;">
+            <sc-for list="{{ soulTabs }}" as="s" hint-placeholder-count="4">
+              <button type="button" role="tab" aria-selected="{{ s.on }}" onClick="{{ s.pick }}" onMouseEnter="{{ s.pick }}" style="display: grid; grid-template-columns: 1fr auto; align-items: baseline; gap: 16px; text-align: left; padding: clamp(14px,1.6vw,22px) 0; background: none; border: 0; border-top: 1px solid rgba(244,239,229,.18); color: {{ s.color }}; cursor: pointer; transition: color 300ms;">
+                <span style="font-family: Newsreader, Georgia, serif; font-size: clamp(48px,6vw,96px); line-height: .95; letter-spacing: -.035em;">{{ s.word }}</span>
+                <span style="display: flex; flex-direction: column; align-items: end; gap: 4px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; opacity: .85;"><span>{{ s.region }}</span><span>{{ s.method }}</span></span>
+              </button>
+            </sc-for>
+            <div style="border-top: 1px solid rgba(244,239,229,.18);"></div>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; align-content: start;">
+            <img src="{{ soulActive.img }}" alt="{{ soulActive.alt }}" style="grid-column: span 2; width: 100%; aspect-ratio: 16/10; object-fit: cover;" />
+            <img src="{{ soulActive.land }}" alt="{{ soulActive.landAlt }}" loading="lazy" style="width: 100%; aspect-ratio: 1/1; object-fit: cover;" />
+            <div style="display: flex; flex-direction: column; justify-content: space-between; gap: 14px; padding: 4px 0 0 6px;">
+              <div>
+                <div style="font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: rgba(244,239,229,.6);">Character</div>
+                <div style="font-family: Newsreader, Georgia, serif; font-size: clamp(20px,1.8vw,26px); line-height: 1.2; margin-top: 6px;">{{ soulActive.char }}</div>
+                <div style="font-size: 12.5px; line-height: 1.55; margin-top: 8px; color: rgba(244,239,229,.75);">{{ soulActive.blurb }}</div>
+              </div>
+              <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 10px;">
+                <div><div style="font-size: 17px; font-weight: 600;">{{ soulActive.priceLabel }}</div><div style="font-size: 10.5px; letter-spacing: .08em; opacity: .65;">{{ soulActive.sizes }}</div></div>
+                <button type="button" onClick="{{ soulActive.quickDefault }}" style="height: 46px; padding: 0 18px; background: #FFD35B; color: #27292D; border: 0; font-size: 11.5px; letter-spacing: .12em; text-transform: uppercase; font-weight: 600; cursor: pointer;" style-hover="background: #F4EFE5;">Add to cart</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10 SUBSCRIPTION -->
+    <section id="subscribe" aria-labelledby="sub-h" style="padding: clamp(56px,7vw,96px) clamp(16px,4vw,64px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: clamp(28px,4vw,64px); align-items: center; border-bottom: 1px solid rgba(39,41,45,.14);">
+      <div>
+        <div style="font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #8E4B33;">Subscriptions · optional future module</div>
+        <h2 id="sub-h" style="margin: 14px 0 20px; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: clamp(36px,4.6vw,68px); line-height: .98; letter-spacing: -.03em;">Never run out<br />of good coffee.</h2>
+        <p style="margin: 0 0 26px; max-width: 44ch; font-size: 15px; line-height: 1.65; color: #514B42;">Choose your coffee, quantity and frequency. Pause or change any time.</p>
+        <a href="#subscribe" style="display: inline-flex; align-items: center; gap: 10px; height: 50px; padding: 0 26px; border: 1px solid #27292D; font-size: 12.5px; letter-spacing: .12em; text-transform: uppercase; font-weight: 500;" style-hover="background: #27292D; color: #F4EFE5;">Explore subscriptions ↗</a>
+        <p style="margin: 18px 0 0; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: #7C7365;">Subscription benefits — business rules to confirm</p>
+      </div>
+      <ol style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+        <li style="background: #EAE3D5; padding: 22px 18px 26px; min-height: 180px; display: flex; flex-direction: column; justify-content: space-between;"><span style="font-family: Newsreader, Georgia, serif; font-size: 40px; line-height: 1; color: #8E4B33;">01</span><span style="font-size: 13px; line-height: 1.5;"><strong style="display: block; font-weight: 600;">Choose coffee</strong>Any Soulful or Fine Robusta lot.</span></li>
+        <li style="background: #EAE3D5; padding: 22px 18px 26px; min-height: 180px; display: flex; flex-direction: column; justify-content: space-between;"><span style="font-family: Newsreader, Georgia, serif; font-size: 40px; line-height: 1; color: #8E4B33;">02</span><span style="font-size: 13px; line-height: 1.5;"><strong style="display: block; font-weight: 600;">Choose quantity</strong>250g to 1kg per delivery.</span></li>
+        <li style="background: #EAE3D5; padding: 22px 18px 26px; min-height: 180px; display: flex; flex-direction: column; justify-content: space-between;"><span style="font-family: Newsreader, Georgia, serif; font-size: 40px; line-height: 1; color: #8E4B33;">03</span><span style="font-size: 13px; line-height: 1.5;"><strong style="display: block; font-weight: 600;">Choose frequency</strong>Every 2, 4 or 6 weeks.</span></li>
+      </ol>
+    </section>
+
+    <!-- 11 WHY SOUL + PROOF -->
+    <section aria-labelledby="why-h" style="padding: clamp(56px,7vw,96px) clamp(16px,4vw,64px);">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: clamp(28px,4vw,64px);">
+        <div>
+          <h2 id="why-h" style="margin: 0 0 22px; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: clamp(40px,5vw,78px); line-height: .98; letter-spacing: -.03em;">Why SOUL?</h2>
+          <div style="display: flex; gap: 22px; font-size: 12px; letter-spacing: .12em; text-transform: uppercase;">
+            <a href="#story" style="text-decoration: underline; text-underline-offset: 6px; text-decoration-color: rgba(39,41,45,.3);">About SOUL ↗</a>
+            <a href="#soulful" style="text-decoration: underline; text-underline-offset: 6px; text-decoration-color: rgba(39,41,45,.3);">Our coffee ↗</a>
+          </div>
+        </div>
+        <dl style="margin: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 0; border-top: 1px solid #27292D;">
+          <div style="padding: 22px 20px 26px 0; border-bottom: 1px solid rgba(39,41,45,.16);"><dt style="font-family: Newsreader, Georgia, serif; font-size: 26px; line-height: 1.1; margin-bottom: 8px;">Fine Robusta</dt><dd style="margin: 0; font-size: 13.5px; line-height: 1.6; color: #514B42;">Robusta graded “Fine” by Q-Graders to CQI / SCA standards — not commodity coffee.</dd></div>
+          <div style="padding: 22px 20px 26px 0; border-bottom: 1px solid rgba(39,41,45,.16);"><dt style="font-family: Newsreader, Georgia, serif; font-size: 26px; line-height: 1.1; margin-bottom: 8px;">Buôn Ma Thuột</dt><dd style="margin: 0; font-size: 13.5px; line-height: 1.6; color: #514B42;">Born in Vietnam's coffee capital, on basalt highlands 500–800 m above sea level.</dd></div>
+          <div style="padding: 22px 20px 26px 0; border-bottom: 1px solid rgba(39,41,45,.16);"><dt style="font-family: Newsreader, Georgia, serif; font-size: 26px; line-height: 1.1; margin-bottom: 8px;">Craft</dt><dd style="margin: 0; font-size: 13.5px; line-height: 1.6; color: #514B42;">One team from farm partnership and fermentation through roasting and brewing.</dd></div>
+          <div style="padding: 22px 0 26px 0; border-bottom: 1px solid rgba(39,41,45,.16);"><dt style="font-family: Newsreader, Georgia, serif; font-size: 26px; line-height: 1.1; margin-bottom: 8px;">Vietnamese perspective</dt><dd style="margin: 0; font-size: 13.5px; line-height: 1.6; color: #514B42;">Local yeast, local knowledge, local names — Cay, Nồng, Thơm, Ngọt.</dd></div>
+        </dl>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 10px; margin-top: clamp(36px,4vw,56px);">
+        <div style="background: #27292D; color: #F4EFE5; padding: 24px 20px 26px;"><div style="font-family: Newsreader, Georgia, serif; font-size: clamp(44px,4.6vw,64px); line-height: .95; letter-spacing: -.03em; color: #FFD35B;">87.21</div><div style="margin-top: 14px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; line-height: 1.6;">Top 1 Robusta<br />VCPC 2026 — third year running</div></div>
+        <div style="background: #27292D; color: #F4EFE5; padding: 24px 20px 26px;"><div style="font-family: Newsreader, Georgia, serif; font-size: clamp(44px,4.6vw,64px); line-height: .95; letter-spacing: -.03em; color: #FFD35B;">Q</div><div style="margin-top: 14px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; line-height: 1.6;">Q-Grader (CQI)<br />SCA Roaster · Processing certified</div></div>
+        <div style="background: #27292D; color: #F4EFE5; padding: 24px 20px 26px;"><div style="font-family: Newsreader, Georgia, serif; font-size: clamp(44px,4.6vw,64px); line-height: .95; letter-spacing: -.03em; color: #FFD35B;">20<span style="font-size: .4em;">t</span></div><div style="margin-top: 14px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; line-height: 1.6;">Roasted per month<br />Up to 60 t capacity</div></div>
+        <div style="background: #27292D; color: #F4EFE5; padding: 24px 20px 26px;"><div style="font-family: Newsreader, Georgia, serif; font-size: clamp(44px,4.6vw,64px); line-height: .95; letter-spacing: -.03em; color: #FFD35B;">500<span style="font-size: .4em;">ha</span></div><div style="margin-top: 14px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; line-height: 1.6;">Partner growing area<br />Đắk Lắk</div></div>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: 10px 36px; margin-top: 22px; padding-top: 18px; border-top: 1px solid rgba(39,41,45,.14); font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #514B42;">
+        <span>Australia-wide shipping — to confirm</span><span>Dispatch timing — to confirm</span><span>Returns &amp; support — to confirm</span><span>Secure payment</span>
+      </div>
+    </section>
+
+    <!-- 12 COFFEE SOLUTIONS -->
+    <section id="solutions" aria-labelledby="sol-h" style="background: #EAE3D5; padding: clamp(48px,6vw,80px) clamp(16px,4vw,64px); display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 360px), 1fr)); gap: clamp(28px,4vw,64px); align-items: center;">
+      <div>
+        <div style="font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #7C7365;">Coffee Solutions · B2B</div>
+        <h2 id="sol-h" style="margin: 12px 0 18px; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: clamp(34px,4.2vw,60px); line-height: 1; letter-spacing: -.025em;">Serving coffee?<br />Let's work together.</h2>
+        <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+          <a href="#solutions" style="display: inline-flex; align-items: center; height: 48px; padding: 0 22px; background: #27292D; color: #F4EFE5; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; font-weight: 500;" style-hover="background: #FFD35B; color: #27292D;">Coffee Solutions ↗</a>
+          <a href="#contact" style="display: inline-flex; align-items: center; height: 48px; padding: 0 22px; border: 1px solid #27292D; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; font-weight: 500;" style-hover="background: #27292D; color: #F4EFE5;">Contact SOUL ↗</a>
+        </div>
+      </div>
+      <ul style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, 1fr); gap: 0 28px; font-family: Newsreader, Georgia, serif; font-size: clamp(20px,1.8vw,26px); line-height: 1.15;">
+        <li style="padding: 16px 0; border-bottom: 1px solid rgba(39,41,45,.18);"><span style="display: block; font-family: 'Be Vietnam Pro', sans-serif; font-size: 10.5px; letter-spacing: .16em; color: #7C7365; margin-bottom: 4px;">01</span>Green beans</li>
+        <li style="padding: 16px 0; border-bottom: 1px solid rgba(39,41,45,.18);"><span style="display: block; font-family: 'Be Vietnam Pro', sans-serif; font-size: 10.5px; letter-spacing: .16em; color: #7C7365; margin-bottom: 4px;">02</span>Roasted coffee</li>
+        <li style="padding: 16px 0; border-bottom: 1px solid rgba(39,41,45,.18);"><span style="display: block; font-family: 'Be Vietnam Pro', sans-serif; font-size: 10.5px; letter-spacing: .16em; color: #7C7365; margin-bottom: 4px;">03</span>Menu &amp; bar setup</li>
+        <li style="padding: 16px 0; border-bottom: 1px solid rgba(39,41,45,.18);"><span style="display: block; font-family: 'Be Vietnam Pro', sans-serif; font-size: 10.5px; letter-spacing: .16em; color: #7C7365; margin-bottom: 4px;">04</span>Training</li>
+      </ul>
+    </section>
+
+    <!-- 13 JOURNAL -->
+    <section id="journal" aria-labelledby="jr-h" style="padding: clamp(56px,7vw,96px) clamp(16px,4vw,64px);">
+      <div style="display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: 16px; margin-bottom: clamp(24px,3vw,40px);">
+        <h2 id="jr-h" style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: clamp(34px,4.2vw,60px); line-height: 1; letter-spacing: -.025em;">Brew guides &amp; journal</h2>
+        <a href="#journal" style="font-size: 12px; letter-spacing: .12em; text-transform: uppercase; text-decoration: underline; text-underline-offset: 6px; text-decoration-color: rgba(39,41,45,.3);">All articles ↗</a>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 10px;">
+        <article><a href="#journal" style="display: block;"><img src="assets/brew-phin-dark.jpg" alt="Phin filter brewing SOUL coffee" loading="lazy" style="width: 100%; aspect-ratio: 4/3; object-fit: cover;" /><div style="padding: 16px 0 0;"><div style="font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: #8E4B33;">Brew guide</div><h3 style="margin: 8px 0 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: 24px; line-height: 1.15;">How to brew Fine Robusta with a phin</h3></div></a></article>
+        <article><a href="#journal" style="display: block;"><img src="assets/brew-espresso.jpg" alt="Espresso extraction" loading="lazy" style="width: 100%; aspect-ratio: 4/3; object-fit: cover;" /><div style="padding: 16px 0 0;"><div style="font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: #8E4B33;">Coffee</div><h3 style="margin: 8px 0 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: 24px; line-height: 1.15;">Choosing a Robusta for espresso</h3></div></a></article>
+        <article><a href="#journal" style="display: block;"><img src="assets/green-beans-hands.jpg" alt="Green Fine Robusta beans in hands" loading="lazy" style="width: 100%; aspect-ratio: 4/3; object-fit: cover;" /><div style="padding: 16px 0 0;"><div style="font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: #8E4B33;">Origin</div><h3 style="margin: 8px 0 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: 24px; line-height: 1.15;">What makes a Robusta “Fine”?</h3></div></a></article>
+      </div>
+    </section>
+
+    <!-- 14 SPACES -->
+    <section id="spaces" aria-labelledby="sp-h" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); border-top: 1px solid rgba(39,41,45,.14);">
+      <div style="padding: clamp(48px,6vw,80px) clamp(16px,4vw,64px); display: flex; flex-direction: column; justify-content: space-between; gap: 28px;">
+        <h2 id="sp-h" style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: clamp(40px,5vw,78px); line-height: .98; letter-spacing: -.03em;">Visit SOUL.</h2>
+        <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 8px 28px; font-family: Newsreader, Georgia, serif; font-size: clamp(22px,2.2vw,32px); line-height: 1.2;">
+          <li>Buôn Ma Thuột</li><li>Hà Nội</li><li>Sài Gòn</li><li>Đà Nẵng</li>
+        </ul>
+        <a href="#spaces" style="align-self: start; display: inline-flex; align-items: center; height: 48px; padding: 0 22px; border: 1px solid #27292D; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; font-weight: 500;" style-hover="background: #27292D; color: #F4EFE5;">Find a space ↗</a>
+      </div>
+      <img src="assets/space-bar.jpg" alt="SOUL Specialty Coffee bar interior" loading="lazy" style="width: 100%; height: 100%; min-height: 360px; object-fit: cover;" />
+    </section>
+  </main>
+
+  <!-- 15 FOOTER -->
+  <footer id="contact" style="background: #27292D; color: #F4EFE5; padding: clamp(48px,6vw,80px) clamp(16px,4vw,64px) 32px;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 180px), 1fr)); gap: 36px 28px;">
+      <div style="grid-column: span 1;">
+        <img src="assets/soul-logo-full-yellow.svg" alt="SOUL Fine Robusta" style="width: 120px; height: auto;" />
+        <p style="margin: 22px 0 0; font-size: 12px; line-height: 1.7; color: rgba(244,239,229,.7); max-width: 26ch;">Crafted by Vietnamese Soul.<br />Buôn Ma Thuột — Vietnam.</p>
+      </div>
+      <div><div style="font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: #FFD35B; margin-bottom: 14px;">Shop</div><ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; font-size: 13.5px;"><li><a href="#best">Coffee</a></li><li><a href="#soulful">Soulful Collection</a></li><li><a href="#best">Best sellers</a></li><li><a href="#new">New releases</a></li><li><a href="#subscribe">Subscriptions</a></li></ul></div>
+      <div><div style="font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: #FFD35B; margin-bottom: 14px;">Discover</div><ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; font-size: 13.5px;"><li><a href="#story">Our story</a></li><li><a href="#soulful">Our coffee</a></li><li><a href="#journal">Journal</a></li><li><a href="#spaces">Spaces</a></li></ul></div>
+      <div><div style="font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: #FFD35B; margin-bottom: 14px;">Professional</div><ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; font-size: 13.5px;"><li><a href="#solutions">Coffee Solutions</a></li><li><a href="#solutions">Wholesale</a></li><li><a href="#contact">Contact</a></li></ul></div>
+      <div><div style="font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: #FFD35B; margin-bottom: 14px;">Support</div><ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; font-size: 13.5px;"><li><a href="#contact">Shipping</a></li><li><a href="#contact">Returns</a></li><li><a href="#contact">FAQ</a></li><li><a href="#contact">Contact</a></li></ul></div>
+      <div>
+        <div style="font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: #FFD35B; margin-bottom: 14px;">Newsletter</div>
+        <form onSubmit="{{ noop }}" style="display: flex; border-bottom: 1px solid rgba(244,239,229,.4);">
+          <label for="nl" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0);">Email</label>
+          <input id="nl" type="email" placeholder="Email address" style="flex: 1; min-width: 0; height: 44px; background: none; border: 0; color: #F4EFE5; font-family: inherit; font-size: 13.5px; outline: none;" />
+          <button type="submit" style="height: 44px; padding: 0 6px; background: none; border: 0; color: #F4EFE5; font-size: 12px; letter-spacing: .12em; cursor: pointer;">JOIN ↗</button>
+        </form>
+        <div style="display: flex; gap: 18px; margin-top: 22px; font-size: 12px; letter-spacing: .1em;"><a href="#contact">Instagram</a><a href="#contact">Facebook</a><a href="#contact">YouTube</a></div>
+      </div>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; margin-top: clamp(40px,5vw,64px); padding-top: 20px; border-top: 1px solid rgba(244,239,229,.18); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: rgba(244,239,229,.6);">
+      <span>© 2026 SOUL Fine Robusta</span>
+      <div style="display: flex; gap: 22px;"><span>Australia · AUD</span><span>EN / VI</span></div>
+      <span>Crafted by Vietnamese Soul</span>
+    </div>
+  </footer>
+
+  <!-- CART DRAWER -->
+  <sc-if value="{{ cartOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position: fixed; inset: 0; z-index: 90; background: rgba(39,41,45,.45);" onClick="{{ closeCart }}"></div>
+    <aside role="dialog" aria-modal="true" aria-label="Cart" style="position: fixed; z-index: 95; top: {{ drawerTop }}; right: 0; bottom: 0; left: {{ drawerLeft }}; width: {{ drawerWidth }}; background: #F4EFE5; display: flex; flex-direction: column; box-shadow: -20px 0 60px -30px rgba(0,0,0,.5);">
+      <div style="display: flex; justify-content: space-between; align-items: center; padding: 18px clamp(16px,2vw,28px); border-bottom: 1px solid rgba(39,41,45,.16);">
+        <div style="font-family: Newsreader, Georgia, serif; font-size: 26px;">Cart <span style="font-size: 14px; font-family: 'Be Vietnam Pro', sans-serif; color: #7C7365;">({{ cartCount }})</span></div>
+        <button type="button" aria-label="Close cart" onClick="{{ closeCart }}" style="width: 44px; height: 44px; background: none; border: 0; font-size: 22px; cursor: pointer;">×</button>
+      </div>
+      <div style="flex: 1; overflow-y: auto; padding: 8px clamp(16px,2vw,28px);">
+        <sc-if value="{{ cartEmpty }}" hint-placeholder-val="{{ true }}">
+          <div style="padding: 48px 0; text-align: center; color: #7C7365;"><div style="font-family: Newsreader, Georgia, serif; font-size: 22px; color: #27292D;">Your cart is empty.</div><a href="#best" onClick="{{ closeCart }}" style="display: inline-block; margin-top: 14px; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; text-decoration: underline; text-underline-offset: 6px;">Shop coffee ↗</a></div>
+        </sc-if>
+        <sc-for list="{{ cartItems }}" as="c" hint-placeholder-count="0">
+          <div style="display: grid; grid-template-columns: 72px 1fr auto; gap: 14px; padding: 16px 0; border-bottom: 1px solid rgba(39,41,45,.12); align-items: start;">
+            <img src="{{ c.img }}" alt="" style="width: 72px; height: 90px; object-fit: cover;" />
+            <div style="display: flex; flex-direction: column; gap: 4px; min-width: 0;">
+              <div style="font-family: Newsreader, Georgia, serif; font-size: 19px; line-height: 1.1;">{{ c.name }}</div>
+              <div style="font-size: 12px; color: #514B42;">{{ c.size }} · {{ c.grind }}</div>
+              <div style="display: inline-flex; align-items: center; border: 1px solid rgba(39,41,45,.3); margin-top: 8px; width: max-content;">
+                <button type="button" aria-label="Decrease quantity" onClick="{{ c.dec }}" style="width: 36px; height: 36px; background: none; border: 0; cursor: pointer; font-size: 16px;">−</button>
+                <span style="min-width: 24px; text-align: center; font-size: 13px; font-weight: 500;">{{ c.qty }}</span>
+                <button type="button" aria-label="Increase quantity" onClick="{{ c.inc }}" style="width: 36px; height: 36px; background: none; border: 0; cursor: pointer; font-size: 16px;">+</button>
+              </div>
+            </div>
+            <div style="text-align: right; display: flex; flex-direction: column; gap: 8px; align-items: end;"><span style="font-size: 15px; font-weight: 600;">{{ c.lineLabel }}</span><button type="button" onClick="{{ c.remove }}" style="background: none; border: 0; font-size: 11px; letter-spacing: .1em; text-transform: uppercase; color: #7C7365; cursor: pointer; text-decoration: underline; text-underline-offset: 4px;">Remove</button></div>
+          </div>
+        </sc-for>
+      </div>
+      <div style="padding: 18px clamp(16px,2vw,28px) 24px; border-top: 1px solid rgba(39,41,45,.16); display: flex; flex-direction: column; gap: 12px;">
+        <div style="display: flex; justify-content: space-between; font-size: 15px;"><span>Subtotal</span><strong>{{ subtotalLabel }}</strong></div>
+        <div style="font-size: 11px; color: #7C7365; letter-spacing: .08em;">Shipping &amp; taxes calculated at checkout · {{ priceNote }}</div>
+        <button type="button" style="height: 52px; background: #27292D; color: #F4EFE5; border: 0; font-size: 12.5px; letter-spacing: .12em; text-transform: uppercase; font-weight: 600; cursor: pointer;" style-hover="background: #FFD35B; color: #27292D;">Checkout</button>
+        <a href="#best" onClick="{{ closeCart }}" style="text-align: center; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; text-decoration: underline; text-underline-offset: 6px; padding: 8px;">View cart</a>
+      </div>
+    </aside>
+  </sc-if>
+
+  <!-- SEARCH OVERLAY -->
+  <sc-if value="{{ searchOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position: fixed; inset: 0; z-index: 90; background: rgba(39,41,45,.45);" onClick="{{ closeSearch }}"></div>
+    <div role="dialog" aria-modal="true" aria-label="Search" style="position: fixed; z-index: 95; top: 0; left: 0; right: 0; background: #F4EFE5; padding: 18px clamp(16px,4vw,64px) 32px; max-height: 100vh; overflow-y: auto;">
+      <div style="display: flex; align-items: center; gap: 14px; border-bottom: 1px solid #27292D; padding-bottom: 10px;">
+        <svg width="20" height="20" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="7" cy="7" r="5"></circle><path d="M11 11l4 4"></path></svg>
+        <label for="srch" style="position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0);">Search products, collections and articles</label>
+        <input id="srch" type="search" ref="{{ searchRef }}" value="{{ query }}" onChange="{{ onQuery }}" placeholder="Search coffee, brew methods, articles…" style="flex: 1; min-width: 0; height: 52px; background: none; border: 0; font-family: Newsreader, Georgia, serif; font-size: clamp(22px,2.4vw,32px); color: #27292D; outline: none;" />
+        <button type="button" aria-label="Close search" onClick="{{ closeSearch }}" style="width: 44px; height: 44px; background: none; border: 0; font-size: 24px; cursor: pointer;">×</button>
+      </div>
+      <sc-if value="{{ queryEmpty }}" hint-placeholder-val="{{ true }}">
+        <div style="padding-top: 22px;">
+          <div style="font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: #7C7365; margin-bottom: 12px;">Popular searches</div>
+          <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <sc-for list="{{ popular }}" as="q" hint-placeholder-count="5">
+              <button type="button" onClick="{{ q.pick }}" style="height: 40px; padding: 0 16px; border: 1px solid rgba(39,41,45,.3); background: none; font-size: 13px; cursor: pointer;" style-hover="background: #27292D; color: #F4EFE5;">{{ q.label }}</button>
+            </sc-for>
+          </div>
+        </div>
+      </sc-if>
+      <sc-if value="{{ queryHas }}" hint-placeholder-val="{{ false }}">
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 280px), 1fr)); gap: 28px; padding-top: 22px;">
+          <div>
+            <div style="font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: #7C7365; margin-bottom: 12px;">Products · {{ resultCount }}</div>
+            <sc-for list="{{ results }}" as="r" hint-placeholder-count="2">
+              <a href="#best" onClick="{{ closeSearch }}" style="display: grid; grid-template-columns: 56px 1fr auto; gap: 14px; align-items: center; padding: 10px 0; border-bottom: 1px solid rgba(39,41,45,.12);">
+                <img src="{{ r.img }}" alt="" style="width: 56px; height: 70px; object-fit: cover;" />
+                <span><span style="display: block; font-family: Newsreader, Georgia, serif; font-size: 19px; line-height: 1.1;">{{ r.name }}</span><span style="font-size: 12px; color: #514B42;">{{ r.type }}</span></span>
+                <span style="font-weight: 600; font-size: 14px;">{{ r.priceLabel }}</span>
+              </a>
+            </sc-for>
+            <sc-if value="{{ noResults }}" hint-placeholder-val="{{ false }}"><div style="font-size: 13.5px; color: #514B42; padding: 10px 0;">No products match “{{ query }}”.</div></sc-if>
+          </div>
+          <div>
+            <div style="font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: #7C7365; margin-bottom: 12px;">Collections &amp; articles</div>
+            <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 10px; font-size: 14px;">
+              <li><a href="#soulful" onClick="{{ closeSearch }}" style="text-decoration: underline; text-underline-offset: 5px; text-decoration-color: rgba(39,41,45,.3);">Soulful Collection 2026</a></li>
+              <li><a href="#brew" onClick="{{ closeSearch }}" style="text-decoration: underline; text-underline-offset: 5px; text-decoration-color: rgba(39,41,45,.3);">Shop by brew method</a></li>
+              <li><a href="#journal" onClick="{{ closeSearch }}" style="text-decoration: underline; text-underline-offset: 5px; text-decoration-color: rgba(39,41,45,.3);">How to brew Fine Robusta with a phin</a></li>
+            </ul>
+          </div>
+        </div>
+      </sc-if>
+    </div>
+  </sc-if>
+
+  <!-- MOBILE MENU -->
+  <sc-if value="{{ mobileOpen }}" hint-placeholder-val="{{ false }}">
+    <div role="dialog" aria-modal="true" aria-label="Menu" style="position: fixed; inset: 0; z-index: 100; background: #F4EFE5; display: flex; flex-direction: column; overflow-y: auto;">
+      <div style="display: flex; justify-content: space-between; align-items: center; height: 66px; padding: 0 16px; border-bottom: 1px solid rgba(39,41,45,.14);">
+        <img src="assets/soul-wordmark-ink.svg" alt="SOUL" style="height: 15px; width: auto;" />
+        <button type="button" aria-label="Close menu" onClick="{{ closeMobile }}" style="width: 44px; height: 44px; background: none; border: 0; font-size: 24px; cursor: pointer;">×</button>
+      </div>
+      <nav aria-label="Mobile" style="padding: 8px 16px 32px; display: flex; flex-direction: column;">
+        <button type="button" aria-expanded="{{ mShopOpen }}" onClick="{{ toggleMShop }}" style="display: flex; justify-content: space-between; align-items: center; height: 60px; background: none; border: 0; border-bottom: 1px solid rgba(39,41,45,.14); font-family: Newsreader, Georgia, serif; font-size: 28px; cursor: pointer; text-align: left; padding: 0;">Shop <span style="font-size: 18px;">{{ mShopGlyph }}</span></button>
+        <sc-if value="{{ mShopOpen }}" hint-placeholder-val="{{ false }}">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 18px 16px; padding: 18px 0 22px; border-bottom: 1px solid rgba(39,41,45,.14);">
+            <div><div style="font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: #7C7365; margin-bottom: 10px;">Coffee</div><ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; font-size: 16px;"><li><a href="#best" onClick="{{ closeMobile }}">All coffee</a></li><li><a href="#best" onClick="{{ closeMobile }}">Best sellers</a></li><li><a href="#new" onClick="{{ closeMobile }}">New releases</a></li><li><a href="#soulful" onClick="{{ closeMobile }}">Soulful Collection</a></li></ul></div>
+            <div><div style="font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: #7C7365; margin-bottom: 10px;">By brew method</div><ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 12px; font-size: 16px;"><li><a href="#brew" onClick="{{ pickPhinMobile }}">Phin</a></li><li><a href="#brew" onClick="{{ pickEspressoMobile }}">Espresso</a></li><li><a href="#brew" onClick="{{ pickFilterMobile }}">Filter</a></li><li><a href="#brew" onClick="{{ pickColdMobile }}">Cold brew</a></li></ul></div>
+          </div>
+        </sc-if>
+        <a href="#subscribe" onClick="{{ closeMobile }}" style="display: flex; align-items: center; height: 60px; border-bottom: 1px solid rgba(39,41,45,.14); font-family: Newsreader, Georgia, serif; font-size: 28px;">Subscriptions</a>
+        <a href="#soulful" onClick="{{ closeMobile }}" style="display: flex; align-items: center; height: 60px; border-bottom: 1px solid rgba(39,41,45,.14); font-family: Newsreader, Georgia, serif; font-size: 28px;">Our coffee</a>
+        <a href="#story" onClick="{{ closeMobile }}" style="display: flex; align-items: center; height: 60px; border-bottom: 1px solid rgba(39,41,45,.14); font-family: Newsreader, Georgia, serif; font-size: 28px;">About</a>
+        <a href="#journal" onClick="{{ closeMobile }}" style="display: flex; align-items: center; height: 60px; border-bottom: 1px solid rgba(39,41,45,.14); font-family: Newsreader, Georgia, serif; font-size: 28px;">Journal</a>
+        <a href="#solutions" onClick="{{ closeMobile }}" style="display: flex; align-items: center; height: 60px; border-bottom: 1px solid rgba(39,41,45,.14); font-family: Newsreader, Georgia, serif; font-size: 28px;">Coffee Solutions</a>
+        <div style="display: flex; gap: 22px; padding-top: 24px; font-size: 12.5px; letter-spacing: .1em; font-weight: 500;"><a href="#account" onClick="{{ closeMobile }}">ACCOUNT</a><span>AUD</span><span>EN / VI</span></div>
+      </nav>
+    </div>
+  </sc-if>
+
+  <!-- TOAST -->
+  <sc-if value="{{ toast }}" hint-placeholder-val="{{ false }}">
+    <div role="status" style="position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%); z-index: 80; background: #27292D; color: #F4EFE5; padding: 12px 18px; font-size: 12.5px; letter-spacing: .06em; display: flex; gap: 14px; align-items: center; box-shadow: 0 12px 30px -12px rgba(0,0,0,.5);">
+      <span>{{ toast }}</span><button type="button" onClick="{{ openCart }}" style="background: none; border: 0; color: #FFD35B; font-size: 12px; letter-spacing: .1em; text-transform: uppercase; cursor: pointer; font-weight: 600;">View cart</button>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;mockPrices&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Commerce&quot;}}">
+class Component extends DCLogic {
+  state = { w: 1440, megaOpen: false, mobileOpen: false, mShopOpen: true, searchOpen: false, cartOpen: false, query: '', cart: [], qa: null, qaSize: 1, qaGrind: 0, brew: 'phin', soul: 0, toast: '' };
+  SIZES = [{ k: '250g', mul: 1 }, { k: '500g', mul: 1.85 }, { k: '1kg', mul: 3.4 }];
+  GRINDS = ['Whole bean', 'Phin', 'Espresso', 'Filter'];
+  PRODUCTS = [
+    { id: 'cay', name: 'Soulful — Cay', word: 'Cay', type: 'Fine Robusta · Phin', region: 'Krông Năng', method: 'Vietnamese phin', char: 'Firm · structured · powerful', blurb: 'Grown around Krông Năng. Built for the slow drip of a phin: dense body, dark chocolate, a long dry finish.', notes: 'Dark chocolate, roasted nut, long finish', base: 24, badge: 'Best seller', img: 'assets/pack-black-bag.jpg', alt: 'Soulful Cay black coffee bag', land: 'assets/farm-landscape.jpg', landAlt: 'Coffee farm on the Krông Năng plateau', methods: ['phin'], accent: '#8E4B33' },
+    { id: 'nong', name: 'Soulful — Nồng', word: 'Nồng', type: 'Fine Robusta · Espresso', region: 'Buôn Ma Thuột', method: 'Espresso', char: 'Bold · expressive · recognisable', blurb: 'From the city that named Vietnamese coffee. Thick crema, cocoa and brown sugar; carries milk without disappearing.', notes: 'Cocoa, brown sugar, heavy crema', base: 26, badge: 'Best seller', img: 'assets/pack-origin-a.jpg', alt: 'Soulful Nồng espresso coffee bag', land: 'assets/roastery.jpg', landAlt: 'SOUL roastery in Buôn Ma Thuột', methods: ['espresso'], accent: '#3B2A22' },
+    { id: 'thom', name: 'Soulful — Thơm', word: 'Thơm', type: 'Fine Robusta · Cold brew', region: "Cư M'gar", method: 'Cold brew', char: 'Layered · aromatic · slowly unfolding', blurb: 'Coarse-ground for long, cold extraction. Aroma leads: dried fruit, honey, a clean tea-like body.', notes: 'Dried fruit, honey, tea-like body', base: 28, badge: 'New', img: 'assets/pack-white-bag.jpg', alt: 'Soulful Thơm cold brew coffee bag', land: 'assets/drying-beds.jpg', landAlt: "Raised drying beds in Cư M'gar", methods: ['cold', 'filter'], accent: '#5F6B4A' },
+    { id: 'ngot', name: 'Soulful — Ngọt', word: 'Ngọt', type: 'Fine Robusta · Filter', region: 'Krông Pắc', method: 'Brewing / filter', char: 'Soft · balanced · lingering', blurb: 'Gentle sweetness for pour-over and immersion brewers. Ripe cherry, caramel, a soft lingering close.', notes: 'Ripe cherry, caramel, soft finish', base: 24, badge: 'Best seller', img: 'assets/pack-origin-b.jpg', alt: 'Soulful Ngọt filter coffee bag', land: 'assets/cherries-macro.jpg', landAlt: 'Ripe coffee cherries in Krông Pắc', methods: ['filter', 'phin'], accent: '#FFD35B' },
+    { id: 'tr', name: 'Fine Robusta TR Natural — Cần Wine Yeast', word: 'TR', type: 'Limited release · Espresso / Filter', region: 'Buôn Ma Thuột', method: 'Espresso · Filter', char: 'Dark fruit · cocoa · long sweet finish', blurb: '', notes: 'Dark fruit, cocoa, long sweet finish', base: 42, badge: 'Limited', img: 'assets/roasted-hands.jpg', alt: 'Roasted Fine Robusta TR Natural beans', land: 'assets/ferment-hands.jpg', landAlt: 'Fermentation check', methods: ['espresso', 'filter'], accent: '#8E4B33' }
+  ];
+  BREWS = { phin: { label: 'Phin', copy: 'Dense, slow, unapologetic. Coffees with body that hold up to a 4-minute drip and condensed milk.', guide: 'Phin brew guide' }, espresso: { label: 'Espresso', copy: 'Crema-rich Robusta that stays present in milk. Roasted for 1:2 ratios on standard machines.', guide: 'Dialing in Robusta espresso' }, filter: { label: 'Filter', copy: 'Softer, sweeter lots for pour-over and immersion. Clarity over weight.', guide: 'Filter brewing Fine Robusta' }, cold: { label: 'Cold brew', copy: 'Aromatic coffees that open over 12–18 hours of cold extraction.', guide: 'Cold brew at home' } };
+  price(p, sizeIdx) { return Math.round(p.base * this.SIZES[sizeIdx].mul); }
+  fmt(n) { return 'A$' + n; }
+  componentDidMount() {
+    this._onResize = () => this.setState({ w: window.innerWidth });
+    this._onResize(); window.addEventListener('resize', this._onResize);
+    this._onKey = (e) => { if (e.key === 'Escape') this.setState({ megaOpen: false, mobileOpen: false, searchOpen: false, cartOpen: false, qa: null }); };
+    window.addEventListener('keydown', this._onKey);
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this._onResize); window.removeEventListener('keydown', this._onKey); clearTimeout(this._toastT); }
+  componentDidUpdate(_, prev) { if (this.state.searchOpen && !prev.searchOpen && this._searchEl) this._searchEl.focus(); }
+  addToCart(p, sizeIdx, grindIdx) {
+    const size = this.SIZES[sizeIdx].k, grind = this.GRINDS[grindIdx], key = p.id + size + grind;
+    this.setState(s => {
+      const cart = s.cart.slice(); const i = cart.findIndex(c => c.key === key);
+      if (i >= 0) cart[i] = { ...cart[i], qty: cart[i].qty + 1 }; else cart.push({ key, id: p.id, size, grind, qty: 1, unit: this.price(p, sizeIdx) });
+      return { cart, qa: null, toast: p.name + ' · ' + size + ' added' };
+    });
+    clearTimeout(this._toastT); this._toastT = setTimeout(() => this.setState({ toast: '' }), 3200);
+  }
+  renderVals() {
+    const s = this.state, isMobile = s.w < 900, mock = this.props.mockPrices ?? true;
+    const label = (p, idx) => mock ? 'From ' + this.fmt(this.price(p, idx ?? 0)) : 'AUD — TBC';
+    const pick = (brew) => (e) => { this.setState({ brew, megaOpen: false, mobileOpen: false }); };
+    const products = this.PRODUCTS.map(p => {
+      const open = s.qa === p.id;
+      return { ...p, priceLabel: label(p), sizes: '250G · 500G · 1KG', qaOpen: open, qaClosed: !open,
+        qaPrice: mock ? this.fmt(this.price(p, s.qaSize)) : 'AUD TBC',
+        openQA: () => this.setState({ qa: p.id, qaSize: 1, qaGrind: p.methods[0] === 'phin' ? 1 : p.methods[0] === 'espresso' ? 2 : p.methods[0] === 'filter' ? 3 : 0 }),
+        add: () => this.addToCart(p, s.qaSize, s.qaGrind),
+        quickDefault: () => this.addToCart(p, 0, 0),
+        sizeOpts: this.SIZES.map((z, i) => ({ label: z.k, on: s.qaSize === i, border: s.qaSize === i ? '#27292D' : 'rgba(39,41,45,.3)', bg: s.qaSize === i ? '#FFD35B' : 'transparent', pick: () => this.setState({ qaSize: i }) })),
+        grindOpts: this.GRINDS.map((g, i) => ({ label: g, on: s.qaGrind === i, border: s.qaGrind === i ? '#27292D' : 'rgba(39,41,45,.3)', bg: s.qaGrind === i ? '#FFD35B' : 'transparent', pick: () => this.setState({ qaGrind: i }) })) };
+    });
+    const byId = Object.fromEntries(products.map(p => [p.id, p]));
+    const soulList = products.slice(0, 4);
+    const active = soulList[s.soul];
+    const cartItems = s.cart.map(c => { const p = byId[c.id]; return { ...c, name: p.name, img: p.img, lineLabel: mock ? this.fmt(c.unit * c.qty) : 'TBC',
+      inc: () => this.setState(st => ({ cart: st.cart.map(x => x.key === c.key ? { ...x, qty: x.qty + 1 } : x) })),
+      dec: () => this.setState(st => ({ cart: st.cart.map(x => x.key === c.key ? { ...x, qty: Math.max(1, x.qty - 1) } : x) })),
+      remove: () => this.setState(st => ({ cart: st.cart.filter(x => x.key !== c.key) })) }; });
+    const cartCount = s.cart.reduce((a, c) => a + c.qty, 0);
+    const subtotal = s.cart.reduce((a, c) => a + c.unit * c.qty, 0);
+    const q = s.query.trim().toLowerCase();
+    const results = q ? products.filter(p => (p.name + ' ' + p.type + ' ' + p.region + ' ' + p.notes + ' ' + p.method).toLowerCase().includes(q)) : [];
+    const tr = byId.tr;
+    return {
+      isMobile, isDesktop: !isMobile,
+      megaOpen: s.megaOpen, openMega: () => this.setState({ megaOpen: true }), closeMega: () => this.setState({ megaOpen: false }), toggleMega: () => this.setState(st => ({ megaOpen: !st.megaOpen })),
+      mobileOpen: s.mobileOpen, openMobile: () => this.setState({ mobileOpen: true }), closeMobile: () => this.setState({ mobileOpen: false }),
+      mShopOpen: s.mShopOpen, mShopGlyph: s.mShopOpen ? '−' : '+', toggleMShop: () => this.setState(st => ({ mShopOpen: !st.mShopOpen })),
+      searchOpen: s.searchOpen, openSearch: () => this.setState({ searchOpen: true, megaOpen: false }), closeSearch: () => this.setState({ searchOpen: false }),
+      searchRef: (el) => { this._searchEl = el; }, query: s.query, onQuery: (e) => this.setState({ query: e.target.value }), queryEmpty: !q, queryHas: !!q, results, resultCount: results.length, noResults: !!q && results.length === 0,
+      popular: ['Phin', 'Espresso', 'Fine Robusta', 'Soulful', 'Cold brew'].map(l => ({ label: l, pick: () => this.setState({ query: l }) })),
+      cartOpen: s.cartOpen, openCart: () => this.setState({ cartOpen: true, toast: '' }), closeCart: () => this.setState({ cartOpen: false }),
+      cartItems, cartCount, cartEmpty: cartItems.length === 0, subtotalLabel: mock ? this.fmt(subtotal) : 'TBC',
+      drawerTop: isMobile ? '12vh' : '0', drawerLeft: isMobile ? '0' : 'auto', drawerWidth: isMobile ? '100%' : 'min(440px, 100%)',
+      bestSellers: [byId.cay, byId.nong, byId.ngot, byId.thom],
+      heroPrice: mock ? this.fmt(24) : 'AUD TBC', priceNote: mock ? 'Prototype pricing · AUD to confirm' : 'AUD pricing to confirm',
+      trPrice: mock ? this.fmt(42) : 'AUD — TBC', addTR: () => this.addToCart(tr, 0, 0),
+      brewTabs: Object.keys(this.BREWS).map(k => ({ label: this.BREWS[k].label, on: s.brew === k, line: s.brew === k ? '#FFD35B' : 'transparent', color: s.brew === k ? '#27292D' : '#7C7365', pick: () => this.setState({ brew: k }) })),
+      brewLabel: this.BREWS[s.brew].label, brewCopy: this.BREWS[s.brew].copy, brewGuide: this.BREWS[s.brew].guide,
+      recProducts: products.filter(p => p.methods.includes(s.brew)).slice(0, 3),
+      pickPhin: pick('phin'), pickEspresso: pick('espresso'), pickFilter: pick('filter'), pickCold: pick('cold'),
+      pickPhinClose: pick('phin'), pickEspressoClose: pick('espresso'), pickFilterClose: pick('filter'), pickColdClose: pick('cold'),
+      pickPhinMobile: pick('phin'), pickEspressoMobile: pick('espresso'), pickFilterMobile: pick('filter'), pickColdMobile: pick('cold'),
+      soulTabs: soulList.map((p, i) => ({ word: p.word, region: p.region, method: p.method, on: s.soul === i, color: s.soul === i ? '#FFD35B' : 'rgba(244,239,229,.55)', pick: () => this.setState({ soul: i }) })),
+      soulActive: active, soulAccent: active.accent,
+      toast: s.toast, noop: (e) => e.preventDefault()
+    };
+  }
+}
+</script>
+</body>
+</html>
