@@ -1,0 +1,366 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Design System | Spark English Center Vietnam</title>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,400;0,6..12,500;0,6..12,600;0,6..12,700;0,6..12,800;0,6..12,900;1,6..12,400&family=Frank+Ruhl+Libre:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+<link rel="stylesheet" href="css/main.css" />
+<style>
+a{color:var(--purple)}a:hover{color:var(--purple-700)}
+.ds{display:grid;grid-template-columns:230px minmax(0,1fr);gap:clamp(24px,4vw,56px);max-width:1320px;margin:0 auto;padding:calc(100px + 32px) var(--gutter) 80px}
+.ds-nav{position:sticky;top:110px;align-self:start;display:flex;flex-direction:column;gap:2px;max-height:calc(100vh - 130px);overflow:auto}
+.ds-nav b{font-family:var(--font-serif);font-size:.68rem;letter-spacing:.14em;text-transform:uppercase;color:var(--accent);margin:1rem 0 .3rem}
+.ds-nav a{font-family:var(--font-serif);font-weight:600;font-size:.9rem;color:var(--ink-soft);padding:.38rem .7rem;border-radius:8px}
+.ds-nav a:hover{background:var(--purple-tint);color:var(--purple)}
+.ds-main{min-width:0;display:flex;flex-direction:column;gap:clamp(56px,6vw,88px)}
+.ds-sec{scroll-margin-top:110px}
+.ds-sec>h2{font-size:clamp(1.7rem,2.6vw,2.2rem);color:var(--purple)}
+.ds-sec>.ds-desc{color:var(--ink-soft);margin-top:.5rem;max-width:68ch;line-height:1.6}
+.ds-sec>h3.ds-sub{font-size:1rem;color:var(--ink);margin:2rem 0 .8rem;font-family:var(--font-serif);letter-spacing:.02em}
+.ds-board{margin-top:1.2rem;background:var(--paper);border:1px solid var(--line);border-radius:var(--r-lg);padding:clamp(20px,2.6vw,32px)}
+.ds-board.ivory{background:var(--ivory)}.ds-board.dark{background:var(--purple);border-color:var(--purple)}
+.ds-code{display:block;margin-top:.8rem;font-family:ui-monospace,Menlo,monospace;font-size:.78rem;color:var(--ink-soft);background:var(--ivory-2);border-radius:8px;padding:.5rem .7rem;white-space:pre-wrap;word-break:break-word}
+.ds-row{display:flex;flex-wrap:wrap;gap:12px;align-items:center}
+.ds-hero{background:var(--purple);color:#fff;border-radius:var(--r-lg);padding:clamp(28px,4vw,48px)}
+.ds-hero h1{color:#fff;font-size:clamp(2.2rem,4vw,3.2rem);line-height:1.05}
+.ds-hero p{color:#EADFEC;margin-top:.8rem;max-width:60ch;line-height:1.6}
+.sw-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px}
+.sw{border:1px solid var(--line);border-radius:14px;overflow:hidden;background:var(--paper)}
+.sw i{display:block;height:84px}
+.sw div{padding:.6rem .75rem .75rem;display:flex;flex-direction:column;gap:.15rem}
+.sw strong{font-family:var(--font-serif);font-size:.86rem;color:var(--ink)}
+.sw code,.ds-t code{font-family:ui-monospace,Menlo,monospace;font-size:.74rem;color:var(--ink-soft)}
+.ds-t{width:100%;border-collapse:collapse;font-size:.92rem}
+.ds-t th{font-family:var(--font-serif);font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;color:var(--ink-faint);text-align:left;padding:.6rem .8rem;border-bottom:1px solid var(--line-strong)}
+.ds-t td{padding:.9rem .8rem;border-bottom:1px solid var(--line);vertical-align:middle}
+.ds-t td:first-child{white-space:nowrap}
+.ds-t-wrap{overflow-x:auto}
+.ty-sample{margin:0;color:var(--ink)}
+.sp-bar{height:14px;background:var(--purple);border-radius:3px}
+.rd-box{width:84px;height:64px;background:var(--purple-tint);border:1.5px solid var(--purple)}
+.sh-box{width:140px;height:84px;background:var(--paper);border-radius:var(--r)}
+.ds-grid2{display:grid;grid-template-columns:1fr 1fr;gap:16px}
+.ds-do,.ds-dont{border-radius:14px;padding:1rem 1.2rem;font-size:.94rem;line-height:1.55}
+.ds-do{background:#EEF6EC;border:1px solid #BFDDB8}.ds-dont{background:#FBEDEC;border:1px solid #EBC3BF}
+.ds-do b,.ds-dont b{font-family:var(--font-serif);font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;display:block;margin-bottom:.3rem}
+.ds-do b{color:#2F6B27}.ds-dont b{color:#9B2C22}
+.ds-board .section,.ds-board section.section{padding:0}
+#cta .promo-band--img .promo{max-width:44%}
+#cta .promo-band--img h2{font-size:clamp(1.3rem,2vw,1.9rem)}
+@media (max-width:1200px){#cta .promo-band--img{display:block;min-height:0;padding:40px 0 250px;background:url(assets/img/real/assess-banner.webp) 86% 100%/auto 270px no-repeat,linear-gradient(#5D1C61 0%,#5D1C61 40%,#B98AC9 100%)}#cta .promo-band--img .promo{max-width:none;text-align:center}}
+@media (max-width:900px){.ds{grid-template-columns:1fr}.ds-nav{position:static;flex-direction:row;flex-wrap:wrap;max-height:none}.ds-nav b{width:100%}.ds-grid2{grid-template-columns:1fr}}
+</style>
+</head>
+<body data-solid-header>
+<div class="ds">
+<nav class="ds-nav" aria-label="Design system sections">
+<b>Foundations</b>
+<a href="#overview">Overview</a><a href="#color">Color</a><a href="#type">Typography</a><a href="#spacing">Spacing &amp; layout</a><a href="#radius">Radius &amp; shadow</a><a href="#imagery">Imagery</a>
+<b>Components</b>
+<a href="#buttons">Buttons</a><a href="#labels">Eyebrow, titles, chips</a><a href="#hero">Hero</a><a href="#summary">Summary box</a><a href="#cards">Cards</a><a href="#split">Split (image + copy)</a><a href="#tabs">Tabs</a><a href="#faq">FAQ / accordion</a><a href="#compare">Comparison grid</a><a href="#steps">Step grid</a><a href="#timeline">Timelines</a><a href="#table">Table</a><a href="#callouts">Callouts</a><a href="#store">Resource &amp; prize cards</a><a href="#form">Form</a><a href="#cta">CTA band &amp; related</a><a href="#nav">Header, crumbs, footer</a>
+<b>Rules</b>
+<a href="#scss">SCSS &amp; component API</a><a href="#rules">UX/UI standards</a>
+</nav>
+<main class="ds-main">
+
+<section class="ds-sec" id="overview">
+<div class="ds-hero"><span class="eyebrow" style="color:var(--gold-soft)">Spark Vietnam · v2</span><h1>Design System</h1><p>Tokens, type, components and rules behind every page of site-v2. All examples below render with the live stylesheet <code>css/main.css</code>, compiled from <code>scss/</code>, so this page stays in sync with the site.</p></div>
+</section>
+
+<section class="ds-sec" id="color">
+<h2>Color</h2>
+<p class="ds-desc">Purple is the brand. Gold is the accent for eyebrows, labels and the primary CTA on purple. Ivory neutrals carry the page; white is reserved for cards.</p>
+<h3 class="ds-sub">Brand purple</h3>
+<div class="sw-grid">
+<div class="sw"><i style="background:var(--purple)"></i><div><strong>Purple</strong><code>--purple · #5D1C61</code></div></div>
+<div class="sw"><i style="background:var(--purple-700)"></i><div><strong>Purple 700</strong><code>--purple-700 · #4A1750</code></div></div>
+<div class="sw"><i style="background:var(--purple-900)"></i><div><strong>Purple 900</strong><code>--purple-900 · #320D37</code></div></div>
+<div class="sw"><i style="background:var(--purple-tint)"></i><div><strong>Purple tint</strong><code>--purple-tint · #F3EAF4</code></div></div>
+<div class="sw"><i style="background:var(--purple-line)"></i><div><strong>Purple line</strong><code>--purple-line · #E4D2E6</code></div></div>
+</div>
+<h3 class="ds-sub">Gold accent</h3>
+<div class="sw-grid">
+<div class="sw"><i style="background:var(--gold)"></i><div><strong>Gold</strong><code>--gold · #AF863A</code></div></div>
+<div class="sw"><i style="background:var(--gold-soft)"></i><div><strong>Gold soft</strong><code>--gold-soft · #C7A659</code></div></div>
+<div class="sw"><i style="background:var(--gold-tint)"></i><div><strong>Gold tint</strong><code>--gold-tint · #F4ECDC</code></div></div>
+</div>
+<h3 class="ds-sub">Neutrals &amp; lines</h3>
+<div class="sw-grid">
+<div class="sw"><i style="background:var(--ivory)"></i><div><strong>Ivory (page)</strong><code>--ivory · #FBF7F0</code></div></div>
+<div class="sw"><i style="background:var(--ivory-2)"></i><div><strong>Ivory 2 (alt section)</strong><code>--ivory-2 · #F5EDE0</code></div></div>
+<div class="sw"><i style="background:var(--paper)"></i><div><strong>Paper (cards)</strong><code>--paper · #FFFFFF</code></div></div>
+<div class="sw"><i style="background:var(--ink)"></i><div><strong>Ink (text)</strong><code>--ink · #2B2530</code></div></div>
+<div class="sw"><i style="background:var(--ink-soft)"></i><div><strong>Ink soft</strong><code>--ink-soft · #6A6470</code></div></div>
+<div class="sw"><i style="background:var(--ink-faint)"></i><div><strong>Ink faint</strong><code>--ink-faint · #938D9B</code></div></div>
+<div class="sw"><i style="background:var(--line)"></i><div><strong>Line</strong><code>--line · #E9E0D1</code></div></div>
+<div class="sw"><i style="background:var(--line-strong)"></i><div><strong>Line strong</strong><code>--line-strong · #DBCDB4</code></div></div>
+</div>
+<h3 class="ds-sub">Usage</h3>
+<div class="ds-t-wrap"><table class="ds-t"><thead><tr><th>Role</th><th>Token</th><th>Where</th></tr></thead><tbody>
+<tr><td>Section H2</td><td><code>--purple</code></td><td>Every section heading on ivory</td></tr>
+<tr><td>Body text</td><td><code>--ink</code> / <code>--ink-soft</code></td><td>Paragraphs / secondary copy, leads</td></tr>
+<tr><td>Eyebrow, labels</td><td><code>--accent</code> (= gold)</td><td>Uppercase kicker above titles, card labels</td></tr>
+<tr><td>Section backgrounds</td><td><code>--ivory</code> ↔ <code>--ivory-2</code> (<code>.bg-ivory2</code>)</td><td>Alternate to separate sections — never two of the same in a row</td></tr>
+<tr><td>Dark bands</td><td><code>--purple</code> (<code>.bg-purple</code>)</td><td>CTA band, scorecard, hero overlay; text white / #EADFEC</td></tr>
+</tbody></table></div>
+</section>
+
+<section class="ds-sec" id="type">
+<h2>Typography</h2>
+<p class="ds-desc">Two families. <b>AvenirNextLTPro</b> (fallback Nunito Sans) for headings, nav, buttons and labels — weights 700–900. <b>Frank Ruhl Libre</b> for body copy — weight 400.</p>
+<div class="ds-grid2" style="margin-top:1.2rem">
+<div class="ds-board"><span class="eyebrow">--font-serif · Headings</span><p style="font-family:var(--font-serif);font-weight:800;font-size:2.4rem;color:var(--purple);margin-top:.6rem;line-height:1.1">Aa Bb Cc 123</p><p style="font-family:var(--font-serif);margin-top:.5rem;color:var(--ink-soft)">AvenirNextLTPro → Nunito Sans · 600 / 700 / 800 / 900</p></div>
+<div class="ds-board"><span class="eyebrow">--font-sans · Body</span><p style="font-family:var(--font-sans);font-size:2.4rem;color:var(--ink);margin-top:.6rem;line-height:1.1">Aa Bb Cc 123</p><p style="margin-top:.5rem;color:var(--ink-soft)">Frank Ruhl Libre · 400 / 500 / 700</p></div>
+</div>
+<h3 class="ds-sub">Type scale</h3>
+<div class="ds-board ds-t-wrap"><table class="ds-t"><thead><tr><th>Style</th><th>Sample</th><th>Size · weight · line-height</th></tr></thead><tbody>
+<tr><td><code>Hero H1 (home)</code></td><td><p class="ty-sample" style="font-family:var(--font-serif);font-weight:900;font-size:clamp(2.2rem,4.4vw,4.4rem);line-height:1.03;letter-spacing:-.022em">Premium English</p></td><td><code>clamp(…,~70px) · 900 · 1.03</code></td></tr>
+<tr><td><code>Hero H1 (page)</code></td><td><p class="ty-sample" style="font-family:var(--font-serif);font-weight:900;font-size:clamp(2rem,3.6vw,3.4rem);line-height:1.05">Page title</p></td><td><code>~54px · 900 · 1.05 · balance</code></td></tr>
+<tr><td><code>h2 / .h2</code></td><td><h2 class="ty-sample" style="color:var(--purple)">Section heading</h2></td><td><code>clamp(2rem,3.6vw,3rem) · 800</code></td></tr>
+<tr><td><code>h3 / .h3</code></td><td><h3 class="ty-sample">Card or sub-heading</h3></td><td><code>clamp(1.3rem,1.9vw,1.6rem) · 700 · 1.18</code></td></tr>
+<tr><td><code>h4 (label)</code></td><td><p class="ty-sample" style="font-family:var(--font-serif);font-size:.7rem;font-weight:800;letter-spacing:.14em;text-transform:uppercase;color:var(--accent)">What parents notice</p></td><td><code>.68–.72rem · 800 · +.14em · uppercase</code></td></tr>
+<tr><td><code>.lead</code></td><td><p class="lead ty-sample">Intro paragraph under a heading.</p></td><td><code>clamp(1.12rem,1.5vw,1.35rem) · 400 · 1.6</code></td></tr>
+<tr><td><code>body / p</code></td><td><p class="ty-sample">Body copy for paragraphs, max 60–72ch.</p></td><td><code>1rem (17px) · 400 · 1.65</code></td></tr>
+<tr><td><code>small / note</code></td><td><p class="ty-sample" style="font-size:.88rem;color:var(--ink-faint)">Helper text, captions, notes</p></td><td><code>.86–.92rem · 400</code></td></tr>
+<tr><td><code>.eyebrow</code></td><td><span class="eyebrow">Spark Parent Center</span></td><td><code>.74rem · 700 · uppercase · gold + star</code></td></tr>
+</tbody></table></div>
+</section>
+
+<section class="ds-sec" id="spacing">
+<h2>Spacing &amp; layout</h2>
+<p class="ds-desc">One container, one section rhythm. Everything sits inside <code>.container</code>.</p>
+<div class="ds-board ds-t-wrap"><table class="ds-t"><thead><tr><th>Token</th><th>Value</th><th>Visual</th></tr></thead><tbody>
+<tr><td><code>--container</code></td><td>1180px max width</td><td><div class="sp-bar" style="width:100%"></div></td></tr>
+<tr><td><code>--gutter</code></td><td>clamp(20px, 5vw, 48px)</td><td><div class="sp-bar" style="width:48px"></div></td></tr>
+<tr><td><code>--section-y</code></td><td>clamp(72px, 9vw, 132px) — <code>.section</code></td><td><div class="sp-bar" style="width:132px"></div></td></tr>
+<tr><td><code>.section--tight</code></td><td>≈ half of section-y</td><td><div class="sp-bar" style="width:66px"></div></td></tr>
+<tr><td>Card padding</td><td>22–30px · clamp(20px,2.4vw,30px)</td><td><div class="sp-bar" style="width:30px"></div></td></tr>
+<tr><td>Grid gap</td><td>16–28px · clamp(16px,2vw,24px)</td><td><div class="sp-bar" style="width:24px"></div></td></tr>
+<tr><td>Heading → content</td><td>28–48px · clamp(28px,3vw,40px)</td><td><div class="sp-bar" style="width:40px"></div></td></tr>
+</tbody></table></div>
+<h3 class="ds-sub">Breakpoints</h3>
+<div class="ds-row"><span class="chips" style="margin:0"><li>≤ 1000px · stepper 2 cols</li><li>≤ 960px · grids 2 cols</li><li>≤ 860px · split stacks</li><li>≤ 760px · mobile nav, 1 col</li><li>≤ 620px · store 2 cols</li></span></div>
+</section>
+
+<section class="ds-sec" id="radius">
+<h2>Radius &amp; shadow</h2>
+<div class="ds-board ivory"><div class="ds-row" style="gap:28px">
+<div><div class="rd-box" style="border-radius:var(--r-sm)"></div><code class="ds-code">--r-sm · 8px</code></div>
+<div><div class="rd-box" style="border-radius:var(--r)"></div><code class="ds-code">--r · 14px</code></div>
+<div><div class="rd-box" style="border-radius:var(--r-lg)"></div><code class="ds-code">--r-lg · 22px (cards)</code></div>
+<div><div class="rd-box" style="border-radius:999px;width:120px"></div><code class="ds-code">999px (pills, buttons)</code></div>
+</div>
+<div class="ds-row" style="gap:28px;margin-top:28px">
+<div><div class="sh-box" style="box-shadow:var(--shadow-sm)"></div><code class="ds-code">--shadow-sm</code></div>
+<div><div class="sh-box" style="box-shadow:var(--shadow)"></div><code class="ds-code">--shadow</code></div>
+<div><div class="sh-box" style="box-shadow:var(--shadow-purple)"></div><code class="ds-code">--shadow-purple</code></div>
+<div><div class="sh-box" style="border:1px solid var(--line)"></div><code class="ds-code">1px --line (default card)</code></div>
+</div></div>
+</section>
+
+<section class="ds-sec" id="imagery">
+<h2>Imagery</h2>
+<p class="ds-desc">Real Spark photography only, stored in <code>assets/img/</code>. Fixed ratios + <code>object-fit:cover</code>.</p>
+<div class="ds-board"><div style="display:grid;grid-template-columns:2fr 1.2fr 1fr;gap:16px;align-items:end">
+<div><img src="assets/img/cdn/IMG_4896-1920w.jpeg" alt="" style="width:100%;aspect-ratio:4/3;object-fit:cover;border-radius:var(--r-lg)" /><code class="ds-code">4:3 · content / split · max 460px tall</code></div>
+<div><img src="assets/img/cdn/IMG_4220-1920w.jpeg" alt="" style="width:100%;aspect-ratio:3/4;object-fit:cover;border-radius:var(--r-lg)" /><code class="ds-code">3:4 · portrait</code></div>
+<div><img src="assets/img/cdn/joe-profile-1920w.png" alt="" style="width:100%;aspect-ratio:1/1;object-fit:cover;border-radius:var(--r-lg)" /><code class="ds-code">1:1 · team / prize</code></div>
+</div></div>
+</section>
+
+<section class="ds-sec" id="buttons">
+<h2>Buttons</h2>
+<p class="ds-desc">Pill shape, Avenir 700. One primary action per section. Min height 44px.</p>
+<div class="ds-board"><div class="ds-row">
+<a class="btn btn-primary" href="#buttons">Primary</a>
+<a class="btn btn-ghost" href="#buttons">Ghost</a>
+<a class="btn btn-gold" href="#buttons">Gold</a>
+<a class="btn btn-link" href="#buttons">Text link <span class="arrow">→</span></a>
+</div><div class="ds-row" style="margin-top:16px">
+<a class="btn btn-primary btn-sm" href="#buttons">Small</a>
+<a class="btn btn-primary" href="#buttons">Default</a>
+<a class="btn btn-primary btn-lg" href="#buttons">Large</a>
+</div>
+<code class="ds-code">.btn + .btn-primary | .btn-ghost | .btn-gold | .btn-link | .btn-onpurple · size .btn-sm | .btn-lg</code></div>
+<div class="ds-board dark"><div class="ds-row"><a class="btn btn-gold btn-lg" href="#buttons">Book a Free Assessment</a><a class="btn btn-onpurple" href="#buttons">On purple</a></div></div>
+</section>
+
+<section class="ds-sec" id="labels">
+<h2>Eyebrow, titles &amp; chips</h2>
+<div class="ds-board">
+<span class="eyebrow">Eyebrow with sparkle</span>
+<div class="sec-head" style="margin-top:1.2rem"><h2>Section head</h2><p class="lead">.sec-head — H2 + lead. Add <code>.center</code> to center.</p></div>
+<div style="margin-top:2rem" class="title-hair"><span class="eyebrow">Title hair</span><h2>Title with gold rule</h2><hr class="rule-gold" /></div>
+<ul class="chips" style="margin-top:1.6rem"><li>Reading fluency</li><li>Vocabulary</li><li>Academic writing</li><li>Critical thinking</li></ul>
+<code class="ds-code">.eyebrow · .sec-head(.center) · .title-hair + hr.rule-gold · ul.chips</code></div>
+</section>
+
+<section class="ds-sec" id="hero">
+<h2>Hero</h2>
+<p class="ds-desc">Home: full-bleed video/photo, H1 ~70px/900, gold tagline. Sub-pages: <code>.hero--page</code>, H1 ~54px, eyebrow + lead, overlay for contrast, followed by breadcrumb bar.</p>
+<div class="ds-board" style="padding:0;overflow:hidden">
+<section class="hero hero--page" style="min-height:0" aria-label="Hero example"><div class="hero-bg"><img src="assets/img/cdn/IMG_2112-1920w.jpeg" alt="" /></div><div class="hero-overlay"></div><div class="container"><div class="hero-inner"><div class="hero-copy"><span class="eyebrow">Parent Center</span><h1>Page hero title</h1><p class="lead">One-sentence lead that frames the page.</p></div></div></div></section>
+</div>
+<code class="ds-code">section.hero.hero--page(.center) > .hero-bg img + .hero-overlay + .container .hero-inner .hero-copy</code>
+</section>
+
+<section class="ds-sec" id="summary">
+<h2>Summary box</h2>
+<p class="ds-desc">“In short” key-takeaways placed right after the hero on long guides. 3–4 bullets.</p>
+<div class="ds-board ivory"><section class="summary" aria-labelledby="ds-sum"><span class="label"><span class="spark"></span>In short</span><h2 id="ds-sum">Academic English, in short</h2><ul>
+<li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span><b>Conversational fluency ≠ academic proficiency.</b></span></li>
+<li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span><b>Affects every subject</b> — Science, Maths, Humanities.</span></li>
+</ul></section></div>
+</section>
+
+<section class="ds-sec" id="cards">
+<h2>Cards</h2>
+<h3 class="ds-sub">Info card · <code>.info-grid(.cols-3|.cols-4) &gt; .info-card</code></h3>
+<div class="info-grid cols-3" style="margin-top:0"><div class="info-card"><h3>English</h3><p>Read complex texts and produce detailed written responses.</p></div><div class="info-card"><h3>Science</h3><p>Technical vocabulary and explaining ideas clearly.</p></div><div class="info-card"><h3>Mathematics</h3><ul><li>Word problems</li><li>Written instructions</li></ul></div></div>
+<h3 class="ds-sub">Hub card · <code>nav.hub-grid &gt; a.hub-card(.has-img)</code></h3>
+<nav class="hub-grid" aria-label="Hub example" style="margin-top:0">
+<a class="hub-card has-img" href="#cards"><img src="assets/img/cdn/IMG_4878-1920w.jpeg" alt="" /><div class="hc-body"><h3>With image</h3><p>Linked card to a sub-page; whole card is clickable.</p><span class="go">Explore <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></div></a>
+<a class="hub-card" href="#cards"><h3>Text only</h3><p>Used for guide lists without imagery.</p><span class="go">Read the guide <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span></a>
+</nav>
+</section>
+
+<section class="ds-sec" id="split">
+<h2>Split (image + copy)</h2>
+<p class="ds-desc">Two columns aligned top; add <code>.rev</code> to flip, <code>.tall</code> on media for portrait. Stacks at 860px.</p>
+<div class="ds-board"><div class="split"><div class="split-copy"><div class="copy"><p>Copy column, max 60ch per line. Supports <b>h4 labels</b>, lists and chips.</p><h4>Students develop</h4><ul class="chips"><li>Reading</li><li>Writing</li></ul></div></div><div class="split-media"><img src="assets/img/cdn/IMG_7170-1920w.jpeg" alt="" /></div></div></div>
+<code class="ds-code">.split(.rev) > .split-copy .copy + .split-media(.tall) img</code>
+</section>
+
+<section class="ds-sec" id="tabs">
+<h2>Tabs</h2>
+<p class="ds-desc">For parallel content (levels, schools, metrics). First tab active. Panel can be a split.</p>
+<div class="ds-board"><div class="tabs"><div class="tab-list" role="tablist"><button class="active" data-tab="ds1">Phonics</button><button data-tab="ds2">ESL</button><button data-tab="ds3">IELTS</button></div><div class="tab-panels">
+<div class="tab-panel active" data-tab-panel="ds1"><p>Panel one — sounds, blending, decoding.</p></div>
+<div class="tab-panel" data-tab-panel="ds2"><p>Panel two — CEFR A1 → B2.</p></div>
+<div class="tab-panel" data-tab-panel="ds3"><p>Panel three — Band 4.5 → 9.</p></div>
+</div></div></div>
+<code class="ds-code">.tabs > .tab-list button[data-tab] + .tab-panels .tab-panel[data-tab-panel](.split)</code>
+</section>
+
+<section class="ds-sec" id="faq">
+<h2>FAQ / accordion</h2>
+<p class="ds-desc">Native <code>&lt;details&gt;</code>. <code>.cols-2</code> for long lists; numbered variant <code>.crit-list</code>.</p>
+<div class="ds-board"><div class="faq-list">
+<details class="faq-item" open><summary>What is reading age?<span class="q-ic"></span></summary><div class="faq-a"><p>A measure comparing reading ability to typical expectations for an age group.</p></div></details>
+<details class="faq-item"><summary>How often is progress monitored?<span class="q-ic"></span></summary><div class="faq-a"><p>Continuously.</p></div></details>
+</div>
+<div class="faq-list crit-list" style="margin-top:20px"><details class="faq-item" open><summary><span class="n">1</span><span class="t">Numbered criterion</span><span class="q-ic"></span></summary><div class="faq-a"><p>Used for factors / criteria lists.</p></div></details></div></div>
+</section>
+
+<section class="ds-sec" id="compare">
+<h2>Comparison grid</h2>
+<div class="ds-board"><div class="verdict-grid" style="margin-top:0"><div class="v v--minus"><h4>Conversational English</h4><ul><li>Talk with friends</li><li>Simple questions</li></ul></div><div class="v v--yes"><h4>Academic English</h4><ul><li>Read complex texts</li><li>Write essays</li></ul></div></div>
+<code class="ds-code">.verdict-grid(.cols-3) > .v.v--minus | .v--plus | .v--yes</code></div>
+</section>
+
+<section class="ds-sec" id="steps">
+<h2>Step grid</h2>
+<div class="ds-board ivory"><ol class="step-grid" style="margin-top:0"><li><span class="sn">01</span><div><h3>Assessment</h3><p>Reading, writing, vocabulary.</p><ul class="chips"><li>Fluency</li><li>Reading age</li></ul></div></li><li><span class="sn">02</span><div><h3>Personalized plan</h3><p>Built from assessment data.</p><p class="note">Parents receive clear feedback.</p></div></li></ol>
+<code class="ds-code">ol.step-grid(.cols-1) > li > span.sn + div (h3, p, ul.chips, p.note)</code></div>
+</section>
+
+<section class="ds-sec" id="timeline">
+<h2>Timelines</h2>
+<h3 class="ds-sub">Horizontal stepper · <code>.roadmap &gt; .rm-track &gt; .rm-step</code> — for ≤4 short stages</h3>
+<div class="ds-board ivory"><div class="roadmap" style="margin-top:0"><div class="rm-track" style="grid-template-columns:repeat(3,1fr)">
+<div class="rm-step"><div class="rm-dot"></div><div class="rm-head"><div class="rm-when">01</div><div class="rm-card"><h3>Phonics</h3><h4>Pre-A1 → A1</h4><p>Learning to read.</p></div></div></div>
+<div class="rm-step"><div class="rm-dot"></div><div class="rm-head"><div class="rm-when">02</div><div class="rm-card"><h3>ESL</h3><h4>A1 → B2</h4><p>Functional English.</p></div></div></div>
+<div class="rm-step"><div class="rm-dot"></div><div class="rm-head"><div class="rm-when">03</div><div class="rm-card"><h3>IELTS</h3><h4>B1 → C2</h4><p>Band mastery.</p></div></div></div>
+</div></div></div>
+<h3 class="ds-sub">Vertical roadmap · <code>.roadmap.rm-v</code> — for long stage content</h3>
+<div class="ds-board ivory"><div class="roadmap rm-v" style="margin-top:0"><div class="rm-track">
+<div class="rm-step"><div class="rm-dot"></div><div class="rm-head"><div class="rm-when">Month 1</div><div class="rm-card"><h3>Assessment &amp; goal setting</h3><p>Teachers identify strengths and gaps; routines begin.</p><h4>What parents notice</h4><ul><li>More engagement</li><li>Improved confidence</li></ul></div></div></div>
+<div class="rm-step"><div class="rm-dot"></div><div class="rm-head"><div class="rm-when">Months 2–3</div><div class="rm-card"><h3>Confidence &amp; consistency</h3><p>Strategies applied more independently.</p><h4>What parents notice</h4><ul><li>Willingness to read</li></ul></div></div></div>
+</div></div></div>
+<h3 class="ds-sub">Level timeline · <code>.cefr &gt; .cefr-item(.b|.c)</code></h3>
+<div class="ds-board ivory"><div class="cefr" style="margin-top:0"><article class="cefr-item b"><span class="lv">B1</span><div class="ch"><h3>Threshold</h3><span class="band">Independent user</span></div><div><h4>What your child can do</h4><p>Understand main points of lessons.</p></div><div><h4>In school</h4><p>Follows most lessons; misses nuance.</p></div><div class="eq"><span>Cambridge PET</span><span>IELTS ≈ 4.0–5.0</span></div></article></div></div>
+</section>
+
+<section class="ds-sec" id="table">
+<h2>Table</h2>
+<div class="tbl-wrap" style="margin-top:1.2rem"><table class="tbl"><thead><tr><th>CEFR</th><th>School year</th><th>IELTS</th></tr></thead><tbody><tr><td>A2 to B1</td><td>Year 3 to 6</td><td>4.0 to 5.0</td></tr><tr><td>B1 to B2</td><td>Year 6 to 9</td><td>5.0 to 6.5</td></tr></tbody></table></div>
+<code class="ds-code">.tbl-wrap > table.tbl — horizontal scroll under 640px</code>
+</section>
+
+<section class="ds-sec" id="callouts">
+<h2>Callouts</h2>
+<div class="ds-grid2" style="margin-top:1.2rem">
+<div class="scorecard"><h3>Scorecard</h3><ul><li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span>Purple checklist panel</span></li><li><span class="tick"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6L9 17l-5-5"/></svg></span><span>Use once per page</span></li></ul></div>
+<div class="q-card"><span class="label"><span class="spark"></span>Q-card</span><ol class="q-list"><li>Definition or key chain</li><li>Short ordered list</li></ol></div>
+</div>
+<div class="inline-cta" style="margin-top:16px"><span class="spark"></span><h3>Inline CTA / statement</h3><p>A centered closing statement inside a section.</p></div>
+<code class="ds-code">.scorecard · .q-card + ol.q-list · .inline-cta</code>
+</section>
+
+<section class="ds-sec" id="store">
+<h2>Resource &amp; prize cards</h2>
+<div class="res-grid" style="margin-top:1.2rem"><article class="res-card"><span class="kind">Guide · PDF</span><h3>IELTS Journey Guide</h3><p>How the exam works and preparation timelines.</p><p class="best"><b>Best for</b>Secondary students &amp; adults</p><a class="btn btn-primary btn-sm" href="#store">Download</a></article></div>
+<div class="store-grid" style="max-width:520px"><article class="prize"><img src="assets/img/cdn/Spark-Squishy-1920w.png" alt="" /><div class="pb"><h3>Watermelon Squishy</h3><div class="pts"><b>80 pts</b></div></div></article><article class="prize"><img src="assets/img/cdn/Spark-Drawing-Tablet-1920w.png" alt="" /><div class="pb"><h3>Drawing Tablet</h3><small>Leaving soon</small><div class="pts"><b>150 pts</b></div></div></article></div>
+<code class="ds-code">.res-grid > .res-card · .store-grid > .prize (1:1 image)</code>
+</section>
+
+<section class="ds-sec" id="form">
+<h2>Form</h2>
+<p class="ds-desc">Fits one screen: 2-column compact grid, required marked *, chips for multi-select, single submit.</p>
+<div class="form-card" style="max-width:640px;margin-top:1.2rem"><h3 class="fhead">Book a Free Assessment</h3><p class="sub">One short step.</p><form novalidate onsubmit="return false"><div class="form-grid compact">
+<div class="field"><label for="ds-fn">First name <span class="req">*</span></label><input id="ds-fn" type="text" /></div>
+<div class="field invalid"><label for="ds-em">Email <span class="req">*</span></label><input id="ds-em" type="email" value="wrong@" /><span class="err">Please enter a valid email.</span></div>
+<div class="field full"><span class="flabel">Interests</span><div class="chip-group" role="group" aria-label="Interests"><label><input type="checkbox" checked /><span>Reading</span></label><label><input type="checkbox" /><span>IELTS</span></label></div></div>
+</div><button type="button" class="btn btn-primary btn-lg">Submit</button><p class="form-note">No spam — unsubscribe anytime.</p></form></div>
+<code class="ds-code">.form-card > form > .form-grid.compact > .field(.full|.invalid) label + input + .err · .chip-group</code>
+</section>
+
+<section class="ds-sec" id="cta">
+<h2>CTA band &amp; related pages</h2>
+<p class="ds-desc">Every content page ends with Related pages + purple CTA band.</p>
+<div class="related" style="margin-top:1.2rem;padding-top:0;border-top:0"><p class="rel-head">Related pages</p><div class="rel-links"><a class="btn btn-ghost btn-sm" href="#cta">Parent Center</a><a class="btn btn-ghost btn-sm" href="#cta">Ask a Teacher</a></div></div>
+<div style="border-radius:var(--r-lg);overflow:hidden;margin-top:16px"><section class="section assess bg-purple cta-band" style="padding-block:56px"><div class="container"><h2>Start With a Free Assessment</h2><p class="lead">Identify strengths, gaps and the right pathway.</p><div class="cta-row"><a href="#cta" class="btn btn-gold btn-lg">Book a Free Assessment</a></div></div></section></div>
+<div style="border-radius:var(--r-lg);overflow:hidden;margin-top:16px"><section class="section--tight section assess bg-purple promo-band promo-band--img" aria-label="Promo example"><div class="container"><div class="promo"><div><h2>Assess your child's English proficiency</h2><p>Schedule session with a teacher</p><a href="#cta" class="btn btn-gold btn-lg">Book now</a></div></div></div></section></div>
+<code class="ds-code">section.section.assess.bg-purple.cta-band · .promo-band--img (home) · .related .rel-links</code>
+</section>
+
+<section class="ds-sec" id="nav">
+<h2>Header, breadcrumbs, footer</h2>
+<p class="ds-desc">Injected by <code>shell.js</code> on every page. Header is transparent over hero, logo 60px → 38px on scroll; add <code>data-solid-header</code> on body for pages without hero.</p>
+<div class="ds-board"><div class="crumb-bar" style="background:none;border:0;padding:0"><nav class="crumbs" aria-label="Breadcrumb example"><ol><li><a href="#nav">Home</a></li><li><a href="#nav">Exclusive</a></li><li aria-current="page"><span class="sep">/</span>Parent Center</li></ol></nav></div></div>
+</section>
+
+<section class="ds-sec" id="scss">
+<h2>SCSS &amp; component API</h2>
+<p class="ds-desc">Source lives in <code>scss/</code>: <code>abstracts</code> → <code>base</code> (tokens, reset, typography) → <code>layout</code> → <code>components</code> (one file each) → <code>sections</code> (page-specific) → <code>utilities</code>. Build with <code>npx sass scss/main.scss css/main.css</code>.</p>
+<div class="ds-grid2" style="margin-top:1.2rem">
+<div class="ds-do"><b>Component rule</b>Every component styles only its own classes and depends only on tokens. Drop it into any page or section and it renders the same.</div>
+<div class="ds-do"><b>Customising from outside</b>Parents never restyle a child. They set the child's public custom properties, or only position it (margin and alignment).</div>
+</div>
+<div class="ds-board ds-t-wrap"><table class="ds-t"><thead><tr><th>Component</th><th>Public variables</th></tr></thead><tbody><tr><td><code>Headings h1–h4</code></td><td><code>--heading-color, --subheading-color</code></td></tr><tr><td><code>.lead</code></td><td><code>--lead-color, --lead-size, --lead-lh, --lead-weight</code></td></tr><tr><td><code>.eyebrow</code></td><td><code>--eyebrow-color</code></td></tr><tr><td><code>.spark (icon)</code></td><td><code>--spark-color, --spark-size</code></td></tr><tr><td><code>.chip</code></td><td><code>--chip-bg, --chip-fg, --chip-border, --chip-shadow, --chip-size, --chip-weight, --chip-blur, --chip-spark-color · .chip--filter</code></td></tr><tr><td><code>.trust-chips</code></td><td><code>--trust-chips-justify</code></td></tr><tr><td><code>.btn-primary</code></td><td><code>--btn-bg, --btn-fg, --btn-border, --btn-hover-bg</code></td></tr><tr><td><code>.btn-ghost</code></td><td><code>--btn-ghost-fg, --btn-ghost-border, --btn-ghost-hover-fg, --btn-ghost-hover-bg, --btn-ghost-hover-border</code></td></tr><tr><td><code>.container</code></td><td><code>--container-max, --container-position, --container-z</code></td></tr><tr><td><code>.brand</code></td><td><code>--brand-h, --logo-white, --logo-purple</code></td></tr><tr><td><code>.split-media</code></td><td><code>--split-media-position, --split-img-ratio, --split-img-maxh, --split-img-maxh-sm</code></td></tr></tbody></table></div>
+<h3 class="ds-sub">Example: same button, themed by its container</h3>
+<div class="ds-board dark"><div class="ds-row" style="--btn-ghost-fg:#fff;--btn-ghost-border:rgba(255,255,255,.45);--btn-ghost-hover-bg:#fff"><a class="btn btn-ghost" href="#scss">Ghost on dark</a><span class="chip" style="--chip-bg:rgba(255,255,255,.12);--chip-fg:#fff;--chip-border:rgba(255,255,255,.28);--chip-shadow:none"><span class="spark"></span>Chip on dark</span></div>
+<code class="ds-code" style="background:rgba(255,255,255,.1);color:#EADFEC">&lt;div style="--btn-ghost-fg:#fff; --btn-ghost-border:rgba(255,255,255,.45)"&gt;&lt;a class="btn btn-ghost"&gt;…&lt;/a&gt;&lt;/div&gt;</code></div>
+</section>
+
+<section class="ds-sec" id="rules">
+<h2>UX/UI standards</h2>
+<p class="ds-desc">Full list in <code>UX-UI-STANDARDS.md</code>. Key do / don't:</p>
+<div class="ds-grid2" style="margin-top:1.2rem">
+<div class="ds-do"><b>Do</b>One H2 per section, purple. Alternate ivory / ivory-2 backgrounds. Fixed image ratios. Cards equal height, CTA at bottom. Hit targets ≥ 44px. <code>text-wrap:balance</code> on titles.</div>
+<div class="ds-dont"><b>Don't</b>Hard line breaks in titles. Long copy beside a small image. Cards touching the next section. Two primary buttons side by side. Images hotlinked from outside site-v2.</div>
+<div class="ds-do"><b>Do</b>Long stage content → vertical roadmap. Parallel content → tabs. Long guides → summary box first.</div>
+<div class="ds-dont"><b>Don't</b>Tall narrow columns of text (5-up cards with paragraphs). Forms longer than one screen.</div>
+</div>
+</section>
+
+</main>
+</div>
+<script src="shell.js"></script>
+<script src="spark.js"></script>
+<script src="site.js"></script>
+</body>
+</html>

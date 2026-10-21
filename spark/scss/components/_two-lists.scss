@@ -1,0 +1,32 @@
+// two-lists — component — owns only selectors rooted at its own classes. Appearance is configurable from outside only through its --custom-property API; parents may only position it (margin / alignment).
+@use '../abstracts/mixins' as *;
+
+.two-lists {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: clamp(22px,3vw,40px);
+  margin-top: clamp(28px,3vw,40px);
+
+  h4 {
+    font-family: var(--font-serif);
+    font-size: 1.15rem;
+    color: var(--ink);
+  }
+
+  ul {
+    margin: .7rem 0 0;
+    padding-left: 1.2em;
+    display: flex;
+    flex-direction: column;
+    gap: .4rem;
+    color: var(--ink-soft);
+  }
+
+  ul li::marker {
+    color: var(--accent);
+  }
+
+  @include down(640px) {
+    grid-template-columns: 1fr;
+  }
+}

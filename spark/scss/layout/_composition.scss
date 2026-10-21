@@ -1,0 +1,18 @@
+// composition — layout layer
+@use '../abstracts/mixins' as *;
+
+.crumb-bar + main > .section:first-child {
+  padding-top: clamp(40px,4.5vw,64px);
+}
+
+.crumb-bar + main > section.section:first-of-type {
+  padding-top: clamp(40px,4.5vw,64px);
+}
+
+.crumb-bar + main > .article-wrap:first-child {
+  padding-top: clamp(32px,3.5vw,52px);
+}
+
+.sec-head + .copy {
+  margin-top: clamp(28px,3vw,40px);
+}
