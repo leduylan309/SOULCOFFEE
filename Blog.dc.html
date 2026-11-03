@@ -48,7 +48,7 @@
         </div>
         <a href="Search.dc.html" aria-label="{{ t.search }}" style="width: 44px; height: 44px; display: grid; place-items: center;"><svg width="17" height="17" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="7" cy="7" r="5"></circle><path d="M11 11l4 4"></path></svg></a>
         <a href="Account.dc.html" aria-label="Account" style="width: 44px; height: 44px; display: grid; place-items: center;"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="8" cy="5.5" r="3"></circle><path d="M2.5 15c.6-3 2.8-4.6 5.5-4.6s4.9 1.6 5.5 4.6"></path></svg></a>
-        <a href="Checkout.dc.html" aria-label="{{ t.cart }}" style="height: 44px; padding: 0 0 0 8px; display: flex; align-items: center; gap: 8px; text-transform: uppercase;"><sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}"><span>{{ t.cart }}</span></sc-if><span style="min-width: 22px; height: 22px; padding: 0 6px; display: grid; place-items: center; background: #27292D; color: #F4EFE5; font-size: 11px; border-radius: 11px;">0</span></a>
+        <a href="Checkout.dc.html" aria-label="{{ t.cart }}" style="height: 44px; padding: 0 0 0 8px; display: flex; align-items: center; gap: 8px; text-transform: uppercase;"><sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}"><span>{{ t.cart }}</span></sc-if><span style="min-width: 22px; height: 22px; padding: 0 6px; display: grid; place-items: center; background: #27292D; color: #F4EFE5; font-size: 11px; border-radius: 11px;">{{ cartCount }}</span></a>
       </div>
     </nav>
   </header>
@@ -321,7 +321,7 @@ class Component extends DCLogic {
       pagination: 'Phân trang', empty: 'Không tìm thấy bài viết phù hợp.', clear: 'Xóa tìm kiếm', tagged: 'Bài viết gắn thẻ', tagIntro: 'Tất cả bài viết có chung chủ đề này, từ mọi chuyên mục.',
       openRoles: 'Vị trí đang tuyển', viewRole: 'Xem chi tiết', fullTime: 'Toàn thời gian', writer: 'Người viết', minRead: 'phút đọc', toc: 'Nội dung bài viết', apply: 'Ứng tuyển', sendCv: 'Gửi CV',
       postNav: 'Điều hướng bài viết', older: '← Bài trước', newer: 'Bài sau →', more: 'Thêm từ', seeAll: 'Xem tất cả',
-      footer: [['Shop', [['Cà phê rang', 'Shop.dc.html#c/ca-phe-pha-phin'], ['Nhân xanh', 'Shop.dc.html#c/ca-phe-nhan-xanh'], ['Soulful Collection', 'Shop.dc.html#c/soulful-flavours'], ['Tất cả sản phẩm', 'Shop.dc.html']]], ['Khám phá', [['Câu chuyện của Soul', 'Our Story.dc.html'], ['Cửa hàng', 'Spaces.dc.html'], ['Blog', 'Blog.dc.html'], ['Tuyển dụng', 'Blog.dc.html#c/recruitment']]], ['Dành cho đối tác', [['Giải pháp cà phê', 'Coffee Solutions.dc.html'], ['Nhân xanh', 'Coffee Solutions.dc.html#green'], ['Mua sỉ', 'Coffee Solutions.dc.html#contact']]], ['Hỗ trợ', [['Hướng dẫn pha', 'Blog.dc.html#c/how-to-make-coffee'], ['Giao hàng', 'Help.dc.html#shipping'], ['Câu hỏi thường gặp', 'Help.dc.html'], ['Liên hệ', 'Help.dc.html#contact']]]],
+      footer: [['Shop', [['Cà phê rang', 'Shop.dc.html#c/ca-phe-pha-phin'], ['Nhân xanh', 'Shop.dc.html#c/ca-phe-nhan-xanh'], ['Soulful Collection', 'Shop.dc.html#c/soulful-flavours'], ['Tất cả sản phẩm', 'Shop.dc.html']]], ['Khám phá', [['Câu chuyện của Soul', 'Our Story.dc.html'], ['Cửa hàng', 'Spaces.dc.html'], ['Blog', 'Blog.dc.html'], ['Tuyển dụng', 'Blog.dc.html#c/recruitment']]], ['Dành cho đối tác', [['Giải pháp cà phê', 'Coffee Solutions.dc.html'], ['Nhân xanh', 'Coffee Solutions.dc.html#services'], ['Mua sỉ', 'Coffee Solutions.dc.html#contact']]], ['Hỗ trợ', [['Hướng dẫn pha', 'Blog.dc.html#c/how-to-make-coffee'], ['Giao hàng', 'Help.dc.html#shipping'], ['Câu hỏi thường gặp', 'Help.dc.html'], ['Liên hệ', 'Help.dc.html#contact']]]],
       tagline: 'Crafted by Vietnamese Soul. Buôn Ma Thuột, Việt Nam.' },
     en: { nav: ['Home', 'Shop', 'New Crop', 'Our Story', 'Coffee Solutions', 'Spaces', 'Blog'], menu: 'Menu', search: 'Search', cart: 'Cart', close: 'Close', home: 'Home', prev: 'Previous page', next: 'Next page',
       eyebrow: 'Soul Journal', title: 'Stories from Soul', intro: 'Harvests, awards, brewing guides and the people behind Vietnamese Fine Robusta, told from Buon Ma Thuot.',
@@ -329,7 +329,7 @@ class Component extends DCLogic {
       pagination: 'Pagination', empty: 'No matching articles.', clear: 'Clear search', tagged: 'Tagged', tagIntro: 'Every article on this topic, across all categories.',
       openRoles: 'Open roles', viewRole: 'View role', fullTime: 'Full-time', writer: 'Written by', minRead: 'min read', toc: 'In this article', apply: 'Apply', sendCv: 'Send CV',
       postNav: 'Article navigation', older: '← Previous', newer: 'Next →', more: 'More from', seeAll: 'See all',
-      footer: [['Shop', [['Roasted Coffee', 'Shop.dc.html#c/ca-phe-pha-phin'], ['Green Coffee', 'Shop.dc.html#c/ca-phe-nhan-xanh'], ['Soulful Collection', 'Shop.dc.html#c/soulful-flavours'], ['All Coffee', 'Shop.dc.html']]], ['Discover', [['Our Story', 'Our Story.dc.html'], ['Spaces', 'Spaces.dc.html'], ['Blog', 'Blog.dc.html'], ['Careers', 'Blog.dc.html#c/recruitment']]], ['Professional', [['Coffee Solutions', 'Coffee Solutions.dc.html'], ['Green Coffee', 'Coffee Solutions.dc.html#green'], ['Wholesale', 'Coffee Solutions.dc.html#contact']]], ['Support', [['Brewing guides', 'Blog.dc.html#c/how-to-make-coffee'], ['Shipping', 'Help.dc.html#shipping'], ['FAQ', 'Help.dc.html'], ['Contact', 'Help.dc.html#contact']]]],
+      footer: [['Shop', [['Roasted Coffee', 'Shop.dc.html#c/ca-phe-pha-phin'], ['Green Coffee', 'Shop.dc.html#c/ca-phe-nhan-xanh'], ['Soulful Collection', 'Shop.dc.html#c/soulful-flavours'], ['All Coffee', 'Shop.dc.html']]], ['Discover', [['Our Story', 'Our Story.dc.html'], ['Spaces', 'Spaces.dc.html'], ['Blog', 'Blog.dc.html'], ['Careers', 'Blog.dc.html#c/recruitment']]], ['Professional', [['Coffee Solutions', 'Coffee Solutions.dc.html'], ['Green Coffee', 'Coffee Solutions.dc.html#services'], ['Wholesale', 'Coffee Solutions.dc.html#contact']]], ['Support', [['Brewing guides', 'Blog.dc.html#c/how-to-make-coffee'], ['Shipping', 'Help.dc.html#shipping'], ['FAQ', 'Help.dc.html'], ['Contact', 'Help.dc.html#contact']]]],
       tagline: 'Crafted by Vietnamese Soul. Buon Ma Thuot, Vietnam.' }
   };
 
@@ -342,6 +342,7 @@ class Component extends DCLogic {
     return { kind: 'all' };
   }
   componentDidMount() {
+    try { const c = JSON.parse(localStorage.getItem('soul-cart-v1')) || []; this.setState({ cartCount: c.reduce((n, i) => n + (i.qty || 1), 0) }); } catch (e) {}
     this._r = () => this.setState({ w: window.innerWidth }); this._r(); window.addEventListener('resize', this._r);
     this._h = () => this.setState({ route: this.parse(location.hash), page: 1, mobileOpen: false });
     this._h(); window.addEventListener('hashchange', this._h);
@@ -361,7 +362,7 @@ class Component extends DCLogic {
     const fmt = (d) => d.split('-').reverse().join('.');
     const nav = (h) => (e) => { e.preventDefault(); this.go(h); };
     const catName = (id) => CATS[id][li];
-    const card = (p, ctx) => { const c = ctx && p.cats.includes(ctx) ? ctx : p.cats[0]; return { title: p.title[li], excerpt: p.ex[li], img: p.img, date: fmt(p.d), cat: catName(c), href: '#p/' + p.h, open: nav('p/' + p.h), catHref: '#c/' + c, catOpen: nav('c/' + c) }; };
+    const card = (p, ctx) => { const c = ctx && p.cats.includes(ctx) ? ctx : p.cats[0]; return { cartCount: this.state.cartCount || 0,  title: p.title[li], excerpt: p.ex[li], img: p.img, date: fmt(p.d), cat: catName(c), href: '#p/' + p.h, open: nav('p/' + p.h), catHref: '#c/' + c, catOpen: nav('c/' + c) }; };
     const hrefs = ['Home.html', 'Shop.dc.html', 'Shop.dc.html#c/soulful-flavours', 'Our Story.dc.html', 'Coffee Solutions.dc.html', 'Spaces.dc.html', '#'];
     const base = {
       t, isMobile, isDesktop: !isMobile,
