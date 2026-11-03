@@ -1,0 +1,22 @@
+<!-- @dsCard group="Components" viewport="700x620" name="Navigation" subtitle="Header, mega menu, mobile menu, footer" -->
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+<script src="../_loader.js"></script>
+<style>body{padding:20px 24px} .k{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px}</style>
+</head><body><div id="root"></div>
+<script type="text/babel" data-presets="react">
+loadSoulDS('../../').then(NS => {
+  const { SiteHeader, MegaMenu, SiteFooter, MobileMenu } = NS;
+  const nav = ['Trang chủ','Sản phẩm','Mùa vụ mới','Về Soul'].map((l,i)=>({label:l,href:'#',hasMenu:i===1,active:i===0}));
+  const App = () => <div style={{display:'flex',flexDirection:'column',gap:10,margin:'-20px -24px'}}>
+    <div style={{position:'relative',height:300,overflow:'hidden'}}><SiteHeader nav={nav} cartCount={2} assetBase="../../" mega={<MegaMenu columns={[{title:'Cà phê rang',items:[{label:'Fine Robusta'},{label:'Pha máy'},{label:'Pha phin'}]},{title:'Nhân xanh',items:[{label:'Fine Robusta'},{label:'Premium Robusta'}],footerLink:{label:'Xem tất cả cà phê'}}]} feature={{img:'../../images/04-soulful/Soulful_vuong.png',eyebrow:'Mùa vụ mới',title:'Soulful Collection 2026',sub:'Cay · Nồng · Thơm · Ngọt',cta:'Khám phá'}} />} /></div>
+    <div style={{display:'grid',gridTemplateColumns:'240px 1fr',gap:10,height:300}}>
+      <div style={{height:300,overflow:'hidden',border:'1px solid var(--line-subtle)'}}><MobileMenu inline assetBase="../../" nav={nav.slice(0,3)} /></div>
+      <div style={{overflow:'hidden'}}><SiteFooter assetBase="../../" columns={[{title:'Shop',links:[{label:'Cà phê rang'},{label:'Nhân xanh'}]},{title:'Khám phá',links:[{label:'Câu chuyện của Soul'},{label:'Cửa hàng'}]},{title:'Hỗ trợ',links:[{label:'Giao hàng'},{label:'Liên hệ'}]}]} /></div>
+    </div>
+  </div>;
+  ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+});
+</script></body></html>

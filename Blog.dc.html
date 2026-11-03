@@ -1,0 +1,430 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..500&amp;family=Be+Vietnam+Pro:wght@400;500;600&amp;display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-font-smoothing: antialiased; overflow-x: clip; scroll-padding-top: 88px; }
+  body { margin: 0; background: #F4EFE5; color: #27292D; font-family: "Be Vietnam Pro", system-ui, sans-serif; font-size: 15px; line-height: 1.6; overflow-x: hidden; }
+  a { color: inherit; text-decoration: none; }
+  a:hover { color: inherit; }
+  button, input { font-family: inherit; color: inherit; }
+  img { display: block; }
+  :focus-visible { outline: 2px solid #FFD35B; outline-offset: 3px; }
+  ::selection { background: #FFD35B; color: #27292D; }
+</style>
+</helmet>
+
+<div style="min-height: 100vh; background: #F4EFE5; color: #27292D;">
+
+  <header style="position: sticky; top: 0; z-index: 60; background: #F4EFE5; border-bottom: 1px solid rgba(39,41,45,.14);">
+    <nav aria-label="Main" style="display: flex; align-items: center; justify-content: space-between; gap: 20px; height: 66px; padding: 0 clamp(16px,4vw,64px);">
+      <div style="display: flex; align-items: center; gap: clamp(20px,2.6vw,40px);">
+        <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+          <button type="button" aria-label="{{ t.menu }}" onClick="{{ openMobile }}" style="width: 44px; height: 44px; margin-left: -10px; display: grid; place-items: center; background: none; border: 0; cursor: pointer;"><span style="display: block; width: 22px; height: 1.5px; background: #27292D; box-shadow: 0 -7px 0 #27292D, 0 7px 0 #27292D;"></span></button>
+        </sc-if>
+        <a href="Home.html" aria-label="SOUL" style="display: flex; align-items: center; gap: 12px;"><img src="assets/soul-elephant-ink.svg" alt="" width="30" height="30" style="width: 30px; height: 30px;" /><img src="assets/soul-wordmark-ink.svg" alt="SOUL" style="height: 15px; width: auto;" /></a>
+        <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+          <div style="display: flex; align-items: center; font-size: 12px; letter-spacing: .08em; font-weight: 500; text-transform: uppercase;">
+            <sc-for list="{{ nav }}" as="n" hint-placeholder-count="7">
+              <a href="{{ n.href }}" onClick="{{ n.click }}" aria-current="{{ n.current }}" style="display: flex; align-items: center; height: 66px; padding: 0 12px; border-bottom: 2px solid {{ n.line }}; white-space: nowrap;" style-hover="border-bottom-color: #FFD35B;">{{ n.label }}</a>
+            </sc-for>
+          </div>
+        </sc-if>
+      </div>
+      <div style="display: flex; align-items: center; gap: 4px; font-size: 12px; letter-spacing: .08em; font-weight: 500;">
+        <div role="group" aria-label="Language" style="display: flex; border: 1px solid rgba(39,41,45,.3); height: 32px; margin-right: 6px;">
+          <button type="button" aria-pressed="{{ isVi }}" onClick="{{ setVi }}" style="width: 38px; height: 30px; border: 0; background: {{ viBg }}; color: {{ viColor }}; font-size: 11px; letter-spacing: .1em; font-weight: 600; cursor: pointer;">VI</button>
+          <button type="button" aria-pressed="{{ isEn }}" onClick="{{ setEn }}" style="width: 38px; height: 30px; border: 0; background: {{ enBg }}; color: {{ enColor }}; font-size: 11px; letter-spacing: .1em; font-weight: 600; cursor: pointer;">EN</button>
+        </div>
+        <a href="Search.dc.html" aria-label="{{ t.search }}" style="width: 44px; height: 44px; display: grid; place-items: center;"><svg width="17" height="17" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="7" cy="7" r="5"></circle><path d="M11 11l4 4"></path></svg></a>
+        <a href="Account.dc.html" aria-label="Account" style="width: 44px; height: 44px; display: grid; place-items: center;"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="8" cy="5.5" r="3"></circle><path d="M2.5 15c.6-3 2.8-4.6 5.5-4.6s4.9 1.6 5.5 4.6"></path></svg></a>
+        <a href="Checkout.dc.html" aria-label="{{ t.cart }}" style="height: 44px; padding: 0 0 0 8px; display: flex; align-items: center; gap: 8px; text-transform: uppercase;"><sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}"><span>{{ t.cart }}</span></sc-if><span style="min-width: 22px; height: 22px; padding: 0 6px; display: grid; place-items: center; background: #27292D; color: #F4EFE5; font-size: 11px; border-radius: 11px;">0</span></a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- ============ LISTING: /blogs/news · /blogs/{blog} · /blogs/all/tagged/{tag} ============ -->
+    <sc-if value="{{ isList }}" hint-placeholder-val="{{ true }}">
+      <section id="top" data-screen-label="01 Blog · Hero" aria-labelledby="bl-h" style="padding: clamp(40px,5vw,72px) clamp(16px,4vw,64px) 0;">
+        <nav aria-label="Breadcrumb" style="display: flex; flex-wrap: wrap; gap: 10px; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #7C7365;">
+          <a href="Home.html" style-hover="color: #8E4B33;">{{ t.home }}</a><span aria-hidden="true">/</span>
+          <sc-if value="{{ hasSubCrumb }}" hint-placeholder-val="{{ false }}"><a href="#" onClick="{{ goAll }}" style-hover="color: #8E4B33;">Blog</a><span aria-hidden="true">/</span></sc-if>
+          <span style="color: #27292D;">{{ crumb }}</span>
+        </nav>
+        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 24px clamp(28px,4vw,64px); align-items: end; margin-top: clamp(32px,5vw,64px); padding-bottom: 24px; border-bottom: 1px solid #27292D;">
+          <div>
+            <div style="display: flex; align-items: center; gap: 14px; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #8E4B33;"><span style="width: 28px; height: 2px; background: #8E4B33;"></span><span>{{ eyebrow }}</span></div>
+            <h1 id="bl-h" style="margin: 20px 0 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: clamp(46px, 6.2vw, 100px); line-height: .98; letter-spacing: -.03em; text-wrap: balance;">{{ listTitle }}</h1>
+          </div>
+          <p style="margin: 0; max-width: 46ch; font-size: clamp(15px,1.15vw,17px); line-height: 1.7; color: #514B42; text-wrap: pretty;">{{ listIntro }}</p>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 14px 24px; padding: 18px 0;">
+          <div role="tablist" aria-label="{{ t.categories }}" style="display: flex; flex-wrap: wrap; gap: 8px;">
+            <sc-for list="{{ cats }}" as="c" hint-placeholder-count="6">
+              <a href="{{ c.href }}" onClick="{{ c.open }}" role="tab" aria-selected="{{ c.active }}" style="height: 40px; padding: 0 14px; display: inline-flex; align-items: center; gap: 10px; border: 1px solid #27292D; background: {{ c.bg }}; color: {{ c.fg }}; font-size: 13px; font-weight: 500; white-space: nowrap;" style-hover="background: #FFD35B; color: #27292D;">{{ c.label }}<span style="font-size: 10.5px; opacity: .75;">{{ c.count }}</span></a>
+            </sc-for>
+          </div>
+          <label style="position: relative; display: flex; align-items: center; flex: 0 1 280px; min-width: 200px;">
+            <span style="position: absolute; left: 0; color: #7C7365;" aria-hidden="true"><svg width="15" height="15" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5"><circle cx="7" cy="7" r="5"></circle><path d="M11 11l4 4"></path></svg></span>
+            <input type="search" value="{{ q }}" onChange="{{ onQ }}" placeholder="{{ t.searchPh }}" aria-label="{{ t.searchPh }}" style="width: 100%; height: 40px; padding: 0 0 0 26px; border: 0; border-bottom: 1px solid #27292D; background: transparent; font-size: 14px; outline: none;" />
+          </label>
+        </div>
+      </section>
+
+      <sc-if value="{{ hasFeatured }}" hint-placeholder-val="{{ true }}">
+        <section data-screen-label="02 Blog · Nổi bật" aria-label="{{ t.featured }}" style="padding: clamp(12px,2vw,24px) clamp(16px,4vw,64px) clamp(40px,5vw,72px);">
+          <article style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); background: #EAE3D5;">
+            <a href="{{ feat.href }}" onClick="{{ feat.open }}" aria-label="{{ feat.title }}" style="position: relative; display: block; min-height: clamp(280px, 32vw, 500px); overflow: hidden; background: #E2DACB;"><img src="{{ feat.img }}" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.2,.7,.2,1);" style-hover="transform: scale(1.03);" /></a>
+            <div style="padding: clamp(24px,3.6vw,56px); display: flex; flex-direction: column; gap: 18px;">
+              <div style="display: flex; flex-wrap: wrap; gap: 8px 16px; font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase;"><span style="color: #8E4B33; font-weight: 600;">{{ t.latest }} · {{ feat.cat }}</span><span style="color: #7C7365;">{{ feat.date }}</span></div>
+              <h2 style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: clamp(32px,3.6vw,54px); line-height: 1.04; letter-spacing: -.025em; text-wrap: balance;"><a href="{{ feat.href }}" onClick="{{ feat.open }}" style-hover="color: #8E4B33;">{{ feat.title }}</a></h2>
+              <p style="margin: 0; max-width: 52ch; font-size: 15.5px; line-height: 1.7; color: #514B42; text-wrap: pretty;">{{ feat.excerpt }}</p>
+              <div style="margin-top: auto; padding-top: 8px;"><a href="{{ feat.href }}" onClick="{{ feat.open }}" style="display: inline-flex; align-items: center; gap: 10px; height: 46px; padding: 0 22px; background: #27292D; color: #F4EFE5; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; font-weight: 500;" style-hover="background: #FFD35B; color: #27292D;">{{ t.read }} ↗</a></div>
+            </div>
+          </article>
+        </section>
+      </sc-if>
+
+      <sc-if value="{{ isJobs }}" hint-placeholder-val="{{ false }}">
+        <section data-screen-label="03 Blog · Vị trí tuyển dụng" aria-label="{{ t.openRoles }}" style="padding: clamp(12px,2vw,24px) clamp(16px,4vw,64px) clamp(56px,7vw,110px);">
+          <ul style="list-style: none; margin: 0; padding: 0; border-top: 1px solid #27292D;">
+            <sc-for list="{{ jobs }}" as="j" hint-placeholder-count="2">
+              <li style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 240px), 1fr)); gap: 12px 32px; align-items: center; padding: clamp(20px,2.4vw,32px) 0; border-bottom: 1px solid rgba(39,41,45,.2);">
+                <div style="display: flex; flex-direction: column; gap: 6px;"><span style="font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: #8E4B33; font-weight: 600;">{{ j.type }}</span><a href="{{ j.href }}" onClick="{{ j.open }}" style="font-family: Newsreader, Georgia, serif; font-size: clamp(28px,2.8vw,40px); line-height: 1.05; letter-spacing: -.02em;" style-hover="color: #8E4B33;">{{ j.role }}</a></div>
+                <div style="font-size: 14px; line-height: 1.6; color: #514B42;">{{ j.where }}</div>
+                <div style="display: flex; flex-wrap: wrap; justify-content: flex-end; align-items: center; gap: 10px 18px;"><span style="font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #7C7365;">{{ j.date }}</span><a href="{{ j.href }}" onClick="{{ j.open }}" style="display: inline-flex; align-items: center; height: 46px; padding: 0 22px; border: 1px solid #27292D; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; font-weight: 500;" style-hover="background: #27292D; color: #F4EFE5;">{{ t.viewRole }} ↗</a></div>
+              </li>
+            </sc-for>
+          </ul>
+        </section>
+      </sc-if>
+
+      <sc-if value="{{ showGrid }}" hint-placeholder-val="{{ true }}">
+        <section data-screen-label="03 Blog · Danh sách bài" aria-label="{{ t.allPosts }}" style="padding: 0 clamp(16px,4vw,64px) clamp(56px,7vw,110px);">
+          <div style="display: flex; justify-content: space-between; align-items: end; gap: 16px; flex-wrap: wrap; padding-bottom: 16px; margin-bottom: clamp(20px,2.4vw,32px); border-bottom: 1px solid rgba(39,41,45,.2); font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #7C7365;"><span>{{ gridLabel }}</span><span>{{ pageLabel }}</span></div>
+          <ul style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: clamp(32px,3vw,48px) clamp(16px,2vw,28px);">
+            <sc-for list="{{ grid }}" as="p" hint-placeholder-count="9">
+              <li><article style="display: flex; flex-direction: column; gap: 14px; height: 100%;">
+                <a href="{{ p.href }}" onClick="{{ p.open }}" aria-label="{{ p.title }}" style="display: block; aspect-ratio: 4/3; overflow: hidden; background: #E2DACB;"><img src="{{ p.img }}" alt="" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.2,.7,.2,1);" style-hover="transform: scale(1.04);" /></a>
+                <div style="display: flex; justify-content: space-between; gap: 12px; font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase;"><a href="{{ p.catHref }}" onClick="{{ p.catOpen }}" style="color: #8E4B33; font-weight: 600;" style-hover="text-decoration: underline;">{{ p.cat }}</a><span style="color: #7C7365;">{{ p.date }}</span></div>
+                <h3 style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: clamp(22px,1.8vw,27px); line-height: 1.15; letter-spacing: -.015em; text-wrap: balance;"><a href="{{ p.href }}" onClick="{{ p.open }}" style-hover="color: #8E4B33;">{{ p.title }}</a></h3>
+                <p style="margin: 0; font-size: 14px; line-height: 1.65; color: #514B42; text-wrap: pretty;">{{ p.excerpt }}</p>
+              </article></li>
+            </sc-for>
+          </ul>
+          <sc-if value="{{ hasPages }}" hint-placeholder-val="{{ true }}">
+            <nav aria-label="{{ t.pagination }}" style="display: flex; justify-content: center; align-items: center; gap: 6px; margin-top: clamp(40px,5vw,64px);">
+              <button type="button" onClick="{{ prevPage }}" disabled="{{ atFirst }}" aria-label="{{ t.prev }}" style="width: 44px; height: 44px; border: 1px solid rgba(39,41,45,.3); background: none; cursor: pointer; opacity: {{ prevOp }};">←</button>
+              <sc-for list="{{ pages }}" as="pg" hint-placeholder-count="3">
+                <button type="button" onClick="{{ pg.go }}" aria-current="{{ pg.current }}" style="width: 44px; height: 44px; border: 1px solid #27292D; background: {{ pg.bg }}; color: {{ pg.fg }}; font-size: 13px; font-weight: 500; cursor: pointer;">{{ pg.n }}</button>
+              </sc-for>
+              <button type="button" onClick="{{ nextPage }}" disabled="{{ atLast }}" aria-label="{{ t.next }}" style="width: 44px; height: 44px; border: 1px solid rgba(39,41,45,.3); background: none; cursor: pointer; opacity: {{ nextOp }};">→</button>
+            </nav>
+          </sc-if>
+        </section>
+      </sc-if>
+
+      <sc-if value="{{ isEmpty }}" hint-placeholder-val="{{ false }}">
+        <section style="padding: 0 clamp(16px,4vw,64px) clamp(56px,7vw,110px);">
+          <div style="display: grid; place-items: center; gap: 16px; min-height: 280px; border: 1px dashed rgba(39,41,45,.35); padding: 24px; text-align: center;"><p style="margin: 0; font-family: Newsreader, Georgia, serif; font-size: 26px;">{{ t.empty }}</p><button type="button" onClick="{{ clearQ }}" style="height: 44px; padding: 0 20px; border: 1px solid #27292D; background: none; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; cursor: pointer;" style-hover="background: #27292D; color: #F4EFE5;">{{ t.clear }}</button></div>
+        </section>
+      </sc-if>
+    </sc-if>
+
+    <!-- ============ ARTICLE /blogs/{blog}/{handle} ============ -->
+    <sc-if value="{{ isPost }}" hint-placeholder-val="{{ false }}">
+      <article aria-labelledby="po-h">
+        <header id="top" data-screen-label="01 Bài viết · Tiêu đề" style="padding: clamp(36px,5vw,64px) clamp(16px,4vw,64px) clamp(28px,3.6vw,48px);">
+          <nav aria-label="Breadcrumb" style="display: flex; flex-wrap: wrap; gap: 10px; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #7C7365;"><a href="Home.html" style-hover="color: #8E4B33;">{{ t.home }}</a><span aria-hidden="true">/</span><a href="#" onClick="{{ goAll }}" style-hover="color: #8E4B33;">Blog</a><span aria-hidden="true">/</span><a href="{{ po.catHref }}" onClick="{{ po.catOpen }}" style="color: #27292D;" style-hover="color: #8E4B33;">{{ po.cat }}</a></nav>
+          <div style="max-width: 980px; margin: clamp(36px,5vw,72px) auto 0; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 22px;">
+            <a href="{{ po.catHref }}" onClick="{{ po.catOpen }}" style="display: inline-flex; align-items: center; height: 30px; padding: 0 12px; background: #FFD35B; font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; font-weight: 600;" style-hover="background: #27292D; color: #F4EFE5;">{{ po.cat }}</a>
+            <h1 id="po-h" style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: clamp(40px, 5.2vw, 80px); line-height: 1.02; letter-spacing: -.03em; text-wrap: balance;">{{ po.title }}</h1>
+            <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: 8px 22px; font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: #7C7365;"><span>{{ t.writer }} <span style="color: #27292D; font-weight: 600;">SOUL</span></span><span>{{ po.date }}</span><span>{{ po.mins }} {{ t.minRead }}</span></div>
+          </div>
+        </header>
+
+        <figure data-screen-label="02 Bài viết · Ảnh bìa" style="margin: 0 clamp(16px,4vw,64px); aspect-ratio: 16/8; max-height: 720px; overflow: hidden; background: #E2DACB;"><img src="{{ po.img }}" alt="{{ po.title }}" style="width: 100%; height: 100%; object-fit: cover;" /></figure>
+
+        <div data-screen-label="03 Bài viết · Nội dung" style="display: flex; flex-wrap: wrap; align-items: flex-start; gap: 32px clamp(28px,5vw,80px); max-width: 1180px; margin: 0 auto; padding: clamp(40px,5vw,80px) clamp(16px,4vw,64px) clamp(40px,5vw,64px);">
+          <aside style="flex: 1 1 220px; max-width: 280px; align-self: stretch;">
+            <div style="position: sticky; top: 96px; display: flex; flex-direction: column; gap: 24px;">
+              <sc-if value="{{ po.hasToc }}" hint-placeholder-val="{{ false }}">
+                <nav aria-label="{{ t.toc }}"><div style="font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: #8E4B33; font-weight: 600; padding-bottom: 10px; border-bottom: 1px solid #27292D;">{{ t.toc }}</div>
+                  <ol style="list-style: none; margin: 0; padding: 0;"><sc-for list="{{ po.toc }}" as="h" hint-placeholder-count="3"><li><a href="{{ h.href }}" style="display: grid; grid-template-columns: 26px 1fr; padding: 10px 0; border-bottom: 1px solid rgba(39,41,45,.14); font-size: 13.5px; line-height: 1.45;" style-hover="color: #8E4B33;"><span style="font-size: 10.5px; color: #7C7365; padding-top: 2px;">{{ h.n }}</span>{{ h.text }}</a></li></sc-for></ol>
+                </nav>
+              </sc-if>
+              <div style="display: flex; flex-direction: column; gap: 10px;"><div style="font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: #7C7365;">Tags</div>
+                <div style="display: flex; flex-wrap: wrap; gap: 6px;"><sc-for list="{{ po.tags }}" as="tg" hint-placeholder-count="2"><a href="{{ tg.href }}" onClick="{{ tg.open }}" style="height: 30px; padding: 0 10px; display: inline-flex; align-items: center; border: 1px solid rgba(39,41,45,.35); font-size: 12px;" style-hover="background: #27292D; color: #F4EFE5; border-color: #27292D;">#{{ tg.label }}</a></sc-for></div>
+              </div>
+            </div>
+          </aside>
+
+          <div style="flex: 999 1 420px; min-width: 0; max-width: 700px;">
+            <p style="margin: 0 0 32px; font-family: Newsreader, Georgia, serif; font-size: clamp(22px,2vw,28px); line-height: 1.35; letter-spacing: -.01em; text-wrap: pretty;">{{ po.excerpt }}</p>
+            <sc-for list="{{ po.body }}" as="bk" hint-placeholder-count="3">
+              <sc-if value="{{ bk.isH }}" hint-placeholder-val="{{ false }}"><h2 id="{{ bk.id }}" style="margin: 44px 0 16px; padding-top: 18px; border-top: 1px solid #27292D; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: clamp(28px,2.6vw,38px); line-height: 1.08; letter-spacing: -.02em;">{{ bk.text }}</h2></sc-if>
+              <sc-if value="{{ bk.isP }}" hint-placeholder-val="{{ true }}"><p style="margin: 0 0 18px; font-size: 16px; line-height: 1.8; color: #3A3832; text-wrap: pretty;">{{ bk.text }}</p></sc-if>
+              <sc-if value="{{ bk.isList }}" hint-placeholder-val="{{ false }}"><ul style="margin: 0 0 22px; padding: 0; list-style: none; border-top: 1px solid rgba(39,41,45,.14);"><sc-for list="{{ bk.items }}" as="li" hint-placeholder-count="3"><li style="display: grid; grid-template-columns: 22px 1fr; padding: 11px 0; border-bottom: 1px solid rgba(39,41,45,.14); font-size: 15.5px; line-height: 1.6;"><span style="color: #8E4B33;" aria-hidden="true">—</span><span>{{ li.text }}</span></li></sc-for></ul></sc-if>
+              <sc-if value="{{ bk.isFacts }}" hint-placeholder-val="{{ false }}"><dl style="margin: 0 0 28px; background: #EAE3D5; padding: clamp(18px,2.2vw,28px);"><sc-for list="{{ bk.items }}" as="f" hint-placeholder-count="4"><div style="display: grid; grid-template-columns: minmax(110px, .38fr) 1fr; gap: 16px; padding: 11px 0; border-bottom: 1px solid rgba(39,41,45,.16);"><dt style="font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: #7C7365; padding-top: 3px;">{{ f.k }}</dt><dd style="margin: 0; font-size: 15px; line-height: 1.55;">{{ f.v }}</dd></div></sc-for></dl></sc-if>
+              <sc-if value="{{ bk.isSteps }}" hint-placeholder-val="{{ false }}"><ol style="margin: 0 0 28px; padding: 0; list-style: none; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 10px;"><sc-for list="{{ bk.items }}" as="st" hint-placeholder-count="4"><li style="background: #EAE3D5; padding: 20px 22px 22px; display: flex; flex-direction: column; gap: 10px;"><span style="font-family: Newsreader, Georgia, serif; font-size: 40px; line-height: 1; color: #8E4B33;">{{ st.n }}</span><span style="font-size: 15px; font-weight: 600;">{{ st.k }}</span><span style="font-size: 14px; line-height: 1.6; color: #514B42;">{{ st.v }}</span></li></sc-for></ol></sc-if>
+              <sc-if value="{{ bk.isApply }}" hint-placeholder-val="{{ false }}"><div style="margin: 8px 0 28px; background: #27292D; color: #F4EFE5; padding: clamp(22px,2.6vw,36px); display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 18px;"><div><div style="font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: #FFD35B;">{{ t.apply }}</div><div style="margin-top: 8px; font-family: Newsreader, Georgia, serif; font-size: clamp(22px,2vw,28px); line-height: 1.2;">{{ bk.text }}</div></div><a href="{{ bk.href }}" style="display: inline-flex; align-items: center; height: 46px; padding: 0 22px; background: #FFD35B; color: #27292D; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; font-weight: 600;" style-hover="background: #F4EFE5;">{{ t.sendCv }} ↗</a></div></sc-if>
+              <sc-if value="{{ bk.isNote }}" hint-placeholder-val="{{ false }}"><div style="margin: 8px 0 24px; padding: 18px 20px; border: 1px dashed rgba(39,41,45,.4); font-size: 13.5px; line-height: 1.6; color: #514B42;">{{ bk.text }}</div></sc-if>
+            </sc-for>
+          </div>
+        </div>
+
+        <nav data-screen-label="04 Bài viết · Bài trước / sau" aria-label="{{ t.postNav }}" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); gap: 10px; padding: 0 clamp(16px,4vw,64px);">
+          <sc-for list="{{ adj }}" as="a" hint-placeholder-count="2">
+            <a href="{{ a.href }}" onClick="{{ a.open }}" style="display: flex; flex-direction: column; gap: 10px; padding: clamp(20px,2.4vw,32px); border: 1px solid #27292D; text-align: {{ a.align }};" style-hover="background: #FFD35B;"><span style="font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: #7C7365;">{{ a.label }}</span><span style="font-family: Newsreader, Georgia, serif; font-size: clamp(20px,1.7vw,26px); line-height: 1.2;">{{ a.title }}</span></a>
+          </sc-for>
+        </nav>
+
+        <section data-screen-label="05 Bài viết · Liên quan" aria-labelledby="rl-h" style="padding: clamp(56px,7vw,110px) clamp(16px,4vw,64px);">
+          <div style="display: flex; justify-content: space-between; align-items: end; gap: 20px; flex-wrap: wrap; padding-bottom: 22px; border-bottom: 1px solid #27292D; margin-bottom: clamp(24px,3vw,40px);">
+            <h2 id="rl-h" style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: clamp(30px,3.4vw,48px); line-height: 1.02; letter-spacing: -.025em;">{{ t.more }} {{ po.cat }}</h2>
+            <a href="{{ po.catHref }}" onClick="{{ po.catOpen }}" style="font-size: 12px; letter-spacing: .12em; text-transform: uppercase; font-weight: 500; text-decoration: underline; text-underline-offset: 6px; text-decoration-color: rgba(39,41,45,.3);" style-hover="text-decoration-color: #27292D;">{{ t.seeAll }} ↗</a>
+          </div>
+          <ul style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 300px), 1fr)); gap: 32px clamp(16px,2vw,28px);">
+            <sc-for list="{{ related }}" as="p" hint-placeholder-count="3">
+              <li><article style="display: flex; flex-direction: column; gap: 14px;">
+                <a href="{{ p.href }}" onClick="{{ p.open }}" aria-label="{{ p.title }}" style="display: block; aspect-ratio: 4/3; overflow: hidden; background: #E2DACB;"><img src="{{ p.img }}" alt="" loading="lazy" style="width: 100%; height: 100%; object-fit: cover; transition: transform .6s cubic-bezier(.2,.7,.2,1);" style-hover="transform: scale(1.04);" /></a>
+                <div style="display: flex; justify-content: space-between; gap: 12px; font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase;"><span style="color: #8E4B33; font-weight: 600;">{{ p.cat }}</span><span style="color: #7C7365;">{{ p.date }}</span></div>
+                <h3 style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: clamp(22px,1.8vw,27px); line-height: 1.15; letter-spacing: -.015em; text-wrap: balance;"><a href="{{ p.href }}" onClick="{{ p.open }}" style-hover="color: #8E4B33;">{{ p.title }}</a></h3>
+              </article></li>
+            </sc-for>
+          </ul>
+        </section>
+      </article>
+    </sc-if>
+  </main>
+
+  <footer id="footer" data-screen-label="Footer" style="background: #27292D; color: #F4EFE5; padding: clamp(48px,6vw,80px) clamp(16px,4vw,64px) 32px;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr)); gap: 36px 28px;">
+      <div><img src="assets/soul-logo-full-yellow.svg" alt="SOUL Fine Robusta" style="width: 120px; height: auto;" /></div>
+      <sc-for list="{{ footerCols }}" as="fc" hint-placeholder-count="4">
+        <div><div style="font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: #FFD35B; margin-bottom: 14px;">{{ fc.title }}</div>
+          <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; font-size: 13.5px;"><sc-for list="{{ fc.links }}" as="fl" hint-placeholder-count="3"><li><a href="{{ fl.href }}" style="color: rgba(244,239,229,.85);" style-hover="color: #FFD35B;">{{ fl.label }}</a></li></sc-for></ul></div>
+      </sc-for>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; margin-top: clamp(40px,5vw,64px); padding-top: 20px; border-top: 1px solid rgba(244,239,229,.18); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: rgba(244,239,229,.7);"><span>{{ t.tagline }}</span><span>© 2026 SOUL Fine Robusta</span></div>
+  </footer>
+
+  <sc-if value="{{ mobileOpen }}" hint-placeholder-val="{{ false }}">
+    <div role="dialog" aria-modal="true" aria-label="{{ t.menu }}" style="position: fixed; inset: 0; z-index: 100; background: #F4EFE5; display: flex; flex-direction: column; overflow-y: auto;">
+      <div style="display: flex; justify-content: space-between; align-items: center; height: 66px; padding: 0 16px; border-bottom: 1px solid rgba(39,41,45,.14);"><img src="assets/soul-wordmark-ink.svg" alt="SOUL" style="height: 15px; width: auto;" /><button type="button" aria-label="{{ t.close }}" onClick="{{ closeMobile }}" style="width: 44px; height: 44px; background: none; border: 0; font-size: 24px; cursor: pointer;">×</button></div>
+      <nav aria-label="Mobile" style="padding: 8px 16px 32px; display: flex; flex-direction: column;"><sc-for list="{{ nav }}" as="n" hint-placeholder-count="7"><a href="{{ n.href }}" onClick="{{ n.click }}" style="display: flex; align-items: center; min-height: 60px; border-bottom: 1px solid rgba(39,41,45,.14); font-family: Newsreader, Georgia, serif; font-size: 28px;">{{ n.label }}</a></sc-for></nav>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;lang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;vi&quot;,&quot;en&quot;],&quot;default&quot;:&quot;vi&quot;,&quot;tsType&quot;:&quot;'vi' | 'en'&quot;,&quot;section&quot;:&quot;Content&quot;},&quot;view&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;all&quot;,&quot;c/news&quot;,&quot;c/soul-megazine&quot;,&quot;c/how-to-make-coffee&quot;,&quot;c/recruitment&quot;,&quot;c/soul-achievements&quot;,&quot;t/awards&quot;,&quot;p/coffee-drip-bag&quot;,&quot;p/kenya-karimikui&quot;,&quot;p/tuyen-dung-vi-tri-truong-cua-hang-soul-specialty-coffee&quot;],&quot;default&quot;:&quot;all&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Page&quot;}}">
+const I = 'images/';
+const CATS = {
+  news: ['Tin tức', 'Latest Post', 'Tin mới nhất từ Soul: mùa vụ, giải thưởng, sự kiện và những dòng cà phê đặc sản vừa về.', 'The latest from Soul: harvests, awards, events and newly arrived specialty coffees.'],
+  'soul-megazine': ['Soul Megazine', 'Soul Megazine', 'Ấn phẩm thường niên và những bài viết dài về con người, vùng đất và hành trình Fine Robusta.', 'Our annual issues and long reads on the people, places and journey behind Fine Robusta.'],
+  'how-to-make-coffee': ['Hướng dẫn pha', 'How to Make Coffee', 'Công thức pha chuẩn Soul cho từng dụng cụ: phin, pour over, espresso, cold brew và túi lọc.', 'Soul brewing guides for every method: phin, pour over, espresso, cold brew and drip bag.'],
+  recruitment: ['Tuyển dụng', 'Recruitment', 'Cùng Soul mang cà phê Việt đến gần hơn với mọi người. Các vị trí đang mở tại hệ thống cửa hàng.', 'Help Soul bring Vietnamese coffee closer to people. Open roles across our stores.'],
+  'soul-achievements': ['Thành tựu', 'Soul Achievements', 'Giải thưởng, chứng nhận và những cột mốc Soul cùng bà con nông dân đạt được.', 'Awards, certifications and milestones achieved alongside our farming partners.']
+};
+const TAGS = { fr: 'vietnam-fine-robusta', aw: 'awards', nc: 'new-crop', br: 'brewing', sp: 'specialty', ev: 'events', so: 'soulful', dl: 'dak-lak', ca: 'careers' };
+// [handle, date, cats, titleVI, titleEN, img, tags, excerptVI, excerptEN, bodyKey]
+const P = [
+  ['coffee-drip-bag', '2026-08-17', 'how-to-make-coffee', 'Hướng dẫn pha cà phê túi lọc chuẩn Soul', 'How to brew Soul Drip Bag coffee', '02-shop/Pha-thu-cong.png', 'br', 'Chỉ cần một chiếc cốc và nước nóng, bạn đã có một tách Fine Robusta thơm ngon trong vài phút, ở bất cứ đâu.', 'With just a cup and hot water, enjoy a delicious cup of Fine Robusta in minutes, anywhere.', 'drip'],
+  ['huong-dan-pha-pour-over-liberica-chuan-soul', '2026-07-03', 'how-to-make-coffee', 'Hướng dẫn pha Pour Over Liberica chuẩn Soul', 'How to brew Liberica pour over, the Soul way', '02-featured/gb_sfr26_libe.jpg', 'br,sp', 'Công thức pour over giúp Liberica bộc lộ tầng hương trái cây chín và độ ngọt đặc trưng.', 'A pour-over recipe that lets Liberica show its ripe-fruit notes and signature sweetness.'],
+  ['soul-fine-robusta-dat-top-1-va-top-3-robusta-tai-vietnam-coffee-producer-competition-2026', '2026-06-29', 'news', 'Soul Fine Robusta đạt Top 1 & Top 3 Robusta tại Vietnam Coffee Producer Competition 2026', 'Soul Fine Robusta wins Top 1 & Top 3 Robusta at Vietnam Coffee Producer Competition 2026', '03c-awards/web/VCPC2026.jpg', 'aw,fr', 'Thêm một mùa thi đáng nhớ: hai mẫu Fine Robusta của Soul cùng góp mặt trong nhóm dẫn đầu hạng mục Robusta.', 'Another memorable season: two Soul Fine Robusta lots placed at the top of the Robusta category.'],
+  ['soul-fine-robusta-2026-issue-new-crop-26-journey', '2026-04-23', 'soul-megazine', "2026 Issue: New Crop'26 Journey", "2026 Issue: New Crop'26 Journey", '04-soulful/Soulful_vuong.png', 'nc,so', 'Ấn phẩm 2026 theo chân mùa vụ mới, từ vườn cà đến bộ sưu tập Soulful Collection ’26.', 'Our 2026 issue follows the new harvest from farm to the Soulful Collection ’26.'],
+  ['kenya-karimikui', '2026-03-27', 'news', 'Kenya Karimikui: biểu hiện trọn vẹn của Kirinyaga', 'Kenya Karimikui: a full expression of Kirinyaga', '04-soulful/Soulful-Thom.jpg', 'sp', 'Lô cà phê sơ chế ướt từ vùng cao Kirinyaga, với giống SL28, SL34 và Ruiru 11.', 'A washed lot from highland Kirinyaga, featuring SL28, SL34 and Ruiru 11.', 'kenya'],
+  ['colombia-sidra-finca-lumbrera', '2026-03-27', 'news', 'Colombia Sidra – Finca Lumbrera: tầng hương bản sắc miền Nam Huila', 'Colombia Sidra – Finca Lumbrera: the layered character of southern Huila', '04-soulful/Soulful-Cay.jpg', 'sp', 'Giống Sidra ở độ cao 1.800 m, sơ chế Anaerobic Washed cho hương gừng, cam quýt và hoa.', 'Sidra grown at 1,800 m, anaerobic washed for notes of ginger, citrus and florals.', 'colombia'],
+  ['nicaragua-mierisch-bourbon-los-placeres-funky', '2026-03-27', 'news', 'Nicaragua Mierisch Bourbon: dấu ấn đậm từ Funky Natural', 'Nicaragua Mierisch Bourbon: the bold mark of a Funky Natural', '04-soulful/Soulful-Nong.jpg', 'sp', 'Bourbon từ Jinotega với phương pháp Funky Natural: rượu trái cây nhiệt đới, cherry và nho khô.', 'Bourbon from Jinotega, Funky Natural process: tropical fruit liqueur, cherry and raisin.', 'nicaragua'],
+  ['ethiopia-oro-yeast-idido-dau-an-huong-vi-tu-vung-cao-yirgacheffe', '2026-03-27', 'news', 'Ethiopia Oro Yeast Idido: dấu ấn hương vị từ vùng cao Yirgacheffe', 'Ethiopia Oro Yeast Idido: a flavor signature from highland Yirgacheffe', '04-soulful/Soulful-Ngot.jpg', 'sp', 'Giống bản địa ở độ cao gần 2.000 m, lên men với men Oro trong ba ngày.', 'Heirloom varieties near 2,000 m, fermented with Oro yeast for three days.', 'ethiopia'],
+  ['soul-first-sip-khi-mot-hat-ca-phe-mo-ra-nhieu-cach-ke-chuyen', '2026-03-27', 'news', 'Soul First Sip: khi một hạt cà phê mở ra nhiều cách kể chuyện', 'Soul First Sip: one bean, many ways to tell its story', '02-featured/espresso_fine_ro.jpg', 'fr', 'Khám phá Fine Robusta qua ba cách chạm: cold brew, phin và milk base.', 'Discover Fine Robusta through three touchpoints: cold brew, phin and milk base.'],
+  ['soul-fine-robusta-toa-dam-dinh-huong-phat-trien-fine-robusta-viet-nam', '2025-11-18', 'news', 'Tọa đàm định hướng phát triển Fine Robusta Việt Nam', 'Roundtable on the future of Vietnamese Fine Robusta', '03b-why-soul/web/why-cupping.jpg', 'fr,ev', 'Nhà sản xuất, chuyên gia và đối tác cùng bàn về chất lượng, tiêu chuẩn và con đường đưa Fine Robusta đi xa hơn.', 'Producers, experts and partners discuss quality, standards and the path forward for Fine Robusta.'],
+  ['soul-fine-robusta-vinh-du-dat-top-1-liberica-top-10-robusta-tai-sout', '2025-10-10', 'news', 'Soul Fine Robusta đạt Top 1 Liberica & Top 10 Robusta tại SEAGCC 2025', 'Soul Fine Robusta wins Top 1 Liberica & Top 10 Robusta at SEAGCC 2025', '03c-awards/web/award-photo-1.jpg', 'aw', 'Tại cuộc thi cà phê nhân xanh Đông Nam Á, Soul dẫn đầu hạng mục Liberica.', 'At the Southeast Asia Green Coffee Competition, Soul topped the Liberica category.'],
+  ['soul-fine-robusta-ban-sac-moi-tu-giong-ca-tr', '2025-09-24', 'news', 'Bản sắc mới từ giống cà TR', 'A new identity from the TR variety', '03b-why-soul/web/why-fine-robusta.jpg', 'fr', 'Giống cà TR và những gì nó mở ra cho hương vị Robusta Việt Nam.', 'The TR variety and what it opens up for the flavor of Vietnamese Robusta.'],
+  ['soul-fine-robusta-vinh-du-dat-top-1-top-7-20-tai-vietnam-coffee-pro', '2025-07-15', 'news,soul-achievements', 'Soul Fine Robusta đạt Top 1, 7 & 20 tại Vietnam Coffee Producer Competition 2025', 'Soul Fine Robusta places Top 1, 7 & 20 at Vietnam Coffee Producer Competition 2025', '03c-awards/web/Top1Ro-Soulfine.jpg', 'aw,fr', 'Ba mẫu cà phê của Soul cùng góp mặt trên bảng xếp hạng nhà sản xuất cà phê Việt Nam 2025.', 'Three Soul lots ranked at Vietnam’s 2025 coffee producer competition.'],
+  ['soul-fine-robusta-top-5-cuoc-thi-ca-phe-dac-san-viet-nam-vietnam-a', '2025-05-11', 'news,soul-achievements', 'Soul Fine Robusta lọt Top 5 Vietnam Amazing Cup 2025', 'Soul Fine Robusta named Top 5 at Vietnam Amazing Cup 2025', '03c-awards/web/cert-CPDS2025.jpg', 'aw', 'Fine Robusta của Soul vào nhóm năm mẫu cao điểm nhất tại cuộc thi cà phê đặc sản Việt Nam.', 'Soul Fine Robusta ranked among the top five at Vietnam’s specialty coffee competition.'],
+  ['mua-vu-ca-phe-new-crop-2025-nhung-cau-chuyen-moi-tu-hat-ca-quen-thu', '2025-05-08', 'news', 'Mùa vụ New Crop 2025: những câu chuyện mới từ hạt cà quen thuộc', 'New Crop 2025: new stories from a familiar bean', '03-why-soul-album/SFR5.jpg', 'nc,fr', 'Mùa thu hoạch 2025 mang đến những lô Fine Robusta mới cùng những thử nghiệm sơ chế.', 'The 2025 harvest brings new Fine Robusta lots and processing experiments.'],
+  ['soul-fine-robusta-2025-issue-new-crop-25-journey', '2025-04-24', 'news,soul-megazine', "2025 Issue: New Crop'25 Journey", "2025 Issue: New Crop'25 Journey", '03-why-soul-album/SFR6.jpg', 'nc,so', 'Ấn phẩm 2025 ghi lại hành trình mùa vụ, từ vườn cà Buôn Ma Thuột đến tách cà phê.', 'Our 2025 issue traces the harvest journey from Buon Ma Thuot farms to the cup.'],
+  ['soul-recap-tasting-cupping-soul-fine-robusta-new-crop-24-25', '2025-03-21', 'news', 'Soul Recap: Tasting & Cupping New Crop 24/25', 'Soul Recap: Tasting & Cupping New Crop 24/25', '03-why-soul-album/SFR7.jpg', 'nc,ev', 'Nhìn lại buổi thử nếm và cupping các lô Fine Robusta mùa vụ 24/25.', 'A look back at our tasting and cupping of the 24/25 Fine Robusta lots.'],
+  ['tri-thuc-trong-va-che-bien-ca-phe-dak-lak-chinh-thuc-duoc-ghi-danh-vao', '2025-03-12', 'news', 'Tri thức trồng và chế biến cà phê Đắk Lắk được ghi danh Di sản văn hóa phi vật thể quốc gia', 'Dak Lak’s coffee cultivation and processing knowledge named National Intangible Cultural Heritage', '03-why-soul-album/IMG_3779.png', 'dl', 'Một cột mốc cho vùng đất cà phê: tri thức canh tác và chế biến của Đắk Lắk chính thức được công nhận.', 'A milestone for coffee country: Dak Lak’s cultivation and processing knowledge is officially recognized.', null, 'the-knowledge-of-coffee-cultivation-and-processing-in-dak-lak-official'],
+  ['khoi-dong-chuoi-workshop-fine-robusta-le-hoi-ca-phe-buon-ma-thuot-20', '2025-03-02', 'news', 'Khởi động chuỗi Workshop Fine Robusta tại Lễ hội Cà phê Buôn Ma Thuột 2025', 'Kick-off: Fine Robusta Workshop Series at Buon Ma Thuot Coffee Festival 2025', '05-solutions/DSCF9134_edited.jpg', 'ev,fr', 'Chuỗi workshop chia sẻ về Fine Robusta, từ sơ chế đến pha chế, dành cho cộng đồng yêu cà phê.', 'A workshop series on Fine Robusta, from processing to brewing, for the coffee community.', null, 'kick-off-fine-robusta-workshop-the-buon-ma-thuot-coffee-festival-20'],
+  ['soul-fine-robusta-dong-hanh-cung-le-hoi-ca-phe-buon-ma-thuot-2025', '2025-02-17', 'news', 'Soul Fine Robusta đồng hành cùng Lễ hội Cà phê Buôn Ma Thuột 2025', 'Soul Fine Robusta at the Buon Ma Thuot Coffee Festival 2025', 'images-spaces-bmt', 'ev,dl', 'Soul góp mặt tại lễ hội cà phê lớn nhất Tây Nguyên, nơi thương hiệu bắt đầu.', 'Soul joins the Central Highlands’ largest coffee festival, in the city where we began.'],
+  ['tong-ket-hanh-trinh-uom-hat-hy-vong-dong-hanh-cung-ba-con-tay-ngu', '2025-01-10', 'soul-achievements', 'Tổng kết hành trình “Ươm hạt hy vọng” cùng bà con Tây Nguyên', 'Wrapping up “Sowing Seeds of Hope” with Central Highlands communities', '03b-why-soul/web/why-fermentation.jpg', 'dl', 'Nhìn lại chặng đường đồng hành cùng bà con nông dân Tây Nguyên trong chương trình “Ươm hạt hy vọng”.', 'Looking back on our journey with Central Highlands farmers through “Sowing Seeds of Hope”.'],
+  ['huong-dan-pha-espresso-chuan-soul', '2025-01-02', 'how-to-make-coffee', 'Hướng dẫn pha Espresso chuẩn Soul', 'How to pull an espresso, the Soul way', '02-shop/Espresso.jpg', 'br', 'Thông số và các bước để chiết xuất một shot Fine Robusta cân bằng, đậm vị.', 'Parameters and steps for a balanced, full-bodied Fine Robusta shot.'],
+  ['huong-dan-pha-pour-over-chuan-soul', '2025-01-02', 'how-to-make-coffee', 'Hướng dẫn pha Pour Over Fine Robusta chuẩn Soul', 'How to brew Fine Robusta pour over, the Soul way', '02-shop/Filter.jpg', 'br,fr', 'Pour over giúp Fine Robusta bộc lộ sự sạch, ngọt và tầng hương rõ ràng.', 'Pour over brings out Fine Robusta’s clarity, sweetness and defined notes.'],
+  ['huong-dan-pha-cold-brew-chuan-soul', '2025-01-02', 'how-to-make-coffee', 'Hướng dẫn pha Cold Brew chuẩn Soul', 'How to make cold brew, the Soul way', '02-shop/Items-Binh-ngam-Coldbrew-3.jpg', 'br', 'Ủ lạnh chậm rãi cho một ly cà phê mượt, ngọt và ít đắng.', 'Slow cold steeping for a smooth, sweet, low-bitterness cup.'],
+  ['wrapped-up-2024', '2024-12-31', 'news', 'Wrapped up 2024', 'Wrapped up 2024', '01-hero/SOUL2024_DSF8608_edited.jpg', 'fr', 'Một năm nhìn lại: những mùa vụ, giải thưởng và người bạn đồng hành của Soul.', 'A year in review: Soul’s harvests, awards and the people who joined us.'],
+  ['issue-2024-it-s-the-holiday-season', '2024-12-24', 'soul-megazine', '2024 Issue: It’s the holiday season', '2024 Issue: It’s the holiday season', '02-shop/CA-PHE-RANG.jpg', 'so', 'Ấn phẩm mùa lễ hội 2024 với những gợi ý quà tặng cà phê Việt.', 'Our 2024 holiday issue, with Vietnamese coffee gift ideas.'],
+  ['bao-dak-lak-robusta-viet-nam-doi-moi-de-vuon-tam', '2024-09-20', 'soul-achievements', 'Báo Đắk Lắk: Robusta Việt Nam đổi mới để vươn tầm', 'Dak Lak Newspaper: Vietnamese Robusta innovates to rise', '03c-awards/web/cert-CPDC2025.jpg', 'dl,fr', 'Báo Đắk Lắk viết về hành trình nâng chất Robusta Việt và vai trò của Soul.', 'Dak Lak Newspaper on the effort to elevate Vietnamese Robusta and Soul’s part in it.'],
+  ['hang-5-trong-top-10-60-mau-tu-6-quoc-gia-tai-seagcc', '2024-09-20', 'soul-achievements', 'Hạng 5 trong Top 10 trên 60 mẫu từ 6 quốc gia tại SEAGCC', 'Fifth place in the Top 10 among 60 samples from 6 countries at SEAGCC', '03c-awards/web/award-photo-2.jpg', 'aw', 'Fine Robusta của Soul xếp hạng 5 tại cuộc thi cà phê nhân xanh Đông Nam Á.', 'Soul Fine Robusta ranked fifth at the Southeast Asia Green Coffee Competition.'],
+  ['fundraising-edition', '2024-08-07', 'news', 'Fundraising Edition', 'Fundraising Edition', '04-soulful/Soulful_Cover-ngang.jpg', 'so', 'Phiên bản đặc biệt gây quỹ, mỗi túi cà phê góp phần cho cộng đồng.', 'A special fundraising edition: every bag gives back to the community.'],
+  ['tam-hon-ly-ca-phe-ngon-bat-dau-tu-nhung-hat-giong-nho-be', '2024-05-06', 'soul-megazine', 'Tâm hồn ly cà phê ngon bắt đầu từ những hạt giống nhỏ bé', 'The soul of a good cup begins with a tiny seed', '02-shop/Nhan-xanh.jpg', 'fr', 'Câu chuyện về giống cây, vườn ươm và sự kiên nhẫn đằng sau một ly cà phê ngon.', 'On seedlings, nurseries and the patience behind a good cup.'],
+  ['mua-vu-ca-phe-new-crop-2024-soulful-fine-robusta-vietnam', '2024-04-10', 'news', 'Mùa vụ New Crop 2024 – Soulful Fine Robusta Vietnam', 'New Crop 2024 – Soulful Fine Robusta Vietnam', '03-why-soul-album/SFR4.jpg', 'nc,so', 'Mùa vụ 2024 và những dòng Soulful Fine Robusta đầu tiên của năm.', 'The 2024 harvest and the year’s first Soulful Fine Robusta lots.'],
+  ['crafted-by-vietnamese-soul-made-with-vietnamese-ingredients-by-the', '2023-12-10', 'soul-megazine', 'Crafted by Vietnamese Soul', 'Crafted by Vietnamese Soul', '02-featured/phin_finero.jpg', 'fr', 'Làm từ nguyên liệu Việt, bởi người Việt: tinh thần đứng sau mỗi sản phẩm Soul.', 'Made with Vietnamese ingredients, by Vietnamese hands: the spirit behind every Soul product.'],
+  ['huong-dan-pha-mot-ca-phe-phin-chuan-soul', '2023-06-19', 'how-to-make-coffee', 'Hướng dẫn pha cà phê phin chuẩn Soul', 'How to brew phin coffee, the Soul way', '02-shop/Phin.jpg', 'br', 'Cách pha phin truyền thống với Fine Robusta: chậm, đậm và tròn vị.', 'Traditional phin brewing with Fine Robusta: slow, bold and rounded.'],
+  ['soul-specialty-coffee-roastery-the-fine-robusta-vietnam-journey-from', '2023-05-20', 'soul-megazine', 'Soul Roastery: hành trình Fine Robusta từ local đến global', 'Soul Roastery: the Fine Robusta journey from local to global', '05-solutions/1789033571781_bag-sewing.jpg', 'fr', 'Từ xưởng rang ở Buôn Ma Thuột, Fine Robusta Việt bắt đầu bước ra thế giới.', 'From our Buon Ma Thuot roastery, Vietnamese Fine Robusta steps onto the world stage.'],
+  ['buon-ma-thuot-huong-cao-nguyen-con-mai-tham-duom-tren-doi-moi', '2023-04-15', 'soul-megazine', 'Buôn Ma Thuột – hương cao nguyên còn mãi thắm đượm trên đôi môi', 'Buon Ma Thuot – the taste of the highlands that lingers', '06-spaces/Soul-BMT.jpg', 'dl', 'Một lá thư tình gửi Buôn Ma Thuột, thủ phủ cà phê và quê nhà của Soul.', 'A love letter to Buon Ma Thuot, coffee capital and Soul’s home.'],
+  ['hanh-trinh-4-nam-theo-duoi-fine-robusta-ca-phe-dac-san-viet', '2022-08-10', 'soul-megazine', 'Hành trình 4 năm theo đuổi Fine Robusta – cà phê đặc sản Việt', 'Four years chasing Fine Robusta – Vietnamese specialty coffee', '03-why-soul-album/SFR4.jpg', 'fr', 'Bốn năm đầu tiên của Soul: thử, sai và tin vào tiềm năng của Robusta Việt.', 'Soul’s first four years: trial, error and belief in Vietnamese Robusta.'],
+  ['holiday-special-mua-ket-noi-mua-nhan-gui-yeu-thuong', '2022-12-24', 'news', 'Holiday Special: mùa kết nối, mùa nhận gửi yêu thương', 'Holiday Special: a season of connection and giving', '02-featured/premium_coffee_1st_thumbnail.jpg', 'so', 'Những hộp quà cà phê cho mùa lễ, để gửi trao yêu thương.', 'Coffee gift boxes for the holidays, made for sharing.'],
+  ['tuyen-dung-vi-tri-truong-cua-hang-soul-specialty-coffee', '2026-07-08', 'recruitment', 'Tuyển dụng: Store Manager – Cửa hàng trưởng', 'Hiring: Store Manager', '06-spaces/Soul-HN.jpg', 'ca', 'Soul Specialty Coffee tìm Cửa hàng trưởng cho hệ thống cửa hàng trên toàn quốc.', 'Soul Specialty Coffee is hiring Store Managers across our stores.', 'sm'],
+  ['tuyen-dung-vi-tri-barista', '2026-07-08', 'recruitment', 'Tuyển dụng: Barista Full-time', 'Hiring: Full-time Barista', '06-spaces/Soul-SG.jpg', 'ca', 'Gia nhập đội ngũ quầy bar Soul, nơi mỗi tách cà phê kể một câu chuyện Việt.', 'Join the Soul bar team, where every cup tells a Vietnamese story.', 'ba']
+].map(r => ({ h: r[0], d: r[1], cats: r[2].split(','), title: [r[3], r[4]], img: r[5] === 'images-spaces-bmt' ? I + '06-spaces/Soul-BMT.jpg' : I + r[5], tags: r[6].split(',').map(k => TAGS[k]), ex: [r[7], r[8]], body: r[9] || null, alt: r[10] || null }))
+  .sort((a, b) => b.d.localeCompare(a.d));
+
+const STORES = ['Bà Nà Hills', 'Buôn Ma Thuột', 'Hà Nội', 'Đà Nẵng', 'Sài Gòn'];
+const origin = (o) => [{ type: 'h', text: ['Thông tin lô', 'Lot details'] }, { type: 'facts', items: o }, { type: 'note', text: ['Phần câu chuyện vùng trồng và ghi chú hương vị đầy đủ sẽ được chuyển nguyên văn từ bài gốc.', 'The full origin story and tasting notes will be migrated verbatim from the original post.'] }];
+const F = (vi, en, v) => ({ k: [vi, en], v });
+const BODY = {
+  drip: [
+    { type: 'p', text: ['Mỗi túi lọc chứa Fine Robusta được Soul chọn lọc và rang phù hợp để giữ lại đặc trưng rõ ràng, cân bằng và dễ thưởng thức. Dù ở nhà, văn phòng hay trên đường, Drip Bag giúp bạn có một tách cà phê Việt gọn nhẹ và gần gũi nhất.', 'Each drip bag contains carefully selected Fine Robusta, roasted to highlight its distinctive, balanced and approachable profile. At home, at the office or on the go, a Drip Bag makes Vietnamese coffee easy to enjoy anywhere.'] },
+    { type: 'h', text: ['Cách pha', 'Brewing guide'] },
+    { type: 'steps', items: [['Xé túi', 'Tear open', 'Xé túi cà phê theo đường hướng dẫn.', 'Tear the drip bag along the indicated line.'], ['Đặt lên cốc', 'Place on the cup', 'Mở hai quai giấy và cố định túi lọc lên miệng cốc.', 'Unfold the paper hangers and secure the bag over the rim.'], ['Rót nước nóng', 'Pour hot water', 'Rót từ từ: 80 ml cho dòng Phin, 120 ml cho dòng Brewing. Đảm bảo nước thấm đều.', 'Pour slowly: 80 ml for Phin, 120 ml for Brewing. Saturate all the grounds evenly.'], ['Thưởng thức', 'Enjoy', 'Khi nước đã chảy hết, nhấc túi lọc ra và thưởng thức.', 'Once fully filtered, remove the bag and enjoy.']] },
+    { type: 'p', text: ['Một cách pha nhanh gọn để thưởng thức cà phê Soul theo cách riêng của bạn, ở bất cứ đâu.', 'A simple, convenient way to enjoy Soul coffee your way, wherever you are.'] }],
+  kenya: origin([F('Vùng trồng', 'Origin', 'Kirinyaga, Kenya'), F('Độ cao', 'Altitude', '1.650 masl'), F('Giống', 'Variety', 'SL28, SL34, Ruiru 11'), F('Sơ chế', 'Process', 'Washed')]),
+  colombia: origin([F('Vùng trồng', 'Origin', 'San Agustín, Huila, Colombia'), F('Độ cao', 'Altitude', '1.800 masl'), F('Giống', 'Variety', 'Sidra'), F('Sơ chế', 'Process', 'Anaerobic Washed'), F('Hương vị', 'Notes', 'Gừng, cam quýt, hương hoa / Ginger, citrus, floral')]),
+  nicaragua: origin([F('Vùng trồng', 'Origin', 'Jinotega, Nicaragua'), F('Độ cao', 'Altitude', '1.250 masl'), F('Giống', 'Variety', 'Bourbon'), F('Sơ chế', 'Process', 'Funky Natural'), F('Hương vị', 'Notes', 'Rượu trái cây nhiệt đới, cherry, nho khô / Tropical fruit liqueur, cherry, raisin')]),
+  ethiopia: origin([F('Vùng trồng', 'Origin', 'Idido, Yirgacheffe, Ethiopia'), F('Độ cao', 'Altitude', '1.940 – 1.985 masl'), F('Giống', 'Variety', 'Heirlooms'), F('Sơ chế', 'Process', 'Oro yeast · 3 ngày / 3 days')]),
+  sm: [
+    { type: 'p', text: ['Soul Specialty Coffee đang tuyển Store Manager cho các cửa hàng: ' + STORES.join(', ') + '.', 'Soul Specialty Coffee is hiring Store Managers for: ' + STORES.join(', ') + '.'] },
+    { type: 'h', text: ['Mục tiêu công việc', 'Role objective'] },
+    { type: 'p', text: ['Chịu trách nhiệm quản lý và điều hành toàn bộ hoạt động kinh doanh, vận hành, nhân sự, tài chính, hàng hóa và chất lượng dịch vụ của cửa hàng; hoàn thành chỉ tiêu và KPI được giao, tuân thủ quy định của Công ty.', 'Lead all store operations — sales, operations, people, finance, inventory and service quality — delivering targets and KPIs in line with company standards.'] },
+    { type: 'h', text: ['Nhiệm vụ chính', 'Key responsibilities'] },
+    { type: 'list', items: [['Quản lý hoạt động kinh doanh, kế hoạch và KPI cửa hàng', 'Manage store sales, planning and KPIs'], ['Vận hành cửa hàng theo SOP, kiểm soát chất lượng đồ uống và sản phẩm', 'Run the store to SOP and control drink and product quality'], ['Quản lý hàng hóa, tồn kho, nhập – xuất – tồn', 'Manage inventory and stock flow'], ['Kiểm soát doanh thu, chi phí và ngân sách', 'Control revenue, costs and budget'], ['Tuyển dụng, đào tạo, xếp lịch và đánh giá nhân sự', 'Hire, train, schedule and evaluate the team'], ['Đảm bảo tiêu chuẩn dịch vụ và trải nghiệm khách hàng', 'Uphold service standards and guest experience'], ['Tuân thủ quy định VSATTP, PCCC và an toàn lao động', 'Ensure food safety, fire safety and workplace safety']] },
+    { type: 'h', text: ['Yêu cầu', 'Requirements'] },
+    { type: 'list', items: [['Tối thiểu 2 năm kinh nghiệm quản lý cửa hàng F&B', 'At least 2 years managing an F&B store'], ['Ưu tiên kinh nghiệm tại khu du lịch, trung tâm thương mại hoặc chuỗi cà phê', 'Experience in tourist sites, malls or coffee chains preferred'], ['Kỹ năng lãnh đạo, lập kế hoạch, phân tích và giải quyết vấn đề', 'Leadership, planning, analysis and problem-solving skills']] },
+    { type: 'apply', text: ['Gửi CV về hcns.soulcoffee@gmail.com', 'Send your CV to hcns.soulcoffee@gmail.com'], href: 'mailto:hcns.soulcoffee@gmail.com?subject=Store%20Manager' }],
+  ba: [
+    { type: 'note', text: ['Mô tả công việc chi tiết sẽ được chuyển nguyên văn từ bài gốc.', 'The full job description will be migrated verbatim from the original post.'] },
+    { type: 'apply', text: ['Gửi CV về hcns.soulcoffee@gmail.com', 'Send your CV to hcns.soulcoffee@gmail.com'], href: 'mailto:hcns.soulcoffee@gmail.com?subject=Barista' }]
+};
+const DEFAULT_BODY = [{ type: 'note', text: ['Nội dung đầy đủ của bài viết sẽ được chuyển nguyên văn từ soulcoffee.vn khi triển khai.', 'The full article will be migrated verbatim from soulcoffee.vn at build time.'] }];
+const PER = 9;
+
+class Component extends DCLogic {
+  state = { w: 1440, lang: null, route: null, q: '', page: 1, mobileOpen: false };
+
+  T = {
+    vi: { nav: ['Trang chủ', 'Sản phẩm', 'Mùa vụ mới', 'Về Soul', 'Giải pháp cà phê', 'Cửa hàng', 'Blog'], menu: 'Menu', search: 'Tìm kiếm', cart: 'Giỏ hàng', close: 'Đóng', home: 'Trang chủ', prev: 'Trang trước', next: 'Trang sau',
+      eyebrow: 'Soul Journal', title: 'Câu chuyện từ Soul', intro: 'Mùa vụ, giải thưởng, công thức pha và những người làm nên Fine Robusta Việt Nam, kể từ Buôn Ma Thuột.',
+      all: 'Tất cả', categories: 'Chuyên mục', searchPh: 'Tìm bài viết', featured: 'Bài nổi bật', latest: 'Mới nhất', read: 'Đọc bài', allPosts: 'Tất cả bài viết', articles: 'bài viết', page: 'Trang',
+      pagination: 'Phân trang', empty: 'Không tìm thấy bài viết phù hợp.', clear: 'Xóa tìm kiếm', tagged: 'Bài viết gắn thẻ', tagIntro: 'Tất cả bài viết có chung chủ đề này, từ mọi chuyên mục.',
+      openRoles: 'Vị trí đang tuyển', viewRole: 'Xem chi tiết', fullTime: 'Toàn thời gian', writer: 'Người viết', minRead: 'phút đọc', toc: 'Nội dung bài viết', apply: 'Ứng tuyển', sendCv: 'Gửi CV',
+      postNav: 'Điều hướng bài viết', older: '← Bài trước', newer: 'Bài sau →', more: 'Thêm từ', seeAll: 'Xem tất cả',
+      footer: [['Shop', [['Cà phê rang', 'Shop.dc.html#c/ca-phe-pha-phin'], ['Nhân xanh', 'Shop.dc.html#c/ca-phe-nhan-xanh'], ['Soulful Collection', 'Shop.dc.html#c/soulful-flavours'], ['Tất cả sản phẩm', 'Shop.dc.html']]], ['Khám phá', [['Câu chuyện của Soul', 'Our Story.dc.html'], ['Cửa hàng', 'Spaces.dc.html'], ['Blog', 'Blog.dc.html'], ['Tuyển dụng', 'Blog.dc.html#c/recruitment']]], ['Dành cho đối tác', [['Giải pháp cà phê', 'Coffee Solutions.dc.html'], ['Nhân xanh', 'Coffee Solutions.dc.html#green'], ['Mua sỉ', 'Coffee Solutions.dc.html#contact']]], ['Hỗ trợ', [['Hướng dẫn pha', 'Blog.dc.html#c/how-to-make-coffee'], ['Giao hàng', 'Help.dc.html#shipping'], ['Câu hỏi thường gặp', 'Help.dc.html'], ['Liên hệ', 'Help.dc.html#contact']]]],
+      tagline: 'Crafted by Vietnamese Soul. Buôn Ma Thuột, Việt Nam.' },
+    en: { nav: ['Home', 'Shop', 'New Crop', 'Our Story', 'Coffee Solutions', 'Spaces', 'Blog'], menu: 'Menu', search: 'Search', cart: 'Cart', close: 'Close', home: 'Home', prev: 'Previous page', next: 'Next page',
+      eyebrow: 'Soul Journal', title: 'Stories from Soul', intro: 'Harvests, awards, brewing guides and the people behind Vietnamese Fine Robusta, told from Buon Ma Thuot.',
+      all: 'All', categories: 'Categories', searchPh: 'Search articles', featured: 'Featured', latest: 'Latest', read: 'Read article', allPosts: 'All articles', articles: 'articles', page: 'Page',
+      pagination: 'Pagination', empty: 'No matching articles.', clear: 'Clear search', tagged: 'Tagged', tagIntro: 'Every article on this topic, across all categories.',
+      openRoles: 'Open roles', viewRole: 'View role', fullTime: 'Full-time', writer: 'Written by', minRead: 'min read', toc: 'In this article', apply: 'Apply', sendCv: 'Send CV',
+      postNav: 'Article navigation', older: '← Previous', newer: 'Next →', more: 'More from', seeAll: 'See all',
+      footer: [['Shop', [['Roasted Coffee', 'Shop.dc.html#c/ca-phe-pha-phin'], ['Green Coffee', 'Shop.dc.html#c/ca-phe-nhan-xanh'], ['Soulful Collection', 'Shop.dc.html#c/soulful-flavours'], ['All Coffee', 'Shop.dc.html']]], ['Discover', [['Our Story', 'Our Story.dc.html'], ['Spaces', 'Spaces.dc.html'], ['Blog', 'Blog.dc.html'], ['Careers', 'Blog.dc.html#c/recruitment']]], ['Professional', [['Coffee Solutions', 'Coffee Solutions.dc.html'], ['Green Coffee', 'Coffee Solutions.dc.html#green'], ['Wholesale', 'Coffee Solutions.dc.html#contact']]], ['Support', [['Brewing guides', 'Blog.dc.html#c/how-to-make-coffee'], ['Shipping', 'Help.dc.html#shipping'], ['FAQ', 'Help.dc.html'], ['Contact', 'Help.dc.html#contact']]]],
+      tagline: 'Crafted by Vietnamese Soul. Buon Ma Thuot, Vietnam.' }
+  };
+
+  parse(hash) {
+    const m = (hash || '').replace(/^#/, '').match(/^([cpt])\/(.+)$/);
+    if (!m) return { kind: 'all' };
+    if (m[1] === 'c' && CATS[m[2]]) return { kind: 'cat', id: m[2] };
+    if (m[1] === 't') return { kind: 'tag', id: decodeURIComponent(m[2]) };
+    if (m[1] === 'p') { const p = P.find(x => x.h === m[2] || x.alt === m[2]); if (p) return { kind: 'post', id: p.h }; }
+    return { kind: 'all' };
+  }
+  componentDidMount() {
+    this._r = () => this.setState({ w: window.innerWidth }); this._r(); window.addEventListener('resize', this._r);
+    this._h = () => this.setState({ route: this.parse(location.hash), page: 1, mobileOpen: false });
+    this._h(); window.addEventListener('hashchange', this._h);
+    this._k = (e) => { if (e.key === 'Escape') this.setState({ mobileOpen: false }); };
+    window.addEventListener('keydown', this._k);
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this._r); window.removeEventListener('hashchange', this._h); window.removeEventListener('keydown', this._k); }
+  componentDidUpdate(pp) {
+    if (pp.lang !== this.props.lang) this.setState({ lang: null });
+    if (pp.view !== this.props.view && this.props.view) this.go(this.props.view === 'all' ? '' : this.props.view);
+  }
+  go(hash) { history.replaceState(null, '', hash ? '#' + hash : location.pathname); this.setState({ route: this.parse(hash), page: 1, q: '', mobileOpen: false }); window.scrollTo(0, 0); }
+
+  renderVals() {
+    const s = this.state, L = s.lang || this.props.lang || 'vi', li = L === 'vi' ? 0 : 1, t = this.T[L], isMobile = s.w < 1180, pad = (n) => String(n).padStart(2, '0');
+    const r = s.route || this.parse(this.props.view && this.props.view !== 'all' ? '#' + this.props.view : '');
+    const fmt = (d) => d.split('-').reverse().join('.');
+    const nav = (h) => (e) => { e.preventDefault(); this.go(h); };
+    const catName = (id) => CATS[id][li];
+    const card = (p, ctx) => { const c = ctx && p.cats.includes(ctx) ? ctx : p.cats[0]; return { title: p.title[li], excerpt: p.ex[li], img: p.img, date: fmt(p.d), cat: catName(c), href: '#p/' + p.h, open: nav('p/' + p.h), catHref: '#c/' + c, catOpen: nav('c/' + c) }; };
+    const hrefs = ['Home.html', 'Shop.dc.html', 'Shop.dc.html#c/soulful-flavours', 'Our Story.dc.html', 'Coffee Solutions.dc.html', 'Spaces.dc.html', '#'];
+    const base = {
+      t, isMobile, isDesktop: !isMobile,
+      isVi: L === 'vi', isEn: L === 'en', viBg: L === 'vi' ? '#27292D' : 'transparent', enBg: L === 'en' ? '#27292D' : 'transparent', viColor: L === 'vi' ? '#F4EFE5' : '#27292D', enColor: L === 'en' ? '#F4EFE5' : '#27292D',
+      setVi: () => this.setState({ lang: 'vi' }), setEn: () => this.setState({ lang: 'en' }),
+      nav: t.nav.map((label, i) => ({ label, href: hrefs[i], click: i === 6 ? nav('') : undefined, current: i === 6 ? 'page' : 'false', line: i === 6 ? '#FFD35B' : 'transparent' })),
+      mobileOpen: s.mobileOpen, openMobile: () => this.setState({ mobileOpen: true }), closeMobile: () => this.setState({ mobileOpen: false }),
+      goAll: nav(''),
+      footerCols: t.footer.map(c => ({ title: c[0], links: c[1].map(l => ({ label: l[0], href: l[1] })) }))
+    };
+
+    if (r.kind === 'post') {
+      const p = P.find(x => x.h === r.id), ctx = p.cats[0], body = (p.body && BODY[p.body]) || DEFAULT_BODY;
+      let hi = 0;
+      const blocks = body.map(b => {
+        const o = { isH: b.type === 'h', isP: b.type === 'p', isList: b.type === 'list', isFacts: b.type === 'facts', isSteps: b.type === 'steps', isApply: b.type === 'apply', isNote: b.type === 'note', text: b.text ? b.text[li] : '', href: b.href, items: [] };
+        if (o.isH) o.id = 's' + (++hi);
+        if (o.isList) o.items = b.items.map(x => ({ text: x[li] }));
+        if (o.isFacts) o.items = b.items.map(x => ({ k: x.k[li], v: x.v }));
+        if (o.isSteps) o.items = b.items.map((x, i) => ({ n: pad(i + 1), k: x[li], v: x[2 + li] }));
+        return o;
+      });
+      const toc = blocks.filter(b => b.isH).map((b, i) => ({ n: pad(i + 1), text: b.text, href: '#' + b.id }));
+      const words = [p.ex[li], ...blocks.map(b => b.text), ...blocks.flatMap(b => b.items.map(x => (x.text || '') + ' ' + (x.v || '')))].join(' ').split(/\s+/).length;
+      const inCat = P.filter(x => x.cats.includes(ctx)), idx = inCat.findIndex(x => x.h === p.h);
+      const older = inCat[idx + 1], newer = inCat[idx - 1];
+      const adj = [older && { label: t.older, title: older.title[li], href: '#p/' + older.h, open: nav('p/' + older.h), align: 'left' }, newer && { label: t.newer, title: newer.title[li], href: '#p/' + newer.h, open: nav('p/' + newer.h), align: 'right' }].filter(Boolean);
+      const related = inCat.filter(x => x.h !== p.h).slice(0, 3);
+      const fill = related.length < 3 ? P.filter(x => x.h !== p.h && !related.includes(x) && x.tags.some(tg => p.tags.includes(tg))).slice(0, 3 - related.length) : [];
+      return { ...base, isList: false, isPost: true,
+        po: { title: p.title[li], excerpt: p.ex[li], img: p.img, date: fmt(p.d), cat: catName(ctx), catHref: '#c/' + ctx, catOpen: nav('c/' + ctx), mins: Math.max(1, Math.round(words / 200)),
+          body: blocks, toc, hasToc: toc.length > 1, tags: p.tags.map(tg => ({ label: tg, href: '#t/' + tg, open: nav('t/' + tg) })) },
+        adj, related: [...related, ...fill].map(x => card(x, ctx)) };
+    }
+
+    const ctx = r.kind === 'cat' ? r.id : null;
+    let list = r.kind === 'cat' ? P.filter(p => p.cats.includes(r.id)) : r.kind === 'tag' ? P.filter(p => p.tags.includes(r.id)) : P;
+    const q = s.q.trim().toLowerCase();
+    if (q) list = list.filter(p => (p.title[0] + ' ' + p.title[1] + ' ' + p.ex[li]).toLowerCase().includes(q));
+    const isJobs = r.kind === 'cat' && r.id === 'recruitment' && !q;
+    const featured = !q && !isJobs && list.length > 3 ? list[0] : null;
+    const rest = isJobs ? [] : featured ? list.slice(1) : list;
+    const nPages = Math.max(1, Math.ceil(rest.length / PER)), page = Math.min(s.page, nPages);
+    const goPage = (n) => () => { this.setState({ page: n }); window.scrollTo({ top: 0, behavior: 'smooth' }); };
+    const cats = [{ id: null, label: t.all, count: P.length }, ...Object.keys(CATS).map(id => ({ id, label: catName(id), count: P.filter(p => p.cats.includes(id)).length }))]
+      .map(c => { const act = c.id === ctx && r.kind !== 'tag'; return { label: c.label, count: c.count, href: c.id ? '#c/' + c.id : '#', open: nav(c.id ? 'c/' + c.id : ''), active: act ? 'true' : 'false', bg: act ? '#27292D' : 'transparent', fg: act ? '#F4EFE5' : '#27292D' }; });
+    const listTitle = r.kind === 'cat' ? catName(r.id) : r.kind === 'tag' ? '#' + r.id : t.title;
+    return { ...base, isList: true, isPost: false,
+      hasSubCrumb: r.kind !== 'all', crumb: r.kind === 'all' ? 'Blog' : listTitle,
+      eyebrow: r.kind === 'tag' ? t.tagged : t.eyebrow, listTitle,
+      listIntro: r.kind === 'cat' ? CATS[r.id][2 + li] : r.kind === 'tag' ? t.tagIntro : t.intro,
+      cats, q: s.q, onQ: (e) => this.setState({ q: e.target.value, page: 1 }), clearQ: () => this.setState({ q: '', page: 1 }),
+      hasFeatured: !!featured, feat: featured ? card(featured, ctx) : {},
+      isJobs, jobs: isJobs ? list.map(p => ({ role: p.title[li].replace(/^(Tuyển dụng|Hiring):\s*/, ''), type: t.fullTime, where: STORES.join(' · '), date: fmt(p.d), href: '#p/' + p.h, open: nav('p/' + p.h) })) : [],
+      showGrid: rest.length > 0, isEmpty: list.length === 0,
+      grid: rest.slice((page - 1) * PER, page * PER).map(p => card(p, ctx)),
+      gridLabel: list.length + ' ' + t.articles, pageLabel: t.page + ' ' + pad(page) + ' / ' + pad(nPages),
+      hasPages: nPages > 1, pages: Array.from({ length: nPages }, (_, i) => ({ n: i + 1, go: goPage(i + 1), current: i + 1 === page ? 'page' : 'false', bg: i + 1 === page ? '#27292D' : 'transparent', fg: i + 1 === page ? '#F4EFE5' : '#27292D' })),
+      atFirst: page <= 1, atLast: page >= nPages, prevOp: page <= 1 ? .35 : 1, nextOp: page >= nPages ? .35 : 1,
+      prevPage: goPage(Math.max(1, page - 1)), nextPage: goPage(Math.min(nPages, page + 1))
+    };
+  }
+}
+</script>
+</body>
+</html>

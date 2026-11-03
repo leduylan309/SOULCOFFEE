@@ -1,0 +1,46 @@
+:root {
+  --font-display: "Newsreader", Georgia, serif;   /* headings, product names, numerals — weight 400 only */
+  --font-sans: "Be Vietnam Pro", system-ui, sans-serif; /* body, labels, buttons — 400/500/600 */
+
+  --weight-regular: 400;
+  --weight-medium: 500;
+  --weight-semibold: 600;
+
+  /* Display (Newsreader 400) — fluid */
+  --type-hero: clamp(46px, 6.2vw, 100px);        --lh-hero: .98;  --ls-hero: -.03em;
+  --type-display-xl: clamp(44px, 6.2vw, 96px);   --lh-display-xl: .94;
+  --type-display-l: clamp(42px, 5.4vw, 84px);    --lh-display-l: .98;
+  --type-display-m: clamp(40px, 4.8vw, 72px);    --lh-display-m: 1;
+  --type-h2: clamp(34px, 4.2vw, 60px);           --lh-h2: 1.02; --ls-h2: -.025em;
+  --type-h2-compact: clamp(32px, 3.8vw, 54px);
+  --type-h3-xl: clamp(30px, 3vw, 42px);          --lh-h3-xl: 1;
+  --type-h3-l: clamp(28px, 2.6vw, 38px);
+  --type-h3: clamp(22px, 2vw, 28px);             --lh-h3: 1.1;
+  --type-title: 23px;                            --lh-title: 1.12;
+  --type-list-serif: 21px;                       --lh-list-serif: 1.15;
+  --type-tile: clamp(19px, 1.6vw, 23px);         --lh-tile: 1.1;
+  --type-lead: clamp(19px, 1.6vw, 23px);         --lh-lead: 1.45;
+  --type-notes: 15.5px;                          /* Newsreader italic tasting notes */
+  --type-numeral: clamp(48px, 5vw, 76px);        --lh-numeral: .9; --ls-numeral: -.035em;
+  --ls-display: -.03em;
+  --ls-tight: -.02em;
+
+  /* Text (Be Vietnam Pro) */
+  --type-body-l: 17px;
+  --type-body: 15px;          --lh-body: 1.7;
+  --type-body-s: 14px;        --lh-body-s: 1.6;
+  --type-caption: 13.5px;     --lh-caption: 1.55;
+  --type-small: 12.5px;       --lh-small: 1.5;
+  --type-meta: 12px;
+
+  /* Labels (Be Vietnam Pro, UPPERCASE, tracked) */
+  --type-eyebrow: 11px;       --ls-eyebrow: .18em;
+  --type-micro: 10.5px;       --ls-micro: .16em;
+  --type-nav: 12px;           --ls-nav: .08em;
+  --type-button: 12.5px;      --ls-button: .12em;
+  --type-link: 12px;          --ls-link: .12em;
+  --type-badge: 10px;         --ls-badge: .16em;
+
+  --measure-body: 54ch;
+  --measure-title: 12ch;
+}

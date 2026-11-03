@@ -1,0 +1,114 @@
+// ============================================================
+// SOUL Design System — Design tokens (single source of truth)
+// Values copied 1:1 from Home.html. Do not round.
+// ============================================================
+
+// ---------- Colour: base palette ----------
+$palette: (
+  'ink':        #27292D,
+  'ink-deep':   #1E1F22,
+  'black':      #141517,
+  'paper':      #F4EFE5,
+  'sand':       #EAE3D5,
+  'sand-deep':  #E2DACB,
+  'white':      #FFFFFF,
+  'yellow':     #FFD35B,
+  'clay':       #8E4B33,
+  'stone-700':  #514B42,
+  'stone-500':  #7C7365,
+);
+
+// Alpha steps used for lines / text on the two base grounds
+$ink-alphas:   (12: .12, 14: .14, 16: .16, 18: .18, 20: .20, 30: .30, 45: .45);
+$paper-alphas: (18: .18, 40: .40, 50: .50, 60: .60, 70: .70, 75: .75, 80: .80, 85: .85);
+
+// ---------- Typography ----------
+$font-display: ('Newsreader', Georgia, serif);
+$font-sans:    ('Be Vietnam Pro', system-ui, sans-serif);
+$font-url: 'https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..500&family=Be+Vietnam+Pro:wght@400;500;600&display=swap';
+
+$weights: (regular: 400, medium: 500, semibold: 600);
+
+// Display scale (Newsreader 400): size, line-height, letter-spacing
+$type-display: (
+  'hero':       (clamp(46px, 6.2vw, 100px), .98, -.03em),
+  'display-xl': (clamp(44px, 6.2vw, 96px),  .94, -.03em),
+  'display-l':  (clamp(42px, 5.4vw, 84px),  .98, -.03em),
+  'display-m':  (clamp(40px, 4.8vw, 72px),  1,   -.03em),
+  'h2':         (clamp(34px, 4.2vw, 60px),  1.02, -.025em),
+  'h2-compact': (clamp(32px, 3.8vw, 54px),  1.02, -.025em),
+  'h3-xl':      (clamp(30px, 3vw, 42px),    1,   0),
+  'h3-l':       (clamp(28px, 2.6vw, 38px),  1,   -.02em),
+  'h3':         (clamp(22px, 2vw, 28px),    1.1, 0),
+  'title':      (23px,                      1.12, 0),
+  'list-serif': (21px,                      1.15, 0),
+  'tile':       (clamp(19px, 1.6vw, 23px),  1.1, 0),
+  'lead':       (clamp(19px, 1.6vw, 23px),  1.45, 0),
+  'numeral':    (clamp(48px, 5vw, 76px),    .9,  -.035em),
+);
+
+// Text scale (Be Vietnam Pro): size, line-height
+$type-text: (
+  'body-l':  (17px, 1.7),
+  'body':    (15px, 1.7),
+  'body-s':  (14px, 1.6),
+  'caption': (13.5px, 1.55),
+  'small':   (12.5px, 1.5),
+  'meta':    (12px, 1.55),
+);
+
+// Labels (UPPERCASE): size, tracking, weight
+$type-label: (
+  'eyebrow': (11px,   .18em, 400),
+  'micro':   (10.5px, .16em, 400),
+  'nav':     (12px,   .08em, 500),
+  'button':  (12.5px, .12em, 500),
+  'link':    (12px,   .12em, 500),
+  'badge':   (10px,   .16em, 600),
+);
+
+// ---------- Spacing ----------
+$spaces: (2, 4, 6, 8, 10, 12, 14, 16, 18, 20, 22, 24, 28, 32, 36, 40, 48, 56, 64, 72);
+
+$layout: (
+  'gutter':      clamp(16px, 4vw, 64px),
+  'section-y':   clamp(56px, 7vw, 110px),
+  'section-y-l': clamp(64px, 8vw, 120px),
+  'section-y-s': clamp(48px, 6vw, 88px),
+  'block-gap':   clamp(28px, 4vw, 64px),
+  'block-gap-l': clamp(36px, 5vw, 80px),
+  'head-gap':    clamp(28px, 3.4vw, 48px),
+  'grid-gap':    10px,
+  'card-pad':    16px,
+  'card-pad-l':  22px,
+  'panel-pad':   clamp(22px, 3vw, 40px),
+);
+
+$sizes: (
+  'header-h': 66px, 'hit-min': 44px,
+  'btn-h-l': 52px, 'btn-h': 50px, 'btn-h-m': 48px, 'btn-h-s': 46px, 'btn-h-xs': 44px,
+  'field-h': 44px, 'chip-h': 40px, 'container-max': 1440px, 'eyebrow-rule': 28px,
+);
+
+$measure-body: 54ch;
+$measure-title: 12ch;
+
+// ---------- Radius / shadow / motion / layers ----------
+$radius: (none: 0, pill: 11px, round: 50%);
+
+$shadows: (
+  'mega':   (0 24px 40px -30px rgba(39, 41, 45, .35)),
+  'drawer': (-20px 0 60px -30px rgba(0, 0, 0, .5)),
+  'toast':  (0 12px 30px -12px rgba(0, 0, 0, .5)),
+);
+$shadow-object: drop-shadow(0 10px 16px rgba(39, 41, 45, .22));
+
+$z: (header: 60, toast: 80, scrim: 90, drawer: 95, mobile-menu: 100, lightbox: 110);
+
+$ratios: (hero-tile: '16/10', portrait: '4/5', square: '1/1', wide: '16/9', photo: '3/2', tall: '3/4');
+
+$scroll-offset: 72px;
+
+// ---------- Breakpoints ----------
+// The layout is intrinsic (auto-fit grids + clamp). Only the header switches.
+$breakpoints: (sm: 480px, md: 768px, nav: 1180px, xl: 1440px);

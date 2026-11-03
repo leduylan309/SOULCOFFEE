@@ -1,0 +1,30 @@
+:root {
+  /* Radius — the system is square. Round only for counters & icon buttons. */
+  --radius-none: 0;
+  --radius-pill: 11px;      /* cart count badge (22px tall) */
+  --radius-round: 50%;      /* circular arrow buttons, store dot */
+
+  /* Borders */
+  --border-hairline: 1px solid var(--line-default);
+  --border-control: 1px solid var(--line-solid);
+  --border-field: 1px solid var(--line-solid);     /* bottom-only underline fields */
+  --border-emphasis: 2px solid var(--line-solid);  /* newsletter field */
+
+  /* Shadows — used only on floating layers */
+  --shadow-mega: 0 24px 40px -30px rgba(39,41,45,.35);
+  --shadow-drawer: -20px 0 60px -30px rgba(0,0,0,.5);
+  --shadow-toast: 0 12px 30px -12px rgba(0,0,0,.5);
+  --shadow-object: drop-shadow(0 10px 16px rgba(39,41,45,.22)); /* filter: certificates on media well */
+
+  /* Motion — hover states swap instantly; only scroll is animated */
+  --motion-hover: 0ms;
+  --scroll-behavior: smooth;
+  --scroll-offset: 72px;
+
+  /* Layers */
+  --z-header: 60;  --z-toast: 80;  --z-scrim: 90;  --z-drawer: 95;  --z-mobile-menu: 100;  --z-lightbox: 110;
+
+  /* Aspect ratios */
+  --ratio-hero-tile: 16/10;  --ratio-portrait: 4/5;  --ratio-square: 1/1;
+  --ratio-wide: 16/9;  --ratio-photo: 3/2;  --ratio-tall: 3/4;
+}

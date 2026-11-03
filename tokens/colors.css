@@ -1,0 +1,74 @@
+:root {
+  /* ── Base palette (exact values from Home.html) ── */
+  --soul-ink: #27292D;          /* primary text, dark sections, primary buttons */
+  --soul-ink-deep: #1E1F22;     /* cards on dark sections, hover on dark tiles */
+  --soul-black: #141517;        /* lightbox backdrop base */
+  --soul-paper: #F4EFE5;        /* page background, text on dark */
+  --soul-sand: #EAE3D5;         /* alt sections, light cards */
+  --soul-sand-deep: #E2DACB;    /* image wells / media placeholder */
+  --soul-white: #FFFFFF;        /* product packshot well */
+  --soul-yellow: #FFD35B;       /* brand accent: hover fill, focus, highlights on dark */
+  --soul-clay: #8E4B33;         /* eyebrow on light, numbering, required marks, errors */
+  --soul-stone-700: #514B42;    /* secondary body text on light */
+  --soul-stone-500: #7C7365;    /* muted meta, placeholders */
+
+  /* Ink alphas (lines on light) */
+  --ink-a12: rgba(39,41,45,.12);
+  --ink-a14: rgba(39,41,45,.14);
+  --ink-a16: rgba(39,41,45,.16);
+  --ink-a18: rgba(39,41,45,.18);
+  --ink-a20: rgba(39,41,45,.20);
+  --ink-a30: rgba(39,41,45,.30);
+  --ink-a45: rgba(39,41,45,.45);
+  /* Paper alphas (text/lines on dark) */
+  --paper-a18: rgba(244,239,229,.18);
+  --paper-a40: rgba(244,239,229,.40);
+  --paper-a50: rgba(244,239,229,.50);
+  --paper-a60: rgba(244,239,229,.60);
+  --paper-a70: rgba(244,239,229,.70);
+  --paper-a75: rgba(244,239,229,.75);
+  --paper-a80: rgba(244,239,229,.80);
+  --paper-a85: rgba(244,239,229,.85);
+
+  /* ── Semantic: surfaces ── */
+  --surface-page: var(--soul-paper);
+  --surface-alt: var(--soul-sand);
+  --surface-media: var(--soul-sand-deep);
+  --surface-packshot: var(--soul-white);
+  --surface-inverse: var(--soul-ink);
+  --surface-inverse-raised: var(--soul-ink-deep);
+  --surface-highlight: var(--soul-yellow);
+  --overlay-scrim: var(--ink-a45);
+  --overlay-lightbox: rgba(20,21,23,.94);
+
+  /* ── Semantic: text ── */
+  --text-primary: var(--soul-ink);
+  --text-secondary: var(--soul-stone-700);
+  --text-muted: var(--soul-stone-500);
+  --text-accent: var(--soul-clay);
+  --text-on-dark: var(--soul-paper);
+  --text-on-dark-secondary: var(--paper-a80);
+  --text-on-dark-muted: var(--paper-a70);
+  --text-on-dark-accent: var(--soul-yellow);
+  --text-error: var(--soul-clay);
+
+  /* ── Semantic: lines ── */
+  --line-subtle: var(--ink-a12);
+  --line-default: var(--ink-a14);
+  --line-strong: var(--ink-a20);
+  --line-control: var(--ink-a30);
+  --line-solid: var(--soul-ink);
+  --line-on-dark: var(--paper-a18);
+  --line-on-dark-control: var(--paper-a50);
+
+  /* ── Semantic: interaction ── */
+  --action-primary-bg: var(--soul-ink);
+  --action-primary-fg: var(--soul-paper);
+  --action-hover-bg: var(--soul-yellow);
+  --action-hover-fg: var(--soul-ink);
+  --action-selected-bg: var(--soul-yellow);
+  --link-hover: var(--soul-clay);
+  --link-hover-on-dark: var(--soul-yellow);
+  --focus-ring: var(--soul-yellow);
+  --selection-bg: var(--soul-yellow);
+}

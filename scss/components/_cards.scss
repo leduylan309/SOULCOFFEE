@@ -1,0 +1,58 @@
+@use '../abstracts' as *;
+
+// Cards = flat colour blocks. No border, no radius, no shadow.
+.c-card {
+  display: flex; flex-direction: column; background: var(--surface-alt);
+  &__media { position: relative; overflow: hidden; background: var(--surface-media); img { @include cover-img; } }
+  &__body  { display: flex; flex-direction: column; gap: 8px; flex: 1; padding: 16px 16px 18px; }
+  &__kicker { @include label('micro'); letter-spacing: .14em; color: var(--text-muted); }
+  &__title { margin: 0; @include display('title'); }
+  &__meta  { @include text('meta'); color: var(--text-secondary); }
+  &__action { margin-top: auto; }
+  &__badge { position: absolute; left: 12px; top: 12px; }
+}
+
+.c-product-card .c-card__media { aspect-ratio: 1 / 1; background: var(--surface-packshot); }
+
+.c-tile {
+  display: flex; flex-direction: column; background: var(--surface-alt);
+  @include hover { background: color('yellow'); }
+  &__media { @include ratio(portrait); background: var(--surface-media); img { @include cover-img; } }
+  &__label { display: flex; justify-content: space-between; align-items: center; gap: 8px; padding: 14px 14px 16px; @include display('tile'); text-wrap: initial; }
+}
+
+.c-collection-card {
+  display: flex; flex-direction: column; background: var(--surface-inverse); color: var(--text-on-dark);
+  &--light { background: var(--surface-alt); color: var(--text-primary); }
+  &__media { @include ratio(hero-tile); img { @include cover-img; } }
+  &__body { padding: 20px 22px 22px; display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 14px; }
+  &__index { @include label('micro'); letter-spacing: .18em; color: color('yellow'); }
+  &--light &__index { color: var(--text-accent); }
+  &__title { margin: 6px 0 0; @include display('h3-xl'); }
+}
+
+.c-soulful-card {
+  display: flex; flex-direction: column; background: var(--surface-inverse-raised); color: var(--text-on-dark);
+  &__media { aspect-ratio: 1 / 1; img { @include cover-img; } }
+  &__body { padding: 18px 18px 20px; display: flex; flex-direction: column; gap: 10px; flex: 1; }
+  &__word { margin: 0; font-family: var(--font-display); font-weight: 400; font-size: 40px; line-height: 1; letter-spacing: -.02em; }
+  &__method { @include label('micro'); letter-spacing: .14em; color: color('yellow'); }
+  &__process { @include text('small'); color: paper(75); }
+}
+
+.c-store-card {
+  display: flex; flex-direction: column; background: var(--surface-alt);
+  &__media { @include ratio(portrait); background: var(--surface-media); img { @include cover-img; } }
+  &__name { display: flex; align-items: center; gap: 10px; padding: 14px 14px 16px; font-family: var(--font-display); font-size: clamp(19px, 1.6vw, 22px); line-height: 1.15;
+    &::before { content: ''; width: 8px; height: 8px; border-radius: var(--radius-round); background: color('clay'); flex: none; } }
+}
+
+.c-cert-card {
+  flex: 0 0 clamp(250px, 22vw, 310px); scroll-snap-align: start; display: flex; flex-direction: column; background: var(--surface-page);
+  &__media { position: relative; aspect-ratio: 1 / 1; background: var(--surface-media);
+    img { position: absolute; inset: 18px; width: calc(100% - 36px); height: calc(100% - 36px); object-fit: contain; filter: var(--shadow-object); } }
+  &__body { padding: 16px 18px 20px; display: flex; flex-direction: column; gap: 8px; }
+  &__year { @include label('micro'); color: var(--text-accent); font-weight: 600; }
+  &__score { font-family: var(--font-display); font-size: 30px; line-height: 1; letter-spacing: -.02em; }
+  &__rank { @include display('list-serif'); }
+}

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..500&amp;family=Be+Vietnam+Pro:wght@400;500;600&amp;display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-font-smoothing: antialiased; overflow-x: clip; scroll-behavior: smooth; scroll-padding-top: 72px; }
+  body { margin: 0; background: #F4EFE5; color: #27292D; font-family: "Be Vietnam Pro", system-ui, sans-serif; font-size: 15px; line-height: 1.6; overflow-x: hidden; }
+  a { color: inherit; text-decoration: none; }
+  a:hover { color: inherit; }
+  button, input, textarea { font-family: inherit; color: inherit; }
+  img { display: block; }
+  :focus-visible { outline: 2px solid #FFD35B; outline-offset: 3px; }
+  ::selection { background: #FFD35B; color: #27292D; }
+  @media (prefers-reduced-motion: reduce) { *, *::before, *::after { transition-duration: 0.01ms !important; scroll-behavior: auto !important; } }
+</style>
+</helmet>
+
+<div style="min-height: 100vh; background: #F4EFE5; color: #27292D;">
+
+  <header style="position: sticky; top: 0; z-index: 60; background: #F4EFE5; border-bottom: 1px solid rgba(39,41,45,.14);">
+    <nav aria-label="Main" style="display: flex; align-items: center; justify-content: space-between; gap: 20px; height: 66px; padding: 0 clamp(16px,4vw,64px);">
+      <div style="display: flex; align-items: center; gap: clamp(20px,2.6vw,40px);">
+        <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+          <button type="button" aria-label="{{ t.menu }}" onClick="{{ openMobile }}" style="width: 44px; height: 44px; margin-left: -10px; display: grid; place-items: center; background: none; border: 0; cursor: pointer;"><span style="display: block; width: 22px; height: 1.5px; background: #27292D; box-shadow: 0 -7px 0 #27292D, 0 7px 0 #27292D;"></span></button>
+        </sc-if>
+        <a href="Home.html" aria-label="SOUL" style="display: flex; align-items: center; gap: 12px;"><img src="assets/soul-elephant-ink.svg" alt="" width="30" height="30" style="width: 30px; height: 30px;" /><img src="assets/soul-wordmark-ink.svg" alt="SOUL" style="height: 15px; width: auto;" /></a>
+        <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+          <div style="display: flex; align-items: center; font-size: 12px; letter-spacing: .08em; font-weight: 500; text-transform: uppercase;">
+            <sc-for list="{{ nav }}" as="n" hint-placeholder-count="6">
+              <a href="{{ n.href }}" aria-current="{{ n.current }}" style="display: flex; align-items: center; height: 66px; padding: 0 13px; border-bottom: 2px solid {{ n.line }}; white-space: nowrap;" style-hover="border-bottom-color: #FFD35B;">{{ n.label }}</a>
+            </sc-for>
+          </div>
+        </sc-if>
+      </div>
+      <div style="display: flex; align-items: center; gap: 4px; font-size: 12px; letter-spacing: .08em; font-weight: 500;">
+        <div role="group" aria-label="Language" style="display: flex; border: 1px solid rgba(39,41,45,.3); height: 32px; margin-right: 6px;">
+          <button type="button" aria-pressed="{{ isVi }}" onClick="{{ setVi }}" style="width: 38px; height: 30px; border: 0; background: {{ viBg }}; color: {{ viColor }}; font-size: 11px; letter-spacing: .1em; font-weight: 600; cursor: pointer;">VI</button>
+          <button type="button" aria-pressed="{{ isEn }}" onClick="{{ setEn }}" style="width: 38px; height: 30px; border: 0; background: {{ enBg }}; color: {{ enColor }}; font-size: 11px; letter-spacing: .1em; font-weight: 600; cursor: pointer;">EN</button>
+        </div>
+        <a href="Search.dc.html" aria-label="{{ t.search }}" style="width: 44px; height: 44px; display: grid; place-items: center;"><svg width="17" height="17" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="7" cy="7" r="5"></circle><path d="M11 11l4 4"></path></svg></a>
+        <a href="Account.dc.html" aria-label="Account" style="width: 44px; height: 44px; display: grid; place-items: center;"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="8" cy="5.5" r="3"></circle><path d="M2.5 15c.6-3 2.8-4.6 5.5-4.6s4.9 1.6 5.5 4.6"></path></svg></a>
+        <a href="Checkout.dc.html" aria-label="{{ t.cart }}" style="height: 44px; padding: 0 0 0 8px; display: flex; align-items: center; gap: 8px; text-transform: uppercase;"><sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}"><span>{{ t.cart }}</span></sc-if><span style="min-width: 22px; height: 22px; padding: 0 6px; display: grid; place-items: center; background: #27292D; color: #F4EFE5; font-size: 11px; border-radius: 11px;">0</span></a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <!-- 01 HERO -->
+    <section id="top" data-screen-label="01 Hero" aria-labelledby="hero-h" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr)); min-height: min(82vh, 780px); border-bottom: 1px solid rgba(39,41,45,.14);">
+      <div style="display: flex; flex-direction: column; justify-content: space-between; padding: clamp(36px,5vw,72px) clamp(16px,4vw,64px) clamp(32px,4vw,56px);">
+        <nav aria-label="Breadcrumb" style="display: flex; gap: 10px; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #7C7365;"><a href="Home.html" style-hover="color: #8E4B33;">{{ t.home }}</a><span aria-hidden="true">/</span><span style="color: #27292D;">{{ t.crumb }}</span></nav>
+        <div style="padding: clamp(32px,6vh,64px) 0;">
+          <div style="display: flex; align-items: center; gap: 14px; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #8E4B33;"><span style="width: 28px; height: 2px; background: #8E4B33;"></span><span>{{ t.heroEyebrow }}</span></div>
+          <h1 id="hero-h" style="margin: 20px 0 0; max-width: 12ch; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: clamp(46px, 6.2vw, 100px); line-height: .98; letter-spacing: -.03em; text-wrap: balance;">{{ t.heroTitle }}</h1>
+          <p style="margin: 28px 0 0; max-width: 50ch; font-size: clamp(15px,1.15vw,17px); line-height: 1.7; color: #514B42; text-wrap: pretty;">{{ t.heroBody }}</p>
+          <div style="display: flex; flex-wrap: wrap; gap: 12px; margin-top: 36px;">
+            <a href="#contact" style="display: inline-flex; align-items: center; gap: 10px; height: 50px; padding: 0 26px; background: #27292D; color: #F4EFE5; font-size: 12.5px; letter-spacing: .12em; text-transform: uppercase; font-weight: 500;" style-hover="background: #FFD35B; color: #27292D;">{{ t.cta1 }} <span aria-hidden="true">↗</span></a>
+            <a href="#capacity" style="display: inline-flex; align-items: center; height: 50px; padding: 0 26px; border: 1px solid #27292D; font-size: 12.5px; letter-spacing: .12em; text-transform: uppercase; font-weight: 500;" style-hover="background: #27292D; color: #F4EFE5;">{{ t.cta2 }}</a>
+          </div>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; border-top: 1px solid rgba(39,41,45,.16);">
+          <sc-for list="{{ strip }}" as="c" hint-placeholder-count="5">
+            <a href="{{ c.href }}" style="flex: 1 1 110px; display: flex; gap: 8px; align-items: baseline; padding: 16px 14px 0 0; font-size: 11.5px; letter-spacing: .12em; text-transform: uppercase; font-weight: 500;" style-hover="color: #8E4B33;"><span style="color: #8E4B33; font-size: 10.5px;">{{ c.n }}</span><span>{{ c.label }}</span></a>
+          </sc-for>
+        </div>
+      </div>
+      <figure style="margin: 0; position: relative; min-height: 420px; background: #27292D;"><img src="images/05-solutions/DSCF9134_edited.jpg" alt="{{ t.heroAlt }}" loading="eager" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;" /></figure>
+    </section>
+
+    <!-- 02 CAPACITY NUMBERS -->
+    <section id="capacity" data-screen-label="02 Năng lực" aria-labelledby="cap-h" style="background: #27292D; color: #F4EFE5; padding: clamp(56px,7vw,110px) clamp(16px,4vw,64px);">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 20px clamp(28px,4vw,64px); align-items: end; margin-bottom: clamp(32px,4vw,56px);">
+        <div><div style="font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #FFD35B;">{{ t.capEyebrow }}</div><h2 id="cap-h" style="margin: 12px 0 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: clamp(34px,4.2vw,60px); line-height: 1.02; letter-spacing: -.025em; text-wrap: balance;">{{ t.capTitle }}</h2></div>
+        <p style="margin: 0; max-width: 54ch; font-size: 15px; line-height: 1.7; color: rgba(244,239,229,.8);">{{ t.capBody }}</p>
+      </div>
+      <ul style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr)); gap: 0 clamp(24px,3vw,48px);">
+        <sc-for list="{{ stats }}" as="s" hint-placeholder-count="4">
+          <li style="padding: 22px 0 8px; border-top: 1px solid rgba(244,239,229,.3); display: flex; flex-direction: column; gap: 10px;">
+            <span style="display: flex; align-items: baseline; gap: 10px; flex-wrap: wrap;"><span style="font-family: Newsreader, Georgia, serif; font-size: clamp(48px,5vw,76px); line-height: .9; letter-spacing: -.035em; color: #FFD35B; white-space: nowrap;">{{ s.num }}</span><span style="font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: #FFD35B;">{{ s.unit }}</span></span>
+            <span style="font-size: 13.5px; line-height: 1.5; color: rgba(244,239,229,.8);">{{ s.label }}</span>
+          </li>
+        </sc-for>
+      </ul>
+    </section>
+
+    <!-- 03 SERVICES -->
+    <section id="services" data-screen-label="03 Giải pháp" aria-labelledby="sv-h" style="padding: clamp(56px,7vw,110px) clamp(16px,4vw,64px);">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 20px clamp(28px,4vw,64px); align-items: end; padding-bottom: 22px; border-bottom: 1px solid #27292D; margin-bottom: 10px;">
+        <div><div style="font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #8E4B33;">{{ t.svEyebrow }}</div><h2 id="sv-h" style="margin: 12px 0 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: clamp(42px,5.4vw,84px); line-height: .98; letter-spacing: -.03em;">{{ t.svTitle }}</h2></div>
+        <p style="margin: 0; max-width: 54ch; font-size: 15px; line-height: 1.7; color: #514B42;">{{ t.svBody }}</p>
+      </div>
+      <div style="display: flex; flex-direction: column; gap: 10px;">
+        <sc-for list="{{ services }}" as="s" hint-placeholder-count="5">
+          <article id="{{ s.id }}" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 10px; background: {{ s.bg }};">
+            <div style="order: {{ s.imgOrder }}; min-height: 360px; position: relative; overflow: hidden; background: #E2DACB;"><img src="{{ s.img }}" alt="{{ s.alt }}" loading="lazy" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover;" /></div>
+            <div style="padding: clamp(24px,3.4vw,52px); display: flex; flex-direction: column; gap: 18px;">
+              <div style="display: flex; justify-content: space-between; gap: 12px; font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: #8E4B33;"><span>{{ s.n }}</span><span style="color: #7C7365;">{{ s.audience }}</span></div>
+              <h3 style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: clamp(30px,3vw,42px); line-height: 1; letter-spacing: -.02em;">{{ s.title }}</h3>
+              <p style="margin: 0; max-width: 56ch; font-size: 15px; line-height: 1.7; color: #514B42; text-wrap: pretty;">{{ s.body }}</p>
+              <dl style="margin: 4px 0 0; border-top: 1px solid rgba(39,41,45,.2);">
+                <sc-for list="{{ s.specs }}" as="sp" hint-placeholder-count="4">
+                  <div style="display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr); gap: 16px; padding: 11px 0; border-bottom: 1px solid rgba(39,41,45,.14);"><dt style="font-size: 13px; color: #514B42;">{{ sp.k }}</dt><dd style="margin: 0; font-family: Newsreader, Georgia, serif; font-size: 19px; line-height: 1.25;">{{ sp.v }}</dd></div>
+                </sc-for>
+              </dl>
+              <div style="display: flex; flex-wrap: wrap; gap: 18px; margin-top: auto; padding-top: 6px;">
+                <a href="#contact" onClick="{{ s.pick }}" style="font-size: 12px; letter-spacing: .12em; text-transform: uppercase; font-weight: 500; text-decoration: underline; text-underline-offset: 6px; text-decoration-color: rgba(39,41,45,.3);" style-hover="text-decoration-color: #27292D;">{{ t.enquire }} ↗</a>
+                <sc-if value="{{ s.hasLink }}" hint-placeholder-val="{{ false }}"><a href="{{ s.linkHref }}" style="font-size: 12px; letter-spacing: .12em; text-transform: uppercase; font-weight: 500; color: #8E4B33;" style-hover="color: #27292D;">{{ s.linkLabel }} ↗</a></sc-if>
+              </div>
+            </div>
+          </article>
+        </sc-for>
+      </div>
+    </section>
+
+    <!-- 04 PARTNERS -->
+    <section id="partners" data-screen-label="04 Đối tác" aria-labelledby="pt-h" style="background: #EAE3D5; padding: clamp(56px,7vw,110px) clamp(16px,4vw,64px);">
+      <div style="display: flex; justify-content: space-between; align-items: end; gap: 20px; flex-wrap: wrap; margin-bottom: clamp(28px,3.4vw,48px);">
+        <div><div style="font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #8E4B33;">{{ t.ptEyebrow }}</div><h2 id="pt-h" style="margin: 12px 0 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: clamp(34px,4.2vw,60px); line-height: 1.02; letter-spacing: -.025em;">{{ t.ptTitle }}</h2></div>
+        <div style="font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #7C7365;">{{ partnerCount }} {{ t.ptUnit }}</div>
+      </div>
+      <ul style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(min(46%, 150px), 1fr)); gap: 10px;">
+        <sc-for list="{{ partners }}" as="p" hint-placeholder-count="20">
+          <li style="aspect-ratio: 3/2; background: #F4EFE5; display: grid; place-items: center; padding: 18px;"><img src="{{ p.src }}" alt="{{ p.alt }}" loading="lazy" style="max-width: 100%; max-height: 64px; object-fit: contain; mix-blend-mode: multiply;" /></li>
+        </sc-for>
+      </ul>
+    </section>
+
+    <!-- 05 CONTACT -->
+    <section id="contact" data-screen-label="05 Liên hệ hợp tác" aria-labelledby="ct-h" style="padding: clamp(56px,7vw,110px) clamp(16px,4vw,64px);">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: clamp(28px,4vw,64px); align-items: start;">
+        <div style="display: flex; flex-direction: column; gap: 22px;">
+          <div style="display: flex; align-items: center; gap: 14px; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #8E4B33;"><span style="width: 28px; height: 2px; background: #8E4B33;"></span><span>{{ t.ctEyebrow }}</span></div>
+          <h2 id="ct-h" style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: clamp(40px,4.8vw,72px); line-height: 1; letter-spacing: -.03em; text-wrap: balance;">{{ t.ctTitle }}</h2>
+          <p style="margin: 0; max-width: 48ch; font-size: 15px; line-height: 1.7; color: #514B42;">{{ t.ctBody }}</p>
+          <ul style="list-style: none; margin: 8px 0 0; padding: 0; border-top: 1px solid #27292D;">
+            <sc-for list="{{ contacts }}" as="c" hint-placeholder-count="4">
+              <li><a href="{{ c.href }}" style="display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 12px; align-items: baseline; padding: 14px 0; border-bottom: 1px solid rgba(39,41,45,.18);" style-hover="color: #8E4B33;"><span><span style="display: block; font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: #7C7365;">{{ c.k }}</span><span style="font-family: Newsreader, Georgia, serif; font-size: 22px; line-height: 1.2;">{{ c.v }}</span></span><span aria-hidden="true" style="font-size: 12px;">↗</span></a></li>
+            </sc-for>
+          </ul>
+        </div>
+        <div style="background: #EAE3D5; padding: clamp(22px,3vw,40px);">
+          <h3 style="margin: 0 0 22px; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: clamp(26px,2.4vw,34px); line-height: 1.1;">{{ t.formTitle }}</h3>
+          <sc-if value="{{ formSent }}" hint-placeholder-val="{{ false }}">
+            <div role="status" style="padding: 28px 0; display: flex; flex-direction: column; gap: 16px;"><div style="font-family: Newsreader, Georgia, serif; font-size: 24px; line-height: 1.3;">{{ t.fThanks }}</div><button type="button" onClick="{{ resetForm }}" style="align-self: start; background: none; border: 0; padding: 0; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; text-decoration: underline; text-underline-offset: 6px; cursor: pointer;">{{ t.fAgain }}</button></div>
+          </sc-if>
+          <sc-if value="{{ formOpen }}" hint-placeholder-val="{{ true }}">
+            <form onSubmit="{{ submitForm }}" novalidate="novalidate" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 18px 20px;">
+              <sc-for list="{{ fields }}" as="f" hint-placeholder-count="4">
+                <label style="display: flex; flex-direction: column; gap: 6px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #514B42;"><span>{{ f.label }} <span style="color: #8E4B33;">{{ f.req }}</span></span>
+                  <input type="{{ f.type }}" name="{{ f.name }}" autocomplete="{{ f.auto }}" value="{{ f.value }}" onChange="{{ f.onChange }}" style="height: 44px; padding: 0; border: 0; border-bottom: 1px solid {{ f.line }}; background: transparent; font-size: 15px; letter-spacing: 0; text-transform: none; color: #27292D; outline: none;" /></label>
+              </sc-for>
+              <fieldset style="grid-column: 1 / -1; margin: 0; padding: 0; border: 0;">
+                <legend style="padding: 0; margin-bottom: 10px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #514B42;">{{ t.fInterest }}</legend>
+                <div style="display: flex; flex-wrap: wrap; gap: 8px;">
+                  <sc-for list="{{ interests }}" as="it" hint-placeholder-count="5"><button type="button" aria-pressed="{{ it.on }}" onClick="{{ it.toggle }}" style="height: 40px; padding: 0 14px; border: 1px solid #27292D; background: {{ it.bg }}; font-size: 13px; font-weight: 500; cursor: pointer;">{{ it.label }}</button></sc-for>
+                </div>
+              </fieldset>
+              <label style="grid-column: 1 / -1; display: flex; flex-direction: column; gap: 6px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #514B42;"><span>{{ t.fMsg }}</span>
+                <textarea name="message" rows="4" value="{{ msg }}" onChange="{{ onMsg }}" style="padding: 10px 0; border: 0; border-bottom: 1px solid #27292D; background: transparent; font-size: 15px; line-height: 1.6; letter-spacing: 0; text-transform: none; color: #27292D; outline: none; resize: vertical;"></textarea></label>
+              <div style="grid-column: 1 / -1; display: flex; flex-wrap: wrap; align-items: center; gap: 16px;">
+                <button type="submit" style="height: 52px; padding: 0 30px; background: #27292D; color: #F4EFE5; border: 0; font-size: 12.5px; letter-spacing: .12em; text-transform: uppercase; font-weight: 600; cursor: pointer;" style-hover="background: #FFD35B; color: #27292D;">{{ t.fSubmit }}</button>
+                <sc-if value="{{ formErr }}" hint-placeholder-val="{{ false }}"><span role="alert" style="font-size: 13px; color: #8E4B33;">{{ t.fRequired }}</span></sc-if>
+              </div>
+            </form>
+          </sc-if>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer id="footer" data-screen-label="06 Footer" style="background: #27292D; color: #F4EFE5; padding: clamp(48px,6vw,80px) clamp(16px,4vw,64px) 32px;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr)); gap: 36px 28px;">
+      <div><img src="assets/soul-logo-full-yellow.svg" alt="SOUL Fine Robusta" style="width: 120px; height: auto;" /></div>
+      <sc-for list="{{ footerCols }}" as="fc" hint-placeholder-count="4">
+        <div><div style="font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: #FFD35B; margin-bottom: 14px;">{{ fc.title }}</div>
+          <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; font-size: 13.5px;"><sc-for list="{{ fc.links }}" as="fl" hint-placeholder-count="3"><li><a href="{{ fl.href }}" style="color: rgba(244,239,229,.85);" style-hover="color: #FFD35B;">{{ fl.label }}</a></li></sc-for></ul></div>
+      </sc-for>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; margin-top: clamp(40px,5vw,64px); padding-top: 20px; border-top: 1px solid rgba(244,239,229,.18); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: rgba(244,239,229,.7);"><span>{{ t.tagline }}</span><span>© 2026 SOUL Fine Robusta</span></div>
+  </footer>
+
+  <sc-if value="{{ mobileOpen }}" hint-placeholder-val="{{ false }}">
+    <div role="dialog" aria-modal="true" aria-label="{{ t.menu }}" style="position: fixed; inset: 0; z-index: 100; background: #F4EFE5; display: flex; flex-direction: column; overflow-y: auto;">
+      <div style="display: flex; justify-content: space-between; align-items: center; height: 66px; padding: 0 16px; border-bottom: 1px solid rgba(39,41,45,.14);"><img src="assets/soul-wordmark-ink.svg" alt="SOUL" style="height: 15px; width: auto;" /><button type="button" aria-label="{{ t.close }}" onClick="{{ closeMobile }}" style="width: 44px; height: 44px; background: none; border: 0; font-size: 24px; cursor: pointer;">×</button></div>
+      <nav aria-label="Mobile" style="padding: 8px 16px 32px; display: flex; flex-direction: column;"><sc-for list="{{ nav }}" as="n" hint-placeholder-count="6"><a href="{{ n.href }}" onClick="{{ closeMobile }}" style="display: flex; align-items: center; min-height: 60px; border-bottom: 1px solid rgba(39,41,45,.14); font-family: Newsreader, Georgia, serif; font-size: 28px;">{{ n.label }}</a></sc-for></nav>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;lang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;vi&quot;,&quot;en&quot;],&quot;default&quot;:&quot;vi&quot;,&quot;tsType&quot;:&quot;'vi' | 'en'&quot;,&quot;section&quot;:&quot;Content&quot;}}">
+class Component extends DCLogic {
+  state = { w: 1440, lang: null, mobileOpen: false, form: { name: '', biz: '', email: '', phone: '' }, msg: '', picked: [], formSent: false, formErr: false };
+
+  LOGOS = ['KhGE0JY', '0qvgmek', 'kAoE23U', 'dHdSZaa', 'jittxwI', 'Xa2jFtw', 'ZCMH8gH', '0cpAes0', 'UBepzyo', 'R9e0V2A', 'zOmbINo', 'Fxwzcg5', 'Ua8UnOv', 'etDhIN6', 'SMERBb7', '5JCRZ3f', 'Z4qvMvv', 'BaGKKC9', 'X9EOl29', 'WtBuhG3'];
+
+  T = {
+    vi: {
+      nav: ['Trang chủ', 'Sản phẩm', 'Mùa vụ mới', 'Về Soul', 'Giải pháp cà phê', 'Cửa hàng', 'Blog'], menu: 'Menu', search: 'Tìm kiếm', cart: 'Giỏ hàng', close: 'Đóng', home: 'Trang chủ', crumb: 'Giải pháp cà phê',
+      heroEyebrow: 'Coffee Solutions · HORECA & doanh nghiệp', heroTitle: 'Giải pháp cà phê cho đối tác',
+      heroBody: 'Soul làm việc cùng nhà rang, quán cà phê, nhà hàng, khách sạn và doanh nghiệp, từ lựa chọn nguyên liệu đến phát triển sản phẩm, đào tạo và vận hành.',
+      heroAlt: 'Bàn cupping với mẫu nhân xanh và túi Soulful', cta1: 'Gửi yêu cầu hợp tác', cta2: 'Xem năng lực',
+      strip: ['Nhân xanh', 'Rang xay', 'Đào tạo', 'Sự kiện', 'Quà tặng'],
+      capEyebrow: 'Năng lực sản xuất', capTitle: 'Từ vùng nguyên liệu đến xưởng rang', capBody: 'Soul liên kết vùng trồng tại Tây Nguyên và vận hành xưởng rang riêng tại Buôn Ma Thuột, đủ năng lực cung ứng ổn định cho đối tác ở nhiều quy mô.',
+      stats: [['20–60', 'tấn / tháng', 'Sản lượng rang: trung bình 20 tấn, tối đa 60 tấn mỗi tháng'], ['500+', 'ha', 'Diện tích vùng trồng liên kết'], ['1.800–2.000', 'tấn / năm', 'Tổng sản lượng nhân xanh mỗi năm'], ['10%', 'sản lượng', 'Đạt tiêu chuẩn chất lượng cao và cà phê đặc sản']],
+      svEyebrow: 'Giải pháp', svTitle: 'Năm cách Soul đồng hành', svBody: 'Mỗi đối tác có nhu cầu khác nhau. Soul tư vấn dựa trên chất lượng mong muốn, thiết bị, quy mô và ngân sách của bạn.',
+      enquire: 'Trao đổi về giải pháp này',
+      services: [
+        ['green', 'Nhân xanh', 'Nhà rang · Xuất khẩu', 'Lựa chọn nguồn cà phê theo chất lượng, mục tiêu rang và nhu cầu sản lượng, từ vùng trồng liên kết của Soul tại Tây Nguyên.', [['Vùng trồng liên kết', 'Từ 500 ha'], ['Sản lượng mỗi năm', '1.800–2.000 tấn'], ['Chất lượng cao & đặc sản', '10% sản lượng'], ['Thu hái & sơ chế', 'Công nghệ hiện đại'], ['Canh tác', 'Sản xuất cà phê bền vững']], 'images/02-shop/Nhan-xanh.jpg', 'Nhân xanh Fine Robusta trong lòng bàn tay', 'Xem nhân xanh'],
+        ['roast', 'Cà phê rang & rang gia công', 'Quán · Nhà hàng · Khách sạn', 'Phát triển lựa chọn cà phê phù hợp với menu, thiết bị và cách phục vụ, với dòng HORECA Heritage, Classico (pha máy) và Bright, Bold (pha phin).', [['Sản lượng trung bình', '20 tấn / tháng'], ['Sản lượng tối đa', '60 tấn / tháng'], ['Đóng gói', 'Công nghệ bán tự động'], ['Chứng nhận', 'Đủ điều kiện sản xuất · An toàn thực phẩm']], 'images/02-shop/CA-PHE-RANG.jpg', 'Fine Robusta vừa rang trong khay làm nguội', 'Xem dòng HORECA'],
+        ['training', 'Đào tạo', 'Chủ quán · Đối tác kinh doanh', 'Đào tạo kiến thức cà phê, đánh giá cảm quan, pha chế và vận hành dành cho chủ quán và đối tác kinh doanh cà phê, do đội ngũ có chứng chỉ quốc tế thực hiện.', [['Đánh giá nhân xanh', 'Q-Grader · CQI & SCA'], ['Sơ chế', 'Processing Certificate'], ['Rang', 'SCA Roaster'], ['Pha chế', 'SCA Barista']], 'images/03b-why-soul/web/why-cupping.jpg', 'Cà phê xay trong bát cupping', ''],
+        ['events', 'Workshop & đồ uống cho sự kiện', 'Doanh nghiệp · Agency', 'Menu đồ uống đa dạng, được Soul thiết kế theo yêu cầu, tư vấn dựa trên khoảng chi phí phù hợp với nhu cầu của doanh nghiệp và quy mô, tính chất của sự kiện. Soul còn đồng hành thiết kế các workshop về phương thức pha chế và câu chuyện cà phê để nội dung sự kiện thêm phong phú.', [['Menu', 'Thiết kế theo yêu cầu'], ['Chi phí', 'Tư vấn theo ngân sách'], ['Workshop', 'Pha chế · Câu chuyện cà phê']], 'images/03b-why-soul/web/why-fine-robusta.jpg', 'Barista Soul cầm tách Fine Robusta', ''],
+        ['gifts', 'Combo quà tặng', 'Doanh nghiệp · Cá nhân', 'Chuyện về vùng đất Tây Nguyên giàu bản sắc: đất đỏ phù sa, tâm hồn người con bản xứ và hơi thở văn hóa bản địa. Các combo được thiết kế vừa vặn, tiện lợi với nhiều mức giá, là lựa chọn tinh tế cho dịp đặc biệt hay làm quà cho người thân, bạn bè, đối tác. Mỗi sản phẩm bên trong đều được Soul tỉ mỉ chọn lựa.', [['Chủ đề', 'Vùng đất · Con người · Văn hóa bản địa'], ['Mức giá', 'Nhiều lựa chọn'], ['Tùy chỉnh', 'Theo số lượng doanh nghiệp']], 'images/04-soulful/Soulful_vuong.png', 'Bộ sưu tập Soulful 2026 trên gỗ lũa', 'Xem hộp quà']
+      ],
+      ptEyebrow: 'Đối tác', ptTitle: 'Đồng hành cùng Soul', ptUnit: 'đối tác',
+      ctEyebrow: 'Liên hệ hợp tác', ctTitle: 'Bắt đầu cùng Soul', ctBody: 'Cho chúng tôi biết bạn đang tìm kiếm điều gì. Đội ngũ Soul sẽ liên hệ lại để tư vấn và gửi mẫu phù hợp.',
+      contacts: [['Hotline Soul Specialty Coffee', '0987 592 220', 'tel:0987592220'], ['Soul Fine Robusta', '0908 267 710', 'tel:0908267710'], ['Email', 'contact@soulcoffee.vn', 'mailto:contact@soulcoffee.vn'], ['Zalo', 'soulspecialtycoffee', 'https://zalo.me/soulspecialtycoffee']],
+      formTitle: 'Form liên hệ', fName: 'Họ tên', fBiz: 'Tên doanh nghiệp', fEmail: 'Email', fPhone: 'Số điện thoại', fInterest: 'Quan tâm đến',
+      interests: ['Nhân xanh', 'Cà phê rang', 'Đào tạo', 'Workshop & sự kiện', 'Quà tặng doanh nghiệp'], fMsg: 'Nội dung cần trao đổi', fSubmit: 'Gửi thông tin',
+      fRequired: 'Vui lòng nhập họ tên và email hợp lệ.', fThanks: 'Cảm ơn bạn. Soul đã nhận thông tin và sẽ liên hệ lại sớm.', fAgain: 'Gửi yêu cầu khác',
+      footer: [['Shop', [['Cà phê rang', 'Shop.dc.html#c/ca-phe-pha-phin'], ['Nhân xanh', 'Shop.dc.html#c/ca-phe-nhan-xanh'], ['Soulful Collection', 'Shop.dc.html#c/soulful-flavours'], ['Tất cả sản phẩm', 'Shop.dc.html']]], ['Khám phá', [['Câu chuyện của Soul', 'Our Story.dc.html'], ['Cửa hàng', 'Home.html#spaces']]], ['Dành cho đối tác', [['Giải pháp cà phê', '#top'], ['Nhân xanh', '#green'], ['Mua sỉ', '#contact']]], ['Hỗ trợ', [['Giao hàng', 'Help.dc.html#shipping'], ['Đổi trả', 'Help.dc.html#returns'], ['Câu hỏi thường gặp', 'Help.dc.html'], ['Liên hệ', '#contact']]]],
+      tagline: 'Crafted by Vietnamese Soul. Buôn Ma Thuột, Việt Nam.'
+    },
+    en: {
+      nav: ['Home', 'Shop', 'New Crop', 'Our Story', 'Coffee Solutions', 'Spaces', 'Blog'], menu: 'Menu', search: 'Search', cart: 'Cart', close: 'Close', home: 'Home', crumb: 'Coffee Solutions',
+      heroEyebrow: 'Coffee Solutions · HORECA & business', heroTitle: 'Coffee Solutions for Partners',
+      heroBody: 'Soul works with roasters, cafés, restaurants, hotels and businesses across sourcing, product development, training and operations.',
+      heroAlt: 'Cupping table with green coffee samples and Soulful bags', cta1: 'Send an enquiry', cta2: 'Our capacity',
+      strip: ['Green coffee', 'Roasting', 'Training', 'Events', 'Gifting'],
+      capEyebrow: 'Production capacity', capTitle: 'From partner farms to our roastery', capBody: 'Soul works with partner growing areas in the Central Highlands and runs its own roastery in Buôn Ma Thuột, able to supply partners of every size reliably.',
+      stats: [['20–60', 'tons / month', 'Roasting volume: 20 tons on average, up to 60 tons a month'], ['500+', 'ha', 'Partner growing area'], ['1,800–2,000', 'tons / year', 'Total green coffee volume per year'], ['10%', 'of volume', 'High-quality and specialty grade']],
+      svEyebrow: 'Solutions', svTitle: 'Five ways we work together', svBody: 'Every partner is different. Soul advises on quality targets, equipment, scale and budget.',
+      enquire: 'Discuss this solution',
+      services: [
+        ['green', 'Green Coffee', 'Roasters · Export', 'Coffee sourcing based on quality, roasting goals and volume requirements, from Soul’s partner growing areas in the Central Highlands.', [['Partner growing area', '500 ha and above'], ['Annual volume', '1,800–2,000 tons'], ['High quality & specialty', '10% of volume'], ['Harvest & processing', 'Advanced production processes'], ['Cultivation', 'Sustainable coffee production']], 'images/02-shop/Nhan-xanh.jpg', 'Green Fine Robusta in cupped hands', 'Shop green coffee'],
+        ['roast', 'Roasted Coffee & Toll Roasting', 'Cafés · Restaurants · Hotels', 'Coffee developed around your menu, equipment and service format, including the HORECA range: Heritage and Classico for espresso, Bright and Bold for phin.', [['Average volume', '20 tons / month'], ['Maximum volume', '60 tons / month'], ['Packaging', 'Semi-automatic'], ['Certification', 'Production eligibility · Food safety']], 'images/02-shop/CA-PHE-RANG.jpg', 'Freshly roasted Fine Robusta in the cooling tray', 'See the HORECA range'],
+        ['training', 'Training', 'Café owners · Business partners', 'Coffee knowledge, sensory, brewing and operational training for café owners and coffee business partners, delivered by an internationally certified team.', [['Green grading', 'Q-Grader · CQI & SCA'], ['Processing', 'Processing Certificate'], ['Roasting', 'SCA Roaster'], ['Brewing', 'SCA Barista']], 'images/03b-why-soul/web/why-cupping.jpg', 'Ground coffee in a cupping bowl', ''],
+        ['events', 'Workshops & Event Coffee', 'Businesses · Agencies', 'A varied drinks menu designed to brief, with advice based on your budget and the scale and nature of the event. Soul can also design workshops on brewing methods and coffee stories to enrich your programme.', [['Menu', 'Designed to brief'], ['Cost', 'Advised to budget'], ['Workshops', 'Brewing · Coffee stories']], 'images/03b-why-soul/web/why-fine-robusta.jpg', 'A Soul barista holding a cup of Fine Robusta', ''],
+        ['gifts', 'Gift Sets', 'Businesses · Personal', 'Stories of the Central Highlands: red basalt soil, the people of the land and its native culture. Thoughtfully sized sets at several price points make a refined gift for special occasions, family, friends or business partners. Every item inside is carefully chosen by Soul.', [['Theme', 'Land · People · Native culture'], ['Price', 'Several options'], ['Customisation', 'For corporate quantities']], 'images/04-soulful/Soulful_vuong.png', 'Soulful Collection 2026 on driftwood', 'Shop gift sets']
+      ],
+      ptEyebrow: 'Partners', ptTitle: 'Working with Soul', ptUnit: 'partners',
+      ctEyebrow: 'Partner enquiry', ctTitle: 'Start with Soul', ctBody: 'Tell us what you are looking for. The Soul team will get back to you with advice and suitable samples.',
+      contacts: [['Soul Specialty Coffee hotline', '0987 592 220', 'tel:0987592220'], ['Soul Fine Robusta', '0908 267 710', 'tel:0908267710'], ['Email', 'contact@soulcoffee.vn', 'mailto:contact@soulcoffee.vn'], ['Zalo', 'soulspecialtycoffee', 'https://zalo.me/soulspecialtycoffee']],
+      formTitle: 'Contact form', fName: 'Name', fBiz: 'Business name', fEmail: 'Email', fPhone: 'Phone', fInterest: 'Interested in',
+      interests: ['Green Coffee', 'Roasted Coffee', 'Training', 'Workshops & Events', 'Corporate Gifts'], fMsg: 'Message', fSubmit: 'Send enquiry',
+      fRequired: 'Please enter your name and a valid email.', fThanks: 'Thank you. Soul has received your enquiry and will be in touch shortly.', fAgain: 'Send another enquiry',
+      footer: [['Shop', [['Roasted Coffee', 'Shop.dc.html#c/ca-phe-pha-phin'], ['Green Coffee', 'Shop.dc.html#c/ca-phe-nhan-xanh'], ['Soulful Collection', 'Shop.dc.html#c/soulful-flavours'], ['All Coffee', 'Shop.dc.html']]], ['Discover', [['Our Story', 'Our Story.dc.html'], ['Spaces', 'Home.html#spaces']]], ['Professional', [['Coffee Solutions', '#top'], ['Green Coffee', '#green'], ['Wholesale', '#contact']]], ['Support', [['Shipping', 'Help.dc.html#shipping'], ['Returns', 'Help.dc.html#returns'], ['FAQ', 'Help.dc.html'], ['Contact', '#contact']]]],
+      tagline: 'Crafted by Vietnamese Soul. Buôn Ma Thuột, Vietnam.'
+    }
+  };
+
+  LINKS = { green: 'https://soulcoffee.vn/collections/ca-phe-nhan-xanh', roast: 'https://soulcoffee.vn/collections/ca-phe-chat-luong-cao', gifts: 'https://soulcoffee.vn/collections/hop-qua-combo' };
+  PICK = { green: 0, roast: 1, training: 2, events: 3, gifts: 4 };
+
+  componentDidMount() {
+    this._r = () => this.setState({ w: window.innerWidth }); this._r(); window.addEventListener('resize', this._r);
+    this._k = (e) => { if (e.key === 'Escape') this.setState({ mobileOpen: false }); }; window.addEventListener('keydown', this._k);
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this._r); window.removeEventListener('keydown', this._k); }
+  componentDidUpdate(pp) { if (pp.lang !== this.props.lang) this.setState({ lang: null }); }
+  setField(k) { return (e) => { const v = e.target.value; this.setState(s => ({ form: { ...s.form, [k]: v }, formErr: false })); }; }
+
+  renderVals() {
+    const s = this.state, L = s.lang || this.props.lang || 'vi', t = this.T[L], isMobile = s.w < 1180, pad = (n) => String(n).padStart(2, '0');
+    const hrefs = ['Home.html', 'Shop.dc.html', 'Shop.dc.html#c/soulful-flavours', 'Our Story.dc.html', '#top', 'Spaces.dc.html', 'Blog.dc.html'];
+    const validEmail = (v) => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.trim());
+    const err = s.formErr;
+    return {
+      t, isMobile, isDesktop: !isMobile,
+      isVi: L === 'vi', isEn: L === 'en', viBg: L === 'vi' ? '#27292D' : 'transparent', enBg: L === 'en' ? '#27292D' : 'transparent', viColor: L === 'vi' ? '#F4EFE5' : '#27292D', enColor: L === 'en' ? '#F4EFE5' : '#27292D',
+      setVi: () => this.setState({ lang: 'vi' }), setEn: () => this.setState({ lang: 'en' }),
+      nav: t.nav.map((label, i) => ({ label, href: hrefs[i], current: i === 4 ? 'page' : 'false', line: i === 4 ? '#FFD35B' : 'transparent' })),
+      mobileOpen: s.mobileOpen, openMobile: () => this.setState({ mobileOpen: true }), closeMobile: () => this.setState({ mobileOpen: false }),
+      strip: t.strip.map((label, i) => ({ label, n: pad(i + 1), href: '#' + ['green', 'roast', 'training', 'events', 'gifts'][i] })),
+      stats: t.stats.map(x => ({ num: x[0], unit: x[1], label: x[2] })),
+      services: t.services.map((x, i) => ({ id: x[0], n: pad(i + 1), title: x[1], audience: x[2], body: x[3], specs: x[4].map(p => ({ k: p[0], v: p[1] })), img: x[5], alt: x[6],
+        linkLabel: x[7], hasLink: !!x[7], linkHref: this.LINKS[x[0]] || '#', bg: i % 2 ? '#F4EFE5' : '#EAE3D5', imgOrder: i % 2 ? 2 : 0,
+        pick: () => this.setState(st => ({ picked: st.picked.includes(this.PICK[x[0]]) ? st.picked : [...st.picked, this.PICK[x[0]]] })) })),
+      partners: this.LOGOS.map((id, i) => ({ src: 'https://i.imgur.com/' + id + '.png', alt: (L === 'vi' ? 'Logo đối tác ' : 'Partner logo ') + (i + 1) })),
+      partnerCount: pad(this.LOGOS.length),
+      contacts: t.contacts.map(c => ({ k: c[0], v: c[1], href: c[2] })),
+      fields: [['name', t.fName, 'text', 'name', true], ['biz', t.fBiz, 'text', 'organization', false], ['email', t.fEmail, 'email', 'email', true], ['phone', t.fPhone, 'tel', 'tel', false]].map(f => ({
+        name: f[0], label: f[1], type: f[2], auto: f[3], req: f[4] ? '*' : '', value: s.form[f[0]], onChange: this.setField(f[0]),
+        line: err && f[4] && (f[0] === 'email' ? !validEmail(s.form.email) : !s.form[f[0]].trim()) ? '#8E4B33' : '#27292D' })),
+      msg: s.msg, onMsg: (e) => this.setState({ msg: e.target.value }),
+      interests: t.interests.map((label, i) => { const on = s.picked.includes(i); return { label, on, bg: on ? '#FFD35B' : 'transparent', toggle: () => this.setState(st => ({ picked: st.picked.includes(i) ? st.picked.filter(x => x !== i) : [...st.picked, i] })) }; }),
+      formSent: s.formSent, formOpen: !s.formSent, formErr: s.formErr,
+      submitForm: (e) => { e.preventDefault(); if (!s.form.name.trim() || !validEmail(s.form.email)) { this.setState({ formErr: true }); return; } this.setState({ formSent: true, formErr: false }); },
+      resetForm: () => this.setState({ formSent: false, form: { name: '', biz: '', email: '', phone: '' }, msg: '', picked: [] }),
+      footerCols: t.footer.map(c => ({ title: c[0], links: c[1].map(l => ({ label: l[0], href: l[1] })) }))
+    };
+  }
+}
+</script>
+</body>
+</html>

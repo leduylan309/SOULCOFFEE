@@ -1,0 +1,475 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..500&amp;family=Be+Vietnam+Pro:wght@400;500;600&amp;display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-font-smoothing: antialiased; overflow-x: clip; scroll-padding-top: 88px; }
+  body { margin: 0; background: #F4EFE5; color: #27292D; font-family: "Be Vietnam Pro", system-ui, sans-serif; font-size: 15px; line-height: 1.6; overflow-x: hidden; }
+  a { color: inherit; text-decoration: none; }
+  a:hover { color: inherit; }
+  button, input, select { font-family: inherit; color: inherit; }
+  img { display: block; }
+  :focus-visible { outline: 2px solid #FFD35B; outline-offset: 3px; }
+  ::selection { background: #FFD35B; color: #27292D; }
+</style>
+</helmet>
+
+<div style="min-height: 100vh; background: #F4EFE5; color: #27292D; display: flex; flex-direction: column;">
+
+  <header style="position: sticky; top: 0; z-index: 60; background: #F4EFE5; border-bottom: 1px solid rgba(39,41,45,.14);">
+    <nav aria-label="Main" style="display: flex; align-items: center; justify-content: space-between; gap: 20px; height: 66px; padding: 0 clamp(16px,4vw,64px);">
+      <div style="display: flex; align-items: center; gap: clamp(20px,2.6vw,40px);">
+        <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+          <button type="button" aria-label="{{ t.menu }}" onClick="{{ openMobile }}" style="width: 44px; height: 44px; margin-left: -10px; display: grid; place-items: center; background: none; border: 0; cursor: pointer;"><span style="display: block; width: 22px; height: 1.5px; background: #27292D; box-shadow: 0 -7px 0 #27292D, 0 7px 0 #27292D;"></span></button>
+        </sc-if>
+        <a href="Home.html" aria-label="SOUL" style="display: flex; align-items: center; gap: 12px;"><img src="assets/soul-elephant-ink.svg" alt="" width="30" height="30" style="width: 30px; height: 30px;" /><img src="assets/soul-wordmark-ink.svg" alt="SOUL" style="height: 15px; width: auto;" /></a>
+        <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+          <div style="display: flex; align-items: center; font-size: 12px; letter-spacing: .08em; font-weight: 500; text-transform: uppercase;">
+            <sc-for list="{{ nav }}" as="n" hint-placeholder-count="7">
+              <a href="{{ n.href }}" style="display: flex; align-items: center; height: 66px; padding: 0 12px; border-bottom: 2px solid transparent; white-space: nowrap;" style-hover="border-bottom-color: #FFD35B;">{{ n.label }}</a>
+            </sc-for>
+          </div>
+        </sc-if>
+      </div>
+      <div style="display: flex; align-items: center; gap: 4px; font-size: 12px; letter-spacing: .08em; font-weight: 500;">
+        <div role="group" aria-label="Language" style="display: flex; border: 1px solid rgba(39,41,45,.3); height: 32px; margin-right: 6px;">
+          <button type="button" aria-pressed="{{ isVi }}" onClick="{{ setVi }}" style="width: 38px; height: 30px; border: 0; background: {{ viBg }}; color: {{ viColor }}; font-size: 11px; letter-spacing: .1em; font-weight: 600; cursor: pointer;">VI</button>
+          <button type="button" aria-pressed="{{ isEn }}" onClick="{{ setEn }}" style="width: 38px; height: 30px; border: 0; background: {{ enBg }}; color: {{ enColor }}; font-size: 11px; letter-spacing: .1em; font-weight: 600; cursor: pointer;">EN</button>
+        </div>
+        <a href="Search.dc.html" aria-label="{{ t.search }}" style="width: 44px; height: 44px; display: grid; place-items: center;"><svg width="17" height="17" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="7" cy="7" r="5"></circle><path d="M11 11l4 4"></path></svg></a>
+        <a href="#" onClick="{{ goHome }}" aria-label="{{ t.account }}" aria-current="page" style="width: 44px; height: 44px; display: grid; place-items: center; box-shadow: inset 0 -2px 0 #FFD35B;"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="8" cy="5.5" r="3"></circle><path d="M2.5 15c.6-3 2.8-4.6 5.5-4.6s4.9 1.6 5.5 4.6"></path></svg></a>
+        <a href="Checkout.dc.html" aria-label="{{ t.cart }}" style="height: 44px; padding: 0 0 0 8px; display: flex; align-items: center; gap: 8px; text-transform: uppercase;"><sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}"><span>{{ t.cart }}</span></sc-if><span style="min-width: 22px; height: 22px; padding: 0 6px; display: grid; place-items: center; background: {{ badgeBg }}; color: {{ badgeFg }}; font-size: 11px; border-radius: 11px;">{{ count }}</span></a>
+      </div>
+    </nav>
+  </header>
+
+  <main style="flex: 1;">
+    <!-- ============ AUTH: /account/login · /account/register · recover ============ -->
+    <sc-if value="{{ isAuth }}" hint-placeholder-val="{{ true }}">
+      <section id="top" data-screen-label="01 Tài khoản · Đăng nhập / Đăng ký" aria-labelledby="au-h" style="display: flex; flex-wrap: wrap; min-height: calc(100vh - 66px);">
+        <div style="flex: 1 1 420px; position: relative; min-height: 320px; background: #27292D; color: #F4EFE5; overflow: hidden;">
+          <img src="images/03-why-soul-album/SFR5.jpg" alt="" style="position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: .55;" />
+          <div style="position: relative; height: 100%; display: flex; flex-direction: column; justify-content: flex-end; gap: 14px; padding: clamp(28px,4vw,64px);">
+            <img src="assets/soul-logo-full-yellow.svg" alt="" style="width: 80px; height: auto;" />
+            <p style="margin: 0; max-width: 18ch; font-family: Newsreader, Georgia, serif; font-size: clamp(32px,3.6vw,54px); line-height: 1.04; letter-spacing: -.02em; text-wrap: balance;">{{ t.authQuote }}</p>
+            <ul style="list-style: none; margin: 8px 0 0; padding: 0; display: flex; flex-direction: column; gap: 8px; font-size: 14px; color: rgba(244,239,229,.9);">
+              <sc-for list="{{ perks }}" as="pk" hint-placeholder-count="3"><li style="display: grid; grid-template-columns: 20px 1fr;"><span style="color: #FFD35B;" aria-hidden="true">—</span>{{ pk.text }}</li></sc-for>
+            </ul>
+          </div>
+        </div>
+        <div style="flex: 1 1 420px; display: flex; align-items: center; justify-content: center; padding: clamp(36px,5vw,72px) clamp(16px,4vw,64px);">
+          <div style="width: 100%; max-width: 460px; display: flex; flex-direction: column; gap: 24px;">
+            <sc-if value="{{ hasTabs }}" hint-placeholder-val="{{ true }}">
+              <div role="tablist" style="display: flex; border-bottom: 1px solid rgba(39,41,45,.25);">
+                <sc-for list="{{ tabs }}" as="tb" hint-placeholder-count="2"><a href="{{ tb.href }}" onClick="{{ tb.open }}" role="tab" aria-selected="{{ tb.on }}" style="flex: 1; height: 48px; display: grid; place-items: center; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; color: {{ tb.fg }}; box-shadow: inset 0 -2px 0 {{ tb.line }};">{{ tb.label }}</a></sc-for>
+              </div>
+            </sc-if>
+            <div><h1 id="au-h" style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: clamp(36px,3.6vw,52px); line-height: 1.02; letter-spacing: -.025em;">{{ authTitle }}</h1><p style="margin: 10px 0 0; font-size: 15px; color: #514B42; text-wrap: pretty;">{{ authIntro }}</p></div>
+            <sc-if value="{{ hasNotice }}" hint-placeholder-val="{{ false }}"><div role="status" style="padding: 12px 16px; background: {{ noticeBg }}; color: {{ noticeFg }}; font-size: 14px; line-height: 1.55;">{{ notice }}</div></sc-if>
+            <sc-for list="{{ forms }}" as="fm" hint-placeholder-count="1">
+              <form onSubmit="{{ fm.submit }}" novalidate="novalidate" style="display: flex; flex-direction: column; gap: 16px;">
+                <sc-for list="{{ fm.rows }}" as="row" hint-placeholder-count="2">
+                  <div style="display: flex; flex-wrap: wrap; gap: 16px;">
+                    <sc-for list="{{ row.fields }}" as="fd" hint-placeholder-count="1">
+                      <div style="display: flex; flex-direction: column; gap: 6px; flex: 1 1 200px; min-width: 0;">
+                        <div style="display: flex; justify-content: space-between; gap: 10px;"><label for="{{ fd.id }}" style="font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: #7C7365;">{{ fd.label }}</label><sc-if value="{{ fd.hasAside }}" hint-placeholder-val="{{ false }}"><a href="{{ fd.asideHref }}" onClick="{{ fd.asideOpen }}" style="font-size: 12px; text-decoration: underline; text-underline-offset: 3px;">{{ fd.aside }}</a></sc-if></div>
+                        <input id="{{ fd.id }}" type="{{ fd.type }}" value="{{ fd.value }}" onChange="{{ fd.onChange }}" autoComplete="{{ fd.auto }}" aria-invalid="{{ fd.invalid }}" style="height: 50px; padding: 0 14px; border: 1px solid {{ fd.line }}; background: #FBF8F2; font-size: 15px; outline: none;" style-focus="border-color: #27292D;" />
+                        <sc-if value="{{ fd.hasErr }}" hint-placeholder-val="{{ false }}"><span role="alert" style="font-size: 12.5px; color: #A0402C;">{{ fd.err }}</span></sc-if>
+                      </div>
+                    </sc-for>
+                  </div>
+                </sc-for>
+                <sc-for list="{{ fm.checks }}" as="ch" hint-placeholder-count="1">
+                  <div style="display: flex; flex-direction: column; gap: 4px;"><label style="display: flex; align-items: flex-start; gap: 10px; font-size: 13.5px; line-height: 1.55; cursor: pointer;"><input type="checkbox" checked="{{ ch.checked }}" onChange="{{ ch.toggle }}" style="width: 18px; height: 18px; margin-top: 2px; accent-color: #27292D;" />{{ ch.label }}</label><sc-if value="{{ ch.hasErr }}" hint-placeholder-val="{{ false }}"><span role="alert" style="font-size: 12.5px; color: #A0402C; padding-left: 28px;">{{ ch.err }}</span></sc-if></div>
+                </sc-for>
+                <sc-if value="{{ fm.hasErr }}" hint-placeholder-val="{{ false }}"><div role="alert" style="padding: 12px 16px; border: 1px solid #A0402C; color: #A0402C; font-size: 14px;">{{ fm.err }}</div></sc-if>
+                <button type="submit" style="height: 54px; border: 0; background: #27292D; color: #F4EFE5; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; cursor: pointer;" style-hover="background: #FFD35B; color: #27292D;">{{ fm.submitLabel }}</button>
+              </form>
+            </sc-for>
+            <p style="margin: 0; font-size: 14px; color: #514B42;">{{ altText }} <a href="{{ altHref }}" onClick="{{ altOpen }}" style="color: #27292D; font-weight: 600; text-decoration: underline; text-underline-offset: 4px;">{{ altLink }}</a></p>
+          </div>
+        </div>
+      </section>
+    </sc-if>
+
+    <!-- ============ DASHBOARD /account ============ -->
+    <sc-if value="{{ isDash }}" hint-placeholder-val="{{ false }}">
+      <section id="top" data-screen-label="01 Tài khoản · Tiêu đề" style="padding: clamp(36px,5vw,64px) clamp(16px,4vw,64px) 0;">
+        <nav aria-label="Breadcrumb" style="display: flex; flex-wrap: wrap; gap: 10px; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #7C7365;"><a href="Home.html" style-hover="color: #8E4B33;">{{ t.home }}</a><span aria-hidden="true">/</span><a href="#" onClick="{{ goHome }}" style-hover="color: #8E4B33;">{{ t.account }}</a><span aria-hidden="true">/</span><span style="color: #27292D;">{{ crumb }}</span></nav>
+        <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: end; gap: 16px 40px; margin-top: clamp(28px,4vw,56px); padding-bottom: 22px; border-bottom: 1px solid #27292D;">
+          <div><div style="display: flex; align-items: center; gap: 14px; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #8E4B33;"><span style="width: 28px; height: 2px; background: #8E4B33;"></span><span>{{ t.account }}</span></div>
+            <h1 style="margin: 18px 0 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: clamp(42px, 5.4vw, 84px); line-height: .98; letter-spacing: -.03em; text-wrap: balance;">{{ dashTitle }}</h1></div>
+          <span style="font-size: 13.5px; color: #514B42;">{{ userEmail }}</span>
+        </div>
+      </section>
+
+      <section data-screen-label="02 Tài khoản · Nội dung" style="padding: clamp(24px,3vw,40px) clamp(16px,4vw,64px) clamp(64px,8vw,120px); display: flex; flex-wrap: wrap; align-items: flex-start; gap: 28px clamp(28px,4vw,64px);">
+        <aside style="flex: 1 1 220px; max-width: 280px; align-self: stretch;">
+          <nav aria-label="{{ t.account }}" style="position: sticky; top: 90px; display: flex; flex-direction: column; border-top: 1px solid #27292D;">
+            <sc-for list="{{ side }}" as="sd" hint-placeholder-count="5">
+              <a href="{{ sd.href }}" onClick="{{ sd.open }}" aria-current="{{ sd.current }}" style="display: flex; justify-content: space-between; align-items: center; gap: 10px; min-height: 50px; padding: 0 12px 0 {{ sd.pad }}; border-bottom: 1px solid rgba(39,41,45,.14); font-size: 14.5px; font-weight: {{ sd.weight }}; box-shadow: inset {{ sd.bar }} 0 0 #FFD35B;" style-hover="color: #8E4B33;"><span>{{ sd.label }}</span><span style="font-size: 11px; color: #7C7365;">{{ sd.count }}</span></a>
+            </sc-for>
+          </nav>
+        </aside>
+
+        <div style="flex: 999 1 520px; min-width: 0; display: flex; flex-direction: column; gap: 28px;">
+          <sc-if value="{{ hasNotice }}" hint-placeholder-val="{{ false }}"><div role="status" style="padding: 12px 16px; background: {{ noticeBg }}; color: {{ noticeFg }}; font-size: 14px;">{{ notice }}</div></sc-if>
+
+          <!-- Overview -->
+          <sc-if value="{{ isOverview }}" hint-placeholder-val="{{ true }}">
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 10px;">
+              <sc-for list="{{ cards }}" as="cd" hint-placeholder-count="3">
+                <a href="{{ cd.href }}" onClick="{{ cd.open }}" style="display: flex; flex-direction: column; gap: 10px; min-height: 200px; padding: 22px; background: {{ cd.bg }}; color: {{ cd.fg }};" style-hover="outline: 1px solid #27292D;">
+                  <span style="font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: {{ cd.eyeColor }}; font-weight: 600;">{{ cd.k }}</span>
+                  <span style="font-family: Newsreader, Georgia, serif; font-size: clamp(24px,2.2vw,32px); line-height: 1.1;">{{ cd.title }}</span>
+                  <span style="font-size: 14px; line-height: 1.6; white-space: pre-line; opacity: .85;">{{ cd.body }}</span>
+                  <span style="margin-top: auto; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; font-weight: 600;">{{ cd.cta }} ↗</span>
+                </a>
+              </sc-for>
+            </div>
+          </sc-if>
+
+          <!-- Orders list -->
+          <sc-if value="{{ isOrders }}" hint-placeholder-val="{{ false }}">
+            <sc-if value="{{ noOrders }}" hint-placeholder-val="{{ false }}">
+              <div style="display: grid; place-items: center; gap: 16px; min-height: 260px; background: #EAE3D5; padding: 24px; text-align: center;"><p style="margin: 0; font-family: Newsreader, Georgia, serif; font-size: 26px;">{{ t.noOrders }}</p><a href="Shop.dc.html" style="height: 46px; padding: 0 20px; display: inline-flex; align-items: center; background: #27292D; color: #F4EFE5; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; font-weight: 600;" style-hover="background: #FFD35B; color: #27292D;">{{ t.shopNow }} ↗</a></div>
+            </sc-if>
+            <ul style="list-style: none; margin: 0; padding: 0; border-top: 1px solid #27292D;">
+              <sc-for list="{{ orderRows }}" as="o" hint-placeholder-count="3">
+                <li style="display: flex; flex-wrap: wrap; align-items: center; gap: 14px 28px; padding: 18px 0; border-bottom: 1px solid rgba(39,41,45,.16);">
+                  <div style="display: flex; gap: 6px; flex: 0 0 auto;"><sc-for list="{{ o.thumbs }}" as="th" hint-placeholder-count="2"><img src="{{ th.src }}" alt="" style="width: 52px; height: 52px; object-fit: cover; background: #E2DACB;" /></sc-for></div>
+                  <div style="flex: 1 1 200px; min-width: 0; display: flex; flex-direction: column; gap: 4px;"><a href="{{ o.href }}" onClick="{{ o.open }}" style="font-family: Newsreader, Georgia, serif; font-size: 22px; line-height: 1.1;" style-hover="color: #8E4B33;">#{{ o.id }}</a><span style="font-size: 13px; color: #7C7365;">{{ o.date }} · {{ o.count }}</span></div>
+                  <span style="height: 28px; padding: 0 10px; display: inline-flex; align-items: center; background: {{ o.stBg }}; color: {{ o.stFg }}; font-size: 10.5px; letter-spacing: .14em; text-transform: uppercase; font-weight: 600;">{{ o.status }}</span>
+                  <span style="min-width: 110px; text-align: right; font-size: 15px; font-weight: 500;">{{ o.total }}</span>
+                  <a href="{{ o.href }}" onClick="{{ o.open }}" style="height: 40px; padding: 0 16px; display: inline-flex; align-items: center; border: 1px solid #27292D; font-size: 11.5px; letter-spacing: .12em; text-transform: uppercase; font-weight: 600;" style-hover="background: #27292D; color: #F4EFE5;">{{ t.view }}</a>
+                </li>
+              </sc-for>
+            </ul>
+          </sc-if>
+
+          <!-- Order detail -->
+          <sc-if value="{{ isOrder }}" hint-placeholder-val="{{ false }}">
+            <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 12px 20px;">
+              <a href="#orders" onClick="{{ goOrders }}" style="font-size: 12px; letter-spacing: .12em; text-transform: uppercase; font-weight: 500;" style-hover="color: #8E4B33;">← {{ t.allOrders }}</a>
+              <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                <sc-if value="{{ od.canCancel }}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{ cancelOrder }}" style="height: 44px; padding: 0 18px; border: 1px solid #A0402C; background: none; color: #A0402C; font-size: 11.5px; letter-spacing: .12em; text-transform: uppercase; font-weight: 600; cursor: pointer;">{{ t.cancel }}</button></sc-if>
+                <button type="button" onClick="{{ reorder }}" style="height: 44px; padding: 0 18px; border: 0; background: #27292D; color: #F4EFE5; font-size: 11.5px; letter-spacing: .12em; text-transform: uppercase; font-weight: 600; cursor: pointer;" style-hover="background: #FFD35B; color: #27292D;">{{ t.reorder }}</button>
+              </div>
+            </div>
+            <sc-if value="{{ od.isCancelled }}" hint-placeholder-val="{{ false }}"><div style="padding: 12px 16px; border: 1px solid #A0402C; color: #A0402C; font-size: 14px;">{{ t.cancelled }}</div></sc-if>
+            <sc-if value="{{ od.isActive }}" hint-placeholder-val="{{ true }}">
+              <ol style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 140px), 1fr)); gap: 6px;">
+                <sc-for list="{{ od.track }}" as="tr" hint-placeholder-count="4"><li style="display: flex; flex-direction: column; gap: 6px; padding-top: 12px; border-top: 3px solid {{ tr.line }};"><span style="font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: {{ tr.fg }};">{{ tr.n }}</span><span style="font-size: 14px; font-weight: 500; color: {{ tr.fg }};">{{ tr.label }}</span></li></sc-for>
+              </ol>
+            </sc-if>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 10px;">
+              <sc-for list="{{ od.blocks }}" as="bl" hint-placeholder-count="3"><div style="background: #EAE3D5; padding: 18px 20px; display: flex; flex-direction: column; gap: 6px;"><span style="font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: #7C7365;">{{ bl.k }}</span><span style="font-size: 14.5px; line-height: 1.6; white-space: pre-line;">{{ bl.v }}</span></div></sc-for>
+            </div>
+            <ul style="list-style: none; margin: 0; padding: 0; border-top: 1px solid #27292D;">
+              <sc-for list="{{ od.items }}" as="ci" hint-placeholder-count="2">
+                <li style="display: grid; grid-template-columns: 72px minmax(0,1fr) auto; gap: 16px; align-items: center; padding: 14px 0; border-bottom: 1px solid rgba(39,41,45,.14);"><a href="{{ ci.href }}"><img src="{{ ci.img }}" alt="" style="width: 72px; height: 72px; object-fit: cover; background: #E2DACB;" /></a><span style="display: flex; flex-direction: column; gap: 2px; min-width: 0;"><a href="{{ ci.href }}" style="font-family: Newsreader, Georgia, serif; font-size: 19px; line-height: 1.2;" style-hover="color: #8E4B33;">{{ ci.name }}</a><span style="font-size: 12.5px; color: #7C7365;">{{ ci.variant }} · {{ ci.unit }} × {{ ci.qty }}</span></span><span style="font-size: 15px; font-weight: 500;">{{ ci.total }}</span></li>
+              </sc-for>
+            </ul>
+            <dl style="margin: 0 0 0 auto; width: min(100%, 380px);">
+              <sc-for list="{{ od.lines }}" as="ln" hint-placeholder-count="3"><div style="display: flex; justify-content: space-between; gap: 12px; padding: 10px 0; border-bottom: 1px solid rgba(39,41,45,.16); font-size: 14px;"><dt>{{ ln.k }}</dt><dd style="margin: 0;">{{ ln.v }}</dd></div></sc-for>
+              <div style="display: flex; justify-content: space-between; align-items: baseline; padding-top: 14px;"><dt style="font-size: 11px; letter-spacing: .16em; text-transform: uppercase; color: #7C7365;">{{ t.total }}</dt><dd style="margin: 0; font-family: Newsreader, Georgia, serif; font-size: 32px; line-height: 1;">{{ od.total }}</dd></div>
+            </dl>
+          </sc-if>
+
+          <!-- Addresses -->
+          <sc-if value="{{ isAddresses }}" hint-placeholder-val="{{ false }}">
+            <sc-if value="{{ showAddrList }}" hint-placeholder-val="{{ true }}">
+              <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(min(100%, 280px), 1fr)); gap: 10px;">
+                <sc-for list="{{ addrs }}" as="ad" hint-placeholder-count="2">
+                  <div style="display: flex; flex-direction: column; gap: 10px; padding: 20px 22px; background: #EAE3D5; border: 1px solid {{ ad.line }};">
+                    <div style="display: flex; justify-content: space-between; align-items: center; gap: 10px;"><span style="font-family: Newsreader, Georgia, serif; font-size: 22px; line-height: 1.1;">{{ ad.name }}</span><sc-if value="{{ ad.isDef }}" hint-placeholder-val="{{ false }}"><span style="height: 24px; padding: 0 8px; display: inline-flex; align-items: center; background: #FFD35B; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; font-weight: 600;">{{ t.default }}</span></sc-if></div>
+                    <span style="font-size: 14px; line-height: 1.6; white-space: pre-line; color: #3A3832;">{{ ad.text }}</span>
+                    <div style="display: flex; flex-wrap: wrap; gap: 6px 16px; margin-top: auto; padding-top: 8px; border-top: 1px solid rgba(39,41,45,.16); font-size: 12.5px;">
+                      <button type="button" onClick="{{ ad.edit }}" style="padding: 0; border: 0; background: none; font-size: 12.5px; text-decoration: underline; text-underline-offset: 3px; cursor: pointer;">{{ t.edit }}</button>
+                      <sc-if value="{{ ad.notDef }}" hint-placeholder-val="{{ true }}"><button type="button" onClick="{{ ad.makeDef }}" style="padding: 0; border: 0; background: none; font-size: 12.5px; text-decoration: underline; text-underline-offset: 3px; cursor: pointer;">{{ t.setDefault }}</button></sc-if>
+                      <button type="button" onClick="{{ ad.remove }}" style="padding: 0; border: 0; background: none; font-size: 12.5px; color: #A0402C; text-decoration: underline; text-underline-offset: 3px; cursor: pointer;">{{ t.remove }}</button>
+                    </div>
+                  </div>
+                </sc-for>
+                <button type="button" onClick="{{ newAddr }}" style="min-height: 180px; display: grid; place-items: center; border: 1px dashed rgba(39,41,45,.45); background: none; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; cursor: pointer;" style-hover="background: #EAE3D5;">+ {{ t.addAddr }}</button>
+              </div>
+            </sc-if>
+          </sc-if>
+
+          <!-- Shared dashboard forms (address edit, profile, password) -->
+          <sc-for list="{{ dashForms }}" as="fm" hint-placeholder-count="0">
+            <form onSubmit="{{ fm.submit }}" novalidate="novalidate" style="display: flex; flex-direction: column; gap: 16px; padding: clamp(20px,2.4vw,32px); border: 1px solid rgba(39,41,45,.25);">
+              <h2 style="margin: 0 0 4px; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: clamp(26px,2.4vw,34px); line-height: 1.1;">{{ fm.title }}</h2>
+              <sc-for list="{{ fm.rows }}" as="row" hint-placeholder-count="2">
+                <div style="display: flex; flex-wrap: wrap; gap: 16px;">
+                  <sc-for list="{{ row.fields }}" as="fd" hint-placeholder-count="2">
+                    <div style="display: flex; flex-direction: column; gap: 6px; flex: 1 1 220px; min-width: 0;">
+                      <label for="{{ fd.id }}" style="font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: #7C7365;">{{ fd.label }}</label>
+                      <sc-if value="{{ fd.isSelect }}" hint-placeholder-val="{{ false }}"><select id="{{ fd.id }}" value="{{ fd.value }}" onChange="{{ fd.onChange }}" aria-invalid="{{ fd.invalid }}" style="width: 100%; height: 50px; padding: 0 12px; border: 1px solid {{ fd.line }}; background: #FBF8F2; font-size: 15px;"><sc-for list="{{ fd.options }}" as="op" hint-placeholder-count="5"><option value="{{ op.v }}">{{ op.label }}</option></sc-for></select></sc-if>
+                      <sc-if value="{{ fd.isInput }}" hint-placeholder-val="{{ true }}"><input id="{{ fd.id }}" type="{{ fd.type }}" value="{{ fd.value }}" onChange="{{ fd.onChange }}" autoComplete="{{ fd.auto }}" readOnly="{{ fd.readOnly }}" aria-invalid="{{ fd.invalid }}" style="width: 100%; height: 50px; padding: 0 14px; border: 1px solid {{ fd.line }}; background: {{ fd.bg }}; font-size: 15px; outline: none;" style-focus="border-color: #27292D;" /></sc-if>
+                      <sc-if value="{{ fd.hasErr }}" hint-placeholder-val="{{ false }}"><span role="alert" style="font-size: 12.5px; color: #A0402C;">{{ fd.err }}</span></sc-if>
+                    </div>
+                  </sc-for>
+                </div>
+              </sc-for>
+              <sc-for list="{{ fm.checks }}" as="ch" hint-placeholder-count="1">
+                <label style="display: flex; align-items: flex-start; gap: 10px; font-size: 13.5px; line-height: 1.55; cursor: pointer;"><input type="checkbox" checked="{{ ch.checked }}" onChange="{{ ch.toggle }}" style="width: 18px; height: 18px; margin-top: 2px; accent-color: #27292D;" />{{ ch.label }}</label>
+              </sc-for>
+              <sc-if value="{{ fm.hasErr }}" hint-placeholder-val="{{ false }}"><div role="alert" style="padding: 12px 16px; border: 1px solid #A0402C; color: #A0402C; font-size: 14px;">{{ fm.err }}</div></sc-if>
+              <div style="display: flex; flex-wrap: wrap; gap: 10px;">
+                <button type="submit" style="height: 50px; padding: 0 26px; border: 0; background: #27292D; color: #F4EFE5; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; cursor: pointer;" style-hover="background: #FFD35B; color: #27292D;">{{ fm.submitLabel }}</button>
+                <sc-if value="{{ fm.hasCancel }}" hint-placeholder-val="{{ false }}"><button type="button" onClick="{{ fm.cancel }}" style="height: 50px; padding: 0 22px; border: 1px solid #27292D; background: none; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; cursor: pointer;">{{ t.cancelEdit }}</button></sc-if>
+              </div>
+            </form>
+          </sc-for>
+        </div>
+      </section>
+    </sc-if>
+  </main>
+
+  <footer data-screen-label="Footer" style="background: #27292D; color: #F4EFE5; padding: clamp(32px,4vw,48px) clamp(16px,4vw,64px) 24px;">
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; align-items: center; gap: 20px;">
+      <img src="assets/soul-logo-full-yellow.svg" alt="SOUL Fine Robusta" style="width: 84px; height: auto;" />
+      <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: 10px 28px; font-size: 13.5px;">
+        <sc-for list="{{ help }}" as="hl" hint-placeholder-count="4"><li><a href="{{ hl.href }}" style="color: rgba(244,239,229,.85);" style-hover="color: #FFD35B;">{{ hl.label }}</a></li></sc-for>
+      </ul>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; margin-top: 28px; padding-top: 18px; border-top: 1px solid rgba(244,239,229,.18); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: rgba(244,239,229,.7);"><span>{{ t.tagline }}</span><span>© 2026 SOUL Fine Robusta</span></div>
+  </footer>
+
+  <sc-if value="{{ mobileOpen }}" hint-placeholder-val="{{ false }}">
+    <div role="dialog" aria-modal="true" aria-label="{{ t.menu }}" style="position: fixed; inset: 0; z-index: 100; background: #F4EFE5; display: flex; flex-direction: column; overflow-y: auto;">
+      <div style="display: flex; justify-content: space-between; align-items: center; height: 66px; padding: 0 16px; border-bottom: 1px solid rgba(39,41,45,.14);"><img src="assets/soul-wordmark-ink.svg" alt="SOUL" style="height: 15px; width: auto;" /><button type="button" aria-label="{{ t.close }}" onClick="{{ closeMobile }}" style="width: 44px; height: 44px; background: none; border: 0; font-size: 24px; cursor: pointer;">×</button></div>
+      <nav aria-label="Mobile" style="padding: 8px 16px 32px; display: flex; flex-direction: column;"><sc-for list="{{ nav }}" as="n" hint-placeholder-count="7"><a href="{{ n.href }}" style="display: flex; align-items: center; min-height: 60px; border-bottom: 1px solid rgba(39,41,45,.14); font-family: Newsreader, Georgia, serif; font-size: 28px;">{{ n.label }}</a></sc-for></nav>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;lang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;vi&quot;,&quot;en&quot;],&quot;default&quot;:&quot;vi&quot;,&quot;tsType&quot;:&quot;'vi' | 'en'&quot;,&quot;section&quot;:&quot;Content&quot;},&quot;view&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;overview&quot;,&quot;login&quot;,&quot;register&quot;,&quot;recover&quot;,&quot;orders&quot;,&quot;addresses&quot;,&quot;profile&quot;],&quot;default&quot;:&quot;overview&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Page&quot;}}">
+const LS_CART = 'soul-cart-v1', LS_ORDERS = 'soul-orders-v1', LS_USERS = 'soul-users-v1', LS_SESSION = 'soul-session-v1';
+const PROVINCES = ['TP. Hồ Chí Minh', 'Hà Nội', 'Đà Nẵng', 'Đắk Lắk', 'Hải Phòng', 'Cần Thơ', 'Huế', 'An Giang', 'Bắc Ninh', 'Cà Mau', 'Cao Bằng', 'Điện Biên', 'Đồng Nai', 'Đồng Tháp', 'Gia Lai', 'Hà Tĩnh', 'Hưng Yên', 'Khánh Hòa', 'Lai Châu', 'Lạng Sơn', 'Lào Cai', 'Lâm Đồng', 'Nghệ An', 'Ninh Bình', 'Phú Thọ', 'Quảng Ngãi', 'Quảng Ninh', 'Quảng Trị', 'Sơn La', 'Tây Ninh', 'Thái Nguyên', 'Thanh Hóa', 'Tuyên Quang', 'Vĩnh Long'];
+const read = (k, d) => { try { const v = JSON.parse(localStorage.getItem(k)); return v == null ? d : v; } catch (e) { return d; } };
+const write = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} };
+const vnd = (n) => n.toLocaleString('vi-VN') + '₫';
+const EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/, PHONE = (v) => /^0\d{9}$/.test(v.replace(/[\s.\-]/g, '').replace(/^\+84/, '0'));
+const AUTH = ['login', 'register', 'recover'];
+
+class Component extends DCLogic {
+  state = { w: 1440, lang: null, route: null, session: null, users: [], orders: [], v: {}, tried: null, formErr: '', notice: null, editing: null, count: 0, mobileOpen: false };
+
+  T = {
+    vi: { nav: ['Trang chủ', 'Sản phẩm', 'Mùa vụ mới', 'Về Soul', 'Giải pháp cà phê', 'Cửa hàng', 'Blog'], menu: 'Menu', search: 'Tìm kiếm', account: 'Tài khoản', cart: 'Giỏ hàng', close: 'Đóng', home: 'Trang chủ',
+      authQuote: 'Mỗi tách cà phê là một hành trình.', perks: ['Theo dõi đơn hàng và mua lại nhanh', 'Lưu địa chỉ giao hàng', 'Nhận tin mùa vụ mới và ưu đãi thành viên'],
+      loginTab: 'Đăng nhập', registerTab: 'Đăng ký', loginTitle: 'Chào mừng trở lại', loginIntro: 'Đăng nhập để xem đơn hàng và thanh toán nhanh hơn.', registerTitle: 'Tạo tài khoản', registerIntro: 'Chỉ mất một phút, để Soul đồng hành cùng gu cà phê của bạn.',
+      recoverTitle: 'Khôi phục mật khẩu', recoverIntro: 'Nhập email đã đăng ký, Soul sẽ gửi đường dẫn đặt lại mật khẩu.',
+      email: 'Email', password: 'Mật khẩu', forgot: 'Quên mật khẩu?', fullName: 'Họ và tên', phone: 'Số điện thoại', newPw: 'Mật khẩu (tối thiểu 8 ký tự)', confirm: 'Nhập lại mật khẩu',
+      marketing: 'Nhận email về mùa vụ mới, sự kiện và ưu đãi từ Soul.', agree: 'Tôi đồng ý với Điều khoản sử dụng và Chính sách bảo mật của Soul.',
+      doLogin: 'Đăng nhập', doRegister: 'Tạo tài khoản', doRecover: 'Gửi đường dẫn', noAcc: 'Chưa có tài khoản?', hasAcc: 'Đã có tài khoản?', backLogin: 'Nhớ mật khẩu rồi?',
+      req: 'Vui lòng điền thông tin này.', badEmail: 'Email chưa đúng định dạng.', badPhone: 'Số điện thoại gồm 10 chữ số, bắt đầu bằng 0.', shortPw: 'Mật khẩu cần ít nhất 8 ký tự.', mismatch: 'Mật khẩu nhập lại không khớp.', mustAgree: 'Vui lòng đồng ý để tiếp tục.',
+      wrong: 'Email hoặc mật khẩu không đúng.', taken: 'Email này đã được đăng ký. Hãy đăng nhập.', recoverSent: 'Nếu email {x} đã đăng ký, đường dẫn đặt lại mật khẩu sẽ được gửi trong vài phút.', needLogin: 'Vui lòng đăng nhập để tiếp tục.', welcome: 'Tài khoản đã được tạo. Chào mừng bạn đến với Soul!', loggedOut: 'Bạn đã đăng xuất.',
+      overview: 'Tổng quan', orders: 'Đơn hàng', addresses: 'Sổ địa chỉ', profile: 'Thông tin tài khoản', logout: 'Đăng xuất', hello: 'Xin chào, {x}',
+      lastOrder: 'Đơn gần nhất', noOrderYet: 'Chưa có đơn hàng', noOrderBody: 'Khám phá Soulful 2026 để bắt đầu.', defAddr: 'Địa chỉ mặc định', noAddr: 'Chưa có địa chỉ', noAddrBody: 'Thêm địa chỉ để thanh toán nhanh hơn.', details: 'Thông tin cá nhân',
+      viewAll: 'Xem tất cả', shopNow: 'Mua sắm', manage: 'Quản lý', editCta: 'Chỉnh sửa', noOrders: 'Bạn chưa có đơn hàng nào.', view: 'Xem', items: 'sản phẩm',
+      status: ['Chờ xác nhận', 'Đã xác nhận', 'Đang giao', 'Đã nhận hàng'], cancelledS: 'Đã hủy', track: ['Đã đặt hàng', 'Đã xác nhận', 'Đang giao', 'Đã nhận hàng'],
+      allOrders: 'Tất cả đơn hàng', cancel: 'Hủy đơn', cancelled: 'Đơn hàng đã được hủy.', reorder: 'Mua lại', contact: 'Liên hệ', shipTo: 'Giao đến', pickAt: 'Nhận tại', payBy: 'Thanh toán', placed: 'Ngày đặt',
+      pay: { cod: 'Thanh toán khi nhận hàng', bank: 'Chuyển khoản ngân hàng', wallet: 'Ví điện tử / thẻ' }, ship: { std: 'Giao tiêu chuẩn', exp: 'Giao nhanh', pickup: 'Nhận tại cửa hàng' }, subtotal: 'Tạm tính', discount: 'Giảm giá', free: 'Miễn phí', total: 'Tổng cộng',
+      default: 'Mặc định', edit: 'Sửa', setDefault: 'Đặt làm mặc định', remove: 'Xóa', addAddr: 'Thêm địa chỉ', newAddrT: 'Địa chỉ mới', editAddrT: 'Sửa địa chỉ', address: 'Địa chỉ (số nhà, đường)', province: 'Tỉnh / Thành phố', choose: 'Chọn tỉnh / thành', ward: 'Phường / Xã', saveAddr: 'Lưu địa chỉ', makeDefault: 'Đặt làm địa chỉ mặc định', cancelEdit: 'Hủy',
+      profileT: 'Thông tin cá nhân', saveProfile: 'Lưu thay đổi', pwT: 'Đổi mật khẩu', curPw: 'Mật khẩu hiện tại', updatePw: 'Cập nhật mật khẩu', saved: 'Đã lưu thay đổi.', pwSaved: 'Đã cập nhật mật khẩu.', badCur: 'Mật khẩu hiện tại không đúng.', addrSaved: 'Đã lưu địa chỉ.',
+      help: [['Giao hàng', 'Help.dc.html#shipping'], ['Đổi trả', 'Help.dc.html#returns'], ['Câu hỏi thường gặp', 'Help.dc.html'], ['Liên hệ', 'Help.dc.html#contact']], tagline: 'Crafted by Vietnamese Soul. Buôn Ma Thuột, Việt Nam.' },
+    en: { nav: ['Home', 'Shop', 'New Crop', 'Our Story', 'Coffee Solutions', 'Spaces', 'Blog'], menu: 'Menu', search: 'Search', account: 'Account', cart: 'Cart', close: 'Close', home: 'Home',
+      authQuote: 'Every cup is a journey.', perks: ['Track orders and reorder fast', 'Save delivery addresses', 'Hear about new harvests and member offers'],
+      loginTab: 'Sign in', registerTab: 'Register', loginTitle: 'Welcome back', loginIntro: 'Sign in to see your orders and check out faster.', registerTitle: 'Create an account', registerIntro: 'It takes a minute, and lets Soul follow your taste in coffee.',
+      recoverTitle: 'Reset password', recoverIntro: 'Enter your account email and we’ll send a reset link.',
+      email: 'Email', password: 'Password', forgot: 'Forgot password?', fullName: 'Full name', phone: 'Phone', newPw: 'Password (min. 8 characters)', confirm: 'Confirm password',
+      marketing: 'Email me about new harvests, events and offers from Soul.', agree: 'I agree to Soul’s Terms of Use and Privacy Policy.',
+      doLogin: 'Sign in', doRegister: 'Create account', doRecover: 'Send reset link', noAcc: 'New to Soul?', hasAcc: 'Already have an account?', backLogin: 'Remembered it?',
+      req: 'This field is required.', badEmail: 'Please enter a valid email.', badPhone: 'Phone must be 10 digits starting with 0.', shortPw: 'Use at least 8 characters.', mismatch: 'Passwords don’t match.', mustAgree: 'Please agree to continue.',
+      wrong: 'Incorrect email or password.', taken: 'This email is already registered. Please sign in.', recoverSent: 'If {x} is registered, a reset link will arrive in a few minutes.', needLogin: 'Please sign in to continue.', welcome: 'Your account is ready. Welcome to Soul!', loggedOut: 'You’ve been signed out.',
+      overview: 'Overview', orders: 'Orders', addresses: 'Addresses', profile: 'Account details', logout: 'Sign out', hello: 'Hello, {x}',
+      lastOrder: 'Latest order', noOrderYet: 'No orders yet', noOrderBody: 'Explore Soulful 2026 to get started.', defAddr: 'Default address', noAddr: 'No address yet', noAddrBody: 'Add one for faster checkout.', details: 'Personal details',
+      viewAll: 'View all', shopNow: 'Shop now', manage: 'Manage', editCta: 'Edit', noOrders: 'You haven’t placed any orders yet.', view: 'View', items: 'items',
+      status: ['Awaiting confirmation', 'Confirmed', 'Shipping', 'Delivered'], cancelledS: 'Cancelled', track: ['Placed', 'Confirmed', 'Shipping', 'Delivered'],
+      allOrders: 'All orders', cancel: 'Cancel order', cancelled: 'This order has been cancelled.', reorder: 'Buy again', contact: 'Contact', shipTo: 'Ship to', pickAt: 'Pick up at', payBy: 'Payment', placed: 'Placed on',
+      pay: { cod: 'Cash on delivery', bank: 'Bank transfer', wallet: 'E-wallet / card' }, ship: { std: 'Standard delivery', exp: 'Express delivery', pickup: 'Store pickup' }, subtotal: 'Subtotal', discount: 'Discount', free: 'Free', total: 'Total',
+      default: 'Default', edit: 'Edit', setDefault: 'Set as default', remove: 'Remove', addAddr: 'Add address', newAddrT: 'New address', editAddrT: 'Edit address', address: 'Street address', province: 'Province / City', choose: 'Choose a province', ward: 'Ward / Commune', saveAddr: 'Save address', makeDefault: 'Make this my default address', cancelEdit: 'Cancel',
+      profileT: 'Personal details', saveProfile: 'Save changes', pwT: 'Change password', curPw: 'Current password', updatePw: 'Update password', saved: 'Changes saved.', pwSaved: 'Password updated.', badCur: 'Current password is incorrect.', addrSaved: 'Address saved.',
+      help: [['Shipping', 'Help.dc.html#shipping'], ['Returns', 'Help.dc.html#returns'], ['FAQ', 'Help.dc.html'], ['Contact', 'Help.dc.html#contact']], tagline: 'Crafted by Vietnamese Soul. Buon Ma Thuot, Vietnam.' }
+  };
+
+  parse(hash) {
+    const h = (hash || '').replace(/^#/, '');
+    if (AUTH.includes(h)) return { kind: h };
+    if (h === 'orders' || h === 'addresses' || h === 'profile') return { kind: h };
+    const m = h.match(/^orders\/(.+)$/); if (m) return { kind: 'order', id: m[1] };
+    return { kind: 'overview' };
+  }
+  load() {
+    const ses = read(LS_SESSION, null), users = read(LS_USERS, []);
+    this.setState({ users, orders: read(LS_ORDERS, []), session: ses && users.some(u => u.email === ses.email) ? ses.email : null, count: read(LS_CART, []).reduce((a, c) => a + c.qty, 0) });
+  }
+  componentDidMount() {
+    this._r = () => this.setState({ w: window.innerWidth }); this._r(); window.addEventListener('resize', this._r);
+    this._h = () => this.route(location.hash); window.addEventListener('hashchange', this._h);
+    this._k = (e) => { if (e.key === 'Escape') this.setState({ mobileOpen: false }); }; window.addEventListener('keydown', this._k);
+    this._st = () => this.load(); window.addEventListener('storage', this._st);
+    this.load(); this.route(location.hash);
+  }
+  componentWillUnmount() { ['resize', 'hashchange', 'keydown', 'storage'].forEach((ev, i) => window.removeEventListener(ev, [this._r, this._h, this._k, this._st][i])); }
+  componentDidUpdate(pp) { if (pp.lang !== this.props.lang) this.setState({ lang: null }); if (pp.view !== this.props.view && this.props.view) this.go(this.props.view === 'overview' ? '' : this.props.view); }
+  route(hash, notice) { this.setState({ route: this.parse(hash), v: {}, tried: null, formErr: '', editing: null, notice: notice === undefined ? null : notice, mobileOpen: false }); }
+  go(h, notice) { history.replaceState(null, '', h ? '#' + h : location.pathname); this.route(h, notice); window.scrollTo(0, 0); }
+  user() { return this.state.users.find(u => u.email === this.state.session); }
+  saveUsers(users) { this.setState({ users }); write(LS_USERS, users); }
+  patchUser(fn) { this.saveUsers(this.state.users.map(u => u.email === this.state.session ? fn(u) : u)); }
+
+  renderVals() {
+    const s = this.state, L = s.lang || this.props.lang || 'vi', li = L === 'vi' ? 0 : 1, t = this.T[L], isMobile = s.w < 1180, X = (a, x) => a.replace('{x}', x);
+    let r = s.route || this.parse(this.props.view && this.props.view !== 'overview' ? '#' + this.props.view : '');
+    const nav = (h) => (e) => { e && e.preventDefault(); this.go(h); };
+    const fmt = (iso) => { const d = new Date(iso); return [d.getDate(), d.getMonth() + 1, d.getFullYear()].map(n => String(n).padStart(2, '0')).join('.'); };
+    const u = this.user();
+    let notice = s.notice;
+    if (!u && !AUTH.includes(r.kind)) { r = { kind: 'login' }; notice = notice || { text: t.needLogin, tone: 'info' }; }
+    if (u && AUTH.includes(r.kind)) r = { kind: 'overview' };
+    const V = (k, d) => s.v[k] !== undefined ? s.v[k] : (d === undefined ? '' : d);
+    const setV = (k) => (e) => { const val = e.target.type === 'checkbox' ? e.target.checked : e.target.value; this.setState(st => ({ v: { ...st.v, [k]: val } })); };
+    const toggleV = (k, d) => () => this.setState(st => ({ v: { ...st.v, [k]: !(st.v[k] !== undefined ? st.v[k] : d) } }));
+    const fld = (form, errs, id, label, extra) => ({ id: 'ac-' + form + '-' + id, label, value: V(id, extra && extra.def), type: 'text', auto: 'on', isInput: true, isSelect: false, options: [], readOnly: false, bg: '#FBF8F2', onChange: setV(id), hasAside: false,
+      hasErr: !!errs[id], err: errs[id] || '', invalid: errs[id] ? 'true' : 'false', line: errs[id] ? '#A0402C' : 'rgba(39,41,45,.35)', ...extra });
+    const focusFirst = (form, er) => { const k = Object.keys(er)[0]; setTimeout(() => { const el = document.getElementById('ac-' + form + '-' + k); if (el) el.focus(); }, 30); };
+    const submitWith = (form, validate, ok) => (e) => { e.preventDefault(); const er = validate(); if (Object.keys(er).length) { this.setState({ tried: form, formErr: '' }); focusFirst(form, er); return; } ok(); };
+    const ntc = notice ? { hasNotice: true, notice: notice.text, noticeBg: notice.tone === 'ok' ? '#27292D' : '#EAE3D5', noticeFg: notice.tone === 'ok' ? '#F4EFE5' : '#27292D' } : { hasNotice: false, notice: '', noticeBg: '', noticeFg: '' };
+    const count = s.count;
+    const base = { t, isMobile, isDesktop: !isMobile,
+      isVi: L === 'vi', isEn: L === 'en', viBg: L === 'vi' ? '#27292D' : 'transparent', enBg: L === 'en' ? '#27292D' : 'transparent', viColor: L === 'vi' ? '#F4EFE5' : '#27292D', enColor: L === 'en' ? '#F4EFE5' : '#27292D',
+      setVi: () => this.setState({ lang: 'vi' }), setEn: () => this.setState({ lang: 'en' }),
+      nav: t.nav.map((label, i) => ({ label, href: ['Home.html', 'Shop.dc.html', 'Shop.dc.html#c/soulful-flavours', 'Our Story.dc.html', 'Coffee Solutions.dc.html', 'Spaces.dc.html', 'Blog.dc.html'][i] })),
+      mobileOpen: s.mobileOpen, openMobile: () => this.setState({ mobileOpen: true }), closeMobile: () => this.setState({ mobileOpen: false }),
+      count, badgeBg: count ? '#FFD35B' : '#27292D', badgeFg: count ? '#27292D' : '#F4EFE5', goHome: nav(''), goOrders: nav('orders'),
+      help: t.help.map(h => ({ label: h[0], href: h[1] })), ...ntc };
+
+    // ---------- AUTH ----------
+    if (AUTH.includes(r.kind)) {
+      const k = r.kind, tr = s.tried === k;
+      let errs = {}, form;
+      if (k === 'login') {
+        const val = () => { const e = {}; if (!V('email').trim()) e.email = t.req; else if (!EMAIL.test(V('email').trim())) e.email = t.badEmail; if (!V('pw')) e.pw = t.req; return e; };
+        errs = tr ? val() : {};
+        form = { rows: [{ fields: [fld(k, errs, 'email', t.email, { type: 'email', auto: 'email' })] }, { fields: [fld(k, errs, 'pw', t.password, { type: 'password', auto: 'current-password', hasAside: true, aside: t.forgot, asideHref: '#recover', asideOpen: nav('recover') })] }], checks: [], submitLabel: t.doLogin,
+          submit: submitWith(k, val, () => { const em = V('email').trim().toLowerCase(), usr = s.users.find(x => x.email === em); if (!usr || usr.pw !== V('pw')) { this.setState({ formErr: t.wrong }); return; } write(LS_SESSION, { email: em }); this.setState({ session: em }); this.go(''); }) };
+      } else if (k === 'register') {
+        const val = () => { const e = {}; if (!V('name').trim()) e.name = t.req; if (!V('email').trim()) e.email = t.req; else if (!EMAIL.test(V('email').trim())) e.email = t.badEmail; if (!V('phone').trim()) e.phone = t.req; else if (!PHONE(V('phone'))) e.phone = t.badPhone; if (V('pw').length < 8) e.pw = t.shortPw; if (V('pw2') !== V('pw') || !V('pw2')) e.pw2 = t.mismatch; if (!V('agree', false)) e.agree = t.mustAgree; return e; };
+        errs = tr ? val() : {};
+        form = { rows: [{ fields: [fld(k, errs, 'name', t.fullName, { auto: 'name' })] }, { fields: [fld(k, errs, 'email', t.email, { type: 'email', auto: 'email' }), fld(k, errs, 'phone', t.phone, { type: 'tel', auto: 'tel' })] }, { fields: [fld(k, errs, 'pw', t.newPw, { type: 'password', auto: 'new-password' }), fld(k, errs, 'pw2', t.confirm, { type: 'password', auto: 'new-password' })] }],
+          checks: [{ label: t.marketing, checked: V('mkt', true), toggle: toggleV('mkt', true), hasErr: false, err: '' }, { label: t.agree, checked: V('agree', false), toggle: toggleV('agree', false), hasErr: !!errs.agree, err: errs.agree || '' }], submitLabel: t.doRegister,
+          submit: submitWith(k, val, () => { const em = V('email').trim().toLowerCase(); if (s.users.some(x => x.email === em)) { this.setState({ formErr: t.taken }); return; }
+            this.saveUsers([...s.users, { email: em, name: V('name').trim(), phone: V('phone').trim(), pw: V('pw'), marketing: V('mkt', true), created: new Date().toISOString(), addresses: [] }]);
+            write(LS_SESSION, { email: em }); this.setState({ session: em }); this.go('', { text: t.welcome, tone: 'ok' }); }) };
+      } else {
+        const val = () => { const e = {}; if (!V('email').trim()) e.email = t.req; else if (!EMAIL.test(V('email').trim())) e.email = t.badEmail; return e; };
+        errs = tr ? val() : {};
+        form = { rows: [{ fields: [fld(k, errs, 'email', t.email, { type: 'email', auto: 'email' })] }], checks: [], submitLabel: t.doRecover,
+          submit: submitWith(k, val, () => this.setState({ notice: { text: X(t.recoverSent, V('email').trim()), tone: 'ok' }, tried: null })) };
+      }
+      form.hasErr = !!s.formErr; form.err = s.formErr;
+      const tab = (id, label) => ({ label, href: '#' + id, open: nav(id), on: k === id ? 'true' : 'false', fg: k === id ? '#27292D' : '#7C7365', line: k === id ? '#27292D' : 'transparent' });
+      return { ...base, isAuth: true, isDash: false, perks: t.perks.map(text => ({ text })),
+        hasTabs: k !== 'recover', tabs: [tab('login', t.loginTab), tab('register', t.registerTab)],
+        authTitle: { login: t.loginTitle, register: t.registerTitle, recover: t.recoverTitle }[k], authIntro: { login: t.loginIntro, register: t.registerIntro, recover: t.recoverIntro }[k],
+        forms: [form],
+        altText: { login: t.noAcc, register: t.hasAcc, recover: t.backLogin }[k], altLink: { login: t.registerTab, register: t.loginTab, recover: t.loginTab }[k],
+        altHref: k === 'login' ? '#register' : '#login', altOpen: nav(k === 'login' ? 'register' : 'login') };
+    }
+
+    // ---------- DASHBOARD ----------
+    const mine = s.orders.filter(o => o.user === u.email || o.email === u.email);
+    const addrs = u.addresses || [], defA = addrs.find(a => a.def) || addrs[0];
+    const stLabel = (o) => o.status < 0 ? t.cancelledS : t.status[o.status];
+    const stColor = (o) => o.status < 0 ? ['#EAE3D5', '#A0402C'] : o.status === 3 ? ['#27292D', '#F4EFE5'] : ['#FFD35B', '#27292D'];
+    const addrText = (a) => a.phone + '\n' + a.address + '\n' + a.ward + ', ' + a.province;
+    const sideK = r.kind === 'order' ? 'orders' : r.kind;
+    const side = [['overview', t.overview, ''], ['orders', t.orders, String(mine.length)], ['addresses', t.addresses, String(addrs.length)], ['profile', t.profile, '']].map(x => { const on = sideK === x[0]; return { label: x[1], count: x[2], href: x[0] === 'overview' ? '#' : '#' + x[0], open: nav(x[0] === 'overview' ? '' : x[0]), current: on ? 'page' : 'false', weight: on ? 600 : 400, bar: on ? '3px' : '0px', pad: on ? '14px' : '0px' }; });
+    side.push({ label: t.logout, count: '', href: '#login', open: (e) => { e.preventDefault(); try { localStorage.removeItem(LS_SESSION); } catch (er) {} this.setState({ session: null }); this.go('login', { text: t.loggedOut, tone: 'info' }); }, current: 'false', weight: 400, bar: '0px', pad: '0px' });
+    const first = (u.name || '').split(' ').slice(-1)[0] || u.email;
+    const out = { ...base, isAuth: false, isDash: true, side, userEmail: u.email, dashForms: [],
+      isOverview: r.kind === 'overview', isOrders: r.kind === 'orders', isOrder: r.kind === 'order', isAddresses: r.kind === 'addresses',
+      crumb: { overview: t.overview, orders: t.orders, order: t.orders, addresses: t.addresses, profile: t.profile }[r.kind], dashTitle: r.kind === 'overview' ? X(t.hello, first) : r.kind === 'order' ? '#' + r.id : { orders: t.orders, addresses: t.addresses, profile: t.profile }[r.kind] };
+
+    if (r.kind === 'overview') {
+      const lo = mine[0];
+      out.cards = [
+        lo ? { k: t.lastOrder, title: '#' + lo.id, body: fmt(lo.date) + ' · ' + vnd(lo.total) + '\n' + stLabel(lo), cta: t.viewAll, href: '#orders', open: nav('orders'), bg: '#27292D', fg: '#F4EFE5', eyeColor: '#FFD35B' }
+           : { k: t.lastOrder, title: t.noOrderYet, body: t.noOrderBody, cta: t.shopNow, href: 'Shop.dc.html', open: undefined, bg: '#27292D', fg: '#F4EFE5', eyeColor: '#FFD35B' },
+        defA ? { k: t.defAddr, title: defA.name, body: addrText(defA), cta: t.manage, href: '#addresses', open: nav('addresses'), bg: '#EAE3D5', fg: '#27292D', eyeColor: '#8E4B33' }
+             : { k: t.defAddr, title: t.noAddr, body: t.noAddrBody, cta: t.addAddr, href: '#addresses', open: nav('addresses'), bg: '#EAE3D5', fg: '#27292D', eyeColor: '#8E4B33' },
+        { k: t.details, title: u.name, body: u.email + '\n' + u.phone, cta: t.editCta, href: '#profile', open: nav('profile'), bg: '#EAE3D5', fg: '#27292D', eyeColor: '#8E4B33' }];
+    }
+    if (r.kind === 'orders') {
+      out.noOrders = mine.length === 0;
+      out.orderRows = mine.map(o => { const c = stColor(o); return { id: o.id, date: fmt(o.date), count: o.items.reduce((a, x) => a + x.qty, 0) + ' ' + t.items, total: vnd(o.total), status: stLabel(o), stBg: c[0], stFg: c[1], href: '#orders/' + o.id, open: nav('orders/' + o.id), thumbs: o.items.slice(0, 3).map(x => ({ src: x.img || 'images/02-shop/CA-PHE-RANG.jpg' })) }; });
+    }
+    if (r.kind === 'order') {
+      const o = mine.find(x => x.id === r.id);
+      if (!o) { out.isOrder = false; out.isOrders = true; out.noOrders = mine.length === 0; out.orderRows = []; return out; }
+      out.od = { total: vnd(o.total), canCancel: o.status === 0, isCancelled: o.status < 0, isActive: o.status >= 0,
+        track: t.track.map((label, i) => ({ n: String(i + 1).padStart(2, '0'), label, line: i <= o.status ? '#27292D' : 'rgba(39,41,45,.2)', fg: i <= o.status ? '#27292D' : '#7C7365' })),
+        blocks: [{ k: t.placed, v: fmt(o.date) + '\n' + t.ship[o.ship] }, o.store ? { k: t.pickAt, v: o.store.name + '\n' + o.store.addr } : { k: t.shipTo, v: o.name + ' · ' + o.phone + '\n' + o.addr.address + '\n' + o.addr.ward + ', ' + o.addr.province }, { k: t.payBy, v: t.pay[o.pay] }],
+        items: o.items.map(x => ({ name: x.name, img: x.img || 'images/02-shop/CA-PHE-RANG.jpg', variant: x.variant, qty: x.qty, unit: vnd(x.price), total: vnd(x.price * x.qty), href: 'Shop.dc.html#p/' + x.h })),
+        lines: [{ k: t.subtotal, v: vnd(o.sub) }, ...(o.disc ? [{ k: t.discount, v: '−' + vnd(o.disc) }] : []), { k: t.ship[o.ship], v: o.shipFee ? vnd(o.shipFee) : t.free }] };
+      out.cancelOrder = () => { const os = read(LS_ORDERS, []).map(x => x.id === o.id ? { ...x, status: -1 } : x); write(LS_ORDERS, os); this.setState({ orders: os }); };
+      out.reorder = () => { const c = read(LS_CART, []); o.items.forEach(x => { const key = x.h + '|' + x.variant, k = c.findIndex(y => y.key === key); if (k >= 0) c[k].qty += x.qty; else c.push({ key, h: x.h, name: x.name, img: x.img, variant: x.variant, price: x.price, qty: x.qty }); }); write(LS_CART, c); location.href = 'Checkout.dc.html'; };
+    }
+    if (r.kind === 'addresses') {
+      const ed = s.editing, cur = ed && ed !== 'new' ? addrs.find(a => a.id === ed) : null;
+      out.showAddrList = !ed;
+      out.addrs = addrs.map(a => ({ name: a.name, text: addrText(a), isDef: !!a.def, notDef: !a.def, line: a.def ? '#27292D' : 'transparent',
+        edit: () => this.setState({ editing: a.id, v: {}, tried: null, notice: null }),
+        makeDef: () => this.patchUser(x => ({ ...x, addresses: x.addresses.map(y => ({ ...y, def: y.id === a.id })) })),
+        remove: () => this.patchUser(x => { const rest = x.addresses.filter(y => y.id !== a.id); if (a.def && rest[0]) rest[0] = { ...rest[0], def: true }; return { ...x, addresses: rest }; }) }));
+      out.newAddr = () => this.setState({ editing: 'new', v: {}, tried: null, notice: null });
+      if (ed) {
+        const d = cur || { name: u.name, phone: u.phone, address: '', ward: '', province: '', def: addrs.length === 0 };
+        const gv = (k) => V(k, d[k]);
+        const val = () => { const e = {}; ['name', 'address', 'ward'].forEach(k => { if (!String(gv(k)).trim()) e[k] = t.req; }); if (!gv('province')) e.province = t.req; if (!String(gv('phone')).trim()) e.phone = t.req; else if (!PHONE(gv('phone'))) e.phone = t.badPhone; return e; };
+        const errs = s.tried === 'addr' ? val() : {};
+        out.dashForms = [{ title: cur ? t.editAddrT : t.newAddrT, submitLabel: t.saveAddr, hasCancel: true, cancel: () => this.setState({ editing: null }), hasErr: false, err: '',
+          rows: [{ fields: [fld('addr', errs, 'name', t.fullName, { def: d.name, auto: 'name' }), fld('addr', errs, 'phone', t.phone, { def: d.phone, type: 'tel', auto: 'tel' })] }, { fields: [fld('addr', errs, 'address', t.address, { def: d.address, auto: 'street-address' })] },
+            { fields: [fld('addr', errs, 'province', t.province, { def: d.province, isInput: false, isSelect: true, options: [{ v: '', label: t.choose }, ...PROVINCES.map(p => ({ v: p, label: p }))] }), fld('addr', errs, 'ward', t.ward, { def: d.ward })] }],
+          checks: [{ label: t.makeDefault, checked: V('def', !!d.def), toggle: toggleV('def', !!d.def) }],
+          submit: submitWith('addr', val, () => {
+            const rec = { id: cur ? cur.id : 'a' + Date.now(), name: String(gv('name')).trim(), phone: String(gv('phone')).trim(), address: String(gv('address')).trim(), ward: String(gv('ward')).trim(), province: gv('province'), def: V('def', !!d.def) };
+            this.patchUser(x => { let list = cur ? x.addresses.map(y => y.id === cur.id ? rec : y) : [...(x.addresses || []), rec]; if (rec.def) list = list.map(y => ({ ...y, def: y.id === rec.id })); if (!list.some(y => y.def) && list[0]) list[0] = { ...list[0], def: true }; return { ...x, addresses: list }; });
+            this.setState({ editing: null, v: {}, tried: null, notice: { text: t.addrSaved, tone: 'ok' } });
+          }) }];
+      }
+    }
+    if (r.kind === 'profile') {
+      const pv = () => { const e = {}; if (!V('name', u.name).trim()) e.name = t.req; if (!PHONE(V('phone', u.phone))) e.phone = t.badPhone; return e; };
+      const pe = s.tried === 'profile' ? pv() : {};
+      const wv = () => { const e = {}; if (!V('cur')) e.cur = t.req; if (V('npw').length < 8) e.npw = t.shortPw; if (V('npw2') !== V('npw') || !V('npw2')) e.npw2 = t.mismatch; return e; };
+      const we = s.tried === 'pw' ? wv() : {};
+      out.dashForms = [
+        { title: t.profileT, submitLabel: t.saveProfile, hasCancel: false, hasErr: false, err: '',
+          rows: [{ fields: [fld('profile', pe, 'name', t.fullName, { def: u.name, auto: 'name' }), fld('profile', pe, 'phone', t.phone, { def: u.phone, type: 'tel', auto: 'tel' })] }, { fields: [fld('profile', pe, 'email', t.email, { def: u.email, readOnly: true, bg: '#EAE3D5' })] }],
+          checks: [{ label: t.marketing, checked: V('mkt', !!u.marketing), toggle: toggleV('mkt', !!u.marketing) }],
+          submit: submitWith('profile', pv, () => { this.patchUser(x => ({ ...x, name: V('name', u.name).trim(), phone: V('phone', u.phone).trim(), marketing: V('mkt', !!u.marketing) })); this.setState({ tried: null, notice: { text: t.saved, tone: 'ok' } }); }) },
+        { title: t.pwT, submitLabel: t.updatePw, hasCancel: false, hasErr: !!s.formErr, err: s.formErr,
+          rows: [{ fields: [fld('pw', we, 'cur', t.curPw, { type: 'password', auto: 'current-password' })] }, { fields: [fld('pw', we, 'npw', t.newPw, { type: 'password', auto: 'new-password' }), fld('pw', we, 'npw2', t.confirm, { type: 'password', auto: 'new-password' })] }], checks: [],
+          submit: submitWith('pw', wv, () => { if (V('cur') !== u.pw) { this.setState({ formErr: t.badCur }); return; } this.patchUser(x => ({ ...x, pw: V('npw') })); this.setState({ v: {}, tried: null, formErr: '', notice: { text: t.pwSaved, tone: 'ok' } }); }) }];
+    }
+    return out;
+  }
+}
+</script>
+</body>
+</html>

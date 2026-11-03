@@ -1,0 +1,18 @@
+<!-- @dsCard group="Components" viewport="700x400" name="Feedback" subtitle="Toast, cart drawer, lightbox" -->
+<!DOCTYPE html><html><head><meta charset="utf-8"><link rel="stylesheet" href="../../styles.css">
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js"></script>
+<script src="../_loader.js"></script>
+<style>body{padding:20px 24px} .k{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-muted);margin-bottom:8px}</style>
+</head><body><div id="root"></div>
+<script type="text/babel" data-presets="react">
+loadSoulDS('../../').then(NS => {
+  const { Toast, Lightbox, Drawer, CartLine, Button } = NS;
+  const App = () => <div style={{display:'grid',gridTemplateColumns:'1fr 1fr',gap:10,height:360}}>
+    <div style={{display:'flex',flexDirection:'column',gap:10}}><div style={{flex:1,minHeight:0}}><Lightbox inline src="../../images/03-why-soul-album/SFR5.jpg" label="Album · Vùng nguyên liệu" counter="03 / 05" caption="Freshly picked cherries" /></div><div><Toast inline message="Soulful — Cay đã thêm vào giỏ" actionLabel="Xem giỏ" /></div></div>
+    <div style={{background:'var(--ink-a45)',display:'flex',justifyContent:'flex-end'}}><Drawer inline width="300px" title="Giỏ hàng" count={1} footer={<Button size="l" fullWidth>Thanh toán</Button>}><CartLine img="../../images/04-soulful/Soulful-Thom.jpg" name="Soulful — Thơm" type="Ủ lạnh" /></Drawer></div>
+  </div>;
+  ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+});
+</script></body></html>

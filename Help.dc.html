@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous" />
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,300..600;1,6..72,300..500&amp;family=Be+Vietnam+Pro:wght@400;500;600&amp;display=swap" rel="stylesheet" />
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+  html { -webkit-font-smoothing: antialiased; overflow-x: clip; scroll-padding-top: 84px; }
+  body { margin: 0; background: #F4EFE5; color: #27292D; font-family: "Be Vietnam Pro", system-ui, sans-serif; font-size: 15px; line-height: 1.6; overflow-x: hidden; }
+  a { color: inherit; text-decoration: none; }
+  a:hover { color: inherit; }
+  button, input, select, textarea { font-family: inherit; color: inherit; }
+  img { display: block; }
+  :focus-visible { outline: 2px solid #FFD35B; outline-offset: 3px; }
+  ::selection { background: #FFD35B; color: #27292D; }
+</style>
+</helmet>
+
+<div style="min-height: 100vh; background: #F4EFE5; color: #27292D;">
+
+  <header style="position: sticky; top: 0; z-index: 60; background: #F4EFE5; border-bottom: 1px solid rgba(39,41,45,.14);">
+    <nav aria-label="Main" style="display: flex; align-items: center; justify-content: space-between; gap: 20px; height: 66px; padding: 0 clamp(16px,4vw,64px);">
+      <div style="display: flex; align-items: center; gap: clamp(20px,2.6vw,40px);">
+        <sc-if value="{{ isMobile }}" hint-placeholder-val="{{ false }}">
+          <button type="button" aria-label="{{ t.menu }}" onClick="{{ openMobile }}" style="width: 44px; height: 44px; margin-left: -10px; display: grid; place-items: center; background: none; border: 0; cursor: pointer;"><span style="display: block; width: 22px; height: 1.5px; background: #27292D; box-shadow: 0 -7px 0 #27292D, 0 7px 0 #27292D;"></span></button>
+        </sc-if>
+        <a href="Home.html" aria-label="SOUL" style="display: flex; align-items: center; gap: 12px;"><img src="assets/soul-elephant-ink.svg" alt="" width="30" height="30" style="width: 30px; height: 30px;" /><img src="assets/soul-wordmark-ink.svg" alt="SOUL" style="height: 15px; width: auto;" /></a>
+        <sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}">
+          <div style="display: flex; align-items: center; font-size: 12px; letter-spacing: .08em; font-weight: 500; text-transform: uppercase;">
+            <sc-for list="{{ nav }}" as="n" hint-placeholder-count="7">
+              <a href="{{ n.href }}" style="display: flex; align-items: center; height: 66px; padding: 0 13px; border-bottom: 2px solid transparent; white-space: nowrap;" style-hover="border-bottom-color: #FFD35B;">{{ n.label }}</a>
+            </sc-for>
+          </div>
+        </sc-if>
+      </div>
+      <div style="display: flex; align-items: center; gap: 4px; font-size: 12px; letter-spacing: .08em; font-weight: 500;">
+        <div role="group" aria-label="Language" style="display: flex; border: 1px solid rgba(39,41,45,.3); height: 32px; margin-right: 6px;">
+          <button type="button" aria-pressed="{{ isVi }}" onClick="{{ setVi }}" style="width: 38px; height: 30px; border: 0; background: {{ viBg }}; color: {{ viColor }}; font-size: 11px; letter-spacing: .1em; font-weight: 600; cursor: pointer;">VI</button>
+          <button type="button" aria-pressed="{{ isEn }}" onClick="{{ setEn }}" style="width: 38px; height: 30px; border: 0; background: {{ enBg }}; color: {{ enColor }}; font-size: 11px; letter-spacing: .1em; font-weight: 600; cursor: pointer;">EN</button>
+        </div>
+        <a href="Search.dc.html" aria-label="{{ t.search }}" style="width: 44px; height: 44px; display: grid; place-items: center;"><svg width="17" height="17" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="7" cy="7" r="5"></circle><path d="M11 11l4 4"></path></svg></a>
+        <a href="Account.dc.html" aria-label="Account" style="width: 44px; height: 44px; display: grid; place-items: center;"><svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="8" cy="5.5" r="3"></circle><path d="M2.5 15c.6-3 2.8-4.6 5.5-4.6s4.9 1.6 5.5 4.6"></path></svg></a>
+        <a href="Checkout.dc.html" aria-label="{{ t.cart }}" style="height: 44px; padding: 0 0 0 8px; display: flex; align-items: center; gap: 8px; text-transform: uppercase;"><sc-if value="{{ isDesktop }}" hint-placeholder-val="{{ true }}"><span>{{ t.cart }}</span></sc-if><span style="min-width: 22px; height: 22px; padding: 0 6px; display: grid; place-items: center; background: #27292D; color: #F4EFE5; font-size: 11px; border-radius: 11px;">{{ cartCount }}</span></a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <section id="top" data-screen-label="01 Hỗ trợ · Hero" aria-labelledby="hp-h" style="padding: clamp(40px,5vw,72px) clamp(16px,4vw,64px) clamp(28px,3.4vw,48px);">
+      <nav aria-label="Breadcrumb" style="display: flex; flex-wrap: wrap; gap: 10px; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #7C7365;"><a href="Home.html" style-hover="color: #8E4B33;">{{ t.home }}</a><span aria-hidden="true">/</span><a href="#" onClick="{{ goFaq }}" style-hover="color: #8E4B33;">{{ t.help }}</a><span aria-hidden="true">/</span><span style="color: #27292D;">{{ pg.title }}</span></nav>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 24px clamp(28px,4vw,64px); align-items: end; margin-top: clamp(32px,5vw,64px); padding-bottom: 24px; border-bottom: 1px solid #27292D;">
+        <div>
+          <div style="display: flex; align-items: center; gap: 14px; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #8E4B33;"><span style="width: 28px; height: 2px; background: #8E4B33;"></span><span>{{ pg.eyebrow }}</span></div>
+          <h1 id="hp-h" style="margin: 20px 0 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: clamp(44px, 5.6vw, 92px); line-height: .98; letter-spacing: -.03em; text-wrap: balance;">{{ pg.title }}</h1>
+        </div>
+        <p style="margin: 0; max-width: 46ch; font-size: clamp(15px,1.15vw,17px); line-height: 1.7; color: #514B42; text-wrap: pretty;">{{ pg.intro }}</p>
+      </div>
+    </section>
+
+    <div data-screen-label="02 Hỗ trợ · Nội dung" style="display: grid; grid-template-columns: {{ cols }}; gap: clamp(24px,4vw,72px); padding: 0 clamp(16px,4vw,64px) clamp(64px,8vw,120px); align-items: start;">
+      <aside aria-label="{{ t.topics }}" style="position: {{ asidePos }}; top: 90px;">
+        <div style="font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: #7C7365; margin-bottom: 10px;">{{ t.topics }}</div>
+        <nav style="display: flex; flex-direction: {{ asideDir }}; flex-wrap: wrap; gap: {{ asideGap }};">
+          <sc-for list="{{ topics }}" as="tp" hint-placeholder-count="7">
+            <a href="{{ tp.href }}" onClick="{{ tp.open }}" aria-current="{{ tp.current }}" style="display: flex; align-items: center; justify-content: space-between; gap: 12px; min-height: 44px; padding: 0 14px; background: {{ tp.bg }}; color: {{ tp.color }}; border: 1px solid {{ tp.border }}; font-size: 13.5px; font-weight: 500;" style-hover="background: #FFD35B; border-color: #FFD35B;"><span>{{ tp.label }}</span><span style="font-size: 10.5px; color: #8E4B33;">{{ tp.n }}</span></a>
+          </sc-for>
+        </nav>
+        <div style="margin-top: 18px; background: #27292D; color: #F4EFE5; padding: 20px;">
+          <div style="font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: #FFD35B;">{{ t.needHelp }}</div>
+          <a href="tel:0987592220" style="display: block; margin-top: 10px; font-family: Newsreader, Georgia, serif; font-size: 26px; line-height: 1.1;" style-hover="color: #FFD35B;">0987 592 220</a>
+          <a href="mailto:contact@soulcoffee.vn" style="display: block; margin-top: 6px; font-size: 13.5px; color: rgba(244,239,229,.85);" style-hover="color: #FFD35B;">contact@soulcoffee.vn</a>
+          <a href="https://zalo.me/soulspecialtycoffee" target="_blank" rel="noopener" style="display: inline-flex; align-items: center; margin-top: 14px; height: 40px; padding: 0 16px; border: 1px solid rgba(244,239,229,.5); font-size: 11.5px; letter-spacing: .12em; text-transform: uppercase;" style-hover="background: #FFD35B; color: #27292D; border-color: #FFD35B;">Zalo ↗</a>
+        </div>
+      </aside>
+
+      <div style="min-width: 0;">
+        <sc-if value="{{ pg.pending }}" hint-placeholder-val="{{ false }}">
+          <div role="note" style="display: flex; gap: 14px; align-items: flex-start; background: #EAE3D5; padding: 16px 18px; margin-bottom: 28px; font-size: 13.5px; line-height: 1.6; color: #514B42;"><span style="flex: none; height: 24px; padding: 0 10px; display: inline-flex; align-items: center; background: #FFD35B; color: #27292D; font-size: 10px; letter-spacing: .14em; text-transform: uppercase; font-weight: 600;">{{ t.draft }}</span><span>{{ t.draftNote }} {{ t.updated }} {{ pg.updated }}.</span></div>
+        </sc-if>
+
+        <sc-if value="{{ isFaq }}" hint-placeholder-val="{{ true }}">
+          <div style="display: flex; flex-direction: column; gap: clamp(36px,4vw,56px);">
+            <sc-for list="{{ faq }}" as="g" hint-placeholder-count="3">
+              <section aria-labelledby="{{ g.id }}">
+                <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 12px; padding-bottom: 14px; border-bottom: 1px solid #27292D;"><h2 id="{{ g.id }}" style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: clamp(28px,2.8vw,40px); line-height: 1.05; letter-spacing: -.02em;">{{ g.h }}</h2><span style="font-size: 10.5px; letter-spacing: .18em; color: #8E4B33;">{{ g.n }}</span></div>
+                <sc-for list="{{ g.items }}" as="q" hint-placeholder-count="3">
+                  <div style="border-bottom: 1px solid rgba(39,41,45,.16);">
+                    <button type="button" aria-expanded="{{ q.open }}" onClick="{{ q.toggle }}" style="width: 100%; display: flex; justify-content: space-between; align-items: center; gap: 20px; min-height: 64px; padding: 16px 0; background: none; border: 0; text-align: left; cursor: pointer; font-size: clamp(15px,1.2vw,17px); font-weight: 500; line-height: 1.45;" style-hover="color: #8E4B33;"><span>{{ q.q }}</span><span aria-hidden="true" style="flex: none; width: 28px; height: 28px; display: grid; place-items: center; border: 1px solid #27292D; font-size: 16px; line-height: 1;">{{ q.sign }}</span></button>
+                    <sc-if value="{{ q.open }}" hint-placeholder-val="{{ false }}">
+                      <div style="padding: 0 48px 22px 0; max-width: 72ch; font-size: 15px; line-height: 1.75; color: #514B42; white-space: pre-line; text-wrap: pretty;">{{ q.a }}<sc-if value="{{ q.hasLink }}" hint-placeholder-val="{{ false }}"> <a href="{{ q.href }}" onClick="{{ q.linkOpen }}" style="color: #8E4B33; text-decoration: underline; text-underline-offset: 4px;">{{ q.link }} →</a></sc-if></div>
+                    </sc-if>
+                  </div>
+                </sc-for>
+              </section>
+            </sc-for>
+          </div>
+        </sc-if>
+
+        <sc-if value="{{ isDoc }}" hint-placeholder-val="{{ false }}">
+          <article style="display: flex; flex-direction: column; gap: clamp(28px,3vw,44px); max-width: 820px;">
+            <sc-for list="{{ pg.blocks }}" as="b" hint-placeholder-count="4">
+              <section style="display: grid; grid-template-columns: 44px minmax(0,1fr); gap: 4px 16px; padding-top: 18px; border-top: 1px solid rgba(39,41,45,.2);">
+                <span style="font-size: 10.5px; letter-spacing: .18em; color: #8E4B33; padding-top: 8px;">{{ b.n }}</span>
+                <div>
+                  <h2 style="margin: 0 0 12px; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: clamp(24px,2.2vw,32px); line-height: 1.1; letter-spacing: -.015em;">{{ b.h }}</h2>
+                  <sc-for list="{{ b.ps }}" as="p" hint-placeholder-count="1"><p style="margin: 0 0 12px; max-width: 68ch; font-size: 15px; line-height: 1.75; color: #514B42; text-wrap: pretty;">{{ p.text }}</p></sc-for>
+                  <sc-if value="{{ b.hasRows }}" hint-placeholder-val="{{ false }}">
+                    <dl style="margin: 6px 0 12px; border-top: 1px solid rgba(39,41,45,.16);">
+                      <sc-for list="{{ b.rows }}" as="r" hint-placeholder-count="3">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 200px), 1fr)); gap: 4px 20px; padding: 12px 0; border-bottom: 1px solid rgba(39,41,45,.16);"><dt style="font-weight: 500; font-size: 14.5px;">{{ r.k }}</dt><dd style="margin: 0; font-size: 14.5px; color: #514B42;">{{ r.v }}</dd></div>
+                      </sc-for>
+                    </dl>
+                  </sc-if>
+                  <sc-if value="{{ b.hasList }}" hint-placeholder-val="{{ false }}">
+                    <ul style="margin: 0 0 12px; padding: 0; list-style: none; display: flex; flex-direction: column; gap: 8px;">
+                      <sc-for list="{{ b.li }}" as="l" hint-placeholder-count="3"><li style="display: grid; grid-template-columns: 14px minmax(0,1fr); gap: 10px; max-width: 68ch; font-size: 15px; line-height: 1.65; color: #514B42;"><span aria-hidden="true" style="width: 6px; height: 6px; margin-top: 10px; background: #8E4B33;"></span><span>{{ l.text }}</span></li></sc-for>
+                    </ul>
+                  </sc-if>
+                </div>
+              </section>
+            </sc-for>
+          </article>
+        </sc-if>
+
+        <sc-if value="{{ isContact }}" hint-placeholder-val="{{ false }}">
+          <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 340px), 1fr)); gap: clamp(24px,3vw,48px); align-items: start;">
+            <div style="display: flex; flex-direction: column; gap: 10px;">
+              <sc-for list="{{ channels }}" as="c" hint-placeholder-count="4">
+                <a href="{{ c.href }}" target="{{ c.target }}" rel="noopener" style="display: grid; grid-template-columns: minmax(0,1fr) auto; gap: 4px 16px; align-items: center; padding: 18px 20px; background: #EAE3D5;" style-hover="background: #FFD35B;">
+                  <span style="font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: #8E4B33;">{{ c.k }}</span><span aria-hidden="true" style="grid-row: span 3;">↗</span>
+                  <span style="font-family: Newsreader, Georgia, serif; font-size: 24px; line-height: 1.15;">{{ c.v }}</span>
+                  <span style="font-size: 13px; color: #514B42;">{{ c.note }}</span>
+                </a>
+              </sc-for>
+              <a href="Spaces.dc.html" style="display: flex; justify-content: space-between; align-items: center; min-height: 52px; padding: 0 20px; border: 1px solid #27292D; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; font-weight: 500;" style-hover="background: #27292D; color: #F4EFE5;"><span>{{ t.visitStores }}</span><span>→</span></a>
+            </div>
+
+            <div style="background: #FFFDF8; border: 1px solid rgba(39,41,45,.14); padding: clamp(20px,2.6vw,36px);">
+              <sc-if value="{{ sent }}" hint-placeholder-val="{{ false }}">
+                <div role="status" style="display: flex; flex-direction: column; gap: 14px; align-items: flex-start;">
+                  <span style="width: 44px; height: 44px; display: grid; place-items: center; background: #FFD35B; font-size: 20px;">✓</span>
+                  <h2 style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: 34px; line-height: 1.05;">{{ t.sentTitle }}</h2>
+                  <p style="margin: 0; max-width: 46ch; font-size: 15px; line-height: 1.7; color: #514B42;">{{ t.sentBody }}</p>
+                  <button type="button" onClick="{{ resetForm }}" style="height: 46px; padding: 0 22px; background: none; border: 1px solid #27292D; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; font-weight: 500; cursor: pointer;" style-hover="background: #27292D; color: #F4EFE5;">{{ t.sendAnother }}</button>
+                </div>
+              </sc-if>
+              <sc-if value="{{ notSent }}" hint-placeholder-val="{{ true }}">
+                <form onSubmit="{{ submit }}" noValidate="{{ true }}" style="display: flex; flex-direction: column; gap: 20px;">
+                  <h2 style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: clamp(28px,2.6vw,36px); line-height: 1.05;">{{ t.formTitle }}</h2>
+                  <label style="display: flex; flex-direction: column; gap: 6px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #514B42;"><span>{{ t.fTopic }}</span>
+                    <select value="{{ f.topic }}" onChange="{{ setTopic }}" style="height: 46px; padding: 0 10px; border: 1px solid rgba(39,41,45,.3); background: #F4EFE5; font-size: 15px; letter-spacing: 0; text-transform: none;"><sc-for list="{{ topicOpts }}" as="o" hint-placeholder-count="5"><option value="{{ o.v }}">{{ o.label }}</option></sc-for></select>
+                  </label>
+                  <sc-for list="{{ fields }}" as="fd" hint-placeholder-count="3">
+                    <label style="display: flex; flex-direction: column; gap: 6px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #514B42;"><span>{{ fd.label }} <span style="color: #8E4B33;">{{ fd.req }}</span></span>
+                      <input type="{{ fd.type }}" name="{{ fd.k }}" autoComplete="{{ fd.ac }}" value="{{ fd.value }}" onChange="{{ fd.change }}" aria-invalid="{{ fd.invalid }}" style="height: 46px; padding: 0; border: 0; border-bottom: 1px solid {{ fd.line }}; background: transparent; font-size: 15px; letter-spacing: 0; text-transform: none; outline-offset: 4px;" />
+                      <sc-if value="{{ fd.invalid }}" hint-placeholder-val="{{ false }}"><span style="font-size: 12px; letter-spacing: 0; text-transform: none; color: #A13D2D;">{{ fd.err }}</span></sc-if>
+                    </label>
+                  </sc-for>
+                  <label style="display: flex; flex-direction: column; gap: 6px; font-size: 11px; letter-spacing: .14em; text-transform: uppercase; color: #514B42;"><span>{{ t.fMsg }} <span style="color: #8E4B33;">*</span></span>
+                    <textarea rows="5" value="{{ f.msg }}" onChange="{{ setMsg }}" aria-invalid="{{ msgInvalid }}" style="padding: 12px; border: 1px solid {{ msgLine }}; background: #F4EFE5; font-size: 15px; line-height: 1.6; letter-spacing: 0; text-transform: none; resize: vertical;"></textarea>
+                    <sc-if value="{{ msgInvalid }}" hint-placeholder-val="{{ false }}"><span style="font-size: 12px; letter-spacing: 0; text-transform: none; color: #A13D2D;">{{ t.errMsg }}</span></sc-if>
+                  </label>
+                  <button type="submit" style="height: 52px; background: #27292D; color: #F4EFE5; border: 0; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; font-weight: 500; cursor: pointer;" style-hover="background: #FFD35B; color: #27292D;">{{ t.send }}</button>
+                  <p style="margin: 0; font-size: 12.5px; line-height: 1.6; color: #7C7365;">{{ t.formNote }}</p>
+                </form>
+              </sc-if>
+            </div>
+          </div>
+        </sc-if>
+
+        <nav aria-label="{{ t.topics }}" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr)); gap: 10px; margin-top: clamp(48px,5vw,72px);">
+          <sc-for list="{{ pager }}" as="pp" hint-placeholder-count="2">
+            <a href="{{ pp.href }}" onClick="{{ pp.open }}" style="display: flex; flex-direction: column; gap: 6px; padding: 20px 22px; background: #EAE3D5; text-align: {{ pp.align }};" style-hover="background: #FFD35B;"><span style="font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: #8E4B33;">{{ pp.dir }}</span><span style="font-family: Newsreader, Georgia, serif; font-size: 26px; line-height: 1.1;">{{ pp.label }}</span></a>
+          </sc-for>
+        </nav>
+      </div>
+    </div>
+  </main>
+
+  <footer id="footer" data-screen-label="Footer" style="background: #27292D; color: #F4EFE5; padding: clamp(48px,6vw,80px) clamp(16px,4vw,64px) 32px;">
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 170px), 1fr)); gap: 36px 28px;">
+      <div><img src="assets/soul-logo-full-yellow.svg" alt="SOUL Fine Robusta" style="width: 120px; height: auto;" /></div>
+      <sc-for list="{{ footerCols }}" as="fc" hint-placeholder-count="4">
+        <div><div style="font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: #FFD35B; margin-bottom: 14px;">{{ fc.title }}</div>
+          <ul style="list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: 9px; font-size: 13.5px;"><sc-for list="{{ fc.links }}" as="fl" hint-placeholder-count="3"><li><a href="{{ fl.href }}" style="color: rgba(244,239,229,.85);" style-hover="color: #FFD35B;">{{ fl.label }}</a></li></sc-for></ul></div>
+      </sc-for>
+    </div>
+    <div style="display: flex; flex-wrap: wrap; justify-content: space-between; gap: 12px 24px; margin-top: clamp(40px,5vw,64px); padding-top: 20px; border-top: 1px solid rgba(244,239,229,.18); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: rgba(244,239,229,.7);"><span>{{ t.tagline }}</span><span>© 2026 SOUL Fine Robusta</span></div>
+  </footer>
+
+  <sc-if value="{{ mobileOpen }}" hint-placeholder-val="{{ false }}">
+    <div role="dialog" aria-modal="true" aria-label="{{ t.menu }}" style="position: fixed; inset: 0; z-index: 100; background: #F4EFE5; display: flex; flex-direction: column; overflow-y: auto;">
+      <div style="display: flex; justify-content: space-between; align-items: center; height: 66px; padding: 0 16px; border-bottom: 1px solid rgba(39,41,45,.14);"><img src="assets/soul-wordmark-ink.svg" alt="SOUL" style="height: 15px; width: auto;" /><button type="button" aria-label="{{ t.close }}" onClick="{{ closeMobile }}" style="width: 44px; height: 44px; background: none; border: 0; font-size: 24px; cursor: pointer;">×</button></div>
+      <nav aria-label="Mobile" style="padding: 8px 16px 32px; display: flex; flex-direction: column;"><sc-for list="{{ nav }}" as="n" hint-placeholder-count="7"><a href="{{ n.href }}" style="display: flex; align-items: center; min-height: 60px; border-bottom: 1px solid rgba(39,41,45,.14); font-family: Newsreader, Georgia, serif; font-size: 28px;">{{ n.label }}</a></sc-for></nav>
+    </div>
+  </sc-if>
+</div>
+</x-dc>
+<script type="text/x-dc" data-dc-script data-props="{&quot;lang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;vi&quot;,&quot;en&quot;],&quot;default&quot;:&quot;vi&quot;,&quot;tsType&quot;:&quot;'vi' | 'en'&quot;,&quot;section&quot;:&quot;Content&quot;},&quot;page&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;faq&quot;,&quot;shipping&quot;,&quot;returns&quot;,&quot;payment&quot;,&quot;privacy&quot;,&quot;terms&quot;,&quot;contact&quot;],&quot;default&quot;:&quot;faq&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Page&quot;}}">
+const LS_MSG = 'soul-messages-v1', LS_CART = 'soul-cart-v1';
+const read = (k, d) => { try { const v = JSON.parse(localStorage.getItem(k)); return v == null ? d : v; } catch (e) { return d; } };
+const ORDER = ['faq', 'shipping', 'returns', 'payment', 'privacy', 'terms', 'contact'];
+const L2 = (vi, en) => [vi, en];
+
+const FAQ = [
+  { h: L2('Đặt hàng & giao hàng', 'Orders & delivery'), items: [
+    [L2('Phí giao hàng là bao nhiêu?', 'How much is delivery?'), L2('Giao tiêu chuẩn 30.000₫ (2–4 ngày làm việc), miễn phí cho đơn từ 500.000₫. Giao nhanh 50.000₫ tại nội thành TP.HCM, Hà Nội, Đà Nẵng và Buôn Ma Thuột.', 'Standard delivery is 30,000₫ (2–4 business days), free on orders from 500,000₫. Express is 50,000₫ within central Ho Chi Minh City, Hanoi, Da Nang and Buon Ma Thuot.'), 'shipping', L2('Chính sách giao hàng', 'Shipping policy')],
+    [L2('Tôi có thể nhận hàng tại cửa hàng không?', 'Can I pick up in store?'), L2('Có. Chọn “Nhận tại cửa hàng” khi thanh toán để nhận miễn phí tại Soul Hồ Chí Minh, Buôn Ma Thuột, Hà Nội hoặc Đà Nẵng. Soul sẽ báo khi đơn sẵn sàng.', 'Yes. Choose “Store pickup” at checkout to collect for free at Soul Ho Chi Minh, Buon Ma Thuot, Hanoi or Da Nang. We’ll let you know when it’s ready.')],
+    [L2('Làm sao theo dõi đơn hàng?', 'How do I track my order?'), L2('Đăng nhập tài khoản và mở mục Đơn hàng để xem trạng thái. Nếu đặt không cần tài khoản, hãy liên hệ hotline kèm mã đơn.', 'Sign in and open Orders to see the status. If you checked out as a guest, contact our hotline with your order number.'), 'account', L2('Tài khoản của tôi', 'My account')],
+    [L2('Soul có bán trên sàn thương mại điện tử không?', 'Do you sell on marketplaces?'), L2('Có, Soul có gian hàng chính thức trên Shopee và Lazada. Một số dòng theo mùa và nhân xanh chỉ bán trên website.', 'Yes, Soul has official stores on Shopee and Lazada. Some seasonal lots and green coffee are website-only.')]
+  ] },
+  { h: L2('Cà phê & cách pha', 'Coffee & brewing'), items: [
+    [L2('Nên chọn nguyên hạt hay xay sẵn?', 'Whole bean or ground?'), L2('Nguyên hạt giữ hương lâu hơn nếu bạn có máy xay. Chọn xay sẵn khi mua theo cách pha (phin, pha máy, pour over, cold brew): Soul xay theo độ mịn phù hợp với từng dòng.', 'Whole bean keeps aroma longer if you have a grinder. Choose ground when buying by brew method (phin, espresso, pour over, cold brew) and we grind to suit each line.')],
+    [L2('Bảo quản cà phê thế nào?', 'How should I store coffee?'), L2('Đóng kín túi, để nơi khô ráo, tránh ánh nắng và không cho vào tủ lạnh. Ngon nhất trong 4–6 tuần sau ngày rang in trên bao bì.', 'Keep the bag sealed, somewhere cool and dry, away from sunlight, and not in the fridge. Best within 4–6 weeks of the roast date on the pack.')],
+    [L2('Fine Robusta khác Robusta thông thường ra sao?', 'How is Fine Robusta different?'), L2('Fine Robusta được hái chín, sơ chế và chấm điểm theo tiêu chuẩn đặc sản, cho vị ngọt, sạch và nhiều tầng hương hơn Robusta thương mại.', 'Fine Robusta is ripe-picked, carefully processed and graded to specialty standards, giving a sweeter, cleaner and more layered cup than commercial Robusta.'), 'blog', L2('Hướng dẫn pha', 'Brewing guides')]
+  ] },
+  { h: L2('Nhân xanh & khách sỉ', 'Green coffee & wholesale'), items: [
+    [L2('Mua nhân xanh tối thiểu bao nhiêu?', 'What is the minimum for green coffee?'), L2('Bán lẻ mẫu 1 kg và 5 kg. Mua sỉ từ 30 kg, liên hệ để nhận báo giá theo lô. Giá nhân xanh chưa gồm 5% VAT.', 'Samples come in 1 kg and 5 kg. Wholesale starts at 30 kg; contact us for lot pricing. Green coffee prices exclude 5% VAT.'), 'b2b', L2('Giải pháp cà phê', 'Coffee Solutions')],
+    [L2('Soul có cung cấp cà phê cho quán, nhà hàng, khách sạn không?', 'Do you supply cafés, restaurants and hotels?'), L2('Có. Dòng HORECA đóng gói 1 kg, kèm tư vấn công thức và setup quầy. Xưởng rang tại Buôn Ma Thuột đáp ứng trung bình 20 tấn mỗi tháng.', 'Yes. HORECA coffees come in 1 kg packs with recipe and bar-setup support. Our Buon Ma Thuot roastery handles around 20 tonnes a month.'), 'b2b', L2('Liên hệ hợp tác', 'Partner with us')],
+    [L2('Có xuất hóa đơn VAT không?', 'Can I get a VAT invoice?'), L2('Có. Ghi thông tin công ty ở phần ghi chú khi đặt hàng hoặc gửi email cho Soul trong vòng 24 giờ sau khi đặt.', 'Yes. Add your company details in the order note, or email us within 24 hours of ordering.')]
+  ] },
+  { h: L2('Thanh toán & đổi trả', 'Payment & returns'), items: [
+    [L2('Soul nhận những hình thức thanh toán nào?', 'Which payment methods do you accept?'), L2('Thanh toán khi nhận hàng (COD), chuyển khoản ngân hàng và ví điện tử VNPay / MoMo.', 'Cash on delivery, bank transfer and VNPay / MoMo e-wallets.'), 'payment', L2('Thanh toán', 'Payment')],
+    [L2('Sản phẩm bị lỗi hoặc giao sai thì sao?', 'What if my order arrives damaged or wrong?'), L2('Chụp ảnh sản phẩm và bao bì, liên hệ Soul trong 48 giờ kể từ khi nhận. Soul sẽ đổi mới hoặc hoàn tiền.', 'Take photos of the product and packaging and contact us within 48 hours of delivery. We’ll replace it or refund you.'), 'returns', L2('Chính sách đổi trả', 'Returns policy')]
+  ] }
+];
+
+const DOCS = {
+  shipping: { eyebrow: L2('Chính sách', 'Policy'), title: L2('Giao hàng', 'Shipping'), intro: L2('Soul rang theo mẻ nhỏ tại Buôn Ma Thuột và giao trên toàn quốc. Đơn đặt trước 14:00 được xử lý trong ngày làm việc.', 'Soul roasts in small batches in Buon Ma Thuot and ships nationwide. Orders placed before 2 pm are processed the same business day.'), blocks: [
+    { h: L2('Hình thức & phí', 'Options & fees'), rows: [[L2('Tiêu chuẩn · 2–4 ngày làm việc', 'Standard · 2–4 business days'), L2('30.000₫ · miễn phí từ 500.000₫', '30,000₫ · free from 500,000₫')], [L2('Giao nhanh · trong ngày / hôm sau', 'Express · same / next day'), L2('50.000₫ · nội thành HCM, HN, ĐN, BMT', '50,000₫ · central HCMC, Hanoi, Da Nang, BMT')], [L2('Nhận tại cửa hàng', 'Store pickup'), L2('Miễn phí · 4 cửa hàng Soul', 'Free · 4 Soul stores')]] },
+    { h: L2('Thời gian xử lý', 'Processing time'), ps: [L2('Cà phê rang được đóng gói sau khi rang để giữ độ tươi. Dòng theo mùa và nhân xanh số lượng lớn có thể cần thêm 1–2 ngày chuẩn bị; Soul sẽ báo trước nếu có thay đổi.', 'Roasted coffee is packed after roasting to keep it fresh. Seasonal lots and bulk green coffee may need 1–2 extra days; we’ll tell you in advance if anything changes.')] },
+    { h: L2('Khi nhận hàng', 'On delivery'), li: [L2('Kiểm tra bao bì trước khi ký nhận. Nếu thùng móp, rách hoặc ướt, hãy chụp ảnh và ghi chú với đơn vị vận chuyển.', 'Check the parcel before signing. If it is dented, torn or wet, take photos and note it with the courier.'), L2('Nếu không liên hệ được người nhận sau 3 lần, đơn sẽ được hoàn về Soul và hoàn tiền trừ phí vận chuyển.', 'If the courier can’t reach you after 3 attempts, the order returns to Soul and is refunded minus shipping.'), L2('Giao quốc tế và đơn sỉ nhân xanh: liên hệ để được báo giá vận chuyển riêng.', 'International and wholesale green coffee: contact us for a shipping quote.')] }
+  ] },
+  returns: { eyebrow: L2('Chính sách', 'Policy'), title: L2('Đổi trả & hoàn tiền', 'Returns & refunds'), intro: L2('Cà phê là thực phẩm, nên Soul nhận đổi trả cho sản phẩm lỗi, hư hỏng khi vận chuyển hoặc giao sai, không áp dụng cho sản phẩm đã mở vì lý do khẩu vị.', 'Coffee is a food product, so we accept returns for faulty, transit-damaged or incorrect items, not for opened products for reasons of taste.'), blocks: [
+    { h: L2('Trường hợp được đổi trả', 'Eligible cases'), li: [L2('Sản phẩm bị lỗi, rách bao bì, hở van hoặc hư hỏng khi vận chuyển.', 'Faulty product, torn packaging, broken valve or damage in transit.'), L2('Giao sai sản phẩm, sai trọng lượng hoặc sai kiểu xay so với đơn hàng.', 'Wrong product, weight or grind compared with your order.'), L2('Phụ kiện (ly gốm, phin) bị nứt vỡ khi nhận.', 'Accessories (ceramic cup, phin) cracked or broken on arrival.')] },
+    { h: L2('Cách yêu cầu', 'How to request'), ps: [L2('Liên hệ Soul trong vòng 48 giờ kể từ khi nhận hàng, kèm mã đơn và ảnh sản phẩm, bao bì. Soul phản hồi trong 1 ngày làm việc và chịu phí vận chuyển đổi trả.', 'Contact us within 48 hours of delivery with your order number and photos of the product and packaging. We reply within 1 business day and cover return shipping.')] },
+    { h: L2('Hoàn tiền', 'Refunds'), rows: [[L2('Thanh toán khi nhận hàng', 'Cash on delivery'), L2('Chuyển khoản vào tài khoản bạn cung cấp', 'Bank transfer to the account you provide')], [L2('Chuyển khoản / ví điện tử', 'Bank transfer / e-wallet'), L2('Hoàn về nguồn thanh toán trong 5–7 ngày làm việc', 'Back to the original method within 5–7 business days')]] }
+  ] },
+  payment: { eyebrow: L2('Hướng dẫn', 'Guide'), title: L2('Thanh toán', 'Payment'), intro: L2('Chọn hình thức thanh toán ở bước cuối khi đặt hàng. Mọi giá trên website đã gồm VAT, trừ nhân xanh (chưa gồm 5% VAT).', 'Choose how to pay at the last step of checkout. All prices include VAT, except green coffee (excludes 5% VAT).'), blocks: [
+    { h: L2('Thanh toán khi nhận hàng (COD)', 'Cash on delivery'), ps: [L2('Trả tiền mặt cho đơn vị vận chuyển khi nhận hàng. Áp dụng cho đơn dưới 5.000.000₫.', 'Pay the courier in cash on delivery. Available for orders under 5,000,000₫.')] },
+    { h: L2('Chuyển khoản ngân hàng', 'Bank transfer'), ps: [L2('Thông tin tài khoản hiển thị sau khi đặt hàng. Ghi mã đơn ở nội dung chuyển khoản; đơn được xác nhận khi Soul nhận được thanh toán.', 'Account details appear after you place the order. Use your order number as the transfer reference; we confirm once payment arrives.')] },
+    { h: L2('VNPay / MoMo', 'VNPay / MoMo'), ps: [L2('Quét mã QR hoặc thanh toán qua ứng dụng. Giao dịch được xử lý bởi cổng thanh toán; Soul không lưu thông tin thẻ của bạn.', 'Scan the QR code or pay in-app. Transactions are handled by the payment gateway; Soul never stores your card details.')] }
+  ] },
+  privacy: { eyebrow: L2('Chính sách', 'Policy'), title: L2('Bảo mật thông tin', 'Privacy'), intro: L2('Soul chỉ thu thập thông tin cần thiết để xử lý đơn hàng, chăm sóc khách hàng và gửi tin bạn đã đồng ý nhận.', 'Soul only collects what we need to fulfil orders, support you and send updates you’ve opted into.'), blocks: [
+    { h: L2('Thông tin Soul thu thập', 'What we collect'), li: [L2('Họ tên, số điện thoại, email và địa chỉ giao hàng.', 'Name, phone number, email and delivery address.'), L2('Lịch sử đơn hàng và sản phẩm đã xem trên website.', 'Order history and products viewed on the site.'), L2('Nội dung bạn gửi qua form liên hệ, Zalo hoặc Messenger.', 'Messages you send through the contact form, Zalo or Messenger.')] },
+    { h: L2('Mục đích sử dụng', 'How we use it'), ps: [L2('Xử lý và giao đơn hàng, phản hồi yêu cầu, gửi bản tin mùa vụ (khi bạn đăng ký) và cải thiện trải nghiệm website. Soul không bán thông tin cá nhân cho bên thứ ba.', 'To process and deliver orders, answer requests, send harvest newsletters (if you subscribe) and improve the site. Soul never sells personal data.')] },
+    { h: L2('Chia sẻ với bên thứ ba', 'Sharing'), ps: [L2('Chỉ chia sẻ thông tin cần thiết với đơn vị vận chuyển và cổng thanh toán để hoàn tất đơn hàng.', 'We share only what’s necessary with couriers and payment gateways to complete your order.')] },
+    { h: L2('Quyền của bạn', 'Your rights'), ps: [L2('Bạn có thể xem, sửa thông tin trong Tài khoản, hủy nhận bản tin bất kỳ lúc nào, hoặc gửi email đến contact@soulcoffee.vn để yêu cầu xóa dữ liệu.', 'You can view and edit your details in Account, unsubscribe any time, or email contact@soulcoffee.vn to request deletion.')] }
+  ] },
+  terms: { eyebrow: L2('Điều khoản', 'Terms'), title: L2('Điều khoản sử dụng', 'Terms of use'), intro: L2('Khi sử dụng website soulcoffee.vn và đặt hàng, bạn đồng ý với các điều khoản dưới đây.', 'By using soulcoffee.vn and placing orders, you agree to the terms below.'), blocks: [
+    { h: L2('Sản phẩm & giá', 'Products & pricing'), ps: [L2('Giá có thể thay đổi theo mùa vụ. Giá áp dụng là giá tại thời điểm đặt hàng. Màu sắc và hình ảnh sản phẩm có thể khác đôi chút so với thực tế.', 'Prices may change with each harvest; the price at the time of ordering applies. Product photos and colours may differ slightly from the real item.')] },
+    { h: L2('Đơn hàng', 'Orders'), ps: [L2('Soul có quyền từ chối hoặc hủy đơn khi sản phẩm hết hàng, thông tin không chính xác hoặc có dấu hiệu gian lận, và sẽ hoàn tiền đầy đủ nếu đã thanh toán.', 'Soul may decline or cancel an order if an item is out of stock, details are incorrect or fraud is suspected, with a full refund if already paid.')] },
+    { h: L2('Tài khoản', 'Accounts'), ps: [L2('Bạn chịu trách nhiệm bảo mật mật khẩu và mọi hoạt động trong tài khoản của mình.', 'You are responsible for keeping your password safe and for activity in your account.')] },
+    { h: L2('Sở hữu trí tuệ', 'Intellectual property'), ps: [L2('Logo, hình ảnh, nội dung và tên các dòng sản phẩm (Soulful, Soul Yeast…) thuộc sở hữu của Soul Specialty Coffee.', 'Logos, images, content and product line names (Soulful, Soul Yeast…) belong to Soul Specialty Coffee.')] }
+  ] }
+};
+
+const LINK = { shipping: '#shipping', returns: '#returns', payment: '#payment', account: 'Account.dc.html#orders', blog: 'Blog.dc.html#c/how-to-make-coffee', b2b: 'Coffee Solutions.dc.html#contact' };
+
+class Component extends DCLogic {
+  state = { w: 1440, lang: null, route: null, open: {}, mobileOpen: false, f: { topic: 'order', name: '', contact: '', order: '', msg: '' }, tried: false, sent: false, cartCount: 0 };
+
+  T = {
+    vi: { nav: ['Trang chủ', 'Sản phẩm', 'Mùa vụ mới', 'Về Soul', 'Giải pháp cà phê', 'Cửa hàng', 'Blog'], menu: 'Menu', search: 'Tìm kiếm', cart: 'Giỏ hàng', close: 'Đóng', home: 'Trang chủ', help: 'Hỗ trợ', topics: 'Chủ đề', needHelp: 'Cần hỗ trợ thêm?',
+      labels: ['Câu hỏi thường gặp', 'Giao hàng', 'Đổi trả', 'Thanh toán', 'Bảo mật', 'Điều khoản', 'Liên hệ'],
+      faqEyebrow: 'Hỗ trợ', faqIntro: 'Những điều khách hàng hay hỏi Soul về đặt hàng, giao hàng, cách pha và mua sỉ. Không tìm thấy câu trả lời? Liên hệ trực tiếp với Soul.',
+      contactEyebrow: 'Hỗ trợ', contactIntro: 'Để lại lời nhắn hoặc liên hệ trực tiếp. Soul phản hồi trong giờ làm việc, 08:00–17:30 từ Thứ 2 đến Thứ 7.',
+      draft: 'Bản nháp', draftNote: 'Nội dung chính sách đang chờ Soul xác nhận trước khi công bố.', updated: 'Cập nhật', prevL: '← Trước', nextL: 'Tiếp →',
+      chHot: 'Hotline khách lẻ', chHotN: 'Đơn hàng, giao hàng, đổi trả', chB2b: 'Khách sỉ & nhân xanh', chB2bN: 'HORECA, doanh nghiệp, xuất khẩu', chMail: 'Email', chMailN: 'Phản hồi trong 1 ngày làm việc', chZalo: 'Zalo', chZaloN: 'Nhắn tin nhanh với Soul', visitStores: 'Ghé cửa hàng Soul',
+      formTitle: 'Để lại lời nhắn', fTopic: 'Chủ đề', topicOpts: [['order', 'Đơn hàng & giao hàng'], ['product', 'Sản phẩm & cách pha'], ['b2b', 'Hợp tác / mua sỉ'], ['other', 'Khác']], fName: 'Họ và tên', fContact: 'Email hoặc số điện thoại', fOrder: 'Mã đơn hàng (nếu có)', fMsg: 'Nội dung',
+      errName: 'Vui lòng nhập họ tên.', errContact: 'Nhập email hoặc số điện thoại hợp lệ.', errMsg: 'Vui lòng nhập nội dung.', send: 'Gửi lời nhắn', formNote: 'Bản demo: lời nhắn được lưu trên trình duyệt này, chưa gửi đến Soul.',
+      sentTitle: 'Đã nhận lời nhắn', sentBody: 'Cảm ơn bạn. Soul sẽ liên hệ lại trong 1 ngày làm việc.', sendAnother: 'Gửi lời nhắn khác',
+      footer: [['Shop', [['Cà phê rang', 'Shop.dc.html#c/ca-phe-pha-phin'], ['Nhân xanh', 'Shop.dc.html#c/ca-phe-nhan-xanh'], ['Soulful Collection', 'Shop.dc.html#c/soulful-flavours'], ['Tất cả sản phẩm', 'Shop.dc.html']]], ['Khám phá', [['Câu chuyện của Soul', 'Our Story.dc.html'], ['Cửa hàng', 'Spaces.dc.html'], ['Blog', 'Blog.dc.html']]], ['Dành cho đối tác', [['Giải pháp cà phê', 'Coffee Solutions.dc.html'], ['Nhân xanh', 'Coffee Solutions.dc.html#green'], ['Mua sỉ', 'Coffee Solutions.dc.html#contact']]], ['Hỗ trợ', [['Giao hàng', 'Help.dc.html#shipping'], ['Đổi trả', 'Help.dc.html#returns'], ['Câu hỏi thường gặp', 'Help.dc.html'], ['Liên hệ', 'Help.dc.html#contact']]]],
+      tagline: 'Crafted by Vietnamese Soul. Buôn Ma Thuột, Việt Nam.' },
+    en: { nav: ['Home', 'Shop', 'New Crop', 'Our Story', 'Coffee Solutions', 'Spaces', 'Blog'], menu: 'Menu', search: 'Search', cart: 'Cart', close: 'Close', home: 'Home', help: 'Help', topics: 'Topics', needHelp: 'Need more help?',
+      labels: ['FAQ', 'Shipping', 'Returns', 'Payment', 'Privacy', 'Terms', 'Contact'],
+      faqEyebrow: 'Help', faqIntro: 'What customers most often ask about ordering, delivery, brewing and wholesale. Can’t find your answer? Get in touch with us directly.',
+      contactEyebrow: 'Help', contactIntro: 'Leave us a message or reach us directly. We reply during business hours, 8:00–17:30, Monday to Saturday.',
+      draft: 'Draft', draftNote: 'Policy content is awaiting Soul’s confirmation before publishing.', updated: 'Updated', prevL: '← Previous', nextL: 'Next →',
+      chHot: 'Customer hotline', chHotN: 'Orders, delivery, returns', chB2b: 'Wholesale & green coffee', chB2bN: 'HORECA, corporate, export', chMail: 'Email', chMailN: 'Reply within 1 business day', chZalo: 'Zalo', chZaloN: 'Quick chat with Soul', visitStores: 'Visit a Soul store',
+      formTitle: 'Leave a message', fTopic: 'Topic', topicOpts: [['order', 'Orders & delivery'], ['product', 'Products & brewing'], ['b2b', 'Partnership / wholesale'], ['other', 'Other']], fName: 'Full name', fContact: 'Email or phone', fOrder: 'Order number (optional)', fMsg: 'Message',
+      errName: 'Please enter your name.', errContact: 'Enter a valid email or phone number.', errMsg: 'Please enter a message.', send: 'Send message', formNote: 'Demo: messages are stored in this browser and not yet sent to Soul.',
+      sentTitle: 'Message received', sentBody: 'Thank you. We’ll get back to you within 1 business day.', sendAnother: 'Send another message',
+      footer: [['Shop', [['Roasted Coffee', 'Shop.dc.html#c/ca-phe-pha-phin'], ['Green Coffee', 'Shop.dc.html#c/ca-phe-nhan-xanh'], ['Soulful Collection', 'Shop.dc.html#c/soulful-flavours'], ['All Coffee', 'Shop.dc.html']]], ['Discover', [['Our Story', 'Our Story.dc.html'], ['Spaces', 'Spaces.dc.html'], ['Blog', 'Blog.dc.html']]], ['Professional', [['Coffee Solutions', 'Coffee Solutions.dc.html'], ['Green Coffee', 'Coffee Solutions.dc.html#green'], ['Wholesale', 'Coffee Solutions.dc.html#contact']]], ['Support', [['Shipping', 'Help.dc.html#shipping'], ['Returns', 'Help.dc.html#returns'], ['FAQ', 'Help.dc.html'], ['Contact', 'Help.dc.html#contact']]]],
+      tagline: 'Crafted by Vietnamese Soul. Buon Ma Thuot, Vietnam.' }
+  };
+
+  componentDidMount() {
+    this._r = () => this.setState({ w: window.innerWidth }); this._r(); window.addEventListener('resize', this._r);
+    this._h = () => { const id = location.hash.slice(1); this.setState({ route: ORDER.includes(id) ? id : 'faq', mobileOpen: false }); };
+    this._h(); window.addEventListener('hashchange', this._h);
+    this._k = (e) => { if (e.key === 'Escape') this.setState({ mobileOpen: false }); };
+    window.addEventListener('keydown', this._k);
+    const c = read(LS_CART, []); this.setState({ cartCount: Array.isArray(c) ? c.reduce((n, i) => n + (i.qty || 1), 0) : 0 });
+  }
+  componentWillUnmount() { window.removeEventListener('resize', this._r); window.removeEventListener('hashchange', this._h); window.removeEventListener('keydown', this._k); }
+  componentDidUpdate(pp) { if (pp.lang !== this.props.lang) this.setState({ lang: null }); if (pp.page !== this.props.page && this.props.page) this.go(this.props.page); }
+  go(id) { history.replaceState(null, '', id === 'faq' ? location.pathname : '#' + id); this.setState({ route: id, mobileOpen: false }); window.scrollTo(0, 0); }
+
+  renderVals() {
+    const s = this.state, L = s.lang || this.props.lang || 'vi', li = L === 'vi' ? 0 : 1, t = this.T[L], isMobile = s.w < 1180, narrow = s.w < 900, pad = (n) => String(n).padStart(2, '0');
+    const route = s.route || this.props.page || 'faq', idx = ORDER.indexOf(route);
+    const hrefs = ['Home.html', 'Shop.dc.html', 'Shop.dc.html#c/soulful-flavours', 'Our Story.dc.html', 'Coffee Solutions.dc.html', 'Spaces.dc.html', 'Blog.dc.html'];
+    const open = (id) => (e) => { e.preventDefault(); this.go(id); };
+    const doc = DOCS[route];
+    const pg = route === 'faq' ? { eyebrow: t.faqEyebrow, title: t.labels[0], intro: t.faqIntro, pending: false, blocks: [] }
+      : route === 'contact' ? { eyebrow: t.contactEyebrow, title: t.labels[6], intro: t.contactIntro, pending: false, blocks: [] }
+      : { eyebrow: doc.eyebrow[li], title: doc.title[li], intro: doc.intro[li], pending: true, updated: '03/11/2026',
+          blocks: doc.blocks.map((b, i) => ({ n: pad(i + 1), h: b.h[li], ps: (b.ps || []).map(p => ({ text: p[li] })), rows: (b.rows || []).map(r => ({ k: r[0][li], v: r[1][li] })), hasRows: !!b.rows, li: (b.li || []).map(x => ({ text: x[li] })), hasList: !!b.li })) };
+    const f = s.f, errs = { name: !f.name.trim(), contact: !/^(\S+@\S+\.\S+|[0-9 +().-]{9,})$/.test(f.contact.trim()), msg: !f.msg.trim() };
+    const setF = (k) => (e) => { const v = e.target.value; this.setState(st => ({ f: { ...st.f, [k]: v } })); };
+    const fieldDefs = [['name', t.fName, 'text', 'name', '*', t.errName], ['contact', t.fContact, 'text', 'email', '*', t.errContact], ['order', t.fOrder, 'text', 'off', '', '']];
+    const prev = idx > 0 ? ORDER[idx - 1] : null, next = idx < ORDER.length - 1 ? ORDER[idx + 1] : null;
+    return {
+      t, pg, isMobile, isDesktop: !isMobile, cartCount: s.cartCount,
+      isFaq: route === 'faq', isDoc: !!doc, isContact: route === 'contact',
+      cols: narrow ? 'minmax(0,1fr)' : 'minmax(220px, 280px) minmax(0,1fr)', asidePos: narrow ? 'static' : 'sticky', asideDir: narrow ? 'row' : 'column', asideGap: narrow ? '6px' : '4px',
+      isVi: L === 'vi', isEn: L === 'en', viBg: L === 'vi' ? '#27292D' : 'transparent', enBg: L === 'en' ? '#27292D' : 'transparent', viColor: L === 'vi' ? '#F4EFE5' : '#27292D', enColor: L === 'en' ? '#F4EFE5' : '#27292D',
+      setVi: () => this.setState({ lang: 'vi' }), setEn: () => this.setState({ lang: 'en' }),
+      nav: t.nav.map((label, i) => ({ label, href: hrefs[i] })),
+      mobileOpen: s.mobileOpen, openMobile: () => this.setState({ mobileOpen: true }), closeMobile: () => this.setState({ mobileOpen: false }),
+      goFaq: open('faq'),
+      topics: ORDER.map((id, i) => ({ label: t.labels[i], n: pad(i + 1), href: id === 'faq' ? '#' : '#' + id, open: open(id), current: id === route ? 'page' : 'false', bg: id === route ? '#27292D' : 'transparent', color: id === route ? '#F4EFE5' : '#27292D', border: id === route ? '#27292D' : 'rgba(39,41,45,.2)' })),
+      faq: FAQ.map((g, gi) => ({ id: 'fq' + gi, h: g.h[li], n: pad(g.items.length), items: g.items.map((q, qi) => { const k = gi + '.' + qi, o = !!s.open[k], lk = q[2]; const isLocal = lk && LINK[lk].startsWith('#');
+        return { q: q[0][li], a: q[1][li], open: o, sign: o ? '−' : '+', toggle: () => this.setState(st => ({ open: { ...st.open, [k]: !st.open[k] } })), hasLink: !!lk, link: lk ? q[3][li] : '', href: lk ? LINK[lk] : '#', linkOpen: isLocal ? open(lk) : undefined }; }) })),
+      channels: [[t.chHot, '0987 592 220', t.chHotN, 'tel:0987592220', '_self'], [t.chB2b, '0908 267 710', t.chB2bN, 'tel:0908267710', '_self'], [t.chMail, 'contact@soulcoffee.vn', t.chMailN, 'mailto:contact@soulcoffee.vn', '_self'], [t.chZalo, 'Soul Specialty Coffee', t.chZaloN, 'https://zalo.me/soulspecialtycoffee', '_blank']].map(c => ({ k: c[0], v: c[1], note: c[2], href: c[3], target: c[4] })),
+      f, sent: s.sent, notSent: !s.sent, topicOpts: t.topicOpts.map(o => ({ v: o[0], label: o[1] })), setTopic: setF('topic'), setMsg: setF('msg'),
+      fields: fieldDefs.map(d => { const bad = s.tried && !!errs[d[0]]; return { k: d[0], label: d[1], type: d[2], ac: d[3], req: d[4], err: d[5], value: f[d[0]], change: setF(d[0]), invalid: bad, line: bad ? '#A13D2D' : 'rgba(39,41,45,.4)' }; }),
+      msgInvalid: s.tried && errs.msg, msgLine: s.tried && errs.msg ? '#A13D2D' : 'rgba(39,41,45,.3)',
+      submit: (e) => { e.preventDefault(); if (errs.name || errs.contact || errs.msg) { this.setState({ tried: true }); return; }
+        try { const all = read(LS_MSG, []); all.push({ ...f, at: new Date().toISOString() }); localStorage.setItem(LS_MSG, JSON.stringify(all)); } catch (er) {}
+        this.setState({ sent: true, tried: false }); },
+      resetForm: () => this.setState({ sent: false, f: { topic: 'order', name: '', contact: '', order: '', msg: '' } }),
+      pager: [prev && { dir: t.prevL, label: t.labels[idx - 1], href: prev === 'faq' ? '#' : '#' + prev, open: open(prev), align: 'left' }, next && { dir: t.nextL, label: t.labels[idx + 1], href: '#' + next, open: open(next), align: 'right' }].filter(Boolean),
+      footerCols: t.footer.map(c => ({ title: c[0], links: c[1].map(l => ({ label: l[0], href: l[1] })) }))
+    };
+  }
+}
+</script>
+</body>
+</html>
