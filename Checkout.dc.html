@@ -163,6 +163,7 @@
                 <span style="font-size: 14.5px; font-weight: 500;">{{ o.fee }}</span>
               </button>
             </sc-for>
+            <p style="margin: 2px 0 0; font-size: 12.5px; line-height: 1.55; color: #7C7365;">{{ t.vnNote }}</p>
             <sc-if value="{{ isPickup }}" hint-placeholder-val="{{ false }}">
               <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr)); gap: 10px; margin-top: 8px;">
                 <sc-for list="{{ stores }}" as="sto" hint-placeholder-count="4">
@@ -203,13 +204,15 @@
             <label style="display: flex; align-items: flex-start; gap: 10px; margin-top: 10px; font-size: 13.5px; line-height: 1.55; cursor: pointer;"><input type="checkbox" checked="{{ invoice }}" onChange="{{ toggleInvoice }}" style="width: 18px; height: 18px; margin-top: 2px; accent-color: #27292D;" />{{ t.invoice }}</label>
             <sc-if value="{{ invoice }}" hint-placeholder-val="{{ false }}">
               <div style="display: flex; flex-wrap: wrap; gap: 18px;">
-                <sc-for list="{{ invoiceFields }}" as="fd" hint-placeholder-count="2">
-                  <div style="display: flex; flex-direction: column; gap: 6px; flex: 1 1 220px; min-width: 0;">
+                <sc-for list="{{ invoiceFields }}" as="fd" hint-placeholder-count="6">
+                  <div style="display: flex; flex-direction: column; gap: 6px; flex: 1 1 {{ fd.basis }}; min-width: 0;">
                     <label for="{{ fd.id }}" style="font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: #7C7365;">{{ fd.label }}</label>
-                    <input id="{{ fd.id }}" type="text" value="{{ fd.value }}" onChange="{{ fd.onChange }}" style="height: 50px; padding: 0 14px; border: 1px solid rgba(39,41,45,.35); background: #FBF8F2; font-size: 15px; outline: none;" style-focus="border-color: #27292D;" />
+                    <input id="{{ fd.id }}" type="{{ fd.type }}" value="{{ fd.value }}" onChange="{{ fd.onChange }}" aria-invalid="{{ fd.invalid }}" style="height: 50px; padding: 0 14px; border: 1px solid {{ fd.line }}; background: #FBF8F2; font-size: 15px; outline: none;" style-focus="border-color: #27292D;" />
+                    <sc-if value="{{ fd.hasErr }}" hint-placeholder-val="{{ false }}"><span role="alert" style="font-size: 12.5px; color: #A0402C;">{{ fd.err }}</span></sc-if>
                   </div>
                 </sc-for>
               </div>
+              <p style="margin: 0; padding: 12px 14px; background: #EAE3D5; font-size: 13px; line-height: 1.6; color: #3A3832;">{{ t.inv48 }}</p>
             </sc-if>
           </fieldset>
 
@@ -331,12 +334,14 @@ const STORES = [
 ];
 const read = (k, d) => { try { const v = JSON.parse(localStorage.getItem(k)); return v == null ? d : v; } catch (e) { return d; } };
 const write = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) {} };
-const vnd = (n) => n.toLocaleString('vi-VN') + '₫';
+const USD_RATE = 26000; // placeholder rate for EN prices — confirm with client
+const fmtMoney = (n, L) => L === 'en' ? '$' + (n / USD_RATE).toFixed(2) : n.toLocaleString('vi-VN') + '₫';
+const vnd = (n) => fmtMoney(n, 'vi');
 const nameFromHandle = (h) => (h || '').split('-').slice(0, 6).join(' ');
 
 class Component extends DCLogic {
-  state = { w: 1440, lang: null, route: null, cart: [], f: { email: '', phone: '', name: '', address: '', province: '', ward: '' }, note: '', errs: {}, tried: false,
-    ship: 'std', store: 'hcm', pay: 'cod', invoice: false, inv: { company: '', tax: '' }, code: '', applied: null, codeMsg: '', session: null, mobileOpen: false };
+  state = { w: 1440, lang: null, route: null, cart: [], f: { email: '', phone: '', name: '', address: '', province: '', ward: '', country: '', city: '' }, note: '', errs: {}, tried: false,
+    ship: 'std', store: 'hcm', pay: 'bank', invoice: false, inv: { company: '', tax: '', addr: '', buyer: '', email: '', note: '' }, code: '', applied: null, codeMsg: '', session: null, mobileOpen: false };
 
   T = {
     vi: { nav: ['Trang chủ', 'Sản phẩm', 'Mùa vụ mới', 'Về Soul', 'Giải pháp cà phê', 'Cửa hàng', 'Blog'], menu: 'Menu', search: 'Tìm kiếm', account: 'Tài khoản', cart: 'Giỏ hàng', close: 'Đóng', home: 'Trang chủ', shop: 'Sản phẩm', progress: 'Tiến trình đặt hàng',
@@ -347,10 +352,10 @@ class Component extends DCLogic {
       assure: ['Rang mới mỗi tuần tại Buôn Ma Thuột', 'Đổi trả trong 7 ngày nếu sản phẩm lỗi', 'Hỗ trợ: 0969 648 148 · contact@soulcoffee.vn'],
       haveAccount: 'Đã có tài khoản? Đăng nhập để điền nhanh thông tin và theo dõi đơn hàng.', login: 'Đăng nhập', signedIn: 'Đang đặt hàng với tài khoản {x}.',
       contactInfo: 'Thông tin liên hệ', email: 'Email', phone: 'Số điện thoại', fullName: 'Họ và tên', delivery: 'Giao hàng', address: 'Địa chỉ (số nhà, đường)', province: 'Tỉnh / Thành phố', choose: 'Chọn tỉnh / thành', ward: 'Phường / Xã',
-      std: 'Giao hàng tiêu chuẩn', stdSub: '2–4 ngày làm việc · miễn phí từ 500.000₫', exp: 'Giao hàng nhanh', expSub: '1–2 ngày · nội thành TP.HCM, Hà Nội, Đà Nẵng', pickup: 'Nhận tại cửa hàng', pickupSub: 'Sẵn sàng sau 2 giờ trong giờ mở cửa', free: 'Miễn phí',
+      std: 'Giao hàng tiêu chuẩn', stdSub: '2–4 ngày làm việc · miễn phí từ {x}', intl: 'International Delivery · Giao hàng quốc tế', intlSub: 'Trao đổi & xác nhận qua email', byEmail: 'Báo phí qua email', vnNote: 'Giao hàng tiêu chuẩn, giao nhanh và nhận tại cửa hàng áp dụng trong lãnh thổ Việt Nam.', country: 'Quốc gia', city: 'Thành phố / Bang', doneIntl: 'Soul sẽ gửi email báo phí và thời gian giao hàng quốc tế để bạn xác nhận trước khi thanh toán.', badPhoneIntl: 'Số điện thoại kèm mã quốc gia, ví dụ +1 202 555 0100.', exp: 'Giao hàng nhanh', expSub: '1–2 ngày · nội thành TP.HCM, Hà Nội, Đà Nẵng', pickup: 'Nhận tại cửa hàng', pickupSub: 'Sẵn sàng sau 2 giờ trong giờ mở cửa', free: 'Miễn phí',
       note: 'Ghi chú đơn hàng (không bắt buộc)', notePh: 'Ví dụ: xay cho phin, giao giờ hành chính…', payment: 'Thanh toán',
       cod: 'Thanh toán khi nhận hàng (COD)', codSub: 'Trả tiền mặt hoặc chuyển khoản khi nhận', bank: 'Chuyển khoản ngân hàng', bankSub: 'Thông tin tài khoản hiển thị sau khi đặt hàng', wallet: 'Ví điện tử / thẻ (VNPay, MoMo)', walletSub: 'Chuyển đến cổng thanh toán an toàn',
-      invoice: 'Xuất hóa đơn VAT cho công ty', company: 'Tên công ty', tax: 'Mã số thuế', fixErrors: 'Vui lòng kiểm tra các trường được đánh dấu.', place: 'Đặt hàng', terms: 'Bằng việc đặt hàng, bạn đồng ý với chính sách giao hàng, đổi trả và bảo mật của Soul.', backCart: 'Quay lại giỏ hàng', edit: 'Sửa',
+      invoice: 'Yêu cầu xuất hóa đơn VAT', company: 'Tên công ty', tax: 'Mã số thuế', invAddr: 'Địa chỉ công ty', buyer: 'Tên người mua hàng (không bắt buộc)', invEmail: 'Email nhận hóa đơn', invNote: 'Ghi chú (không bắt buộc)', inv48: 'Hóa đơn sẽ được xuất trong vòng 48 giờ (không bao gồm Thứ 7, Chủ nhật và ngày lễ) kể từ khi thanh toán thành công.', fixErrors: 'Vui lòng kiểm tra các trường được đánh dấu.', place: 'Đặt hàng', terms: 'Bằng việc đặt hàng, bạn đồng ý với chính sách giao hàng, đổi trả và bảo mật của Soul.', backCart: 'Quay lại giỏ hàng', edit: 'Sửa',
       code: 'Mã giảm giá', codePh: 'Nhập mã', apply: 'Áp dụng', codeOk: 'Đã áp dụng mã {x}.', codeBad: 'Mã không hợp lệ hoặc đã hết hạn.', discount: 'Giảm giá', total: 'Tổng cộng',
       req: 'Vui lòng điền thông tin này.', badEmail: 'Email chưa đúng định dạng.', badPhone: 'Số điện thoại gồm 10 chữ số, bắt đầu bằng 0.',
       orderNo: 'Đơn hàng', thanks: 'Cảm ơn {x}, Soul đã nhận đơn hàng của bạn.', doneBody: 'Xác nhận đơn hàng đã được gửi tới {x}. Soul sẽ gọi xác nhận trong giờ làm việc và rang, đóng gói đơn của bạn trong vòng 24 giờ.', donePickup: 'Soul sẽ nhắn tin khi đơn sẵn sàng tại {x}.',
@@ -366,10 +371,10 @@ class Component extends DCLogic {
       assure: ['Roasted weekly in Buon Ma Thuot', '7-day returns on faulty products', 'Help: 0969 648 148 · contact@soulcoffee.vn'],
       haveAccount: 'Have an account? Sign in to fill your details and track orders.', login: 'Sign in', signedIn: 'Checking out as {x}.',
       contactInfo: 'Contact', email: 'Email', phone: 'Phone', fullName: 'Full name', delivery: 'Delivery', address: 'Street address', province: 'Province / City', choose: 'Choose a province', ward: 'Ward / Commune',
-      std: 'Standard delivery', stdSub: '2–4 business days · free over 500,000₫', exp: 'Express delivery', expSub: '1–2 days · inner HCMC, Hanoi, Da Nang', pickup: 'Pick up in store', pickupSub: 'Ready in 2 hours during opening hours', free: 'Free',
+      std: 'Standard delivery', stdSub: '2–4 business days · free over {x}', intl: 'International Delivery', intlSub: 'Discussion & confirmation by email', byEmail: 'Quoted by email', vnNote: 'Standard, express and in-store pickup apply within Vietnam only.', country: 'Country', city: 'City / State', doneIntl: 'Soul will email you the international shipping cost and time to confirm before payment.', badPhoneIntl: 'Include your country code, e.g. +1 202 555 0100.', exp: 'Express delivery', expSub: '1–2 days · inner HCMC, Hanoi, Da Nang', pickup: 'Pick up in store', pickupSub: 'Ready in 2 hours during opening hours', free: 'Free',
       note: 'Order note (optional)', notePh: 'E.g. grind for phin, office-hours delivery…', payment: 'Payment',
       cod: 'Cash on delivery (COD)', codSub: 'Pay in cash or by transfer on delivery', bank: 'Bank transfer', bankSub: 'Account details shown after you place the order', wallet: 'E-wallet / card (VNPay, MoMo)', walletSub: 'Redirects to a secure payment gateway',
-      invoice: 'Issue a company VAT invoice', company: 'Company name', tax: 'Tax code', fixErrors: 'Please check the highlighted fields.', place: 'Place order', terms: 'By placing your order you agree to Soul’s shipping, returns and privacy policies.', backCart: 'Back to cart', edit: 'Edit',
+      invoice: 'Request a VAT invoice', company: 'Company name', tax: 'Tax code', invAddr: 'Company address', buyer: 'Buyer name (optional)', invEmail: 'Invoice email', invNote: 'Note (optional)', inv48: 'Invoices are issued within 48 hours (excluding Saturdays, Sundays and public holidays) after successful payment.', fixErrors: 'Please check the highlighted fields.', place: 'Place order', terms: 'By placing your order you agree to Soul’s shipping, returns and privacy policies.', backCart: 'Back to cart', edit: 'Edit',
       code: 'Discount code', codePh: 'Enter code', apply: 'Apply', codeOk: 'Code {x} applied.', codeBad: 'This code is invalid or expired.', discount: 'Discount', total: 'Total',
       req: 'This field is required.', badEmail: 'Please enter a valid email.', badPhone: 'Phone must be 10 digits starting with 0.',
       orderNo: 'Order', thanks: 'Thank you, {x}. Soul has received your order.', doneBody: 'A confirmation has been sent to {x}. We’ll call to confirm during business hours, then roast and pack your order within 24 hours.', donePickup: 'We’ll text you when your order is ready at {x}.',
@@ -403,20 +408,22 @@ class Component extends DCLogic {
   validate(t) {
     const f = this.state.f, e = {}, pickup = this.state.ship === 'pickup';
     if (!f.email.trim()) e.email = t.req; else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(f.email.trim())) e.email = t.badEmail;
-    const ph = f.phone.replace(/[\s.\-]/g, '').replace(/^\+84/, '0');
-    if (!ph) e.phone = t.req; else if (!/^0\d{9}$/.test(ph)) e.phone = t.badPhone;
+    const intl = this.state.ship === 'intl', raw = f.phone.replace(/[\s.\-()]/g, ''), ph = raw.replace(/^\+84/, '0');
+    if (!raw) e.phone = t.req; else if (intl ? !/^\+?\d{7,15}$/.test(raw) : !/^0\d{9}$/.test(ph)) e.phone = intl ? t.badPhoneIntl : t.badPhone;
     if (!f.name.trim()) e.name = t.req;
-    if (!pickup) { if (!f.address.trim()) e.address = t.req; if (!f.province) e.province = t.req; if (!f.ward.trim()) e.ward = t.req; }
+    if (intl) { if (!f.address.trim()) e.address = t.req; if (!f.country.trim()) e.country = t.req; if (!f.city.trim()) e.city = t.req; }
+    else if (!pickup) { if (!f.address.trim()) e.address = t.req; if (!f.province) e.province = t.req; if (!f.ward.trim()) e.ward = t.req; }
+    if (this.state.invoice) { const v = this.state.inv; if (!v.company.trim()) e.inv_company = t.req; if (!v.tax.trim()) e.inv_tax = t.req; if (!v.addr.trim()) e.inv_addr = t.req; if (!v.email.trim()) e.inv_email = t.req; else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.email.trim())) e.inv_email = t.badEmail; }
     return e;
   }
   totals() {
     const s = this.state, sub = s.cart.reduce((a, c) => a + c.price * c.qty, 0), disc = s.applied ? Math.round(sub * CODES[s.applied] / 1000) * 1000 : 0;
-    const ship = s.ship === 'pickup' ? 0 : s.ship === 'exp' ? EXP : (sub - disc >= FREE_AT ? 0 : STD);
+    const ship = s.ship === 'pickup' || s.ship === 'intl' ? 0 : s.ship === 'exp' ? EXP : (sub - disc >= FREE_AT ? 0 : STD);
     return { sub, disc, ship, total: sub - disc + ship };
   }
 
   renderVals() {
-    const s = this.state, L = s.lang || this.props.lang || 'vi', li = L === 'vi' ? 0 : 1, t = this.T[L], isMobile = s.w < 1180;
+    const s = this.state, L = s.lang || this.props.lang || 'vi', li = L === 'vi' ? 0 : 1, t = this.T[L], isMobile = s.w < 1180, vnd = (n) => fmtMoney(n, L);
     let r = s.route || this.parse(this.props.step && this.props.step !== 'cart' ? '#' + this.props.step : '');
     if (r.kind === 'checkout' && s.cart.length === 0) r = { kind: 'cart' };
     const nav = (h) => (e) => { e && e.preventDefault(); this.go(h); };
@@ -452,32 +459,32 @@ class Component extends DCLogic {
 
     if (r.kind === 'checkout') {
       const pickup = s.ship === 'pickup';
-      const pays = [['cod', t.cod, t.codSub], ['bank', t.bank, t.bankSub], ['wallet', t.wallet, t.walletSub]];
+      const pays = [['bank', t.bank, t.bankSub], ['wallet', t.wallet, t.walletSub]], intl = s.ship === 'intl';
       return { ...base,
         guest: !s.session, signedIn: !!s.session, signedInMsg: X(t.signedIn, s.session || ''),
         contactRows: [{ fields: [fld('email', t.email, { type: 'email', auto: 'email', ph: 'ban@email.com' }), fld('phone', t.phone, { type: 'tel', auto: 'tel', ph: '09xx xxx xxx' })] }, { fields: [fld('name', t.fullName, { auto: 'name' })] }],
-        ships: [['std', t.std, t.stdSub, stdFree ? t.free : vnd(STD)], ['exp', t.exp, t.expSub, vnd(EXP)], ['pickup', t.pickup, t.pickupSub, t.free]].map(o => ({ ...radio(s.ship === o[0]), label: o[1], sub: o[2], fee: o[3], pick: () => this.setState({ ship: o[0] }) })),
+        ships: [['std', t.std, X(t.stdSub, vnd(FREE_AT)), stdFree ? t.free : vnd(STD)], ['exp', t.exp, t.expSub, vnd(EXP)], ['pickup', t.pickup, t.pickupSub, t.free], ['intl', t.intl, t.intlSub, t.byEmail]].map(o => ({ ...radio(s.ship === o[0]), label: o[1], sub: o[2], fee: o[3], pick: () => this.setState({ ship: o[0] }) })),
         isPickup: pickup, isDelivery: !pickup,
         stores: STORES.map(x => ({ ...radio(s.store === x.id), name: x.name, addr: x.addr, pick: () => this.setState({ store: x.id }) })),
-        addrRows: [{ fields: [fld('address', t.address, { auto: 'street-address' })] }, { fields: [fld('province', t.province, { isInput: false, isSelect: true, options: [{ v: '', label: t.choose }, ...PROVINCES.map(p => ({ v: p, label: p }))] }), fld('ward', t.ward, {})] }],
+        addrRows: intl ? [{ fields: [fld('address', t.address, { auto: 'street-address' })] }, { fields: [fld('city', t.city, { auto: 'address-level2' }), fld('country', t.country, { auto: 'country-name' })] }] : [{ fields: [fld('address', t.address, { auto: 'street-address' })] }, { fields: [fld('province', t.province, { isInput: false, isSelect: true, options: [{ v: '', label: t.choose }, ...PROVINCES.map(p => ({ v: p, label: p }))] }), fld('ward', t.ward, {})] }],
         note: s.note, onNote: (e) => this.setState({ note: e.target.value }),
         pays: pays.map(o => ({ ...radio(s.pay === o[0]), label: o[1], sub: o[2], pick: () => this.setState({ pay: o[0] }) })),
         invoice: s.invoice, toggleInvoice: () => this.setState({ invoice: !s.invoice }),
-        invoiceFields: [['company', t.company], ['tax', t.tax]].map(x => ({ id: 'ck-' + x[0], label: x[1], value: s.inv[x[0]], onChange: (e) => { const v = e.target.value; this.setState(st => ({ inv: { ...st.inv, [x[0]]: v } })); } })),
+        invoiceFields: [['company', t.company, '220px'], ['tax', t.tax, '220px'], ['addr', t.invAddr, '100%'], ['buyer', t.buyer, '220px'], ['email', t.invEmail, '220px'], ['note', t.invNote, '100%']].map(x => ({ id: 'ck-inv_' + x[0], label: x[1], basis: x[2], type: x[0] === 'email' ? 'email' : 'text', hasErr: !!errs['inv_' + x[0]], err: errs['inv_' + x[0]] || '', invalid: errs['inv_' + x[0]] ? 'true' : 'false', line: errs['inv_' + x[0]] ? '#A0402C' : 'rgba(39,41,45,.35)', value: s.inv[x[0]], onChange: (e) => { const v = e.target.value; this.setState(st => ({ inv: { ...st.inv, [x[0]]: v } })); } })),
         hasFormErr: s.tried && Object.keys(errs).length > 0,
         code: s.code, onCode: (e) => this.setState({ code: e.target.value }),
         applyCode: () => { const c = s.code.trim().toUpperCase(); if (CODES[c]) this.setState({ applied: c, codeMsg: X(t.codeOk, c) }); else this.setState({ applied: null, codeMsg: t.codeBad }); },
         hasCodeMsg: !!s.codeMsg, codeMsg: s.codeMsg, codeColor: s.applied ? '#27292D' : '#A0402C',
-        lines: [{ k: t.subtotal, v: vnd(tt.sub) }, ...(tt.disc ? [{ k: t.discount + ' (' + s.applied + ')', v: '−' + vnd(tt.disc) }] : []), { k: t.shipping, v: tt.ship ? vnd(tt.ship) : t.free }],
+        lines: [{ k: t.subtotal, v: vnd(tt.sub) }, ...(tt.disc ? [{ k: t.discount + ' (' + s.applied + ')', v: '−' + vnd(tt.disc) }] : []), { k: t.shipping, v: intl ? t.byEmail : tt.ship ? vnd(tt.ship) : t.free }],
         total: vnd(tt.total), placeLabel: t.place + ' · ' + vnd(tt.total),
         placeOrder: (e) => {
           e.preventDefault();
           const er = this.validate(t);
-          if (Object.keys(er).length) { this.setState({ tried: true }); const first = ['email', 'phone', 'name', 'address', 'province', 'ward'].find(k => er[k]); setTimeout(() => { const el = document.getElementById('ck-' + first); if (el) el.focus(); }, 30); return; }
+          if (Object.keys(er).length) { this.setState({ tried: true }); const first = ['email', 'phone', 'name', 'address', 'province', 'ward', 'city', 'country', 'inv_company', 'inv_tax', 'inv_addr', 'inv_email'].find(k => er[k]); setTimeout(() => { const el = document.getElementById('ck-' + first); if (el) el.focus(); }, 30); return; }
           const id = 'SL' + String(Date.now()).slice(-7);
           const store = STORES.find(x => x.id === s.store);
           const order = { id, date: new Date().toISOString(), email: s.f.email.trim(), user: s.session, name: s.f.name.trim(), phone: s.f.phone.trim(),
-            ship: s.ship, store: pickup ? store : null, addr: pickup ? null : { address: s.f.address.trim(), ward: s.f.ward.trim(), province: s.f.province },
+            ship: s.ship, store: pickup ? store : null, addr: pickup ? null : intl ? { address: s.f.address.trim(), ward: s.f.city.trim(), province: s.f.country.trim() } : { address: s.f.address.trim(), ward: s.f.ward.trim(), province: s.f.province },
             pay: s.pay, note: s.note, invoice: s.invoice ? s.inv : null, code: s.applied,
             items: s.cart.map(c => ({ h: c.h, name: c.name || nameFromHandle(c.h), img: c.img, variant: c.variant, qty: c.qty, price: c.price })), sub: tt.sub, disc: tt.disc, shipFee: tt.ship, total: tt.total, status: 0 };
           write(LS_ORDERS, [order, ...read(LS_ORDERS, [])]);
@@ -488,13 +495,13 @@ class Component extends DCLogic {
 
     if (r.kind === 'done') {
       if (!od) return { ...base, hasOrder: false, noOrder: true, od: { items: [], lines: [], blocks: [] }, bank: [], track: [] };
-      const payName = { cod: t.cod, bank: t.bank, wallet: t.wallet }[od.pay], shipName = { std: t.std, exp: t.exp, pickup: t.pickup }[od.ship];
+      const payName = { cod: t.cod, bank: t.bank, wallet: t.wallet }[od.pay], shipName = { std: t.std, exp: t.exp, pickup: t.pickup, intl: t.intl }[od.ship];
       const first = od.name.split(' ').slice(-1)[0];
       return { ...base, hasOrder: true, noOrder: false,
-        thanks: X(t.thanks, first), doneBody: X(t.doneBody, od.email) + (od.store ? ' ' + X(t.donePickup, od.store.name) : ''),
+        thanks: X(t.thanks, first), doneBody: X(t.doneBody, od.email) + (od.store ? ' ' + X(t.donePickup, od.store.name) : '') + (od.ship === 'intl' ? ' ' + t.doneIntl : ''),
         od: { id: od.id, isBank: od.pay === 'bank', total: vnd(od.total),
           items: od.items.map(c => ({ name: c.name, img: c.img || 'images/02-shop/CA-PHE-RANG.jpg', variant: c.variant, qty: c.qty, total: vnd(c.price * c.qty) })),
-          lines: [{ k: t.subtotal, v: vnd(od.sub) }, ...(od.disc ? [{ k: t.discount, v: '−' + vnd(od.disc) }] : []), { k: shipName, v: od.shipFee ? vnd(od.shipFee) : t.free }],
+          lines: [{ k: t.subtotal, v: vnd(od.sub) }, ...(od.disc ? [{ k: t.discount, v: '−' + vnd(od.disc) }] : []), { k: shipName, v: od.shipFee ? vnd(od.shipFee) : od.ship === 'intl' ? t.byEmail : t.free }],
           blocks: [{ k: t.contact, v: od.name + '\n' + od.phone + '\n' + od.email }, od.store ? { k: t.pickAt, v: od.store.name + '\n' + od.store.addr } : { k: t.shipTo, v: od.addr.address + '\n' + od.addr.ward + ', ' + od.addr.province }, { k: t.payBy, v: payName }] },
         bank: t.bankRows.map(b => ({ k: b[0], v: X(b[1], od.id) })),
         track: t.track.map((label, i) => ({ n: String(i + 1).padStart(2, '0'), label, line: i <= od.status ? '#27292D' : 'rgba(39,41,45,.2)', fg: i <= od.status ? '#27292D' : '#7C7365' })),

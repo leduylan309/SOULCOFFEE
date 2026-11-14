@@ -284,6 +284,27 @@
     </div>
   </sc-if>
 
+  <sc-if value="{{ pickOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position: fixed; inset: 0; z-index: 106; display: grid; place-items: center; padding: 16px;">
+      <button type="button" aria-label="{{ t.close }}" onClick="{{ closePick }}" style="position: absolute; inset: 0; border: 0; background: rgba(20,21,23,.5); cursor: pointer;"></button>
+      <div role="dialog" aria-modal="true" aria-label="{{ picker.name }}" style="position: relative; width: min(100%, 600px); max-height: calc(100vh - 32px); overflow-y: auto; background: #F4EFE5; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));">
+        <img src="{{ picker.img }}" alt="" style="width: 100%; height: 100%; min-height: 220px; object-fit: cover; background: #E2DACB;" />
+        <div style="padding: 20px 20px 22px; display: flex; flex-direction: column; gap: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px;"><span style="padding-top: 6px; font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: #8E4B33; font-weight: 600;">{{ picker.kind }}</span><button type="button" aria-label="{{ t.close }}" onClick="{{ closePick }}" style="width: 44px; height: 44px; margin: -10px -10px 0 0; background: none; border: 0; font-size: 22px; cursor: pointer;">×</button></div>
+          <h2 style="margin: -10px 0 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: 24px; line-height: 1.15; text-wrap: balance;">{{ picker.name }}</h2>
+          <sc-for list="{{ picker.options }}" as="op" hint-placeholder-count="2">
+            <fieldset style="margin: 0; padding: 0; border: 0;">
+              <legend style="padding: 0 0 8px; font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: #7C7365;">{{ op.label }}</legend>
+              <div style="display: flex; flex-wrap: wrap; gap: 8px;"><sc-for list="{{ op.values }}" as="v" hint-placeholder-count="2"><button type="button" onClick="{{ v.pick }}" aria-pressed="{{ v.on }}" style="min-height: 44px; padding: 0 14px; border: 1px solid #27292D; background: {{ v.bg }}; color: {{ v.fg }}; font-size: 13px; font-weight: 500; cursor: pointer;">{{ v.label }}</button></sc-for></div>
+            </fieldset>
+          </sc-for>
+          <button type="button" onClick="{{ picker.add }}" style="margin-top: auto; height: 50px; border: 0; background: #27292D; color: #F4EFE5; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; cursor: pointer;" style-hover="background: #FFD35B; color: #27292D;">{{ picker.addLabel }}</button>
+          <a href="{{ picker.href }}" onClick="{{ picker.details }}" style="align-self: center; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; font-weight: 500; text-decoration: underline; text-underline-offset: 5px;" style-hover="color: #8E4B33;">{{ t.details }}</a>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
   <sc-if value="{{ toastOn }}" hint-placeholder-val="{{ false }}">
     <div role="status" style="position: fixed; left: 50%; bottom: 24px; transform: translateX(-50%); z-index: 108; display: flex; align-items: center; gap: 16px; max-width: calc(100% - 32px); padding: 12px 14px 12px 18px; background: #27292D; color: #F4EFE5; font-size: 13.5px;"><span>{{ toast }}</span><button type="button" onClick="{{ openCart }}" style="height: 34px; padding: 0 12px; border: 0; background: #FFD35B; color: #27292D; font-size: 11px; letter-spacing: .12em; text-transform: uppercase; font-weight: 600; cursor: pointer;">{{ t.viewCart }}</button></div>
   </sc-if>
@@ -298,21 +319,28 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;lang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;vi&quot;,&quot;en&quot;],&quot;default&quot;:&quot;vi&quot;,&quot;tsType&quot;:&quot;'vi' | 'en'&quot;,&quot;section&quot;:&quot;Content&quot;},&quot;view&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;all&quot;,&quot;c/soulful-flavours&quot;,&quot;c/ca-phe-pha-phin&quot;,&quot;c/ca-phe-pha-may&quot;,&quot;c/ca-phe-nhan-xanh&quot;,&quot;c/hop-qua-combo&quot;,&quot;c/ca-phe-chat-luong-cao&quot;,&quot;p/soulful-ngot-brewing-specialty-liberica-soul-yeast-soulful-collection-2026-vietnam-specialty-coffee&quot;,&quot;p/vietnam-specialty-arabica-catimor-natural&quot;,&quot;p/fine-robusta-tr-natural-soul-yeast&quot;,&quot;p/phin-pha-ca-phe-soul-1&quot;],&quot;default&quot;:&quot;all&quot;,&quot;tsType&quot;:&quot;string&quot;,&quot;section&quot;:&quot;Page&quot;}}">
 const I = 'images/';
-// collection handle → [nameVI, nameEN, introVI, introEN, group]
+// collection handle → [nameVI, nameEN, introVI, introEN, group (0 shop · 1 categories · 9 hidden), depth]
 const COLS = {
-  all: ['Tất cả sản phẩm', 'All products', 'Cà phê rang, nhân xanh, phụ kiện và quà tặng từ Soul, rang tại Buôn Ma Thuột.', 'Roasted coffee, green beans, accessories and gifts from Soul, roasted in Buon Ma Thuot.', 0],
-  'soulful-flavours': ['Soulful Collection 2026', 'Soulful Collection 2026', 'Bộ sưu tập theo mùa: bốn cung bậc Ngọt, Nồng, Thơm, Cay từ những lô Fine Robusta và Specialty mùa vụ 25/26.', 'Our seasonal collection: four moods, Sweet, Bold, Fragrant and Spicy, from 25/26 Fine Robusta and specialty lots.', 1],
-  'ca-phe-pha-phin': ['Cà phê pha phin', 'Vietnamese Phin', 'Rang cho phin: đậm, tròn và ngọt hậu, cho tách cà phê Việt quen thuộc.', 'Roasted for the phin: bold, round and sweet, for the familiar Vietnamese cup.', 1],
-  'ca-phe-pha-may': ['Cà phê pha máy', 'Espresso', 'Rang cho espresso: body dày, crema bền, cân bằng khi pha cùng sữa.', 'Roasted for espresso: rich body, lasting crema, balanced with milk.', 1],
-  'ca-phe-pha-dung-cu': ['Cà phê pha dụng cụ', 'Pour-over', 'Rang sáng hơn cho pour over, để hương trái cây và độ ngọt rõ ràng.', 'Lighter roasts for pour over, with clear fruit notes and sweetness.', 1],
-  'ca-phe-u-lanh-cold-brew': ['Cà phê ủ lạnh', 'Cold Brew', 'Rang riêng cho ủ lạnh: mượt, ngọt và ít đắng.', 'Roasted for cold steeping: smooth, sweet and low in bitterness.', 1],
-  'ca-phe-nuoc-ngoai': ['Cà phê nước ngoài', 'International Beans', 'Những lô đặc sản chọn lọc từ Kenya, Colombia, Nicaragua và Ethiopia, rang bởi Soul.', 'Selected specialty lots from Kenya, Colombia, Nicaragua and Ethiopia, roasted by Soul.', 1],
-  'ca-phe-nhan-xanh': ['Cà phê nhân xanh', 'Green Beans', 'Nhân xanh Fine Robusta, Arabica và Liberica cho nhà rang. Mẫu 1 kg, 5 kg; mua sỉ từ 30 kg.', 'Green Fine Robusta, Arabica and Liberica for roasters. 1 kg and 5 kg samples; wholesale from 30 kg.', 1],
-  'phu-kien': ['Phụ kiện', 'Merchandise', 'Phin, ly gốm, trà và cacao Việt để hoàn thiện góc cà phê của bạn.', 'Phin filters, ceramics, Vietnamese tea and cacao for your coffee corner.', 1],
-  'hop-qua-combo': ['Hộp quà combo', 'Gift Sets', 'Hộp quà 2 món và 4 món kết hợp cà phê, phin và đặc sản Việt.', 'Two- and four-piece gift sets pairing coffee, phin and Vietnamese specialties.', 1],
-  'san-pham-noi-bat': ['Sản phẩm nổi bật', 'Featured', 'Những sản phẩm được yêu thích nhất của Soul.', 'Soul’s most-loved products.', 2],
-  'san-pham-moi': ['Sản phẩm mới', 'New arrivals', 'Mới nhất từ xưởng rang và mùa vụ 25/26.', 'Newest from the roastery and the 25/26 harvest.', 2],
-  'ca-phe-chat-luong-cao': ['Sản phẩm HORECA', 'HORECA', 'Dòng cà phê chất lượng cao, đóng gói 1 kg cho quán, nhà hàng và khách sạn.', 'High-quality coffee in 1 kg packs for cafés, restaurants and hotels.', 2]
+  all: ['Tất cả sản phẩm', 'All products', 'Cà phê rang, nhân xanh, phụ kiện và quà tặng từ Soul, rang tại Buôn Ma Thuột.', 'Roasted coffee, green beans, accessories and gifts from Soul, roasted in Buon Ma Thuot.', 0, 0],
+  'ca-phe-rang': ['Cà phê rang', 'Roasted Coffee', 'Toàn bộ cà phê rang của Soul: bộ sưu tập mùa vụ, dòng nguyên bản, HORECA và cà phê cho từng cách pha.', 'All Soul roasted coffee: seasonal collections, origin coffees, HORECA and coffees for every brew method.', 1, 0],
+  'soulful-flavours': ['Soulful Collection 2026', 'Soulful Collection 2026', 'Bộ sưu tập theo mùa: bốn cung bậc Ngọt, Nồng, Thơm, Cay từ những lô Fine Robusta và Specialty mùa vụ 25/26.', 'Our seasonal collection: four moods, Sweet, Bold, Fragrant and Spicy, from 25/26 Fine Robusta and specialty lots.', 1, 1],
+  'origin-collection': ['Origin Collection', 'Origin Collection', 'Những dòng cà phê nguyên bản của Soul: Fine Robusta Buôn Ma Thuột, Specialty Arabica và House Blend.', 'Soul’s core origin coffees: Buon Ma Thuot Fine Robusta, Specialty Arabica and House Blend.', 1, 1],
+  'ca-phe-chat-luong-cao': ['Horeca Collection', 'Horeca Collection', 'Dòng cà phê chất lượng cao, đóng gói 1 kg cho quán, nhà hàng và khách sạn.', 'High-quality coffee in 1 kg packs for cafés, restaurants and hotels.', 1, 1],
+  'ca-phe-pha-phin': ['Cà phê pha phin', 'Vietnamese Phin', 'Rang cho phin: đậm, tròn và ngọt hậu, cho tách cà phê Việt quen thuộc.', 'Roasted for the phin: bold, round and sweet, for the familiar Vietnamese cup.', 1, 1],
+  'ca-phe-pha-may': ['Cà phê pha máy', 'Espresso', 'Rang cho espresso: body dày, crema bền, cân bằng khi pha cùng sữa.', 'Roasted for espresso: rich body, lasting crema, balanced with milk.', 1, 1],
+  'ca-phe-pha-dung-cu': ['Cà phê pha dụng cụ', 'Pour-over', 'Rang sáng hơn cho pour over, để hương trái cây và độ ngọt rõ ràng.', 'Lighter roasts for pour over, with clear fruit notes and sweetness.', 1, 1],
+  'ca-phe-u-lanh-cold-brew': ['Cà phê ủ lạnh', 'Cold Brew', 'Rang riêng cho ủ lạnh: mượt, ngọt và ít đắng.', 'Roasted for cold steeping: smooth, sweet and low in bitterness.', 1, 1],
+  'ca-phe-nuoc-ngoai': ['Cà phê nước ngoài (Arabica)', 'International Coffee (Arabica)', 'Những lô Arabica đặc sản chọn lọc từ Kenya, Colombia, Nicaragua và Ethiopia, rang bởi Soul.', 'Selected specialty Arabica lots from Kenya, Colombia, Nicaragua and Ethiopia, roasted by Soul.', 1, 1],
+  'phu-kien': ['Phụ kiện', 'Merchandise', 'Phin, ly gốm, trà và cacao Việt để hoàn thiện góc cà phê của bạn.', 'Phin filters, ceramics, Vietnamese tea and cacao for your coffee corner.', 1, 0],
+  'hop-qua-combo': ['Hộp quà combo', 'Gift Sets', 'Hộp quà 2 món và 4 món kết hợp cà phê, phin và đặc sản Việt.', 'Two- and four-piece gift sets pairing coffee, phin and Vietnamese specialties.', 1, 0],
+  'ca-phe-nhan-xanh': ['Cà phê nhân xanh', 'Green Coffee', 'Nhân xanh Fine Robusta, Robusta, Arabica và Liberica cho nhà rang. Mẫu 1 kg, 5 kg; trên 60 kg liên hệ báo giá.', 'Green Fine Robusta, Robusta, Arabica and Liberica for roasters. 1 kg and 5 kg samples; over 60 kg, request a quote.', 1, 0],
+  'fine-robusta': ['Fine Robusta', 'Fine Robusta', 'Nhân xanh Fine Robusta TR từ Buôn Ma Thuột, sơ chế và lên men theo từng lô.', 'Green Fine Robusta TR from Buon Ma Thuot, processed and fermented lot by lot.', 1, 1],
+  'high-quality-robusta': ['High Quality Robusta', 'High Quality Robusta', 'Nhân xanh Robusta chất lượng cao cho nhà rang và sản xuất quy mô.', 'High-quality green Robusta for roasters and production at scale.', 1, 1],
+  'specialty-arabica': ['Specialty Arabica', 'Specialty Arabica', 'Nhân xanh Arabica đặc sản từ Cầu Đất, Lâm Đồng.', 'Specialty green Arabica from Cau Dat, Lam Dong.', 1, 1],
+  'high-quality-arabica': ['High Quality Arabica', 'High Quality Arabica', 'Nhân xanh Arabica chất lượng cao. Danh sách lô đang được cập nhật.', 'High-quality green Arabica. Lots are being updated.', 1, 1],
+  'liberica': ['Liberica', 'Liberica', 'Nhân xanh Liberica từ M’Drăk, Đắk Lắk.', 'Green Liberica from M’Drak, Dak Lak.', 1, 1],
+  'san-pham-noi-bat': ['Sản phẩm nổi bật', 'Featured', 'Những sản phẩm được yêu thích nhất của Soul.', 'Soul’s most-loved products.', 9, 0],
+  'san-pham-moi': ['Sản phẩm mới', 'New arrivals', 'Mới nhất từ xưởng rang và mùa vụ 25/26.', 'Newest from the roastery and the 25/26 harvest.', 9, 0]
 };
 const CODE = { SF: 'soulful-flavours', PHIN: 'ca-phe-pha-phin', MAY: 'ca-phe-pha-may', DC: 'ca-phe-pha-dung-cu', CB: 'ca-phe-u-lanh-cold-brew', NN: 'ca-phe-nuoc-ngoai', NX: 'ca-phe-nhan-xanh', PK: 'phu-kien', CMB: 'hop-qua-combo', NB: 'san-pham-noi-bat', MOI: 'san-pham-moi', HO: 'ca-phe-chat-luong-cao' };
 const KIND = { sf: ['Soulful 2026', 'Soulful 2026'], rs: ['Cà phê rang', 'Roasted coffee'], ho: ['HORECA · 1 kg', 'HORECA · 1 kg'], nn: ['Cà phê nước ngoài', 'International'], gb: ['Nhân xanh', 'Green beans'], pk: ['Phụ kiện', 'Merchandise'], cmb: ['Hộp quà', 'Gift set'] };
@@ -370,7 +398,9 @@ const R = [
   ['combo-pha-phin-4-mon-hop-qua-ca-phe-experience-02', 'Combo pha phin 4 món: Experience 02', 689000, 'PHIN CMB MOI', 'cmb', 'rang', '', {}],
   ['combo-pha-phin-4-mon-hop-qua-ca-phe-experience-03', 'Combo pha phin 4 món: Experience 03', 679000, 'PHIN CMB NB MOI', 'cmb', 'rang', '', {}]
 ];
-const P = R.map((r, i) => ({ i, h: r[0], name: r[1], price: r[2], cols: ['all', ...r[3].split(' ').map(c => CODE[c])], kind: r[4], img: I + IMG[r[5]], flags: r[6], specs: r[7], story: r[8] || null }));
+const SUBS = (r) => { const k = r[4], v = r[7].v || '', a = []; if (['sf', 'rs', 'ho', 'nn'].includes(k) || r[0] === 'hop-ca-phe-tui-loc-drip-bag') a.push('ca-phe-rang'); if (k === 'rs') a.push('origin-collection'); if (k === 'gb') a.push(/Liberica/.test(v) ? 'liberica' : /Robusta TR/.test(v) ? 'fine-robusta' : /Robusta/.test(v) ? 'high-quality-robusta' : 'specialty-arabica'); return a; };
+const USD_RATE = 26000; // placeholder rate for EN prices — confirm with client
+const P = R.map((r, i) => ({ i, h: r[0], name: r[1], price: r[2], cols: ['all', ...r[3].split(' ').map(c => CODE[c]), ...SUBS(r)], kind: r[4], img: I + IMG[r[5]], flags: r[6], specs: r[7], story: r[8] || null }));
 const STORY = {
   lib: [['Từ M’Drăk, cách Buôn Ma Thuột khoảng 100 km về phía Đông, Soul giới thiệu một mẫu Liberica mang câu chuyện riêng của vùng đất chịu ảnh hưởng dãy Trường Sơn Đông: mùa mưa muộn, độ ẩm kéo dài và nhịp khí hậu rất riêng.', 'Liberica được phơi nguyên trái 3–5 tuần, để hương vị từ trái chín chuyển hóa chậm vào hạt. Kết quả là một tách nhẹ nhàng, trong trẻo, thiên về sắc thái trà: vỏ cam, đào chín, chanh dây và chút lá xá xị.'],
     ['From M’Drăk, about 100 km east of Buon Ma Thuot, Soul introduces a Liberica shaped by the Eastern Truong Son range: a late rainy season, lingering humidity and a climate rhythm of its own.', 'Whole cherries are dried for 3–5 weeks, letting ripe-fruit character slowly move into the seed. The cup is light, clean and tea-like: orange peel, ripe peach, passion fruit and a hint of sarsi leaf.']]
@@ -380,28 +410,28 @@ const PER = 12;
 const LS = 'soul-cart-v1';
 
 class Component extends DCLogic {
-  state = { w: 1440, lang: null, route: null, q: '', sort: 'feat', inStock: false, page: 1, sel: {}, qty: 1, img: 0, cart: [], cartOpen: false, toast: '', mobileOpen: false };
+  state = { pick: null, pickSel: {}, w: 1440, lang: null, route: null, q: '', sort: 'feat', inStock: false, page: 1, sel: {}, qty: 1, img: 0, cart: [], cartOpen: false, toast: '', mobileOpen: false };
 
   T = {
     vi: { nav: ['Trang chủ', 'Sản phẩm', 'Mùa vụ mới', 'Về Soul', 'Giải pháp cà phê', 'Cửa hàng', 'Blog'], menu: 'Menu', search: 'Tìm kiếm', account: 'Tài khoản', cart: 'Giỏ hàng', close: 'Đóng', home: 'Trang chủ', shop: 'Sản phẩm', prev: 'Trang trước', next: 'Trang sau',
       eyebrowAll: 'Soul Shop', eyebrowCol: 'Bộ sưu tập', groups: ['Cửa hàng', 'Danh mục', 'Chọn lọc'], searchPh: 'Tìm sản phẩm', inStock: 'Còn hàng', sort: 'Sắp xếp', sorts: [['feat', 'Nổi bật'], ['new', 'Mới nhất'], ['asc', 'Giá tăng dần'], ['desc', 'Giá giảm dần']],
       products: 'sản phẩm', empty: 'Không có sản phẩm phù hợp.', clear: 'Xóa bộ lọc', pagination: 'Phân trang', add: 'Thêm', soldOut: 'Hết hàng', newCrop: 'New crop 25/26', quote: 'Liên hệ báo giá', contact: 'Liên hệ',
-      gbNote: 'Giá nhân xanh chưa gồm 5% VAT. Mẫu 1 kg / 5 kg; mua sỉ từ 30 kg, liên hệ để nhận báo giá.', hoNote: 'Dòng HORECA đóng gói 1 kg. Đối tác quán, nhà hàng, khách sạn liên hệ để nhận giá sỉ và hỗ trợ setup.',
-      weight: 'Trọng lượng', grind: 'Phân loại', whole: 'Nguyên hạt', ground: 'Xay sẵn', pack: 'Quy cách', bulk: '≥ 30 kg · báo giá', qty: 'Số lượng', addCart: 'Thêm vào giỏ', buyNow: 'Mua ngay', perKg: ' / kg', exVat: 'Chưa gồm 5% VAT', inclVat: 'Đã gồm VAT',
+      gbNote: 'Giá nhân xanh chưa gồm 5% VAT. Mẫu 1 kg / 5 kg; trên 60 kg vui lòng liên hệ để nhận báo giá.', hoNote: 'Dòng HORECA đóng gói 1 kg. Đối tác quán, nhà hàng, khách sạn liên hệ để nhận giá sỉ và hỗ trợ setup.',
+      weight: 'Trọng lượng', grind: 'Phân loại', whole: 'Nguyên hạt', ground: 'Xay sẵn', pack: 'Quy cách', bulk: '> 60 kg · liên hệ báo giá', alt: 'Độ cao vùng trồng', crop: 'Mùa vụ', producer: 'Farmer / Nhà sản xuất', tbu: 'Đang cập nhật', details: 'Xem chi tiết sản phẩm', bestSeller: 'Best Seller', qty: 'Số lượng', addCart: 'Thêm vào giỏ', buyNow: 'Mua ngay', perKg: ' / kg', exVat: 'Chưa gồm 5% VAT', inclVat: 'Đã gồm VAT',
       soldOutMsg: 'Lô này đã hết. Để lại thông tin để được báo khi có mùa vụ mới.', notify: 'Báo cho tôi', region: 'Vùng trồng', variety: 'Giống', process: 'Sơ chế', notes: 'Hương vị', type: 'Loại', brewGuide: 'Hướng dẫn pha',
-      about: 'Về sản phẩm', pending: 'Câu chuyện sản phẩm song ngữ sẽ được chuyển nguyên văn từ trang hiện tại khi triển khai.', gbTerms: ['Tỷ lệ chín 100% · độ ẩm < 13%', 'Hạt đen ≤ 0,5% · vỡ, tạp chất 0%', 'Mẫu 1 kg, 5 kg · lấy sỉ từ 30 kg', 'Email finerobusta@soulcoffee.vn · Zalo/WhatsApp +84 908 267 710'],
+      about: 'Về sản phẩm', pending: 'Câu chuyện sản phẩm song ngữ sẽ được chuyển nguyên văn từ trang hiện tại khi triển khai.', gbTerms: ['Tỷ lệ chín 100% · độ ẩm < 13%', 'Hạt đen ≤ 0,5% · vỡ, tạp chất 0%', 'Mẫu 1 kg, 5 kg · trên 60 kg liên hệ báo giá', 'Email finerobusta@soulcoffee.vn · Zalo/WhatsApp +84 908 267 710'],
       related: 'Sản phẩm liên quan', added: 'Đã thêm vào giỏ', viewCart: 'Xem giỏ', cartEmpty: 'Giỏ hàng đang trống.', keepShopping: 'Tiếp tục mua sắm', remove: 'Xóa', subtotal: 'Tạm tính', shipNote: 'Phí giao hàng tính khi thanh toán.', checkout: 'Thanh toán',
-      footer: [['Shop', [['Cà phê rang', 'Shop.dc.html#c/ca-phe-pha-phin'], ['Nhân xanh', 'Shop.dc.html#c/ca-phe-nhan-xanh'], ['Soulful Collection', 'Shop.dc.html#c/soulful-flavours'], ['Tất cả sản phẩm', 'Shop.dc.html']]], ['Khám phá', [['Câu chuyện của Soul', 'Our Story.dc.html'], ['Cửa hàng', 'Spaces.dc.html'], ['Blog', 'Blog.dc.html']]], ['Dành cho đối tác', [['Giải pháp cà phê', 'Coffee Solutions.dc.html'], ['HORECA', 'Shop.dc.html#c/ca-phe-chat-luong-cao'], ['Mua sỉ', 'Coffee Solutions.dc.html#contact']]], ['Hỗ trợ', [['Hướng dẫn pha', 'Blog.dc.html#c/how-to-make-coffee'], ['Giao hàng', 'Help.dc.html#shipping'], ['Câu hỏi thường gặp', 'Help.dc.html'], ['Liên hệ', 'Help.dc.html#contact']]]],
+      footer: [['Shop', [['Cà phê rang', 'Shop.dc.html#c/ca-phe-rang'], ['Nhân xanh', 'Shop.dc.html#c/ca-phe-nhan-xanh'], ['Soulful Collection', 'Shop.dc.html#c/soulful-flavours'], ['Tất cả sản phẩm', 'Shop.dc.html']]], ['Khám phá', [['Câu chuyện của Soul', 'Our Story.dc.html'], ['Cửa hàng', 'Spaces.dc.html'], ['Blog', 'Blog.dc.html']]], ['Dành cho đối tác', [['Giải pháp cà phê', 'Coffee Solutions.dc.html'], ['HORECA', 'Shop.dc.html#c/ca-phe-chat-luong-cao'], ['Mua sỉ', 'Coffee Solutions.dc.html#contact']]], ['Hỗ trợ', [['Hướng dẫn pha', 'Blog.dc.html#c/how-to-make-coffee'], ['Giao hàng', 'Help.dc.html#shipping'], ['Câu hỏi thường gặp', 'Help.dc.html'], ['Liên hệ', 'Help.dc.html#contact']]]],
       tagline: 'Crafted by Vietnamese Soul. Buôn Ma Thuột, Việt Nam.' },
     en: { nav: ['Home', 'Shop', 'New Crop', 'Our Story', 'Coffee Solutions', 'Spaces', 'Blog'], menu: 'Menu', search: 'Search', account: 'Account', cart: 'Cart', close: 'Close', home: 'Home', shop: 'Shop', prev: 'Previous page', next: 'Next page',
       eyebrowAll: 'Soul Shop', eyebrowCol: 'Collection', groups: ['Shop', 'Categories', 'Curated'], searchPh: 'Search products', inStock: 'In stock', sort: 'Sort', sorts: [['feat', 'Featured'], ['new', 'Newest'], ['asc', 'Price: low to high'], ['desc', 'Price: high to low']],
       products: 'products', empty: 'No matching products.', clear: 'Clear filters', pagination: 'Pagination', add: 'Add', soldOut: 'Sold out', newCrop: 'New crop 25/26', quote: 'Request a quote', contact: 'Contact us',
-      gbNote: 'Green coffee prices exclude 5% VAT. 1 kg / 5 kg samples; wholesale from 30 kg, contact us for a quote.', hoNote: 'HORECA coffees come in 1 kg packs. Cafés, restaurants and hotels: contact us for trade pricing and setup support.',
-      weight: 'Weight', grind: 'Grind', whole: 'Whole bean', ground: 'Ground', pack: 'Pack size', bulk: '≥ 30 kg · quote', qty: 'Quantity', addCart: 'Add to cart', buyNow: 'Buy now', perKg: ' / kg', exVat: 'Excludes 5% VAT', inclVat: 'VAT included',
+      gbNote: 'Green coffee prices exclude 5% VAT. 1 kg / 5 kg samples; for over 60 kg, contact us for a quote.', hoNote: 'HORECA coffees come in 1 kg packs. Cafés, restaurants and hotels: contact us for trade pricing and setup support.',
+      weight: 'Weight', grind: 'Grind', whole: 'Whole bean', ground: 'Ground', pack: 'Pack size', bulk: '> 60 kg · request a quote', alt: 'Altitude', crop: 'Crop', producer: 'Farmer / Producer', tbu: 'To be updated', details: 'View product details', bestSeller: 'Best Seller', qty: 'Quantity', addCart: 'Add to cart', buyNow: 'Buy now', perKg: ' / kg', exVat: 'Excludes 5% VAT', inclVat: 'VAT included',
       soldOutMsg: 'This lot is sold out. Leave your details to hear about the next harvest.', notify: 'Notify me', region: 'Region', variety: 'Variety', process: 'Process', notes: 'Taste notes', type: 'Type', brewGuide: 'Brewing guide',
-      about: 'About this coffee', pending: 'The bilingual product story will be migrated verbatim from the current site at build time.', gbTerms: ['100% ripe cherries · moisture < 13%', 'Full black ≤ 0.5% · broken & foreign matter 0%', '1 kg, 5 kg samples · wholesale from 30 kg', 'Email finerobusta@soulcoffee.vn · Zalo/WhatsApp +84 908 267 710'],
+      about: 'About this coffee', pending: 'The bilingual product story will be migrated verbatim from the current site at build time.', gbTerms: ['100% ripe cherries · moisture < 13%', 'Full black ≤ 0.5% · broken & foreign matter 0%', '1 kg, 5 kg samples · over 60 kg, request a quote', 'Email finerobusta@soulcoffee.vn · Zalo/WhatsApp +84 908 267 710'],
       related: 'You may also like', added: 'Added to cart', viewCart: 'View cart', cartEmpty: 'Your cart is empty.', keepShopping: 'Keep shopping', remove: 'Remove', subtotal: 'Subtotal', shipNote: 'Shipping calculated at checkout.', checkout: 'Checkout',
-      footer: [['Shop', [['Roasted Coffee', 'Shop.dc.html#c/ca-phe-pha-phin'], ['Green Coffee', 'Shop.dc.html#c/ca-phe-nhan-xanh'], ['Soulful Collection', 'Shop.dc.html#c/soulful-flavours'], ['All Coffee', 'Shop.dc.html']]], ['Discover', [['Our Story', 'Our Story.dc.html'], ['Spaces', 'Spaces.dc.html'], ['Blog', 'Blog.dc.html']]], ['Professional', [['Coffee Solutions', 'Coffee Solutions.dc.html'], ['HORECA', 'Shop.dc.html#c/ca-phe-chat-luong-cao'], ['Wholesale', 'Coffee Solutions.dc.html#contact']]], ['Support', [['Brewing guides', 'Blog.dc.html#c/how-to-make-coffee'], ['Shipping', 'Help.dc.html#shipping'], ['FAQ', 'Help.dc.html'], ['Contact', 'Help.dc.html#contact']]]],
+      footer: [['Shop', [['Roasted Coffee', 'Shop.dc.html#c/ca-phe-rang'], ['Green Coffee', 'Shop.dc.html#c/ca-phe-nhan-xanh'], ['Soulful Collection', 'Shop.dc.html#c/soulful-flavours'], ['All Coffee', 'Shop.dc.html']]], ['Discover', [['Our Story', 'Our Story.dc.html'], ['Spaces', 'Spaces.dc.html'], ['Blog', 'Blog.dc.html']]], ['Professional', [['Coffee Solutions', 'Coffee Solutions.dc.html'], ['HORECA', 'Shop.dc.html#c/ca-phe-chat-luong-cao'], ['Wholesale', 'Coffee Solutions.dc.html#contact']]], ['Support', [['Brewing guides', 'Blog.dc.html#c/how-to-make-coffee'], ['Shipping', 'Help.dc.html#shipping'], ['FAQ', 'Help.dc.html'], ['Contact', 'Help.dc.html#contact']]]],
       tagline: 'Crafted by Vietnamese Soul. Buon Ma Thuot, Vietnam.' }
   };
 
@@ -415,7 +445,7 @@ class Component extends DCLogic {
     this._r = () => this.setState({ w: window.innerWidth }); this._r(); window.addEventListener('resize', this._r);
     this._h = () => this.setState({ route: this.parse(location.hash), page: 1, sel: {}, qty: 1, img: 0, mobileOpen: false });
     this._h(); window.addEventListener('hashchange', this._h);
-    this._k = (e) => { if (e.key === 'Escape') this.setState({ mobileOpen: false, cartOpen: false }); };
+    this._k = (e) => { if (e.key === 'Escape') this.setState({ mobileOpen: false, cartOpen: false, pick: null }); };
     window.addEventListener('keydown', this._k);
     try { const c = JSON.parse(localStorage.getItem(LS) || '[]'); if (Array.isArray(c)) this.setState({ cart: c }); } catch (e) {}
   }
@@ -435,22 +465,36 @@ class Component extends DCLogic {
 
   // variant model per product
   opts(p, t) {
-    if (p.kind === 'gb') return [{ id: 'w', label: t.pack, values: [['1', '1 kg', 1], ['5', '5 kg', 5], ['30', t.bulk, 0]] }];
+    if (p.kind === 'gb') return [{ id: 'w', label: t.pack, values: [['1', '1 kg', 1], ['5', '5 kg', 5], ['60', t.bulk, 0]] }];
     if (p.kind === 'sf' || p.kind === 'rs' || p.kind === 'nn') return [{ id: 'w', label: t.weight, values: [['200', '200 g', 1], ['500', '500 g', 2.3]] }, { id: 'g', label: t.grind, values: [['whole', t.whole, 1], ['ground', t.ground, 1]] }];
     return [];
+  }
+
+  pickerVals(t, li, vnd, nav) {
+    const s = this.state, pp = s.pick ? P.find(x => x.h === s.pick) : null, close = () => this.setState({ pick: null });
+    if (!pp) return { pickOpen: false, closePick: close, picker: { options: [] } };
+    const o = this.opts(pp, t).map(x => ({ ...x, values: x.values.filter(v => v[2] > 0) }));
+    const pk = (id) => s.pickSel[id] || o.find(x => x.id === id).values[0][0];
+    const ch = o.map(x => x.values.find(v => v[0] === pk(x.id)));
+    const price = Math.round(pp.price * ch.reduce((a, v) => a * v[2], 1) / 5000) * 5000;
+    return { pickOpen: true, closePick: close, picker: { name: pp.name, img: pp.img, kind: KIND[pp.kind][li], href: '#p/' + pp.h, details: (e) => { close(); nav('p/' + pp.h)(e); },
+      options: o.map(x => ({ label: x.label, values: x.values.map(v => { const on = pk(x.id) === v[0]; return { label: v[1], on: on ? 'true' : 'false', bg: on ? '#27292D' : 'transparent', fg: on ? '#F4EFE5' : '#27292D', pick: () => this.setState(st => ({ pickSel: { ...st.pickSel, [x.id]: v[0] } })) }; }) })),
+      addLabel: t.addCart + ' · ' + vnd(price),
+      add: () => { this.addItem({ key: pp.h + '|' + ch.map(v => v[0]).join('|'), h: pp.h, variant: ch.map(v => v[1]).join(' · '), price, qty: 1 }, t.added); close(); } } };
   }
 
   renderVals() {
     const s = this.state, L = s.lang || this.props.lang || 'vi', li = L === 'vi' ? 0 : 1, t = this.T[L], isMobile = s.w < 1180;
     const r = s.route || this.parse(this.props.view && this.props.view !== 'all' ? '#' + this.props.view : '');
-    const vnd = (n) => n.toLocaleString('vi-VN') + '₫';
+    const vnd = (n) => L === 'en' ? '$' + (n / USD_RATE).toFixed(2) : n.toLocaleString('vi-VN') + '₫';
     const nav = (h) => (e) => { e && e.preventDefault(); this.go(h); };
     const sold = (p) => p.flags.includes('s'), quote = (p) => p.flags.includes('q');
-    const badge = (p) => sold(p) ? [t.soldOut, '#27292D', '#F4EFE5'] : p.flags.includes('n') ? [t.newCrop, '#FFD35B', '#27292D'] : p.cols.includes('san-pham-moi') ? [L === 'vi' ? 'Mới' : 'New', '#F4EFE5', '#27292D'] : null;
+    const badge = (p) => sold(p) ? [t.soldOut, '#27292D', '#F4EFE5'] : p.flags.includes('n') ? [t.newCrop, '#FFD35B', '#27292D'] : p.flags.includes('b') ? [t.bestSeller, '#8E4B33', '#F4EFE5'] : p.cols.includes('san-pham-moi') ? [L === 'vi' ? 'Mới' : 'New', '#F4EFE5', '#27292D'] : null;
     const priceTxt = (p) => quote(p) ? t.contact : vnd(p.price);
     const unit = (p) => p.kind === 'gb' && !quote(p) ? t.perKg : '';
     const quickAdd = (p) => () => {
       const o = this.opts(p, t), vs = o.map(x => x.values[0]);
+      if (o.length) { this.setState({ pick: p.h, pickSel: {}, toast: '' }); return; }
       this.addItem({ key: p.h + '|' + vs.map(v => v[0]).join('|'), h: p.h, variant: vs.map(v => v[1]).join(' · '), price: p.price, qty: 1 }, t.added);
     };
     const card = (p) => { const b = badge(p), needsPick = false; return { name: p.name, img: p.img, kind: KIND[p.kind][li], price: priceTxt(p), unit: unit(p), href: '#p/' + p.h, open: nav('p/' + p.h),
@@ -473,7 +517,8 @@ class Component extends DCLogic {
       cart: s.cart.map(c => { const p = P.find(x => x.h === c.h) || {}; return { name: p.name, img: p.img, variant: c.variant, qty: c.qty, total: vnd(c.price * c.qty), inc: setQty(c.key, 1), dec: setQty(c.key, -1), remove: setQty(c.key, -c.qty) }; }),
       subtotal: vnd(s.cart.reduce((a, c) => a + c.price * c.qty, 0)),
       toastOn: !!s.toast && !s.cartOpen, toast: s.toast,
-      footerCols: t.footer.map(c => ({ title: c[0], links: c[1].map(l => ({ label: l[0], href: l[1] })) }))
+      footerCols: t.footer.map(c => ({ title: c[0], links: c[1].map(l => ({ label: l[0], href: l[1] })) })),
+      ...this.pickerVals(t, li, vnd, nav)
     };
 
     if (r.kind === 'prod') {
@@ -482,11 +527,11 @@ class Component extends DCLogic {
       const chosen = o.map(x => x.values.find(v => v[0] === pick(x.id)));
       const mult = chosen.reduce((a, v) => a * v[2], 1);
       const isBulk = mult === 0 || quote(p), price = Math.round(p.price * (o.length ? mult : 1) / 5000) * 5000;
-      const col = p.cols.find(c => c !== 'all' && COLS[c][4] === 1) || 'all';
+      const col = p.cols.find(c => COLS[c][4] === 1 && COLS[c][5] === 1) || p.cols.find(c => COLS[c][4] === 1) || 'all';
       const brew = p.cols.map(c => BREW[c]).find(Boolean);
       const b = badge(p);
       const gallery = [p.img, ...Array.from(new Set(P.filter(x => x.kind === p.kind && x.img !== p.img).map(x => x.img))).slice(0, 2), I + (p.kind === 'gb' ? '03b-why-soul/web/why-fermentation.jpg' : '03-why-soul-album/SFR5.jpg')];
-      const sp = p.specs, specs = [[t.type, KIND[p.kind][li]], sp.r && [t.region, sp.r], sp.v && [t.variety, sp.v], sp.p && [t.process, sp.p], sp.n && [t.notes, sp.n[li]]].filter(Boolean).map(f => ({ k: f[0], v: f[1] }));
+      const sp = p.specs, isCof = ['sf', 'rs', 'ho', 'nn', 'gb'].includes(p.kind), specs = [[t.type, KIND[p.kind][li]], sp.r && [t.region, sp.r], isCof && [t.alt, sp.a || t.tbu], sp.v && [t.variety, sp.v], sp.p && [t.process, sp.p], isCof && [t.crop, sp.c || '25/26'], isCof && p.kind !== 'nn' && [t.producer, 'Soul Fine Robusta'], sp.n && [t.notes, sp.n[li]]].filter(Boolean).map(f => ({ k: f[0], v: f[1] }));
       const story = p.story && STORY[p.story] ? STORY[p.story][li] : [];
       const rel = P.filter(x => x.h !== p.h && x.cols.includes(col)).slice(0, 4);
       return { ...base, isList: false, isProduct: true,
@@ -518,7 +563,7 @@ class Component extends DCLogic {
     if (s.sort === 'feat') sorted.sort((a, b) => (b.cols.includes('san-pham-noi-bat') - a.cols.includes('san-pham-noi-bat')) || a.i - b.i);
     const nPages = Math.max(1, Math.ceil(sorted.length / PER)), page = Math.min(s.page, nPages);
     const goPage = (n) => () => { this.setState({ page: n }); window.scrollTo({ top: 0, behavior: 'smooth' }); };
-    const groups = [0, 1, 2].map(g => ({ title: t.groups[g], items: Object.keys(COLS).filter(k => COLS[k][4] === g).map(k => { const on = k === id; return { label: COLS[k][li], count: P.filter(p => p.cols.includes(k)).length, href: k === 'all' ? '#' : '#c/' + k, open: nav(k === 'all' ? '' : 'c/' + k), current: on ? 'page' : 'false', weight: on ? 600 : 400, fg: on ? '#27292D' : '#3A3832', bar: on ? '3px' : '0px', indent: on ? '12px' : '0px' }; }) }));
+    const groups = [0, 1].map(g => ({ title: t.groups[g], items: Object.keys(COLS).filter(k => COLS[k][4] === g).map(k => { const on = k === id, d = COLS[k][5]; return { label: COLS[k][li], count: P.filter(p => p.cols.includes(k)).length, href: k === 'all' ? '#' : '#c/' + k, open: nav(k === 'all' ? '' : 'c/' + k), current: on ? 'page' : 'false', weight: on ? 600 : d ? 400 : 500, fg: on ? '#27292D' : d ? '#514B42' : '#27292D', bar: on ? '3px' : '0px', indent: (d * 16 + (on ? 10 : 0)) + 'px' }; }) }));
     const note = id === 'ca-phe-nhan-xanh' ? t.gbNote : id === 'ca-phe-chat-luong-cao' ? t.hoNote : '';
     return { ...base, isList: true, isProduct: false,
       hasSubCrumb: id !== 'all', col: { name: c[li], intro: c[2 + li], eyebrow: id === 'all' ? t.eyebrowAll : t.eyebrowCol, note },

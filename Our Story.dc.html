@@ -75,7 +75,7 @@
         </nav>
         <div style="padding: clamp(32px,6vh,64px) 0;">
           <div style="display: flex; align-items: center; gap: 14px; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #8E4B33;"><span style="display: inline-block; width: 28px; height: 2px; background: #8E4B33;"></span><span>{{ t.heroEyebrow }}</span></div>
-          <h1 id="hero-h" style="margin: 20px 0 0; max-width: 11ch; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: clamp(46px, 6.2vw, 100px); line-height: .98; letter-spacing: -.03em; text-wrap: balance;">{{ t.heroTitle }}</h1>
+          <h1 id="hero-h" style="margin: 20px 0 0; max-width: 15ch; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: clamp(40px, 5.2vw, 84px); line-height: .98; letter-spacing: -.03em; text-wrap: balance;">{{ t.heroTitle }}</h1>
           <p style="margin: 28px 0 0; max-width: 50ch; font-size: clamp(15px,1.15vw,17px); line-height: 1.7; color: #514B42; text-wrap: pretty;">{{ t.heroBody }}</p>
         </div>
         <div style="display: flex; flex-wrap: wrap; border-top: 1px solid rgba(39,41,45,.16);">
@@ -92,7 +92,7 @@
     <!-- 02 MANIFESTO -->
     <section id="manifesto" data-screen-label="02 Manifesto" aria-label="{{ t.manifestoLabel }}" style="background: #27292D; color: #F4EFE5; padding: clamp(72px,9vw,140px) clamp(16px,4vw,64px);">
       <div style="max-width: 1100px; display: flex; flex-direction: column; gap: clamp(28px,3vw,44px);">
-        <div style="display: flex; align-items: center; gap: 14px; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #FFD35B;"><span style="display: inline-block; width: 28px; height: 2px; background: #FFD35B;"></span><span>Crafted by Vietnamese Soul</span></div>
+        <div style="display: flex; align-items: center; gap: 14px; font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #FFD35B;"><span style="display: inline-block; width: 28px; height: 2px; background: #FFD35B;"></span><span>{{ t.manifestoEyebrow }}</span></div>
         <blockquote style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: clamp(36px, 5vw, 80px); line-height: 1.04; letter-spacing: -.03em; text-wrap: balance;">
           <span style="display: block;">{{ t.quote1 }}</span>
           <span style="display: block; color: #FFD35B;">{{ t.quote2 }}</span>
@@ -106,7 +106,7 @@
       <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: clamp(36px,5vw,80px); align-items: start;">
         <div style="position: sticky; top: 100px; display: flex; flex-direction: column; gap: 24px;">
           <div style="font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #8E4B33;">{{ t.phEyebrow }}</div>
-          <h2 id="ph-h" style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: clamp(34px,4.2vw,60px); line-height: 1.02; letter-spacing: -.025em; text-wrap: balance;">{{ t.phTitleA }} <em style="color: #7C7365;">{{ t.phQ1 }}</em> {{ t.phTitleB }} <em style="color: #8E4B33;">{{ t.phQ2 }}</em></h2>
+          <h2 id="ph-h" style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: clamp(34px,4.2vw,60px); line-height: 1.02; letter-spacing: -.025em; text-wrap: balance;">{{ t.phTitle }}</h2>
           <img src="images/03-why-soul-album/SFR4.jpg" alt="{{ t.phAlt }}" loading="lazy" style="width: 100%; aspect-ratio: 16/10; object-fit: cover; margin-top: 8px;" />
         </div>
         <div>
@@ -143,6 +143,20 @@
               <span style="display: flex; justify-content: space-between; gap: 10px; font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: #8E4B33;"><span>{{ c.n }}</span><span style="color: #7C7365;">{{ c.issuer }}</span></span>
               <span style="font-family: Newsreader, Georgia, serif; font-size: clamp(28px,2.6vw,38px); line-height: 1; letter-spacing: -.02em;">{{ c.label }}</span>
               <span style="font-size: 13.5px; line-height: 1.55; color: #514B42; text-wrap: pretty;">{{ c.desc }}</span>
+            </li>
+          </sc-for>
+        </ul>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 24px clamp(28px,4vw,64px); align-items: start; margin-top: clamp(40px,5vw,72px); padding-top: clamp(28px,3vw,40px); border-top: 1px solid #27292D;">
+        <div>
+          <h3 style="margin: 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: clamp(28px,3vw,42px); line-height: 1.05; letter-spacing: -.02em; text-wrap: balance;">{{ t.prodTitle }}</h3>
+          <p style="margin: 16px 0 0; max-width: 56ch; font-size: 15px; line-height: 1.7; color: #514B42; text-wrap: pretty;">{{ t.prodBody }}</p>
+        </div>
+        <ul style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px;">
+          <sc-for list="{{ prodStats }}" as="ps" hint-placeholder-count="2">
+            <li style="padding: 20px 20px 22px; background: #F4EFE5; display: flex; flex-direction: column; gap: 10px;">
+              <span style="display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap;"><span style="font-family: Newsreader, Georgia, serif; font-size: clamp(44px,4.4vw,64px); line-height: .9; letter-spacing: -.035em;">{{ ps.num }}</span><span style="font-size: 12px; letter-spacing: .12em; text-transform: uppercase; color: #8E4B33;">{{ ps.unit }}</span></span>
+              <span style="font-size: 13.5px; line-height: 1.5; color: #514B42;">{{ ps.label }}</span>
             </li>
           </sc-for>
         </ul>
@@ -187,7 +201,7 @@
       <ul style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(46%, 220px), 1fr)); gap: 10px;">
         <sc-for list="{{ channels }}" as="c" hint-placeholder-count="4">
           <li>
-            <a href="{{ c.href }}" style="display: flex; flex-direction: column; justify-content: space-between; gap: 28px; height: 100%; min-height: 190px; padding: 20px 20px 22px; background: #EAE3D5;" style-hover="background: #FFD35B;">
+            <a href="{{ c.href }}" style="display: flex; flex-direction: column; justify-content: space-between; gap: 18px; height: 100%; min-height: 150px; padding: 20px 20px 22px; background: #EAE3D5;" style-hover="background: #FFD35B;">
               <span style="display: flex; justify-content: space-between; font-size: 10.5px; letter-spacing: .16em; color: #8E4B33;"><span>{{ c.n }}</span><span aria-hidden="true" style="color: #27292D; font-size: 12px;">↗</span></span>
               <span><span style="display: block; font-family: Newsreader, Georgia, serif; font-size: clamp(24px,2.2vw,32px); line-height: 1.05; letter-spacing: -.02em;">{{ c.title }}</span><span style="display: block; margin-top: 8px; font-size: 13px; line-height: 1.55; color: #514B42;">{{ c.desc }}</span></span>
             </a>
@@ -197,38 +211,59 @@
     </section>
 
     <!-- 07 TIMELINE -->
-    <section id="journey" data-screen-label="07 Hành trình" aria-labelledby="tl-h" style="padding: clamp(40px,5vw,72px) clamp(16px,4vw,64px) clamp(56px,7vw,110px);">
-      <div style="display: flex; align-items: end; justify-content: space-between; gap: 20px; flex-wrap: wrap; margin-bottom: clamp(28px,3.4vw,48px);">
+    <section id="journey" data-screen-label="07 Hành trình" aria-labelledby="tl-h" style="padding: clamp(48px,6vw,96px) clamp(16px,4vw,64px) clamp(56px,7vw,110px); border-top: 1px solid rgba(39,41,45,.14);">
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr)); gap: 20px clamp(28px,4vw,64px); align-items: end; margin-bottom: clamp(36px,4.4vw,64px);">
         <div>
           <div style="font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #8E4B33;">{{ t.tlEyebrow }}</div>
-          <h2 id="tl-h" style="margin: 12px 0 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: clamp(42px,5.4vw,84px); line-height: .98; letter-spacing: -.03em;">2018 — 2024</h2>
+          <h2 id="tl-h" style="margin: 12px 0 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: clamp(36px,4.6vw,68px); line-height: 1; letter-spacing: -.03em; text-wrap: balance;">{{ t.tlTitle }}</h2>
         </div>
-        <div style="font-size: 11px; letter-spacing: .18em; text-transform: uppercase; color: #7C7365;">{{ milestoneCount }} {{ t.milestones }}</div>
+        <p style="margin: 0; max-width: 54ch; font-size: 15px; line-height: 1.7; color: #514B42; text-wrap: pretty;">{{ t.tlBody }}</p>
       </div>
-      <ol style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(46%, 160px), 1fr)); gap: 36px 10px;">
-        <sc-for list="{{ timeline }}" as="m" hint-placeholder-count="7">
-          <li style="position: relative; display: flex; flex-direction: column; gap: 10px; padding-top: 22px; border-top: 1px solid #27292D;">
-            <span aria-hidden="true" style="position: absolute; top: -5px; left: 0; width: 9px; height: 9px; border-radius: 50%; background: {{ m.dot }};"></span>
-            <span style="display: flex; align-items: baseline; gap: 8px;"><span style="font-family: Newsreader, Georgia, serif; font-size: clamp(40px,3.6vw,56px); line-height: .9; letter-spacing: -.035em;">{{ m.year }}</span><span style="font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: #8E4B33;">{{ m.month }}</span></span>
-            <span style="font-family: Newsreader, Georgia, serif; font-size: 21px; line-height: 1.15;">{{ m.title }}</span>
-            <span style="font-size: 12.5px; line-height: 1.5; color: #514B42;">{{ m.place }}</span>
-          </li>
-        </sc-for>
-      </ol>
+      <sc-if value="{{ tlWide }}" hint-placeholder-val="{{ true }}">
+        <ol style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0 clamp(16px,2vw,32px);">
+          <sc-for list="{{ timeline }}" as="m" hint-placeholder-count="4">
+            <li style="position: relative; display: flex; flex-direction: column; gap: 12px; padding-top: 26px; border-top: 1px solid #27292D;">
+              <span aria-hidden="true" style="position: absolute; top: -6px; left: 0; width: 11px; height: 11px; border-radius: 50%; background: {{ m.dot }};"></span>
+              <span style="font-family: Newsreader, Georgia, serif; font-size: clamp(30px,2.8vw,44px); line-height: .95; letter-spacing: -.03em;">{{ m.years }}</span>
+              <span style="font-family: Newsreader, Georgia, serif; font-size: clamp(20px,1.7vw,25px); line-height: 1.15; text-wrap: balance;">{{ m.title }}</span>
+              <span style="font-size: 14.5px; line-height: 1.6; color: #514B42; text-wrap: pretty;">{{ m.body }}</span>
+              <img src="{{ m.img }}" alt="{{ m.alt }}" loading="lazy" style="width: 100%; aspect-ratio: 4/3; object-fit: cover; margin-top: 6px; background: #E2DACB;" />
+            </li>
+          </sc-for>
+        </ol>
+      </sc-if>
+      <sc-if value="{{ tlNarrow }}" hint-placeholder-val="{{ false }}">
+        <ol style="list-style: none; margin: 0; padding: 0 0 0 6px; display: flex; flex-direction: column;">
+          <sc-for list="{{ timeline }}" as="m" hint-placeholder-count="4">
+            <li style="position: relative; display: flex; flex-direction: column; gap: 10px; padding: 0 0 40px 28px; border-left: 1px solid #27292D;">
+              <span aria-hidden="true" style="position: absolute; top: 6px; left: -6px; width: 11px; height: 11px; border-radius: 50%; background: {{ m.dot }};"></span>
+              <span style="font-family: Newsreader, Georgia, serif; font-size: 34px; line-height: .95; letter-spacing: -.03em;">{{ m.years }}</span>
+              <span style="font-family: Newsreader, Georgia, serif; font-size: 22px; line-height: 1.15;">{{ m.title }}</span>
+              <span style="font-size: 15px; line-height: 1.6; color: #514B42; text-wrap: pretty;">{{ m.body }}</span>
+              <img src="{{ m.img }}" alt="{{ m.alt }}" loading="lazy" style="width: 100%; max-width: 520px; aspect-ratio: 16/10; object-fit: cover; margin-top: 4px; background: #E2DACB;" />
+            </li>
+          </sc-for>
+        </ol>
+      </sc-if>
     </section>
 
     <!-- 08 NEXT -->
     <section id="next" data-screen-label="08 Tiếp theo" aria-label="{{ t.nextLabel }}" style="padding: 0 clamp(16px,4vw,64px) clamp(56px,7vw,110px);">
-      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr)); gap: 10px;">
-        <a href="Shop.dc.html" style="display: flex; flex-direction: column; background: #27292D; color: #F4EFE5;">
-          <span style="display: block; aspect-ratio: 16/10; overflow: hidden;"><img src="images/02-shop/CA-PHE-RANG.jpg" alt="{{ t.next1Alt }}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;" /></span>
-          <span style="padding: 20px 22px 22px; display: flex; justify-content: space-between; align-items: end; gap: 14px; flex-wrap: wrap;"><span><span style="display: block; font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: #FFD35B;">{{ t.next1Eyebrow }}</span><span style="display: block; margin-top: 6px; font-family: Newsreader, Georgia, serif; font-size: clamp(30px,3vw,42px); line-height: 1;">{{ t.next1Title }}</span></span><span style="font-size: 12px; letter-spacing: .12em; text-transform: uppercase; text-decoration: underline; text-underline-offset: 6px; text-decoration-color: rgba(244,239,229,.4);">{{ t.next1Cta }} ↗</span></span>
-        </a>
-        <a href="Spaces.dc.html" style="display: flex; flex-direction: column; background: #EAE3D5;">
-          <span style="display: block; aspect-ratio: 16/10; overflow: hidden; background: #E2DACB;"><img src="images/06-spaces/Soul-BMT.jpg" alt="{{ t.next2Alt }}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;" /></span>
-          <span style="padding: 20px 22px 22px; display: flex; justify-content: space-between; align-items: end; gap: 14px; flex-wrap: wrap;"><span><span style="display: block; font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: #8E4B33;">{{ t.next2Eyebrow }}</span><span style="display: block; margin-top: 6px; font-family: Newsreader, Georgia, serif; font-size: clamp(30px,3vw,42px); line-height: 1;">{{ t.next2Title }}</span></span><span style="font-size: 12px; letter-spacing: .12em; text-transform: uppercase; text-decoration: underline; text-underline-offset: 6px; text-decoration-color: rgba(39,41,45,.3);">{{ t.next2Cta }} ↗</span></span>
-        </a>
-      </div>
+      <ul style="list-style: none; margin: 0; padding: 0; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr)); gap: 10px;">
+        <sc-for list="{{ ctas }}" as="c" hint-placeholder-count="3">
+          <li>
+            <a href="{{ c.href }}" style="display: flex; flex-direction: column; height: 100%; background: #EAE3D5;" style-hover="background: #FFD35B;">
+              <span style="display: block; aspect-ratio: 16/10; overflow: hidden; background: #E2DACB;"><img src="{{ c.img }}" alt="{{ c.alt }}" loading="lazy" style="width: 100%; height: 100%; object-fit: cover;" /></span>
+              <span style="flex: 1; padding: 20px 22px 24px; display: flex; flex-direction: column; gap: 10px;">
+                <span style="font-size: 10.5px; letter-spacing: .18em; color: #8E4B33;">{{ c.n }}</span>
+                <span style="font-family: Newsreader, Georgia, serif; font-size: clamp(28px,2.6vw,38px); line-height: 1.02; letter-spacing: -.02em;">{{ c.title }}</span>
+                <span style="font-size: 14px; line-height: 1.6; color: #514B42; text-wrap: pretty;">{{ c.desc }}</span>
+                <span style="margin-top: auto; padding-top: 8px; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; font-weight: 500; text-decoration: underline; text-underline-offset: 6px; text-decoration-color: rgba(39,41,45,.3);">{{ c.cta }} ↗</span>
+              </span>
+            </a>
+          </li>
+        </sc-for>
+      </ul>
     </section>
 
     <!-- 09 NEWSLETTER (same as Home) -->
@@ -293,77 +328,83 @@ class Component extends DCLogic {
     vi: {
       nav: ['Trang chủ', 'Sản phẩm', 'Mùa vụ mới', 'Về Soul', 'Giải pháp cà phê', 'Cửa hàng', 'Blog'],
       menu: 'Menu', search: 'Tìm kiếm', cart: 'Giỏ hàng', close: 'Đóng', home: 'Trang chủ', crumb: 'Về Soul',
-      heroEyebrow: 'Câu chuyện của Soul · Từ 2018', heroTitle: 'Hành trình 7 năm cùng cà phê',
-      heroBody: 'Chúng tôi bắt đầu hành trình cà phê của mình bằng tâm ý của những đứa con lớn lên từ vùng Cao Nguyên Buôn Ma Thuột. SOUL dành trọn vẹn tâm ý và lòng nhiệt thành để làm nên điều mình tin là đúng đắn.',
+      heroEyebrow: '01 · Soul bắt đầu từ đâu?', heroTitle: 'Từ Buôn Ma Thuột, một hành trình cùng cà phê Việt',
+      heroBody: 'Ra đời năm 2018, Soul bắt đầu từ Buôn Ma Thuột, vùng đất mà Robusta đã gắn bó với đời sống và văn hóa cà phê qua nhiều thế hệ. Từ mong muốn khám phá những giá trị chưa được nhìn nhận đầy đủ của Robusta Việt Nam, Soul từng bước phát triển cách tiếp cận riêng, kết hợp kinh nghiệm bản địa với kiến thức chuyên môn và những thử nghiệm qua từng mùa vụ.',
       heroAlt: 'Giàn phơi cà phê sơ chế tự nhiên tại Buôn Ma Thuột',
-      chapters: ['Triết lý', 'Đội ngũ', 'Fine Robusta', 'Hành trình'],
-      manifestoLabel: 'Tuyên ngôn', quote1: 'Vì tính nguyên bản sẽ không bao giờ bị nhầm lẫn', quote2: 'Và lòng nhiệt thành thường nhận ra nhau.',
-      manifestoBody: 'Chúng tôi không cố thuyết phục ai đây là thứ cà phê ngon nhất. Gu thưởng thức là điều không thể thuyết phục. Nhưng SOUL dành trọn vẹn tâm ý và lòng nhiệt thành để làm nên điều mình tin là đúng đắn, dù thỏa hiệp thường dễ dàng hơn rất nhiều.',
-      phEyebrow: 'Triết lý', phTitleA: 'Thay vì', phQ1: '“Làm thế nào cho ngon?”', phTitleB: 'chúng tôi hỏi', phQ2: '“Làm thế nào cho đúng?”',
-      phAlt: 'Cành Robusta trĩu quả chín tại vườn', phLead: 'Chúng tôi bắt đầu hành trình cà phê của mình bằng tâm ý của những đứa con lớn lên từ vùng Cao Nguyên Buôn Ma Thuột, và tiếp cận cà phê theo một hướng khác.',
+      chapters: ['Cách làm', 'Chuyên môn', 'Fine Robusta', 'Kết nối', 'Hành trình'],
+      manifestoLabel: 'Cách Soul làm cà phê', manifestoEyebrow: '02 · Soul làm cà phê theo cách nào?', quote1: 'Vì tính nguyên bản sẽ không bao giờ bị nhầm lẫn.', quote2: 'Và lòng nhiệt thành thường nhận ra nhau.',
+      manifestoBody: 'Soul không tìm cách tạo ra một hương vị phù hợp với tất cả mọi người. Chúng tôi trân trọng sự khác biệt trong từng vùng trồng, mỗi mùa vụ và gu thưởng thức, đồng thời kiên trì với cách làm cà phê cẩn trọng, bằng kiến thức và lòng nhiệt thành, ngay cả khi có những lựa chọn dễ dàng hơn.',
+      phEyebrow: 'Cách tiếp cận', phTitle: 'Không có một công thức chung cho mọi hạt cà phê',
+      phAlt: 'Cành Robusta trĩu quả chín tại vườn', phLead: 'Mỗi vùng trồng, mỗi mùa vụ đều có những đặc điểm riêng. Với Soul, làm cà phê là quá trình liên tục quan sát, tìm hiểu và điều chỉnh, để mỗi lựa chọn đều phù hợp với đặc tính nguyên liệu và chất lượng mà chúng tôi hướng đến.',
       rights: [
-        ['Đúng từ vùng trồng', 'Đúng từ quy trình trồng trọt đến thu hoạch, sơ chế.'],
-        ['Đúng trong từng tách', 'Đúng từ kỹ thuật rang xay cho đến nghệ thuật pha nên một tách cà phê hoàn hảo.'],
-        ['Đúng với người nông dân', 'Đúng trong giao dịch với các nông dân, nông hộ; đảm bảo từng giọt mồ hôi của họ rơi xuống là xứng đáng.'],
-        ['Đúng với khách hàng', 'Và đúng trong kết nối với khách hàng. Hương vị mỗi tách cà phê SOUL sẽ truyền tải tinh thần ấy.']
+        ['Hiểu từ vùng nguyên liệu', 'Tìm hiểu đặc điểm vùng trồng, điều kiện canh tác và sự thay đổi của nguyên liệu qua từng mùa vụ.'],
+        ['Chú trọng từng công đoạn', 'Từ thu hoạch, sơ chế đến rang xay, mỗi công đoạn đều được thực hiện và kiểm soát dựa trên những yêu cầu chất lượng cụ thể.'],
+        ['Kết nối cùng nông hộ', 'Kết hợp kinh nghiệm canh tác tại địa phương với kiến thức chuyên môn, cùng trao đổi và cải thiện chất lượng qua từng mùa vụ.'],
+        ['Lấy trải nghiệm làm điểm đến', 'Chất lượng không chỉ được đánh giá trong quá trình sản xuất mà còn qua hương vị, sự ổn định và trải nghiệm thực tế của người uống.']
       ],
-      teamEyebrow: 'Năng lực đội ngũ', teamTitle: 'Chứng chỉ quốc tế cho từng khâu',
-      teamBody: 'Chúng tôi luôn cố gắng cập nhật và nâng cao năng lực chuyên môn. Bộ phận quản lý vận hành tại SOUL đã được cấp các chứng chỉ quốc tế uy tín.',
+      teamEyebrow: '03 · Năng lực chuyên môn', teamTitle: 'Chuyên môn từ sự học hỏi không ngừng',
+      teamBody: 'Đội ngũ Soul liên tục học hỏi và nâng cao năng lực thông qua các chương trình đào tạo chuyên môn trong lĩnh vực đánh giá cảm quan, sơ chế, rang và pha chế cà phê.',
       teamAlt: 'Cà phê xay trong bát cupping để đánh giá cảm quan',
       caps: [['Q-Grader', 'CQI · SCA', 'Quản lý chất lượng cà phê nhân'], ['Processing', 'Certificate', 'Thực hiện và quản lý chất lượng chế biến'], ['SCA Roaster', 'SCA', 'Trình độ rang và quản lý chất lượng cà phê rang'], ['SCA Barista', 'SCA', 'Quy trình và chất lượng pha chế']],
-      frEyebrow: 'Thế hệ kế thừa', frTitle: 'Một trăn trở dành cho Robusta',
-      frLead: 'Làm thế nào cho đúng với tiềm năng giá trị của Robusta, để lan tỏa sự trân trọng, công nhận mà Robusta xứng đáng?',
-      frBody: 'Trăn trở đó đã trở thành động lực của Soul để tìm tòi, sáng tạo cách tiếp cận Fine Robusta với phương pháp sơ chế và lên men từ chất liệu đậm đà bản sắc Buôn Ma Thuột, kết hợp với trái cây thu hái từ vườn mà vẫn vương vấn hơi thở, hương sắc bản vị Tây Nguyên. Không chỉ ở bộ sưu tập mùa vụ hằng năm, mà trong từng sản phẩm từ hạt cà phê đến hình ảnh bao bì, Soul đều muốn truyền tải chất lượng Fine Robusta Việt Nam, giá trị văn hóa vùng miền, sự minh bạch trong quy trình sản xuất và giá trị bền vững của chuỗi cung ứng.',
+      prodTitle: 'Từ vùng nguyên liệu đến sản xuất', prodBody: 'Soul hiện hợp tác cùng mạng lưới vùng trồng liên kết khoảng 500 ha, với năng lực rang xay trung bình khoảng 20 tấn mỗi tháng. Quy mô sản xuất giúp chúng tôi có điều kiện phát triển các dòng cà phê khác nhau, nhưng sự nhất quán về chất lượng, nguồn gốc rõ ràng và đặc trưng riêng của mỗi loại hạt vẫn luôn là những ưu tiên quan trọng.',
+      prodStats: [['~500', 'ha', 'Mạng lưới vùng trồng liên kết'], ['~20', 'tấn / tháng', 'Năng lực rang xay trung bình']],
+      frEyebrow: '04 · Một vị thế mới', frTitle: 'Robusta trong một thế giới đang thay đổi',
+      frLead: 'Biến đổi khí hậu đang làm thay đổi ngành cà phê thế giới. Nhiệt độ tăng, thời tiết thất thường và những thách thức trong canh tác Arabica khiến thị trường ngày càng quan tâm đến tiềm năng của Robusta, không chỉ về khả năng cung ứng mà còn ở chất lượng hương vị.',
+      frBody: 'Trong bối cảnh đó, Soul chọn tiếp tục khám phá tiềm năng Fine Robusta Buôn Ma Thuột thông qua các phương pháp sơ chế, lên men và thử nghiệm với nguyên liệu bản địa như men rượu cần, trái cây Tây Nguyên, tạo nên những sắc thái hương vị mang dấu ấn vùng miền. Tinh thần ấy được thể hiện trong từng bộ sưu tập mùa vụ, từ chất lượng hạt cà phê đến thiết kế bao bì, cùng định hướng minh bạch nguồn gốc và phát triển chuỗi cung ứng có trách nhiệm.',
       ingLabel: 'Chất liệu lên men bản địa', ingredients: ['Men rượu cần', 'Men rượu nếp', 'Men bia thủ công', 'Chanh leo', 'Khóm mật', 'Tiêu sọ'],
       frAlt1: 'Quả cà phê được ủ kín để lên men', frAlt2: 'Rót Fine Robusta từ bình thủy tinh vào ly thưởng thức', frAlt3: 'Quả cà phê trong túi lên men yếm khí', frCaption: 'Sơ chế & lên men tại vùng nguyên liệu',
-      chEyebrow: 'Giữ lửa & lan tỏa', chTitle: 'Từ Buôn Ma Thuột đến những tâm hồn đồng điệu',
-      chBody: 'Với tâm thế giữ lửa và lan tỏa giá trị của cà phê Việt Nam, đặc biệt là Robusta và Fine Robusta, từ khi thành lập đến nay Soul luôn nỗ lực đa dạng hóa giải pháp cho đối tác xuất khẩu, HORECA, doanh nghiệp và khách hàng thông qua các điểm trải nghiệm & showroom trên toàn quốc.',
-      channels: [['Xuất khẩu', 'Nhân xanh Fine Robusta & Premium Robusta cho nhà rang quốc tế.', 'Coffee Solutions.dc.html#services'], ['HORECA', 'Cà phê rang, menu và đào tạo cho quán, nhà hàng, khách sạn.', 'Coffee Solutions.dc.html'], ['Doanh nghiệp', 'Quà tặng, workshop và trải nghiệm cà phê cho sự kiện.', 'Coffee Solutions.dc.html'], ['Khách hàng', 'Điểm trải nghiệm & showroom Soul trên toàn quốc.', 'Spaces.dc.html']],
-      tlEyebrow: 'Hành trình', milestones: 'cột mốc',
-      timeline: [['08', '2018', 'Coffee bar & văn phòng đầu tiên', 'TP. Hồ Chí Minh'], ['03', '2019', 'Xưởng rang & flagship store', 'Buôn Ma Thuột'], ['10', '2020', 'Showroom & coffee bar đầu tiên', 'Đà Nẵng'], ['10', '2021', 'Showroom & coffee bar đầu tiên', 'Hà Nội'], ['08', '2022', 'Showroom & coffee bar thứ hai', 'Hà Nội'], ['04', '2023', 'Địa điểm mới', 'Đà Nẵng'], ['02', '2024', 'Showroom & coffee bar đầu tiên', 'Phú Quốc']],
-      nextLabel: 'Khám phá tiếp', next1Eyebrow: 'Cà phê của Soul', next1Title: 'Nếm câu chuyện trong tách', next1Cta: 'Khám phá cà phê', next1Alt: 'Fine Robusta vừa rang trong khay làm nguội',
-      next2Eyebrow: 'Cửa hàng', next2Title: 'Ghé Soul', next2Cta: 'Khám phá cửa hàng', next2Alt: 'Sân Soul Buôn Ma Thuột dưới dây đèn',
+      chEyebrow: '05 · Kết nối & mở rộng', chTitle: 'Từ bản sắc địa phương đến những thị trường mới',
+      chBody: 'Song song với việc phát triển sản phẩm, Soul mở rộng hoạt động từ cung ứng cà phê nhân xanh cho nhà rang quốc tế đến các giải pháp cà phê dành cho đối tác F&B, doanh nghiệp và khách hàng cá nhân. Qua từng kênh phục vụ, Soul hướng đến việc đưa cà phê Việt Nam tiếp cận nhiều thị trường và phù hợp với những nhu cầu thưởng thức khác nhau.',
+      channels: [['Xuất khẩu', 'Cung cấp cà phê nhân xanh Fine Robusta và High Quality Robusta cho các nhà rang, đối tác quốc tế.', 'Coffee Solutions.dc.html#green'], ['HORECA', 'Cà phê rang và giải pháp sản phẩm dành cho quán cà phê, nhà hàng, khách sạn.', 'Coffee Solutions.dc.html#roast'], ['Doanh nghiệp', 'Quà tặng cà phê, workshop và các hoạt động trải nghiệm dành cho doanh nghiệp, sự kiện.', 'Coffee Solutions.dc.html#events'], ['Khách hàng cá nhân', 'Các dòng cà phê đóng gói và không gian trải nghiệm Soul dành cho người yêu cà phê.', 'Shop.dc.html']],
+      tlEyebrow: '06 · Hành trình', tlTitle: 'Tám năm, và hành trình vẫn tiếp nối',
+      tlBody: 'Từ Coffee Bar đầu tiên năm 2018 đến các vùng nguyên liệu, xưởng rang và thị trường quốc tế, mỗi giai đoạn đánh dấu một bước phát triển mới của Soul.',
+      timeline: [['2018 – 2019', 'Những bước khởi đầu', 'Soul ra đời với Coffee Bar đầu tiên tại TP. Hồ Chí Minh, sau đó phát triển xưởng rang và cửa hàng flagship tại Buôn Ma Thuột.', 'Cửa hàng Soul đầu tiên tại TP. Hồ Chí Minh'], ['2020 – 2022', 'Mở rộng trải nghiệm', 'Phát triển các showroom và Coffee Bar tại Đà Nẵng, Hà Nội, đưa sản phẩm Soul đến gần hơn với người thưởng thức.', 'Showroom & Coffee Bar Soul Hà Nội'], ['2023 – 2024', 'Phát triển và ghi nhận chất lượng', 'Tiếp tục mở rộng hoạt động, đồng thời ghi dấu tại các cuộc thi cà phê trong nước và khu vực, nổi bật với kết quả tại Vietnam Green Coffee 2024.', 'Đội ngũ Soul nhận giải tại cuộc thi cà phê'], ['2025 – 2026', 'Kết nối những thị trường mới', 'Tiếp tục phát triển Fine Robusta, ghi nhận thành tích tại các cuộc thi chất lượng và giới thiệu cà phê Việt Nam thông qua những sự kiện, hoạt động kết nối quốc tế.', 'Soul tại sự kiện cà phê quốc tế']],
+      nextLabel: 'Khám phá tiếp',
+      ctas: [['Cà phê Soul', 'Khám phá các dòng cà phê dành cho phin, espresso, brewing và bộ sưu tập Fine Robusta mùa vụ.', 'Khám phá sản phẩm', 'Shop.dc.html', 'images/02-shop/CA-PHE-RANG.jpg', 'Fine Robusta vừa rang trong khay làm nguội'], ['Giải pháp cà phê', 'Cà phê nhân xanh, cà phê rang và giải pháp sản phẩm dành cho đối tác, doanh nghiệp và ngành F&B.', 'Giải pháp cà phê', 'Coffee Solutions.dc.html', 'images/05-solutions/DSCF9134_edited.jpg', 'Bàn cupping với mẫu nhân xanh'], ['Không gian Soul', 'Ghé thăm các cửa hàng Soul, tìm hiểu những hương vị mới và kết nối cùng những người có chung tình yêu với cà phê Việt.', 'Tìm cửa hàng gần bạn', 'Spaces.dc.html', 'images/06-spaces/Soul-BMT.jpg', 'Sân Soul Buôn Ma Thuột dưới dây đèn']],
       nlTitle: 'Theo dõi những gì sắp diễn ra tại Soul', nlBody: 'Cà phê mới, thông tin mùa vụ, câu chuyện từ vùng nguyên liệu, kiến thức chuyên môn và các hoạt động mới. Hãy đăng ký tại đây để chúng tôi có thể gửi cho bạn.',
       nlPlaceholder: 'Email của bạn', nlSubmit: 'Đăng ký', nlThanks: 'Cảm ơn bạn đã đăng ký.',
-      footer: [['Shop', [['Cà phê rang', 'Shop.dc.html#c/ca-phe-pha-phin'], ['Nhân xanh', 'Shop.dc.html#c/ca-phe-nhan-xanh'], ['Soulful Collection', 'Shop.dc.html#c/soulful-flavours'], ['Tất cả sản phẩm', 'Shop.dc.html']]], ['Khám phá', [['Câu chuyện của Soul', 'Our Story.dc.html'], ['Cửa hàng', 'Spaces.dc.html'], ['Blog', 'Blog.dc.html']]], ['Dành cho đối tác', [['Giải pháp cà phê', 'Coffee Solutions.dc.html'], ['Nhân xanh', 'Coffee Solutions.dc.html#services'], ['Mua sỉ', 'Coffee Solutions.dc.html#contact']]], ['Hỗ trợ', [['Giao hàng', 'Help.dc.html#shipping'], ['Đổi trả', 'Help.dc.html#returns'], ['Câu hỏi thường gặp', 'Help.dc.html'], ['Liên hệ', 'Help.dc.html#contact']]]],
+      footer: [['Shop', [['Cà phê rang', 'Shop.dc.html#c/ca-phe-rang'], ['Nhân xanh', 'Shop.dc.html#c/ca-phe-nhan-xanh'], ['Soulful Collection', 'Shop.dc.html#c/soulful-flavours'], ['Tất cả sản phẩm', 'Shop.dc.html']]], ['Khám phá', [['Câu chuyện của Soul', 'Our Story.dc.html'], ['Cửa hàng', 'Spaces.dc.html'], ['Blog', 'Blog.dc.html']]], ['Dành cho đối tác', [['Giải pháp cà phê', 'Coffee Solutions.dc.html'], ['Nhân xanh', 'Coffee Solutions.dc.html#services'], ['Mua sỉ', 'Coffee Solutions.dc.html#contact']]], ['Hỗ trợ', [['Giao hàng', 'Help.dc.html#shipping'], ['Đổi trả', 'Help.dc.html#returns'], ['Câu hỏi thường gặp', 'Help.dc.html'], ['Liên hệ', 'Help.dc.html#contact']]]],
       tagline: 'Crafted by Vietnamese Soul. Buôn Ma Thuột, Việt Nam.'
     },
     en: {
       nav: ['Home', 'Shop', 'New Crop', 'Our Story', 'Coffee Solutions', 'Spaces', 'Blog'],
       menu: 'Menu', search: 'Search', cart: 'Cart', close: 'Close', home: 'Home', crumb: 'Our Story',
-      heroEyebrow: 'Our story · Since 2018', heroTitle: 'A 7-year coffee journey',
-      heroBody: 'We began our coffee journey with the intent of children raised in the Buôn Ma Thuột highlands. SOUL gives its whole heart and passion to making what we believe is right.',
+      heroEyebrow: '01 · Where did Soul begin?', heroTitle: 'From Buôn Ma Thuột, a journey with Vietnamese coffee',
+      heroBody: 'Founded in 2018, Soul began in Buôn Ma Thuột, a land where Robusta has shaped daily life and coffee culture for generations. Wanting to uncover the value of Vietnamese Robusta that has yet to be fully recognised, Soul has steadily built its own approach, combining local experience with professional knowledge and experiments across every harvest.',
       heroAlt: 'Raised drying beds of natural-process coffee in Buôn Ma Thuột',
-      chapters: ['Philosophy', 'Team', 'Fine Robusta', 'Journey'],
-      manifestoLabel: 'Manifesto', quote1: 'Because authenticity is never mistaken', quote2: 'And passion recognises its own.',
-      manifestoBody: 'We do not try to convince anyone that this is the best coffee. Taste cannot be argued. But SOUL gives its whole heart and passion to making what we believe is right, even when compromise would be far easier.',
-      phEyebrow: 'Philosophy', phTitleA: 'Instead of', phQ1: '“How do we make it taste good?”', phTitleB: 'we ask', phQ2: '“How do we make it right?”',
-      phAlt: 'Robusta branches heavy with ripe cherries', phLead: 'We began our coffee journey as children of the Buôn Ma Thuột highlands, and chose to approach coffee from a different direction.',
+      chapters: ['Approach', 'Expertise', 'Fine Robusta', 'Reach', 'Journey'],
+      manifestoLabel: 'How Soul makes coffee', manifestoEyebrow: '02 · How does Soul make coffee?', quote1: 'Because authenticity is never mistaken.', quote2: 'And passion recognises its own.',
+      manifestoBody: 'Soul does not try to create one flavour that suits everyone. We value the differences between each growing region, each harvest and each palate, and we hold to a careful way of making coffee, with knowledge and passion, even when easier choices exist.',
+      phEyebrow: 'Our approach', phTitle: 'There is no single formula for every coffee bean',
+      phAlt: 'Robusta branches heavy with ripe cherries', phLead: 'Every growing region and every harvest has its own character. For Soul, making coffee is a continuous process of observing, learning and adjusting, so that each choice suits the nature of the raw material and the quality we aim for.',
       rights: [
-        ['Right at origin', 'Right from cultivation through harvesting and processing.'],
-        ['Right in every cup', 'Right from roasting technique to the craft of brewing a perfect cup.'],
-        ['Right by our farmers', 'Right in how we trade with farmers and growers, making sure every drop of their effort is rewarded fairly.'],
-        ['Right by our customers', 'And right in how we connect with you. Every cup of SOUL carries that spirit.']
+        ['Understanding origin', 'Studying each growing area, its farming conditions and how the raw material changes from harvest to harvest.'],
+        ['Care at every stage', 'From harvesting and processing to roasting, every stage is carried out and controlled against specific quality requirements.'],
+        ['Working with farmers', 'Combining local farming experience with professional knowledge, exchanging ideas and improving quality together each harvest.'],
+        ['Experience as the destination', 'Quality is judged not only during production but through flavour, consistency and the real experience of the drinker.']
       ],
-      teamEyebrow: 'Team capability', teamTitle: 'International certification at every step',
-      teamBody: 'We keep updating and raising our professional skills. The SOUL operations team holds respected international certifications.',
+      teamEyebrow: '03 · Professional expertise', teamTitle: 'Expertise built on continuous learning',
+      teamBody: 'The Soul team keeps learning and raising its skills through professional training in sensory evaluation, processing, roasting and coffee brewing.',
       teamAlt: 'Ground coffee in a cupping bowl for sensory evaluation',
       caps: [['Q-Grader', 'CQI · SCA', 'Green coffee quality management'], ['Processing', 'Certificate', 'Processing practice and quality management'], ['SCA Roaster', 'SCA', 'Roasting skill and roasted coffee quality'], ['SCA Barista', 'SCA', 'Brewing workflow and quality']],
-      frEyebrow: 'The next generation', frTitle: 'A question we carry for Robusta',
-      frLead: 'How do we do right by Robusta’s true potential, so it earns the respect and recognition it deserves?',
-      frBody: 'That question drives Soul to explore new ways of approaching Fine Robusta, with processing and fermentation built on ingredients rooted in Buôn Ma Thuột, combined with fruit picked from the garden that still carries the character of the Central Highlands. Beyond our annual seasonal collection, every Soul product, from the bean to the packaging, aims to share the quality of Vietnamese Fine Robusta, the culture of its region, a transparent production process and a sustainable supply chain.',
+      prodTitle: 'From origin to production', prodBody: 'Soul currently works with a partner growing network of about 500 ha, with an average roasting capacity of around 20 tons a month. This scale lets us develop a range of coffees, while consistent quality, clear origin and the distinct character of each bean remain our key priorities.',
+      prodStats: [['~500', 'ha', 'Partner growing network'], ['~20', 'tons / month', 'Average roasting capacity']],
+      frEyebrow: '04 · A new standing', frTitle: 'Robusta in a changing world',
+      frLead: 'Climate change is reshaping the global coffee industry. Rising temperatures, erratic weather and the challenges of growing Arabica are turning the market’s attention to Robusta, not only for its supply potential but for its flavour quality.',
+      frBody: 'Against this backdrop, Soul continues to explore the potential of Buôn Ma Thuột Fine Robusta through processing, fermentation and experiments with native ingredients such as rượu cần yeast and Central Highlands fruit, creating flavour nuances that carry the mark of the region. That spirit runs through every seasonal collection, from bean quality to packaging design, together with a commitment to transparent origin and a responsible supply chain.',
       ingLabel: 'Native fermentation ingredients', ingredients: ['Rượu cần yeast', 'Rice wine yeast', 'Craft beer yeast', 'Passion fruit', 'Honey pineapple', 'Peppercorn'],
       frAlt1: 'Coffee cherries sealed for fermentation', frAlt2: 'Fine Robusta poured from a glass server', frAlt3: 'Cherries in a bag for anaerobic fermentation', frCaption: 'Processing & fermentation at origin',
-      chEyebrow: 'Keeping the fire', chTitle: 'From Buôn Ma Thuột to kindred spirits',
-      chBody: 'Committed to keeping the fire alive and sharing the value of Vietnamese coffee, especially Robusta and Fine Robusta, Soul has grown its solutions for export partners, HORECA, businesses and customers through experience spaces and showrooms across the country.',
-      channels: [['Export', 'Fine Robusta & Premium Robusta green coffee for roasters worldwide.', 'Coffee Solutions.dc.html#services'], ['HORECA', 'Roasted coffee, menus and training for cafés, restaurants and hotels.', 'Coffee Solutions.dc.html'], ['Business', 'Gifting, workshops and coffee experiences for events.', 'Coffee Solutions.dc.html'], ['Customers', 'Soul experience spaces & showrooms nationwide.', 'Spaces.dc.html']],
-      tlEyebrow: 'Journey', milestones: 'milestones',
-      timeline: [['08', '2018', 'First coffee bar & office', 'Ho Chi Minh City'], ['03', '2019', 'Roastery & flagship store', 'Buôn Ma Thuột'], ['10', '2020', 'First showroom & coffee bar', 'Đà Nẵng'], ['10', '2021', 'First showroom & coffee bar', 'Hà Nội'], ['08', '2022', 'Second showroom & coffee bar', 'Hà Nội'], ['04', '2023', 'New location', 'Đà Nẵng'], ['02', '2024', 'First showroom & coffee bar', 'Phú Quốc']],
-      nextLabel: 'Keep exploring', next1Eyebrow: 'Shop coffee', next1Title: 'Taste the story', next1Cta: 'Shop coffee', next1Alt: 'Freshly roasted Fine Robusta in the cooling tray',
-      next2Eyebrow: 'Our spaces', next2Title: 'Visit Soul', next2Cta: 'Explore our spaces', next2Alt: 'Soul Buôn Ma Thuột courtyard under string lights',
+      chEyebrow: '05 · Connect & expand', chTitle: 'From local identity to new markets',
+      chBody: 'Alongside product development, Soul has grown from supplying green coffee to international roasters to coffee solutions for F&B partners, businesses and individual customers. Through each channel, Soul aims to bring Vietnamese coffee to more markets and to suit different ways of enjoying it.',
+      channels: [['Export', 'Fine Robusta and High Quality Robusta green coffee for roasters and international partners.', 'Coffee Solutions.dc.html#green'], ['HORECA', 'Roasted coffee and product solutions for cafés, restaurants and hotels.', 'Coffee Solutions.dc.html#roast'], ['Business', 'Coffee gifts, workshops and experiences for businesses and events.', 'Coffee Solutions.dc.html#events'], ['Individual customers', 'Packaged coffees and Soul experience spaces for coffee lovers.', 'Shop.dc.html']],
+      tlEyebrow: '06 · Our journey', tlTitle: 'Eight years, and the journey continues',
+      tlBody: 'From our first Coffee Bar in 2018 to growing regions, a roastery and international markets, each stage marks a new step in Soul’s growth.',
+      timeline: [['2018 – 2019', 'First steps', 'Soul opened its first Coffee Bar in Ho Chi Minh City, then built a roastery and flagship store in Buôn Ma Thuột.', 'Soul’s first store in Ho Chi Minh City'], ['2020 – 2022', 'Growing the experience', 'Showrooms and Coffee Bars opened in Đà Nẵng and Hà Nội, bringing Soul closer to coffee drinkers.', 'Soul Hà Nội showroom & Coffee Bar'], ['2023 – 2024', 'Growth and recognised quality', 'Soul kept expanding while earning recognition at national and regional coffee competitions, notably at Vietnam Green Coffee 2024.', 'The Soul team receiving a competition award'], ['2025 – 2026', 'Connecting new markets', 'Soul continues to develop Fine Robusta, earning results at quality competitions and introducing Vietnamese coffee through international events and partnerships.', 'Soul at an international coffee event']],
+      nextLabel: 'Keep exploring',
+      ctas: [['Soul coffee', 'Explore coffees for phin, espresso and brewing, and our seasonal Fine Robusta collection.', 'Explore products', 'Shop.dc.html', 'images/02-shop/CA-PHE-RANG.jpg', 'Freshly roasted Fine Robusta in the cooling tray'], ['Coffee solutions', 'Green coffee, roasted coffee and product solutions for partners, businesses and the F&B industry.', 'Coffee solutions', 'Coffee Solutions.dc.html', 'images/05-solutions/DSCF9134_edited.jpg', 'Cupping table with green coffee samples'], ['Soul spaces', 'Visit Soul stores, discover new flavours and connect with people who share a love of Vietnamese coffee.', 'Find a store near you', 'Spaces.dc.html', 'images/06-spaces/Soul-BMT.jpg', 'Soul Buôn Ma Thuột courtyard under string lights']],
       nlTitle: 'Stay close to what is happening at Soul', nlBody: 'New coffees, crop updates, stories from origin, coffee knowledge and what is happening across Soul. Please sign up here so we can send it to you.',
       nlPlaceholder: 'Your email address', nlSubmit: 'Subscribe', nlThanks: 'Thank you for subscribing.',
-      footer: [['Shop', [['Roasted Coffee', 'Shop.dc.html#c/ca-phe-pha-phin'], ['Green Coffee', 'Shop.dc.html#c/ca-phe-nhan-xanh'], ['Soulful Collection', 'Shop.dc.html#c/soulful-flavours'], ['All Coffee', 'Shop.dc.html']]], ['Discover', [['Our Story', 'Our Story.dc.html'], ['Spaces', 'Spaces.dc.html'], ['Blog', 'Blog.dc.html']]], ['Professional', [['Coffee Solutions', 'Coffee Solutions.dc.html'], ['Green Coffee', 'Coffee Solutions.dc.html#services'], ['Wholesale', 'Coffee Solutions.dc.html#contact']]], ['Support', [['Shipping', 'Help.dc.html#shipping'], ['Returns', 'Help.dc.html#returns'], ['FAQ', 'Help.dc.html'], ['Contact', 'Help.dc.html#contact']]]],
+      footer: [['Shop', [['Roasted Coffee', 'Shop.dc.html#c/ca-phe-rang'], ['Green Coffee', 'Shop.dc.html#c/ca-phe-nhan-xanh'], ['Soulful Collection', 'Shop.dc.html#c/soulful-flavours'], ['All Coffee', 'Shop.dc.html']]], ['Discover', [['Our Story', 'Our Story.dc.html'], ['Spaces', 'Spaces.dc.html'], ['Blog', 'Blog.dc.html']]], ['Professional', [['Coffee Solutions', 'Coffee Solutions.dc.html'], ['Green Coffee', 'Coffee Solutions.dc.html#services'], ['Wholesale', 'Coffee Solutions.dc.html#contact']]], ['Support', [['Shipping', 'Help.dc.html#shipping'], ['Returns', 'Help.dc.html#returns'], ['FAQ', 'Help.dc.html'], ['Contact', 'Help.dc.html#contact']]]],
       tagline: 'Crafted by Vietnamese Soul. Buôn Ma Thuột, Vietnam.'
     }
   };
@@ -389,13 +430,15 @@ class Component extends DCLogic {
       setVi: () => this.setState({ lang: 'vi' }), setEn: () => this.setState({ lang: 'en' }),
       nav: t.nav.map((label, i) => ({ label, href: hrefs[i], current: i === 3 ? 'page' : 'false', line: i === 3 ? '#FFD35B' : 'transparent' })),
       mobileOpen: s.mobileOpen, openMobile: () => this.setState({ mobileOpen: true }), closeMobile: () => this.setState({ mobileOpen: false }),
-      chapters: t.chapters.map((label, i) => ({ label, n: pad(i + 1), href: ['#philosophy', '#team', '#fine-robusta', '#journey'][i] })),
+      chapters: t.chapters.map((label, i) => ({ label, n: pad(i + 1), href: ['#philosophy', '#team', '#fine-robusta', '#channels', '#journey'][i] })),
+      prodStats: t.prodStats.map(x => ({ num: x[0], unit: x[1], label: x[2] })),
+      tlWide: s.w >= 1024, tlNarrow: s.w < 1024,
+      ctas: t.ctas.map((c, i) => ({ n: pad(i + 1), title: c[0], desc: c[1], cta: c[2], href: c[3], img: c[4], alt: c[5] })),
       rights: t.rights.map((r, i) => ({ n: pad(i + 1), title: r[0], body: r[1] })),
       caps: t.caps.map((c, i) => ({ n: pad(i + 1), label: c[0], issuer: c[1], desc: c[2] })),
       ingredients: t.ingredients.map((label, i) => ({ label, dot: i < 3 ? '#FFD35B' : '#F4EFE5' })),
       channels: t.channels.map((c, i) => ({ n: pad(i + 1), title: c[0], desc: c[1], href: c[2] })),
-      timeline: t.timeline.map((m, i, a) => ({ month: m[0], year: m[1], title: m[2], place: m[3], dot: i === 0 || i === a.length - 1 ? '#8E4B33' : '#27292D' })),
-      milestoneCount: pad(t.timeline.length),
+      timeline: t.timeline.map((m, i, a) => ({ years: m[0], title: m[1], body: m[2], alt: m[3], img: ['images/06-spaces/Soul-SG.jpg', 'images/06-spaces/Soul-HN.jpg', 'images/03c-awards/web/award-photo-1.jpg', 'images/03c-awards/web/award-photo-2.jpg'][i], dot: i === a.length - 1 ? '#8E4B33' : '#27292D' })),
       nlEmail: s.nlEmail, onNl: (e) => this.setState({ nlEmail: e.target.value }), nlSent: s.nlSent, nlOpen: !s.nlSent,
       submitNl: (e) => { e.preventDefault(); if (validEmail(s.nlEmail)) this.setState({ nlSent: true }); },
       footerCols: t.footer.map(c => ({ title: c[0], links: c[1].map(l => ({ label: l[0], href: l[1] })) }))

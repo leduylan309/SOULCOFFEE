@@ -571,6 +571,28 @@
     </div>
   </sc-if>
 
+  <!-- VARIANT PICKER -->
+  <sc-if value="{{ pickOpen }}" hint-placeholder-val="{{ false }}">
+    <div style="position: fixed; inset: 0; z-index: 90; display: grid; place-items: center; padding: 16px;">
+      <button type="button" aria-label="{{ t.pkClose }}" onClick="{{ closePick }}" style="position: absolute; inset: 0; border: 0; background: rgba(20,21,23,.5); cursor: pointer;"></button>
+      <div role="dialog" aria-modal="true" aria-label="{{ picker.name }}" style="position: relative; width: min(100%, 600px); max-height: calc(100vh - 32px); overflow-y: auto; background: #F4EFE5; display: grid; grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));">
+        <img src="{{ picker.img }}" alt="" style="width: 100%; height: 100%; min-height: 220px; object-fit: cover; background: #E2DACB;" />
+        <div style="padding: 20px 20px 22px; display: flex; flex-direction: column; gap: 16px;">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; gap: 12px;"><span style="padding-top: 6px; font-size: 10.5px; letter-spacing: .16em; text-transform: uppercase; color: #8E4B33; font-weight: 600;">{{ picker.type }}</span><button type="button" aria-label="{{ t.pkClose }}" onClick="{{ closePick }}" style="width: 44px; height: 44px; margin: -10px -10px 0 0; background: none; border: 0; font-size: 22px; cursor: pointer;">×</button></div>
+          <h2 style="margin: -10px 0 0; font-family: Newsreader, Georgia, serif; font-weight: 400; font-size: 24px; line-height: 1.15; text-wrap: balance;">{{ picker.name }}</h2>
+          <sc-for list="{{ picker.options }}" as="op" hint-placeholder-count="2">
+            <fieldset style="margin: 0; padding: 0; border: 0;">
+              <legend style="padding: 0 0 8px; font-size: 10.5px; letter-spacing: .18em; text-transform: uppercase; color: #7C7365;">{{ op.label }}</legend>
+              <div style="display: flex; flex-wrap: wrap; gap: 8px;"><sc-for list="{{ op.values }}" as="v" hint-placeholder-count="2"><button type="button" onClick="{{ v.pick }}" aria-pressed="{{ v.on }}" style="min-height: 44px; padding: 0 14px; border: 1px solid #27292D; background: {{ v.bg }}; color: {{ v.fg }}; font-size: 13px; font-weight: 500; cursor: pointer;">{{ v.label }}</button></sc-for></div>
+            </fieldset>
+          </sc-for>
+          <button type="button" onClick="{{ picker.add }}" style="margin-top: auto; height: 50px; border: 0; background: #27292D; color: #F4EFE5; font-size: 12px; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; cursor: pointer;" style-hover="background: #FFD35B; color: #27292D;">{{ picker.addLabel }}</button>
+          <a href="{{ picker.href }}" style="align-self: center; font-size: 12px; letter-spacing: .12em; text-transform: uppercase; font-weight: 500; text-decoration: underline; text-underline-offset: 5px;" style-hover="color: #8E4B33;">{{ t.pkDetails }}</a>
+        </div>
+      </div>
+    </div>
+  </sc-if>
+
   <!-- TOAST -->
   <sc-if value="{{ toast }}" hint-placeholder-val="{{ false }}">
     <div role="status" style="position: fixed; left: 50%; bottom: 22px; transform: translateX(-50%); z-index: 80; background: #27292D; color: #F4EFE5; padding: 12px 18px; font-size: 12.5px; letter-spacing: .04em; display: flex; gap: 14px; align-items: center; box-shadow: 0 12px 30px -12px rgba(0,0,0,.5); max-width: calc(100vw - 32px);">
@@ -581,7 +603,7 @@
 </x-dc>
 <script type="text/x-dc" data-dc-script data-props="{&quot;lang&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;vi&quot;,&quot;en&quot;],&quot;default&quot;:&quot;vi&quot;,&quot;tsType&quot;:&quot;'vi' | 'en'&quot;,&quot;section&quot;:&quot;Content&quot;},&quot;soulfulVisual&quot;:{&quot;editor&quot;:&quot;enum&quot;,&quot;options&quot;:[&quot;square&quot;,&quot;wide&quot;],&quot;default&quot;:&quot;square&quot;,&quot;tsType&quot;:&quot;'square' | 'wide'&quot;,&quot;section&quot;:&quot;Soulful 2026&quot;}}">
 class Component extends DCLogic {
-  state = { w: 1440, lang: null, megaOpen: false, mobileOpen: false, searchOpen: false, cartOpen: false, query: '', cart: [], toast: '', album: null, gal: 'album',
+  state = { pick: null, pickSel: {}, w: 1440, lang: null, megaOpen: false, mobileOpen: false, searchOpen: false, cartOpen: false, query: '', cart: [], toast: '', album: null, gal: 'album',
     form: { name: '', biz: '', email: '', phone: '', msg: '' }, picked: [], formSent: false, formErr: false, nlEmail: '', nlSent: false };
 
   T = {
@@ -597,7 +619,7 @@ class Component extends DCLogic {
       roastedNames: ['Fine Robusta', 'Pha máy', 'Pha thủ công', 'Pha phin', 'Cà phê ủ lạnh'], greenNames: ['Fine Robusta', 'Premium Robusta'],
       featEyebrow: 'Sản phẩm nổi bật', featTitle: 'Những lựa chọn đáng chú ý từ Soul',
       featBody: 'Những sản phẩm được yêu thích, những lô cà phê đạt giải và những lựa chọn tiêu biểu cho cách Soul làm việc với Robusta Việt Nam.',
-      featCta: 'Xem tất cả cà phê', addToCart: 'Thêm vào giỏ', added: 'đã thêm vào giỏ',
+      featCta: 'Xem tất cả cà phê', addToCart: 'Thêm vào giỏ', added: 'đã thêm vào giỏ', pkWeight: 'Trọng lượng', pkPack: 'Quy cách', pkGrind: 'Phân loại', pkWhole: 'Nguyên hạt', pkGround: 'Xay sẵn', pkDetails: 'Xem chi tiết sản phẩm', pkClose: 'Đóng',
       craftEyebrow: 'Crafted by Vietnamese Soul', craftTitle: 'Một thế hệ mới lớn lên cùng cà phê',
       craftP1: 'Soul lớn lên từ Buôn Ma Thuột, giữa một vùng đất đã gắn với Robusta qua nhiều thế hệ.',
       craftP2: 'Chúng tôi làm việc với cà phê xuyên suốt từ vùng nguyên liệu, thu hái, sơ chế, đánh giá nhân xanh đến rang và pha chế. Nhờ những kiến thức và phương pháp tiếp cận mới, chúng tôi có thêm nhiều cách để nhìn sâu hơn vào những điều vốn đã rất quen thuộc. Mỗi mùa vụ vì vậy không chỉ mang đến những lô cà phê mới, mà còn mở ra thêm những cách để hiểu Robusta Việt Nam rõ hơn.',
@@ -629,7 +651,7 @@ class Component extends DCLogic {
       nlTitle: 'Theo dõi những gì sắp diễn ra tại Soul',
       nlBody: 'Cà phê mới, thông tin mùa vụ, câu chuyện từ vùng nguyên liệu, kiến thức chuyên môn và các hoạt động mới. Hãy đăng ký tại đây để chúng tôi có thể gửi cho bạn.',
       nlPlaceholder: 'Email của bạn', nlSubmit: 'Đăng ký', nlThanks: 'Cảm ơn bạn đã đăng ký.',
-      footer: [['Shop', [['Cà phê rang', 'Shop.dc.html#c/ca-phe-pha-phin'], ['Nhân xanh', 'Shop.dc.html#c/ca-phe-nhan-xanh'], ['Soulful Collection', 'Shop.dc.html#c/soulful-flavours'], ['Tất cả sản phẩm', 'Shop.dc.html']]], ['Khám phá', [['Câu chuyện của Soul', 'Our Story.dc.html'], ['Cửa hàng', 'Spaces.dc.html'], ['Blog', 'Blog.dc.html']]], ['Dành cho đối tác', [['Giải pháp cà phê', 'Coffee Solutions.dc.html'], ['Nhân xanh', 'Coffee Solutions.dc.html#services'], ['Mua sỉ', 'Coffee Solutions.dc.html#contact']]], ['Hỗ trợ', [['Giao hàng', 'Help.dc.html#shipping'], ['Đổi trả', 'Help.dc.html#returns'], ['Câu hỏi thường gặp', 'Help.dc.html'], ['Liên hệ', 'Help.dc.html#contact']]]],
+      footer: [['Shop', [['Cà phê rang', 'Shop.dc.html#c/ca-phe-rang'], ['Nhân xanh', 'Shop.dc.html#c/ca-phe-nhan-xanh'], ['Soulful Collection', 'Shop.dc.html#c/soulful-flavours'], ['Tất cả sản phẩm', 'Shop.dc.html']]], ['Khám phá', [['Câu chuyện của Soul', 'Our Story.dc.html'], ['Cửa hàng', 'Spaces.dc.html'], ['Blog', 'Blog.dc.html']]], ['Dành cho đối tác', [['Giải pháp cà phê', 'Coffee Solutions.dc.html'], ['Nhân xanh', 'Coffee Solutions.dc.html#services'], ['Mua sỉ', 'Coffee Solutions.dc.html#contact']]], ['Hỗ trợ', [['Giao hàng', 'Help.dc.html#shipping'], ['Đổi trả', 'Help.dc.html#returns'], ['Câu hỏi thường gặp', 'Help.dc.html'], ['Liên hệ', 'Help.dc.html#contact']]]],
       tagline: 'Crafted by Vietnamese Soul. Buôn Ma Thuột, Việt Nam.',
       cartEmpty: 'Giỏ hàng đang trống.', remove: 'Xoá', checkout: 'Thanh toán', cartNote: 'Giá và phí giao hàng được tính ở bước thanh toán.',
       searchPh: 'Tìm cà phê, cách pha…', noResults: 'Không tìm thấy sản phẩm phù hợp.'
@@ -646,7 +668,7 @@ class Component extends DCLogic {
       roastedNames: ['Fine Robusta', 'Espresso', 'Filter', 'Vietnamese Phin', 'Cold Brew'], greenNames: ['Fine Robusta', 'Premium Robusta'],
       featEyebrow: 'Featured coffees', featTitle: 'Noteworthy coffees from Soul',
       featBody: 'Customer favourites, award-winning lots and distinctive coffees that represent our approach to Vietnamese Robusta.',
-      featCta: 'Shop all coffee', addToCart: 'Add to cart', added: 'added to cart',
+      featCta: 'Shop all coffee', addToCart: 'Add to cart', added: 'added to cart', pkWeight: 'Weight', pkPack: 'Pack size', pkGrind: 'Grind', pkWhole: 'Whole bean', pkGround: 'Ground', pkDetails: 'View product details', pkClose: 'Close',
       craftEyebrow: 'Crafted by Vietnamese Soul', craftTitle: 'A new generation growing up with coffee',
       craftP1: 'Soul comes from Buôn Ma Thuột, where Robusta has been part of life for generations.',
       craftP2: 'Our work spans the entire journey of coffee, from origin, harvesting and processing to green coffee evaluation, roasting and brewing. With new knowledge and new ways of working, we are able to look more closely at what has long been familiar to us. Each harvest brings not only new coffee lots, but also new ways to understand Vietnamese Robusta.',
@@ -678,7 +700,7 @@ class Component extends DCLogic {
       nlTitle: 'Stay close to what is happening at Soul',
       nlBody: 'New coffees, crop updates, stories from origin, coffee knowledge and what is happening across Soul. Please sign up here so we can send it to you.',
       nlPlaceholder: 'Your email address', nlSubmit: 'Subscribe', nlThanks: 'Thank you for subscribing.',
-      footer: [['Shop', [['Roasted Coffee', 'Shop.dc.html#c/ca-phe-pha-phin'], ['Green Coffee', 'Shop.dc.html#c/ca-phe-nhan-xanh'], ['Soulful Collection', 'Shop.dc.html#c/soulful-flavours'], ['All Coffee', 'Shop.dc.html']]], ['Discover', [['Our Story', 'Our Story.dc.html'], ['Spaces', 'Spaces.dc.html'], ['Blog', 'Blog.dc.html']]], ['Professional', [['Coffee Solutions', 'Coffee Solutions.dc.html'], ['Green Coffee', 'Coffee Solutions.dc.html#services'], ['Wholesale', 'Coffee Solutions.dc.html#contact']]], ['Support', [['Shipping', 'Help.dc.html#shipping'], ['Returns', 'Help.dc.html#returns'], ['FAQ', 'Help.dc.html'], ['Contact', 'Help.dc.html#contact']]]],
+      footer: [['Shop', [['Roasted Coffee', 'Shop.dc.html#c/ca-phe-rang'], ['Green Coffee', 'Shop.dc.html#c/ca-phe-nhan-xanh'], ['Soulful Collection', 'Shop.dc.html#c/soulful-flavours'], ['All Coffee', 'Shop.dc.html']]], ['Discover', [['Our Story', 'Our Story.dc.html'], ['Spaces', 'Spaces.dc.html'], ['Blog', 'Blog.dc.html']]], ['Professional', [['Coffee Solutions', 'Coffee Solutions.dc.html'], ['Green Coffee', 'Coffee Solutions.dc.html#services'], ['Wholesale', 'Coffee Solutions.dc.html#contact']]], ['Support', [['Shipping', 'Help.dc.html#shipping'], ['Returns', 'Help.dc.html#returns'], ['FAQ', 'Help.dc.html'], ['Contact', 'Help.dc.html#contact']]]],
       tagline: 'Crafted by Vietnamese Soul. Buôn Ma Thuột, Vietnam.',
       cartEmpty: 'Your cart is empty.', remove: 'Remove', checkout: 'Checkout', cartNote: 'Prices and shipping are calculated at checkout.',
       searchPh: 'Search coffee, brew methods…', noResults: 'No matching products.'
@@ -747,7 +769,7 @@ class Component extends DCLogic {
     this._onResize = () => this.setState({ w: window.innerWidth });
     this._onResize(); window.addEventListener('resize', this._onResize);
     this._onKey = (e) => {
-      if (e.key === 'Escape') this.setState({ megaOpen: false, mobileOpen: false, searchOpen: false, cartOpen: false, album: null });
+      if (e.key === 'Escape') this.setState({ megaOpen: false, mobileOpen: false, searchOpen: false, cartOpen: false, album: null, pick: null });
       if (this.state.album !== null && e.key === 'ArrowRight') this.stepAlbum(1);
       if (this.state.album !== null && e.key === 'ArrowLeft') this.stepAlbum(-1);
     };
@@ -775,10 +797,19 @@ class Component extends DCLogic {
   readCart() { try { const c = JSON.parse(localStorage.getItem('soul-cart-v1')); return Array.isArray(c) ? c : []; } catch (e) { return []; } }
   saveCart(cart) { this.setState({ cart }); try { localStorage.setItem('soul-cart-v1', JSON.stringify(cart)); } catch (e) {} }
   setQty(key, d) { this.saveCart(this.state.cart.map(c => c.key === key ? { ...c, qty: c.qty + d } : c).filter(c => c.qty > 0)); }
-  addToCart(id) {
-    const L = this.state.lang || this.props.lang || 'vi', t = this.T[L], it = this.item(id, L, t), sku = this.SKU[id];
-    const key = sku[0] + '|home', cart = this.readCart(), i = cart.findIndex(c => c.key === key);
-    if (i >= 0) cart[i] = { ...cart[i], qty: cart[i].qty + 1 }; else cart.push({ key, h: sku[0], name: it.name, img: it.img, variant: sku[2], price: sku[1], qty: 1 });
+  // options mirror Shop.dc.html opts(); key format matches Shop so lines merge in the shared cart
+  pickOpts(id, t) {
+    if (this.SKU[id][2] === '1 kg') return [{ id: 'w', label: t.pkPack, values: [['1', '1 kg', 1], ['5', '5 kg', 5]] }];
+    return [{ id: 'w', label: t.pkWeight, values: [['200', '200 g', 1], ['500', '500 g', 2.3]] }, { id: 'g', label: t.pkGrind, values: [['whole', t.pkWhole, 1], ['ground', t.pkGround, 1]] }];
+  }
+  pickChosen(id, t) { const o = this.pickOpts(id, t), sel = this.state.pickSel; return { o, ch: o.map(x => x.values.find(v => v[0] === (sel[x.id] || x.values[0][0]))) }; }
+  addToCart(id) { this.setState({ pick: id, pickSel: {}, toast: '' }); }
+  confirmPick() {
+    const id = this.state.pick, L = this.state.lang || this.props.lang || 'vi', t = this.T[L], it = this.item(id, L, t), sku = this.SKU[id], { ch } = this.pickChosen(id, t);
+    const price = Math.round(sku[1] * ch.reduce((a, v) => a * v[2], 1) / 5000) * 5000;
+    const key = sku[0] + '|' + ch.map(v => v[0]).join('|'), cart = this.readCart(), i = cart.findIndex(c => c.key === key);
+    if (i >= 0) cart[i] = { ...cart[i], qty: cart[i].qty + 1 }; else cart.push({ key, h: sku[0], name: it.name, img: it.img, variant: ch.map(v => v[1]).join(' · '), price, qty: 1 });
+    this.setState({ pick: null });
     this.saveCart(cart); this.setState({ toast: it.name + ' ' + t.added });
     clearTimeout(this._toastT); this._toastT = setTimeout(() => this.setState({ toast: '' }), 3200);
   }
@@ -790,9 +821,14 @@ class Component extends DCLogic {
     const hrefs = ['#top', 'Shop.dc.html', 'Shop.dc.html#c/soulful-flavours', 'Our Story.dc.html', 'Coffee Solutions.dc.html', 'Spaces.dc.html', 'Blog.dc.html'];
     const nav = t.nav.map((label, i) => ({ label, href: hrefs[i], caret: i === 1 ? '▾' : '', popup: i === 1 ? 'true' : 'false',
       enter: () => this.setState({ megaOpen: i === 1 }) }));
+    const money = (n) => L === 'en' ? '$' + (n / 26000).toFixed(2) : n.toLocaleString('vi-VN') + '₫'; // EN placeholder rate, same as Shop
+    let picker = { options: [] };
+    if (s.pick) { const it = this.item(s.pick, L, t), sku = this.SKU[s.pick], { o, ch } = this.pickChosen(s.pick, t), price = Math.round(sku[1] * ch.reduce((a, v) => a * v[2], 1) / 5000) * 5000;
+      picker = { name: it.name, img: it.img, type: it.type, href: 'Shop.dc.html#p/' + sku[0], addLabel: t.addToCart + ' · ' + money(price), add: () => this.confirmPick(),
+        options: o.map(x => ({ label: x.label, values: x.values.map(v => { const on = ch.includes(v); return { label: v[1], on: on ? 'true' : 'false', bg: on ? '#27292D' : 'transparent', fg: on ? '#F4EFE5' : '#27292D', pick: () => this.setState(st => ({ pickSel: { ...st.pickSel, [x.id]: v[0] } })) }; }) })) }; }
     const featured = this.PRODUCTS.map(p => ({ id: p.id, img: p.img, alt: p.alt, name: p.name, ...p[L], add: () => this.addToCart(p.id) }));
     const soulful = this.SOULFUL.map((x, i) => ({ ...x, method: t.soulMethods[i], alt: 'Soulful ' + x.word + ' — ' + x.process, add: () => this.addToCart(x.id) }));
-    const cartItems = s.cart.map(c => ({ name: c.name || c.h, img: c.img || 'images/02-shop/CA-PHE-RANG.jpg', type: [c.variant, c.price ? c.price.toLocaleString('vi-VN') + '₫' : ''].filter(Boolean).join(' · '), qty: c.qty,
+    const cartItems = s.cart.map(c => ({ name: c.name || c.h, img: c.img || 'images/02-shop/CA-PHE-RANG.jpg', type: [c.variant, c.price ? money(c.price) : ''].filter(Boolean).join(' · '), qty: c.qty,
       inc: () => this.setQty(c.key, 1), dec: () => { if (c.qty > 1) this.setQty(c.key, -1); }, remove: () => this.setQty(c.key, -c.qty) }));
     const q = s.query.trim().toLowerCase();
     const pool = [...featured.map(p => ({ name: p.name, type: p.type, img: p.img, href: '#featured' })), ...soulful.map(x => ({ name: 'Soulful — ' + x.word, type: x.method + ' · ' + x.process, img: x.img, href: '#soulful-cards' }))];
@@ -847,7 +883,8 @@ class Component extends DCLogic {
       searchOpen: s.searchOpen, openSearch: () => this.setState({ searchOpen: true, megaOpen: false }), closeSearch: () => this.setState({ searchOpen: false }),
       searchRef: (el) => { this._searchEl = el; }, query: s.query, onQuery: (e) => this.setState({ query: e.target.value }),
       results, noResults: !!q && results.length === 0,
-      toast: s.toast
+      toast: s.toast,
+      pickOpen: !!s.pick, picker, closePick: () => this.setState({ pick: null })
     };
   }
 }
