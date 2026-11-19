@@ -1,85 +1,37 @@
-# Checklist: dựng trang mới (pattern-first)
+# Compose a new page (SOUL)
 
-Dùng checklist này mỗi khi tạo page trong WordPress admin — **không** tạo file PHP template mới.
+Dùng khi theme + patterns đã ship. Hiện tại: checklist mục tiêu.
 
----
+## Steps
 
-## 1. Chuẩn bị
+1. Pages → Add New (blank hoặc insert full-page starter: Home / Our Story / Solutions / Spaces / Help / Guide)
+2. Inserter → category theme (Pages / Layout / Cards / Content / CTAs / Forms)
+3. Một pattern = một section; sắp xếp theo rhythm paper/sand/ink
+4. Đổi copy, ảnh, link trong editor (VI trước; EN qua multilingual plugin khi có)
+5. Dynamic: Query Loop / Woo / form blocks — không paste HTML prototype
+6. Preview desktop + mobile; publish
 
-- [ ] Xác định loại trang: hub / guide / program / form / store / contact  
-- [ ] Chọn full-page starter gần nhất trong **Spark pages** (hoặc blank)  
-- [ ] Solid header? (Contact, Policy, Joe Evans, blog…) → meta `_spark_solid_header = 1` hoặc slug đã whitelist  
+## Page recipes
 
-## 2. Skeleton section (thứ tự chuẩn)
+### Marketing / guide
+Hero → Split / copy → Summary or pillars → FAQ → Related → Newsletter
 
-1. **Hero** — block `sparkvn/hero` (variation `page`)  
-2. **Summary / In short** — pattern `summary` (nếu cần)  
-3. **Body sections** — ghép từ catalog:  
-   - Layout: `split`, `split-rev`, `copy-section`, `img-pair`, `photo-strip`  
-   - Content: `faq`, `two-lists`, `feat-list`, `notice`, `verdict`, `roadmap*`…  
-   - Cards: `hub-grid`, `info-grid`, `q-cards`, `team-grid`…  
-   - Tabs: block `sparkvn/tabs` + pattern `tab-panel-*`  
-4. **Related** — pattern `related` (đổi link)  
-5. **CTA band** — pattern `cta-band`  
+### Our Story–like
+Hero → Manifesto → Philosophy → Team → Fine Robusta → Channels → Journey → Newsletter
 
-Bỏ Related/CTA theo rule trang đặc biệt (xem UX standards).
+### B2B Solutions
+Hero → Capacity stats → Service rows → Partners → Contact form
 
-## 3. Trong editor
+### Spaces
+Hub: Hero → Store card grid  
+Branch: Hero → About → Gallery → Other stores
 
-- [ ] Insert pattern → **sửa copy**, không để sample text  
-- [ ] Ảnh: **Replace** từ Media Library (đã sideload từ theme) — không sửa raw `src`  
-- [ ] Links: permalink WP (`/about/`), không `.html`  
-- [ ] 1 H2 / section; eyebrow gold nếu có  
-- [ ] FAQ dùng Details + style **FAQ item**  
-- [ ] Button trên nền tím → style **Gold**  
-- [ ] Group xen kẽ → style **Ivory 2** hoặc **Purple**  
+### Help
+Hero → FAQ (`details`) hoặc policy body → Contact
 
-## 4. Dữ liệu động
+## Không làm
 
-| Cần | Block |
-|---|---|
-| Danh sách programs live | `sparkvn/query-programs` (ưu tiên hơn static `program-card*`) |
-| Blog posts | `sparkvn/query-posts` |
-| Store prizes | `sparkvn/query-prizes` (+ pattern `store-anchor-nav`) |
-| Resources | `sparkvn/query-resources` |
-| Form lead | `sparkvn/form` |
-
-## 5. QA trước publish
-
-- [ ] Desktop + mobile: hero, split, cards không vỡ  
-- [ ] Breadcrumb không bị header che (solid header pages)  
-- [ ] Form submit (nếu có) → lead lưu + email theo Settings  
-- [ ] Không còn placeholder / lorem / link `.html`  
-- [ ] Related trỏ đúng trang nội bộ  
-
-## 6. Nếu thiếu pattern
-
-1. Tái dùng pattern gần nhất + chỉnh  
-2. Nếu section sẽ dùng ≥2 trang → **tạo pattern mới** (xem `01-pattern-first-rules.md` mục B)  
-3. Chỉ mở custom block nếu vượt quá core + pattern  
-
----
-
-## Ví dụ nhanh: trang Guide mới
-
-```
-sparkvn/hero (page)
-→ summary
-→ split
-→ two-lists
-→ notice
-→ faq
-→ related
-→ cta-band
-```
-
-## Ví dụ nhanh: trang Hub mới
-
-```
-sparkvn/hero (page)
-→ hub-grid
-→ split-rev
-→ testimonials (optional)
-→ related
-→ cta-band
-```
+- Tạo `page-{slug}.php` copy từ `html/*.html`
+- Nhúng Custom HTML cho cả section marketing
+- Để link `Shop.dc.html` / `Home.html` trong content
+- Sync pattern mà copy phải khác mỗi trang

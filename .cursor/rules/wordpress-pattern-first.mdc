@@ -1,0 +1,14 @@
+---
+description: Pattern-first WordPress architecture (all WP work in this repo)
+globs: wordpress/**/*.{php,scss,css,js,json},PATTERN-SYSTEM/**/*.md,docs/**/*.md
+alwaysApply: false
+---
+
+# WordPress pattern-first
+
+Follow the personal skill **wordpress-pattern-first** (`~/.cursor/skills/wordpress-pattern-first/SKILL.md`) for all WordPress theme / Gutenberg / pattern work.
+
+- Prefer unsynced patterns + core blocks + block styles.
+- Custom blocks only for hero video/overlay, tabs, forms, CPT queries, or hard templateLock.
+- No `page-*.php` HTML clones; no one custom block per SCSS file; no marketing copy in `wp:html`.
+- Update `PATTERN-SYSTEM/` catalogs when adding patterns or blocks in this repo.

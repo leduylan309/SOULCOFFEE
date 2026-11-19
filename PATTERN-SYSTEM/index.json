@@ -1,53 +1,25 @@
 {
-  "name": "Pattern System Kit (project inventory)",
-  "globalSkill": "~/.cursor/skills/wordpress-pattern-first/SKILL.md",
-  "goal": "per-project catalog for pattern-first WordPress; rules live in the global skill",
-  "theme": "wordpress/wp-content/themes/sparkvn",
-  "counts": {
-    "patterns": 62,
-    "customBlocks": 9,
-    "blockStyles": 10,
-    "patternCategories": 6
-  },
-  "categories": [
-    "sparkvn-pages",
-    "sparkvn-layout",
-    "sparkvn-cards",
-    "sparkvn-content",
-    "sparkvn-cta",
-    "sparkvn-connect"
+  "project": "soul-fine-robusta",
+  "theme_slug": "soul",
+  "theme_exists": true,
+  "theme_path": "wordpress/wp-content/themes/soul",
+  "ui_source": "html/ (local, gitignored)",
+  "commerce": "cpt-soul_product + soul_order (no WooCommerce, no online payment)",
+  "docs": "docs/PROJECT.md",
+  "skill": "wordpress-pattern-first",
+  "patterns": [
+    "page-home",
+    "page-our-story",
+    "page-coffee-solutions",
+    "hero-home",
+    "story-split",
+    "newsletter-band"
   ],
-  "customBlocks": [
-    "sparkvn/hero",
-    "sparkvn/card",
-    "sparkvn/tabs",
-    "sparkvn/tab-panel",
-    "sparkvn/form",
-    "sparkvn/query-programs",
-    "sparkvn/query-posts",
-    "sparkvn/query-prizes",
-    "sparkvn/query-resources"
-  ],
-  "decisionTree": {
-    "repeatedSectionChangingCopy": "unsynced pattern",
-    "groupColumnsDetailsButtonListHeading": "core block + spark block style",
-    "heroTabsFormCptQuery": "custom block",
-    "headerFooterBreadcrumb": "php"
-  },
-  "docs": [
-    "README.md",
-    "01-pattern-first-rules.md",
-    "02-pattern-catalog.md",
-    "03-blocks-and-styles.md",
-    "04-design-system.md",
-    "05-compose-new-page.md",
-    "06-gaps-checklist.md"
-  ],
-  "sourcePaths": {
-    "patterns": "wordpress/wp-content/themes/sparkvn/patterns/",
-    "blocks": "wordpress/wp-content/themes/sparkvn/blocks/",
-    "tokens": "wordpress/wp-content/themes/sparkvn/sass/base/_tokens.scss",
-    "rules": "docs/RULES.md",
-    "structure": "docs/STRUCTURE.md"
+  "tokens": {
+    "ink": "#27292D",
+    "paper": "#F4EFE5",
+    "sand": "#EAE3D5",
+    "yellow": "#FFD35B",
+    "clay": "#8E4B33"
   }
 }

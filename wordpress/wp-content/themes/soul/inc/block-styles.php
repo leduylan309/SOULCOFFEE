@@ -1,0 +1,36 @@
+<?php
+/**
+ * Core block styles.
+ *
+ * @package Soul
+ */
+
+declare(strict_types=1);
+
+add_action('init', static function (): void {
+	$styles = [
+		['core/button', 'primary', __('Primary ink', 'soul')],
+		['core/button', 'outline', __('Outline', 'soul')],
+		['core/button', 'yellow', __('Yellow fill', 'soul')],
+		['core/group', 'surface-paper', __('Surface paper', 'soul')],
+		['core/group', 'surface-sand', __('Surface sand', 'soul')],
+		['core/group', 'surface-ink', __('Surface ink', 'soul')],
+		['core/group', 'surface-yellow', __('Surface yellow', 'soul')],
+		['core/columns', 'section-header', __('Section header', 'soul')],
+		['core/columns', 'tight-10', __('Tight 10px gutter', 'soul')],
+		['core/details', 'faq', __('FAQ', 'soul')],
+		['core/paragraph', 'lead', __('Lead', 'soul')],
+		['core/paragraph', 'tasting-notes', __('Tasting notes', 'soul')],
+		['core/paragraph', 'meta-chain', __('Meta chain', 'soul')],
+		['core/image', 'ratio-1-1', __('Ratio 1:1', 'soul')],
+		['core/image', 'ratio-4-5', __('Ratio 4:5', 'soul')],
+		['core/image', 'ratio-16-10', __('Ratio 16:10', 'soul')],
+	];
+
+	foreach ($styles as [$block, $name, $label]) {
+		register_block_style($block, [
+			'name'  => $name,
+			'label' => $label,
+		]);
+	}
+});

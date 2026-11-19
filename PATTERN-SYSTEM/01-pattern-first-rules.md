@@ -1,34 +1,31 @@
-# Pattern-first rules (local pointer)
+# Pattern-first rules (SOUL)
 
-**Source of truth (all WordPress projects):**  
-`~/.cursor/skills/wordpress-pattern-first/SKILL.md`
+Đây là **nhắc rule chung**, không phải catalog brand.
 
-Folder `PATTERN-SYSTEM/` chỉ lưu **inventory của theme trong repo này**. Không fork rule theo brand.
+## Source of truth
+
+Personal skill: `~/.cursor/skills/wordpress-pattern-first/SKILL.md`  
+Repo rule: `.cursor/rules/wordpress-pattern-first.mdc`
 
 ## Decision tree
 
-| Situation | Do |
+| Situation | Do this |
 |---|---|
-| Section lặp, copy/ảnh/link đổi theo trang | Unsynced pattern |
-| Group / Columns / Cover / Details / Buttons / Heading / List | Core + block style |
-| Hero video/overlay, Tabs, Form, CPT query, `templateLock` | Custom block |
-| Header, footer, breadcrumb | PHP |
-| Nhiều item cùng khung dữ liệu | CPT + query block |
+| Section lặp; copy/ảnh/link đổi theo trang | **Unsynced block pattern** |
+| Group, Columns, Cover, Details, Buttons, Heading, List | **Core block + theme block style** |
+| Hero video/overlay, Tabs, Form, CPT query, `templateLock` cứng | **Custom block** only |
+| Header, footer, shell | **PHP** template part |
+| Nhiều item cùng shape (products, stores, posts) | **CPT + Query Loop** (hoặc Woo/query block) |
 
 ## Hard bans
 
-- Không `page-{slug}.php` paste full HTML marketing  
-- Không 1 custom block cho mỗi file SCSS  
-- Không `wp:html` cho copy marketing (trừ embed thật)  
-- Không để link prototype `.html` trong content  
-- Không sync CTA/Related khi copy khác từng trang  
-- Không ACF để dựng layout mà block/pattern làm được  
+- Không `page-{slug}.php` paste full marketing HTML từ `html/*.html`
+- Không 1 custom block / 1 file SCSS component
+- Không marketing copy trong `wp:html` (trừ embed thật)
+- Không để link prototype `.html` trong content production
+- Không sync CTA/related khi copy phải khác mỗi trang
+- Không ACF để “vẽ layout” mà blocks/patterns làm được
 
-## Khi thêm section mới
+## Definition of Done
 
-1. Tái dùng ≥2 trang → component + **pattern** cùng changeset  
-2. Ưu tiên core + style  
-3. Custom block chỉ khi skill cho phép  
-4. Cập nhật `02-pattern-catalog.md` / `03-blocks-and-styles.md`  
-
-Xem thêm: skill `reference.md`.
+Editor tạo trang mới bằng starter + inserter patterns, đổi copy/ảnh/link, publish **không** cần dev sửa PHP/HTML.

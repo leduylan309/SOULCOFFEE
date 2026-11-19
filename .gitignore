@@ -10,7 +10,9 @@ wordpress/wp-content/cache/
 wordpress/wp-content/backup-db/
 wordpress/wp-content/debug.log
 
+# Local design prototypes only — do not commit
 html/
+
 BLOG MANAGEMENT/
 
 # OS / IDE

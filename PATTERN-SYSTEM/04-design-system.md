@@ -1,120 +1,66 @@
-# Design system (tokens + components)
+# Design system — SOUL Fine Robusta
 
-Source of truth (live): `wordpress/wp-content/themes/sparkvn/sass/`  
-Compile: `npx sass sass/main.scss css/main.css`  
-Prototype song song: `html/scss/` (nhiều file giống; theme đã diverge ~22 file cho Gutenberg)
+Source of truth (prototype): [`html/`](../html/)  
+- Tokens: `html/tokens/*.css`  
+- SCSS: `html/scss/` → `html/dist/soul.css`  
+- Spec: `html/readme.md`, `html/Soul Design System.dc.html`  
+- Components (React specimens): `html/components/`  
+- Vanilla runtime: `html/js/`
+
+Khi có theme: mirror tokens vào `theme.json` + `sass/`; load `editor-styles`.
 
 ---
 
-## Tokens (`sass/base/_tokens.scss`)
+## Colour
 
-### Color
-
-| Token | Hex |
-|---|---|
-| `--purple` | `#5D1C61` |
-| `--purple-700` | `#4A1750` |
-| `--purple-900` | `#320D37` |
-| `--purple-tint` | `#F3EAF4` |
-| `--purple-line` | `#E4D2E6` |
-| `--ivory` | `#FBF7F0` |
-| `--ivory-2` | `#F5EDE0` |
-| `--paper` | `#FFFFFF` |
-| `--ink` | `#2B2530` |
-| `--ink-soft` | `#6A6470` |
-| `--ink-faint` | `#938D9B` |
-| `--gold` / `--accent` | `#AF863A` |
-| `--gold-soft` | `#C7A659` |
-| `--gold-tint` | `#F4ECDC` |
-| `--line` | `#E9E0D1` |
-| `--line-strong` | `#DBCDB4` |
-
-### Type (tên token bị đảo)
-
-| Token | Face | Dùng cho |
+| Token | Hex | Role |
 |---|---|---|
-| `--font-serif` | Avenir Next → Nunito Sans | Headings / UI |
-| `--font-sans` | Frank Ruhl Libre → Georgia | Body |
+| `--ink` | `#27292D` | Text / primary button |
+| `--ink-deep` | `#1E1F22` | Dark cards |
+| `--paper` | `#F4EFE5` | Base ground |
+| `--sand` | `#EAE3D5` | Alternate sections / light cards |
+| `--sand-deep` | `#E2DACB` | Empty image wells |
+| `--yellow` / accent | `#FFD35B` | Hover, focus, newsletter, awards |
+| `--clay` | `#8E4B33` | Eyebrow light, errors, link hover |
+| Stone 700 | `#514B42` | Secondary text |
+| Stone 500 | `#7C7365` | Muted / placeholder |
 
-### Layout
-
-| Token | Value |
-|---|---|
-| `--container` | `1180px` |
-| `--gutter` | `clamp(20px, 5vw, 48px)` |
-| `--section-y` | `clamp(72px, 9vw, 132px)` |
-| `--r-sm / --r / --r-lg` | `8 / 14 / 22` |
-
-Breakpoints (desktop-first): sm 620 / md 760 / lg 860 / xl 960 / xxl 1180.
+Section rhythm: paper → sand → ink; yellow band **một lần** trước footer ink. Không dark-dark liên tiếp.
 
 ---
 
-## Component API (bắt buộc)
+## Type
 
-1. File component chỉ style **root class của nó**.  
-2. Parent chỉ được **định vị** child (margin / width / order) — không tô màu lại.  
-3. Đổi appearance từ ngoài = set **public custom properties**.  
-4. Surface tối (`.bg-purple`, `.hero`, `.cta-band`) chỉ set biến — không rule màu con cháu.
-
-### Public properties thường dùng
-
-| Target | Props |
+| Face | Use |
 |---|---|
-| Headings | `--heading-color`, `--subheading-color` |
-| `.lead` | `--lead-color`, `--lead-size`, `--lead-lh`, `--lead-weight` |
-| `.eyebrow` | `--eyebrow-color` |
-| `.chip` | `--chip-bg`, `--chip-fg`, `--chip-border`… |
-| `.btn-primary` | `--btn-bg`, `--btn-fg`, `--btn-border`, `--btn-hover-bg` |
-| `.btn-ghost` | `--btn-ghost-fg`, `--btn-ghost-border`… |
-| `.container` | `--container-max` |
-| `.brand` | `--brand-h`, `--logo-white`, `--logo-purple` |
-| `.split-media` | `--split-img-ratio`, `--split-img-maxh` |
+| **Newsreader 400** | Headings, product names, menus, lead, big numerals; italic = tasting notes only |
+| **Be Vietnam Pro** 400/500/600 | Body 15/1.7, UI labels |
 
-Chi tiết: `wordpress/wp-content/themes/sparkvn/sass/README.md`
+Labels: 10.5–12.5px, UPPERCASE via CSS, tracking ~.08–.18em.  
+Display: fluid `clamp()`, hero ~100px → card ~23px. Never bold Newsreader.
 
 ---
 
-## Component roots → pattern / block
+## Layout & chrome
 
-| SCSS root | CMS thường dùng |
-|---|---|
-| `.hero` | Block `sparkvn/hero` |
-| `.split` | Pattern `split` / Columns style `split` |
-| `.copy` | Pattern `copy-section` |
-| `.summary` | Pattern `summary` |
-| `.faq-*` | Pattern `faq` + Details style `faq` |
-| `.cta-band` | Pattern `cta-band` + Group style `purple` |
-| `.related` | Pattern `related` |
-| `.hub-grid` / `.hub-card` | Pattern `hub-grid` + block `card` |
-| `.adv-grid` | Pattern `advantage-cards` |
-| `.prog-feature` / `.pf` | Pattern `program-card*` **hoặc** block `query-programs` |
-| `.form-card` | Block `sparkvn/form` |
-| `.roadmap` | Pattern `roadmap` / `roadmap-vertical` |
-| `.tabs` | Block `sparkvn/tabs` |
-| `.profile` / `.option-card` | Chưa có pattern riêng — đang nằm trong page markup |
-| `.article-wrap` / `.prose` | PHP `single.php` |
-| `.post-grid` | Block `query-posts` + `home.php` |
+- Side pad `clamp(16px,4vw,64px)`; section Y `clamp(56px,7vw,110px)`
+- Tile gutter **10px** (signature)
+- Sticky header **66px**; story column sticky `top: 100px`
+- Radius **0** (exceptions: cart pill, carousel arrows, store dot)
+- Cards: flat colour, no shadow; shadows only overlays (mega, drawer, toast, certs)
 
 ---
 
-## UX standards ngắn
+## Motion & interaction
 
-Từ `html/UX-UI-STANDARDS.md`:
-
-- 1 H2 / section  
-- Ảnh content `object-fit: cover`, max height ~460 desktop  
-- Split: copy max ~60ch  
-- FAQ = native `details`  
-- Trang content kết thúc Related + CTA (trừ ngoại lệ Home / Exclusive / Teachers / Contact / single post)  
-- Hit target ≥ 44px  
+- Hover = instant colour swap (no transition)
+- Focus = 2px yellow outline, 3px offset
+- Almost no animation; respect `prefers-reduced-motion`
+- Icons: typographic glyphs ↗ ↓ ← → × ▾ · ; search SVG only
 
 ---
 
-## Editor styles
+## Component groups (`html/components/`)
 
-| File | Role |
-|---|---|
-| `css/main.css` | Full design system trong editor iframe |
-| `css/editor.css` | Canvas + inserter + tabs/split fixes |
-| `css/editor-post.css` | Mirror `.prose` cho post |
-| `css/editor-page.css` | Ẩn title field (title nằm trong hero) |
+actions · display · forms · commerce · content · navigation · feedback — 31 specimens extracted from Home.  
+SCSS component API: file owns root class; parents position only; appearance via public custom properties.
