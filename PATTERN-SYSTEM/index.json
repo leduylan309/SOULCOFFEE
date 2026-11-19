@@ -1,0 +1,53 @@
+{
+  "name": "Pattern System Kit (project inventory)",
+  "globalSkill": "~/.cursor/skills/wordpress-pattern-first/SKILL.md",
+  "goal": "per-project catalog for pattern-first WordPress; rules live in the global skill",
+  "theme": "wordpress/wp-content/themes/sparkvn",
+  "counts": {
+    "patterns": 62,
+    "customBlocks": 9,
+    "blockStyles": 10,
+    "patternCategories": 6
+  },
+  "categories": [
+    "sparkvn-pages",
+    "sparkvn-layout",
+    "sparkvn-cards",
+    "sparkvn-content",
+    "sparkvn-cta",
+    "sparkvn-connect"
+  ],
+  "customBlocks": [
+    "sparkvn/hero",
+    "sparkvn/card",
+    "sparkvn/tabs",
+    "sparkvn/tab-panel",
+    "sparkvn/form",
+    "sparkvn/query-programs",
+    "sparkvn/query-posts",
+    "sparkvn/query-prizes",
+    "sparkvn/query-resources"
+  ],
+  "decisionTree": {
+    "repeatedSectionChangingCopy": "unsynced pattern",
+    "groupColumnsDetailsButtonListHeading": "core block + spark block style",
+    "heroTabsFormCptQuery": "custom block",
+    "headerFooterBreadcrumb": "php"
+  },
+  "docs": [
+    "README.md",
+    "01-pattern-first-rules.md",
+    "02-pattern-catalog.md",
+    "03-blocks-and-styles.md",
+    "04-design-system.md",
+    "05-compose-new-page.md",
+    "06-gaps-checklist.md"
+  ],
+  "sourcePaths": {
+    "patterns": "wordpress/wp-content/themes/sparkvn/patterns/",
+    "blocks": "wordpress/wp-content/themes/sparkvn/blocks/",
+    "tokens": "wordpress/wp-content/themes/sparkvn/sass/base/_tokens.scss",
+    "rules": "docs/RULES.md",
+    "structure": "docs/STRUCTURE.md"
+  }
+}

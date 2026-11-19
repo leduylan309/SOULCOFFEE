@@ -1,8 +1,0 @@
-@use '../abstracts' as *;
-
-.u-visually-hidden { @include visually-hidden; }
-.u-on-dark { color: var(--text-on-dark); }
-.u-accent { color: var(--text-accent); }
-.u-muted { color: var(--text-muted); }
-.u-mt-auto { margin-top: auto; }
-@each $k, $r in $ratios { .u-ratio-#{$k} { aspect-ratio: #{$r}; overflow: hidden; } }
