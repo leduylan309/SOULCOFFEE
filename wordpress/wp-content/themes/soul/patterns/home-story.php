@@ -3,6 +3,8 @@
  * Title: Home — 03 Story + Album
  * Slug: soul/home-story
  * Categories: soul-layout
+ *
+ * Editors: click each album Image → Replace → Upload / Media Library.
  */
 $story = esc_url(home_url('/our-story/'));
 $album = [

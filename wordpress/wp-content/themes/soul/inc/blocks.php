@@ -37,8 +37,14 @@ add_filter('render_block', static function (string $content, array $block): stri
 	}
 	$class = (string) ($block['attrs']['className'] ?? '');
 	$attrs = '';
-	if (str_contains($class, 's-home-album') || str_contains($class, 'js-soul-lightbox')) {
-		$label = str_contains($class, 's-home-album') ? 'Album · Vùng nguyên liệu' : 'Gallery';
+	if (str_contains($class, 's-home-album') || str_contains($class, 's-space-br-gallery') || str_contains($class, 'js-soul-lightbox')) {
+		if (str_contains($class, 's-home-album')) {
+			$label = 'Album · Vùng nguyên liệu';
+		} elseif (str_contains($class, 's-space-br-gallery')) {
+			$label = get_the_title() ?: 'Inside Soul';
+		} else {
+			$label = 'Gallery';
+		}
 		$attrs .= ' data-component="lightbox" data-label="' . esc_attr($label) . '"';
 	}
 	if (str_contains($class, 'js-soul-rail') || str_contains($class, 's-home-awards__rail-wrap')) {
@@ -53,5 +59,6 @@ add_filter('render_block', static function (string $content, array $block): stri
 	if ($attrs === '') {
 		return $content;
 	}
-	return (string) preg_replace('/^<div\b/i', '<div' . $attrs, $content, 1);
-}, 10, 2);
+	// Layout support may prefix whitespace/newlines before the wrapper.
+	return (string) preg_replace('/^(\s*)<div\b/i', '$1<div' . $attrs, $content, 1);
+}, 20, 2);

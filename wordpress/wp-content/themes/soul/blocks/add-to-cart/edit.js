@@ -45,12 +45,13 @@
               value: a.productType,
               onChange: (v) => setAttributes({ productType: v }),
             }),
+            el('p', { style: { opacity: 0.75, marginBottom: 8 } }, 'Ảnh giỏ: mặc định lấy ảnh card. Chỉ chọn nếu cần khác.'),
             el(MediaUploadCheck, null,
               el(MediaUpload, {
                 onSelect: (m) => setAttributes({ imageUrl: m.url || '' }),
                 allowedTypes: ['image'],
                 render: ({ open }) =>
-                  el(Button, { onClick: open, variant: 'secondary' }, a.imageUrl ? 'Đổi ảnh giỏ' : 'Chọn ảnh giỏ'),
+                  el(Button, { onClick: open, variant: 'secondary' }, a.imageUrl ? 'Đổi ảnh giỏ (tuỳ chọn)' : 'Ảnh giỏ (tuỳ chọn)'),
               })
             ),
             a.imageUrl

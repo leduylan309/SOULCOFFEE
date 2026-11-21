@@ -10,7 +10,7 @@ declare(strict_types=1);
 add_action('init', 'soul_run_seed_solutions_fidelity', 78);
 
 function soul_run_seed_solutions_fidelity(): void {
-	if (get_option('soul_seeded_solutions_editable_v1')) {
+	if (get_option('soul_seeded_solutions_editable_v2')) {
 		return;
 	}
 	if (! function_exists('soul_page_coffee_solutions_content')) {
@@ -33,4 +33,5 @@ function soul_run_seed_solutions_fidelity(): void {
 	kses_init_filters();
 
 	update_option('soul_seeded_solutions_editable_v1', 1);
+	update_option('soul_seeded_solutions_editable_v2', 1);
 }

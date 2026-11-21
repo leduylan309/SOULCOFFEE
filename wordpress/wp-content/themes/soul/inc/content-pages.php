@@ -103,3 +103,48 @@ function soul_page_new_crop_content(): string {
 		'newcrop-closing',
 	]);
 }
+
+/**
+ * Branch space post_content from patterns (editable in CPT editor).
+ *
+ * @param list<string>|null                         $about_paras Optional about body paragraphs for seed.
+ * @param list<array{id?:int,url:string,alt:string}>|null $gallery_items Media-library-ready gallery items.
+ */
+function soul_space_branch_content(int $post_id, ?array $about_paras = null, ?array $gallery_items = null): string {
+	$GLOBALS['soul_space_seed_id'] = $post_id;
+	if (is_array($about_paras)) {
+		$GLOBALS['soul_space_seed_about'] = $about_paras;
+	} else {
+		unset($GLOBALS['soul_space_seed_about']);
+	}
+	if (is_array($gallery_items)) {
+		$GLOBALS['soul_space_seed_gallery_items'] = $gallery_items;
+	} else {
+		unset($GLOBALS['soul_space_seed_gallery_items']);
+	}
+
+	$prev = $GLOBALS['post'] ?? null;
+	$post = get_post($post_id);
+	if ($post) {
+		$GLOBALS['post'] = $post;
+		setup_postdata($post);
+	}
+
+	$content = soul_compose_patterns([
+		'spaces-br-hero',
+		'spaces-br-about',
+		'spaces-br-gallery',
+		'spaces-br-others',
+	]);
+
+	if ($prev instanceof \WP_Post) {
+		$GLOBALS['post'] = $prev;
+		setup_postdata($prev);
+	} else {
+		wp_reset_postdata();
+		unset($GLOBALS['post']);
+	}
+	unset($GLOBALS['soul_space_seed_id'], $GLOBALS['soul_space_seed_about'], $GLOBALS['soul_space_seed_gallery_items']);
+
+	return $content;
+}

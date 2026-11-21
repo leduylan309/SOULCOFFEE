@@ -3,6 +3,8 @@
  * Title: Solutions — 04 Partners
  * Slug: soul/solutions-partners
  * Categories: soul-content
+ *
+ * Editors: click Gallery → Upload / Media Library (no URL pasting).
  */
 $logos = ['KhGE0JY', '0qvgmek', 'kAoE23U', 'dHdSZaa', 'jittxwI', 'Xa2jFtw', 'ZCMH8gH', '0cpAes0', 'UBepzyo', 'R9e0V2A', 'zOmbINo', 'Fxwzcg5', 'Ua8UnOv', 'etDhIN6', 'SMERBb7', '5JCRZ3f', 'Z4qvMvv', 'BaGKKC9', 'X9EOl29', 'WtBuhG3'];
 ?>
@@ -19,19 +21,21 @@ $logos = ['KhGE0JY', '0qvgmek', 'kAoE23U', 'dHdSZaa', 'jittxwI', 'Xa2jFtw', 'ZCM
 <!-- /wp:group -->
 
 <!-- wp:paragraph {"className":"s-sol-pt__count"} -->
-<p class="s-sol-pt__count">20 đối tác</p>
+<p class="s-sol-pt__count" data-partners-count><?php echo esc_html((string) count($logos)); ?> đối tác</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:group -->
 
-<!-- wp:columns {"className":"s-sol-pt__grid"} -->
-<div class="wp-block-columns s-sol-pt__grid">
+<!-- wp:gallery {"linkTo":"none","columns":5,"className":"s-sol-pt__grid"} -->
+<figure class="wp-block-gallery has-nested-images columns-5 is-cropped s-sol-pt__grid wp-block-gallery-is-layout-flex">
 <?php foreach ($logos as $i => $id) : ?>
-<!-- wp:column -->
-<div class="wp-block-column"><!-- wp:image {"sizeSlug":"full","linkDestination":"none","className":"s-sol-pt__logo"} -->
+<!-- wp:image {"sizeSlug":"full","linkDestination":"none","className":"s-sol-pt__logo"} -->
 <figure class="wp-block-image size-full s-sol-pt__logo"><img src="<?php echo esc_url('https://i.imgur.com/' . $id . '.png'); ?>" alt="<?php echo esc_attr('Logo đối tác ' . ($i + 1)); ?>"/></figure>
-<!-- /wp:image --></div>
-<!-- /wp:column -->
+<!-- /wp:image -->
 <?php endforeach; ?>
-</div>
-<!-- /wp:columns --></div>
+</figure>
+<!-- /wp:gallery -->
+
+<!-- wp:paragraph {"className":"s-sol-pt__hint"} -->
+<p class="s-sol-pt__hint">Chọn khối Gallery → Upload hoặc Thư viện để thêm / đổi logo đối tác.</p>
+<!-- /wp:paragraph --></div>
 <!-- /wp:group -->

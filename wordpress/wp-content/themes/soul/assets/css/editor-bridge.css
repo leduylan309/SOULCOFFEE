@@ -46,7 +46,9 @@
 .editor-styles-wrapper [class^="s-sol-"],
 .editor-styles-wrapper [class*=" s-sol-"],
 .editor-styles-wrapper [class^="s-space-"],
-.editor-styles-wrapper [class*=" s-space-"] {
+.editor-styles-wrapper [class*=" s-space-"],
+.editor-styles-wrapper [class^="s-blog-"],
+.editor-styles-wrapper [class*=" s-blog-"] {
   max-width: none !important;
   width: 100%;
   box-sizing: border-box;
@@ -60,4 +62,40 @@
 /* Keep pattern inserter preview readable */
 .block-editor-block-preview__content [class^="s-home-"] {
   pointer-events: none;
+}
+
+/* Blog article canvas: paper (class toggled by blog-editor.js). */
+.editor-styles-wrapper.s-blog-article-canvas {
+  background: var(--soul-paper, #f4efe5) !important;
+}
+
+/*
+ * Post canvas widths (must live HERE — last in add_editor_style — to beat
+ * `.is-root-container > .wp-block { max-width: none }` above).
+ * Gutenberg: alignfull → .wp-block[data-align=full]; keep that full-bleed.
+ * Article flow (p/h2/steps/note) → 700 centered like front .s-blog-post__body.
+ */
+.editor-styles-wrapper.s-blog-article-canvas .is-root-container {
+  max-width: none !important;
+  width: 100% !important;
+  margin-inline: 0 !important;
+  padding: clamp(28px, 4vw, 48px) 0 !important;
+  box-sizing: border-box;
+}
+.editor-styles-wrapper.s-blog-article-canvas .is-root-container > .wp-block {
+  max-width: 700px !important;
+  margin-left: auto !important;
+  margin-right: auto !important;
+  padding-left: clamp(16px, 3vw, 32px);
+  padding-right: clamp(16px, 3vw, 32px);
+  box-sizing: border-box;
+}
+.editor-styles-wrapper.s-blog-article-canvas .is-root-container > .wp-block[data-align="full"],
+.editor-styles-wrapper.s-blog-article-canvas .is-root-container > .wp-block[data-align="wide"] {
+  max-width: none !important;
+  width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+  padding-left: 0 !important;
+  padding-right: 0 !important;
 }

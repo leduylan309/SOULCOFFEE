@@ -23,6 +23,7 @@ add_action('after_setup_theme', static function (): void {
 		'assets/css/story-sections.css',
 		'assets/css/solutions-sections.css',
 		'assets/css/spaces-sections.css',
+		'assets/css/blog-sections.css',
 		'assets/css/theme-chrome.css',
 		'assets/css/editor-bridge.css',
 	]);

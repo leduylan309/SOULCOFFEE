@@ -101,11 +101,8 @@ add_action('add_meta_boxes', static function (): void {
 			esc_html__('Hours', 'soul'),
 			esc_textarea($m['hours'])
 		);
-		printf(
-			'<p><label>%s<br><textarea class="widefat" rows="6" name="soul_gallery">%s</textarea></label></p>',
-			esc_html__('Gallery image URLs (one per line)', 'soul'),
-			esc_textarea($m['gallery'])
-		);
+		echo '<p class="description">' . esc_html__('Ảnh đại diện (hub + hero): cột Featured Image → Upload / Thư viện.', 'soul') . '</p>';
+		echo '<p class="description">' . esc_html__('Album Inside Soul: trong editor → khối Gallery → Upload / Thư viện.', 'soul') . '</p>';
 	}, 'soul_space', 'side');
 });
 
@@ -120,6 +117,4 @@ add_action('save_post_soul_space', static function (int $post_id): void {
 		update_post_meta($post_id, $key, sanitize_text_field(wp_unslash($_POST[$key] ?? '')));
 	}
 	update_post_meta($post_id, 'soul_hours', sanitize_textarea_field(wp_unslash($_POST['soul_hours'] ?? '')));
-	$gallery = isset($_POST['soul_gallery']) ? sanitize_textarea_field(wp_unslash($_POST['soul_gallery'])) : '';
-	update_post_meta($post_id, 'soul_gallery', $gallery);
 });

@@ -46,6 +46,20 @@ async function boot() {
   bus.on('cart:change', syncCount);
 
   (await import('./pages/forms.js')).default?.();
+
+  // Space gallery: keep "NN ảnh" in sync with Media Library images in the block.
+  document.querySelectorAll('.s-space-br-gallery').forEach((g) => {
+    const n = g.querySelectorAll('.wp-block-gallery .wp-block-image, .wp-block-gallery .blocks-gallery-item').length;
+    const el = g.querySelector('[data-gallery-count]');
+    if (el) el.textContent = String(n).padStart(2, '0') + ' ảnh';
+  });
+
+  // Partners: keep count in sync with Gallery logos.
+  document.querySelectorAll('.s-sol-pt').forEach((g) => {
+    const n = g.querySelectorAll('.wp-block-gallery .wp-block-image, .wp-block-gallery .blocks-gallery-item').length;
+    const el = g.querySelector('[data-partners-count]');
+    if (el && n) el.textContent = n + ' đối tác';
+  });
 }
 
 document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', boot) : boot();

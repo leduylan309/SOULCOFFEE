@@ -204,6 +204,37 @@ function soul_sideload_featured(int $post_id, string $file, string $title): void
 	}
 }
 
+/**
+ * Sideload a remote image into the Media Library (for Gallery block uploads UX).
+ *
+ * @return int Attachment ID or 0 on failure.
+ */
+function soul_sideload_remote_image(string $url, int $parent_id = 0, string $desc = ''): int {
+	require_once ABSPATH . 'wp-admin/includes/file.php';
+	require_once ABSPATH . 'wp-admin/includes/media.php';
+	require_once ABSPATH . 'wp-admin/includes/image.php';
+
+	$tmp = download_url($url, 30);
+	if (is_wp_error($tmp)) {
+		return 0;
+	}
+	$path = wp_parse_url($url, PHP_URL_PATH);
+	$name = $path ? basename($path) : 'space-gallery.jpg';
+	if ($name === '' || ! str_contains($name, '.')) {
+		$name = 'space-gallery.jpg';
+	}
+	$file_array = [
+		'name'     => sanitize_file_name($name),
+		'tmp_name' => $tmp,
+	];
+	$id = media_handle_sideload($file_array, $parent_id, $desc);
+	if (is_wp_error($id)) {
+		@unlink($tmp);
+		return 0;
+	}
+	return (int) $id;
+}
+
 function soul_home_seed_content(): string {
 	$shop = esc_url(get_post_type_archive_link('soul_product') ?: home_url('/products/'));
 	return <<<HTML

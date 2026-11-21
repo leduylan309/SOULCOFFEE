@@ -28,6 +28,11 @@ add_action('init', static function (): void {
 		['core/image', 'ratio-1-1', __('Ratio 1:1', 'soul')],
 		['core/image', 'ratio-4-5', __('Ratio 4:5', 'soul')],
 		['core/image', 'ratio-16-10', __('Ratio 16:10', 'soul')],
+		['core/group', 'blog-note', __('Blog note', 'soul')],
+		['core/group', 'blog-facts', __('Blog lot facts', 'soul')],
+		['core/group', 'blog-apply', __('Blog apply CTA', 'soul')],
+		['core/list', 'blog-list', __('Blog dash list', 'soul')],
+		['core/list', 'blog-steps', __('Blog steps grid', 'soul')],
 	];
 
 	foreach ($styles as [$block, $name, $label]) {

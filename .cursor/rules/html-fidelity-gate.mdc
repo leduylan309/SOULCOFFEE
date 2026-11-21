@@ -53,3 +53,4 @@ Status: chờ A approve
 | Our Story `/our-story/` | `html/Our Story.dc.html` | `.s-story-*` |
 | Coffee Solutions `/coffee-solutions/` | `html/Coffee Solutions.dc.html` | `.s-sol-*` |
 | Spaces `/spaces/` | `html/Spaces.dc.html` | `.s-space-*` |
+| Blog `/blog/` | `html/Blog.dc.html` | `.s-blog-*` |

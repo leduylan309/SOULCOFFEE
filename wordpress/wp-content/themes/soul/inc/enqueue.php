@@ -51,9 +51,15 @@ add_action('wp_enqueue_scripts', static function (): void {
 		SOUL_VERSION
 	);
 	wp_enqueue_style(
+		'soul-blog-sections',
+		SOUL_URI . '/assets/css/blog-sections.css',
+		['soul-spaces-sections'],
+		SOUL_VERSION
+	);
+	wp_enqueue_style(
 		'soul-chrome',
 		SOUL_URI . '/assets/css/theme-chrome.css',
-		['soul-spaces-sections'],
+		['soul-blog-sections'],
 		SOUL_VERSION
 	);
 	// Editor styles registered in setup.php (same files) — do not re-register here.

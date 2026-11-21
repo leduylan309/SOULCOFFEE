@@ -3,6 +3,7 @@
  * Title: Home — 07 Newsletter
  * Slug: soul/newsletter-band
  * Categories: soul-cta, soul-connect
+ * Post Types: page
  */
 ?>
 <!-- wp:group {"align":"full","className":"s-home-nl is-style-surface-yellow","anchor":"newsletter","layout":{"type":"default"}} -->

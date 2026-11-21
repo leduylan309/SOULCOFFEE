@@ -1,6 +1,6 @@
 <?php
 /**
- * Category archive — reuse blog card layout.
+ * Category archive — same SoT listing as /blog/.
  *
  * @package Soul
  */

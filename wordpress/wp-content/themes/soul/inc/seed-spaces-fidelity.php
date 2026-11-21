@@ -10,7 +10,7 @@ declare(strict_types=1);
 add_action('init', 'soul_run_seed_spaces_fidelity', 79);
 
 function soul_run_seed_spaces_fidelity(): void {
-	if (get_option('soul_seeded_spaces_fidelity_v1')) {
+	if (get_option('soul_seeded_spaces_fidelity_v4')) {
 		return;
 	}
 
@@ -133,10 +133,6 @@ function soul_run_seed_spaces_fidelity(): void {
 
 	foreach ($spaces as $slug => $row) {
 		$existing = get_page_by_path($slug, OBJECT, 'soul_space');
-		$content  = '';
-		foreach ($row['about'] as $p) {
-			$content .= '<!-- wp:paragraph --><p>' . esc_html($p) . '</p><!-- /wp:paragraph -->' . "\n";
-		}
 
 		$postarr = [
 			'post_type'    => 'soul_space',
@@ -144,7 +140,7 @@ function soul_run_seed_spaces_fidelity(): void {
 			'post_title'   => $row['title'],
 			'post_name'    => $slug,
 			'post_excerpt' => $row['lead'],
-			'post_content' => $content,
+			'post_content' => '',
 			'menu_order'   => (int) $row['order'],
 		];
 
@@ -167,14 +163,38 @@ function soul_run_seed_spaces_fidelity(): void {
 		update_post_meta($id, 'soul_hotline', $row['hotline']);
 		update_post_meta($id, 'soul_map_q', $row['map_q']);
 		update_post_meta($id, 'soul_menu_url', $row['menu_url']);
-		update_post_meta($id, 'soul_gallery', implode("\n", $row['gallery']));
+		delete_post_meta($id, 'soul_gallery');
 
 		$path = SOUL_DIR . '/assets/images/' . $row['image'];
 		if (function_exists('soul_sideload_featured') && is_readable($path)) {
 			soul_sideload_featured($id, $path, $row['title']);
 		}
+
+		// Core Gallery block in content — editor Upload / Media Library (no URL meta).
+		$gallery_items = [];
+		foreach ($row['gallery'] as $gi => $gurl) {
+			$gallery_items[] = [
+				'url' => $gurl,
+				'alt' => $row['title'] . ' · ' . str_pad((string) ($gi + 1), 2, '0', STR_PAD_LEFT),
+			];
+		}
+
+		// Pattern-first content: Gallery = core block (Upload / Media Library).
+		if (function_exists('soul_space_branch_content')) {
+			$branch = soul_space_branch_content($id, $row['about'], $gallery_items);
+			kses_remove_filters();
+			wp_update_post([
+				'ID'           => $id,
+				'post_content' => $branch,
+				'post_excerpt' => $row['lead'],
+			]);
+			kses_init_filters();
+		}
 	}
 
 	flush_rewrite_rules(false);
 	update_option('soul_seeded_spaces_fidelity_v1', 1);
+	update_option('soul_seeded_spaces_fidelity_v2', 1);
+	update_option('soul_seeded_spaces_fidelity_v3', 1);
+	update_option('soul_seeded_spaces_fidelity_v4', 1);
 }
