@@ -7,10 +7,15 @@
  */
 get_header();
 ?>
-<section class="soul-container soul-checkout" data-page="checkout">
+<section class="soul-container soul-checkout soul-page-shell" data-page="checkout">
 	<header class="soul-page__header">
 		<p class="soul-eyebrow"><?php esc_html_e('Đặt hàng', 'soul'); ?></p>
 		<h1><?php esc_html_e('Giỏ hàng & gửi đơn', 'soul'); ?></h1>
+		<ol class="soul-steps" aria-label="<?php esc_attr_e('Tiến trình', 'soul'); ?>">
+			<li class="is-on">01 · <?php esc_html_e('Giỏ', 'soul'); ?></li>
+			<li>02 · <?php esc_html_e('Thông tin', 'soul'); ?></li>
+			<li>03 · <?php esc_html_e('Xác nhận', 'soul'); ?></li>
+		</ol>
 		<p><?php esc_html_e('Không thanh toán online — Soul lưu đơn và liên hệ xác nhận (COD hoặc chuyển khoản).', 'soul'); ?></p>
 	</header>
 

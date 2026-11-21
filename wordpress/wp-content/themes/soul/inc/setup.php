@@ -14,7 +14,18 @@ add_action('after_setup_theme', static function (): void {
 	add_theme_support('post-thumbnails');
 	add_theme_support('html5', ['search-form', 'comment-form', 'comment-list', 'gallery', 'caption', 'style', 'script']);
 	add_theme_support('editor-styles');
-	add_editor_style(['assets/css/soul.css', 'assets/css/theme-chrome.css']);
+	// Same stack as front (cms-ui-fidelity): tokens → DS → sections → chrome → editor bridge.
+	add_editor_style([
+		'assets/css/soul-tokens.css',
+		'assets/css/soul.css',
+		'assets/css/home-sections.css',
+		'assets/css/newcrop-sections.css',
+		'assets/css/story-sections.css',
+		'assets/css/solutions-sections.css',
+		'assets/css/spaces-sections.css',
+		'assets/css/theme-chrome.css',
+		'assets/css/editor-bridge.css',
+	]);
 	add_theme_support('align-wide');
 	add_theme_support('responsive-embeds');
 	add_theme_support('wp-block-styles');
@@ -40,3 +51,20 @@ add_action('phpmailer_init', static function ($phpmailer): void {
 	$phpmailer->Port     = 1025;
 	$phpmailer->SMTPAuth = false;
 });
+
+/** Pretty `/search/` → core search template (`?s=`). */
+add_action('init', static function (): void {
+	add_rewrite_rule('^search/?$', 'index.php?s=', 'top');
+}, 20);
+
+add_action('after_switch_theme', static function (): void {
+	flush_rewrite_rules();
+});
+
+add_action('init', static function (): void {
+	if (get_option('soul_rewrite_flush_v15')) {
+		return;
+	}
+	flush_rewrite_rules(false);
+	update_option('soul_rewrite_flush_v15', 1);
+}, 99);

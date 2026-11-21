@@ -9,17 +9,54 @@ declare(strict_types=1);
 
 add_action('wp_enqueue_scripts', static function (): void {
 	wp_enqueue_style(
+		'soul-tokens',
+		SOUL_URI . '/assets/css/soul-tokens.css',
+		[],
+		SOUL_VERSION
+	);
+	wp_enqueue_style(
 		'soul-main',
 		SOUL_URI . '/assets/css/soul.css',
-		[],
+		['soul-tokens'],
+		SOUL_VERSION
+	);
+	wp_enqueue_style(
+		'soul-home-sections',
+		SOUL_URI . '/assets/css/home-sections.css',
+		['soul-main', 'wp-block-library'],
+		SOUL_VERSION
+	);
+	wp_enqueue_style(
+		'soul-newcrop-sections',
+		SOUL_URI . '/assets/css/newcrop-sections.css',
+		['soul-home-sections'],
+		SOUL_VERSION
+	);
+	wp_enqueue_style(
+		'soul-story-sections',
+		SOUL_URI . '/assets/css/story-sections.css',
+		['soul-newcrop-sections'],
+		SOUL_VERSION
+	);
+	wp_enqueue_style(
+		'soul-solutions-sections',
+		SOUL_URI . '/assets/css/solutions-sections.css',
+		['soul-story-sections'],
+		SOUL_VERSION
+	);
+	wp_enqueue_style(
+		'soul-spaces-sections',
+		SOUL_URI . '/assets/css/spaces-sections.css',
+		['soul-solutions-sections'],
 		SOUL_VERSION
 	);
 	wp_enqueue_style(
 		'soul-chrome',
 		SOUL_URI . '/assets/css/theme-chrome.css',
-		['soul-main'],
+		['soul-spaces-sections'],
 		SOUL_VERSION
 	);
+	// Editor styles registered in setup.php (same files) — do not re-register here.
 
 	wp_enqueue_script(
 		'soul-main',

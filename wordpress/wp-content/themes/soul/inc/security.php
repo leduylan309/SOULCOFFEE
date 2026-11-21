@@ -8,6 +8,44 @@
 declare(strict_types=1);
 
 /**
+ * Allow form controls in post content (Home contact / newsletter patterns).
+ *
+ * @param array<string, array<string, bool>> $tags
+ * @return array<string, array<string, bool>>
+ */
+add_filter('wp_kses_allowed_html', static function (array $tags, string $context): array {
+	if ($context !== 'post') {
+		return $tags;
+	}
+	$input_atts = [
+		'type' => true, 'name' => true, 'id' => true, 'value' => true, 'placeholder' => true,
+		'required' => true, 'autocomplete' => true, 'tabindex' => true, 'class' => true,
+		'aria-hidden' => true, 'aria-label' => true, 'aria-pressed' => true, 'disabled' => true,
+		'checked' => true, 'readonly' => true, 'min' => true, 'max' => true, 'step' => true,
+		'rows' => true, 'cols' => true, 'maxlength' => true, 'pattern' => true, 'inputmode' => true,
+	];
+	$tags['input'] = array_merge($tags['input'] ?? [], $input_atts);
+	$tags['form'] = array_merge($tags['form'] ?? [], [
+		'action' => true, 'method' => true, 'class' => true, 'id' => true, 'novalidate' => true,
+		'data-*' => true,
+	]);
+	$tags['textarea'] = array_merge($tags['textarea'] ?? [], [
+		'name' => true, 'id' => true, 'rows' => true, 'cols' => true, 'class' => true,
+		'required' => true, 'placeholder' => true, 'autocomplete' => true,
+	]);
+	$tags['button'] = array_merge($tags['button'] ?? [], [
+		'type' => true, 'name' => true, 'value' => true, 'class' => true, 'id' => true,
+		'disabled' => true, 'aria-label' => true, 'aria-pressed' => true, 'data-*' => true,
+	]);
+	$tags['label'] = array_merge($tags['label'] ?? [], [
+		'for' => true, 'class' => true,
+	]);
+	$tags['fieldset'] = array_merge($tags['fieldset'] ?? [], ['class' => true, 'style' => true]);
+	$tags['legend'] = array_merge($tags['legend'] ?? [], ['class' => true, 'style' => true]);
+	return $tags;
+}, 10, 2);
+
+/**
  * @return true|\WP_Error
  */
 function soul_rest_guard(\WP_REST_Request $request) {

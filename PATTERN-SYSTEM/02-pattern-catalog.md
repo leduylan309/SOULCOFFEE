@@ -1,31 +1,38 @@
 # Pattern catalog (theme `soul`)
 
 Inserter prefix: `soul/`  
-Path: `wordpress/wp-content/themes/soul/patterns/`
+Path: `wordpress/wp-content/themes/soul/patterns/` (~45 files)  
+Fidelity tracker: [`docs/PAGE-FIDELITY-CHECKLIST.md`](../docs/PAGE-FIDELITY-CHECKLIST.md)
 
-## Pages
+## Page starters
 
-| File | Slug |
+| Slug |
+|---|
+| `page-home` · `page-our-story` · `page-coffee-solutions` · `page-help` · `page-spaces-hub` · `page-new-crop` |
+
+## Home sections (fidelity pass — semantic HTML + `home-sections.css`)
+
+`home-hero` · `home-shop` · `home-featured` · `home-story` · `home-awards` · `home-soulful` · `home-solutions` · `home-visit` · `newsletter-band`
+
+SoT: `html/Home.html`. Patterns = **editable** Group/Columns/Image/Buttons + className `s-home-*`.  
+Custom blocks: `soul/add-to-cart`, `soul/lead-form`. Compose via `page-home` / `soul_home_full_content()`.
+
+## Marketing sections
+
+| Prefix | Count |
 |---|---|
-| `page-home.php` | `page-home` |
-| `page-our-story.php` | `page-our-story` |
-| `page-coffee-solutions.php` | `page-coffee-solutions` |
-| `page-help.php` | `page-help` |
-| `page-spaces-hub.php` | `page-spaces-hub` (note: hub = CPT archive) |
+| `story-*` | 8 + newsletter |
+| `solutions-*` | 5 |
+| `help-*` | 5 |
+| `newcrop-*` | 6 |
+| `spaces-hub-*` | 3 |
+| `not-found` | 1 |
 
-## Sections
+## Legacy
 
-| File | Slug |
-|---|---|
-| `hero-home.php` | `hero-home` |
-| `story-split.php` | `story-split` |
-| `newsletter-band.php` | `newsletter-band` |
+`hero-home` · `story-split` — prefer page-specific patterns above.
 
-## Seeded pages (editable in WP)
-
-Home (full §3.6), Our Story, Coffee Solutions, Help — content from `inc/content-pages.php` via `seed-phase2`.
-
-## CPT surfaces (templates, not patterns)
+## CPT / template surfaces
 
 | URL | Template |
 |---|---|
@@ -34,3 +41,6 @@ Home (full §3.6), Our Story, Coffee Solutions, Help — content from `inc/conte
 | `/spaces/` | `archive-soul_space.php` |
 | `/spaces/{slug}/` | `single-soul_space.php` |
 | `/checkout/` | `templates/checkout.php` |
+| `/search/` | `search.php` (+ rewrite) |
+| `/blog/` | `home.php` |
+| 404 | `404.php` |

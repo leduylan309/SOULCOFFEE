@@ -11,13 +11,7 @@ export default class AddToCart extends Component {
       e.preventDefault();
       if (!this.opts.product) return console.warn('[soul] add-to-cart needs data-product');
       this.el.classList.add(STATE.loading); this.el.disabled = true;
-      try {
-        // Re-read data-product in case PDP JS updated price/variant after mount.
-        let product = this.opts.product;
-        try { product = JSON.parse(this.el.getAttribute('data-product') || '{}'); } catch { /* keep */ }
-        await cart.add({ ...product, qty: this.qty() });
-        if (this.opts.openDrawer) this.emit('cart:open');
-      }
+      try { await cart.add({ ...this.opts.product, qty: this.qty() }); if (this.opts.openDrawer) this.emit('cart:open'); }
       finally { this.el.classList.remove(STATE.loading); this.el.disabled = false; }
     });
   }

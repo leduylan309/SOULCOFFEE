@@ -67,11 +67,11 @@
   --weight-medium: 500;
   --weight-semibold: 600;
   --type-hero: clamp(46px, 6.2vw, 100px);
-  --lh-hero: 0.98;
+  --lh-hero: 1.05;
   --type-display-xl: clamp(44px, 6.2vw, 96px);
   --lh-display-xl: 0.94;
   --type-display-l: clamp(42px, 5.4vw, 84px);
-  --lh-display-l: 0.98;
+  --lh-display-l: 1.05;
   --type-display-m: clamp(40px, 4.8vw, 72px);
   --lh-display-m: 1;
   --type-h2: clamp(34px, 4.2vw, 60px);
@@ -261,9 +261,9 @@ img {
 .t-hero {
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: clamp(46px, 6.2vw, 100px);
-  line-height: 0.98;
-  letter-spacing: -0.03em;
+  font-size: var(--type-hero);
+  line-height: var(--lh-hero);
+  letter-spacing: var(--ls-display);
   text-wrap: balance;
 }
 
@@ -279,9 +279,9 @@ img {
 .t-display-l {
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: clamp(42px, 5.4vw, 84px);
-  line-height: 0.98;
-  letter-spacing: -0.03em;
+  font-size: var(--type-display-l);
+  line-height: var(--lh-display-l);
+  letter-spacing: var(--ls-display);
   text-wrap: balance;
 }
 
@@ -1576,44 +1576,63 @@ img {
 .c-lightbox {
   position: fixed;
   inset: 0;
-  z-index: 110;
+  z-index: var(--z-lightbox, 110);
+  max-width: 100vw;
+  max-height: 100dvh;
+  max-height: 100vh;
+  overflow: hidden;
   background: var(--overlay-lightbox);
   color: #F4EFE5;
   display: flex;
   flex-direction: column;
 }
 .c-lightbox__bar {
+  flex: 0 0 auto;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 64px;
-  padding: 0 clamp(12px, 3vw, 32px);
+  height: 60px;
+  padding: 0 clamp(16px, 3vw, 32px);
   font-family: var(--font-sans);
-  font-size: 10.5px;
+  font-size: 11px;
   letter-spacing: 0.16em;
   font-weight: 400;
   text-transform: uppercase;
 }
 .c-lightbox__stage {
-  flex: 1;
+  flex: 1 1 auto;
   min-height: 0;
+  min-width: 0;
   display: grid;
-  grid-template-columns: 56px 1fr 56px;
+  grid-template-columns: 56px minmax(0, 1fr) 56px;
+  grid-template-rows: minmax(0, 1fr);
   align-items: center;
+  justify-items: center;
   gap: 8px;
   padding: 0 clamp(8px, 2vw, 24px) 24px;
+  overflow: hidden;
 }
 .c-lightbox__stage img {
-  width: 100%;
-  height: 100%;
+  display: block;
+  width: auto;
+  height: auto;
+  max-width: 100%;
+  max-height: min(100%, calc(100dvh - 110px));
+  max-height: min(100%, calc(100vh - 110px));
+  margin: 0 auto;
   object-fit: contain;
+  object-position: center;
 }
 .c-lightbox__caption {
+  flex: 0 0 auto;
   padding: 0 16px 22px;
   text-align: center;
   font-size: 13px;
   letter-spacing: 0.04em;
   color: rgba(244, 239, 229, 0.85);
+}
+.c-lightbox__caption[hidden] {
+  display: none !important;
 }
 
 .c-toast {

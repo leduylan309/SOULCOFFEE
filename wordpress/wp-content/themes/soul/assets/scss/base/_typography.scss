@@ -1,0 +1,10 @@
+@use 'sass:map';
+@use '../abstracts' as *;
+
+// Utility type classes — t-{key}
+@each $k, $t in $type-display { .t-#{$k} { @include display($k); } }
+@each $k, $t in $type-text    { .t-#{$k} { @include text($k); } }
+@each $k, $t in $type-label   { .t-#{$k} { @include label($k); } }
+
+.t-notes { font-family: var(--font-display); font-style: italic; font-size: 15.5px; line-height: 1.45; color: var(--text-secondary); }
+.t-measure { max-width: var(--measure-body); text-wrap: pretty; }

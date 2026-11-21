@@ -67,11 +67,12 @@
   --weight-medium: 500;
   --weight-semibold: 600;
   --type-hero: clamp(46px, 6.2vw, 100px);
-  --lh-hero: 0.98;
+  /* 1.05: Newsreader + VI diacritics — .98 clips when titles wrap */
+  --lh-hero: 1.05;
   --type-display-xl: clamp(44px, 6.2vw, 96px);
   --lh-display-xl: 0.94;
   --type-display-l: clamp(42px, 5.4vw, 84px);
-  --lh-display-l: 0.98;
+  --lh-display-l: 1.05;
   --type-display-m: clamp(40px, 4.8vw, 72px);
   --lh-display-m: 1;
   --type-h2: clamp(34px, 4.2vw, 60px);

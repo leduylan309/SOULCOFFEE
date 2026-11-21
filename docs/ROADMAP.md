@@ -92,6 +92,27 @@ Nguồn yêu cầu: [`BRD.md`](BRD.md).
 
 ---
 
+## Phase 5 — Page fidelity _(đang mở)_
+
+Nguồn: [`PAGE-FIDELITY-CHECKLIST.md`](PAGE-FIDELITY-CHECKLIST.md) · Design System `html/Soul Design System.dc.html` §12.
+
+**Cách làm:** danh sách trang → section → unsynced pattern → ráp trang khớp HTML.
+
+**Waves**
+
+- [x] Wave 0 — Checklist + catalog docs
+- [x] Wave 1 — DS CSS sync · chrome · Home 9 sections
+- [x] Wave 2 — Our Story · Solutions · Spaces · New Crop · Help
+- [x] Wave 3 — Shop · PDP · Checkout
+- [x] Wave 4 — Blog · Search · 404
+- [x] Account — checklist only (không build; F-61)
+
+**Exit:** Mọi URL sitemap (trừ Account) có section counterpart — đạt baseline. Pixel polish / F-72 còn open trong checklist.
+
+**Note (2026-11):** Home 100% fidelity pass — DS sync + `home-sections.css` + 9 independent `home-*` patterns khớp `Home.html`; seed `soul_seeded_home_fidelity_v2`.
+
+---
+
 ## Backlog có chủ đích trì hoãn
 
 | Item | Lý do |

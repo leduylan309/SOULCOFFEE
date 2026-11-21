@@ -1,0 +1,55 @@
+---
+description: Duyệt fidelity từng section vs html SoT @1920 — checklist, một gate/một vòng, không pass hàng loạt
+alwaysApply: true
+---
+
+# HTML fidelity gate (bắt buộc)
+
+SoT visual = `html/*.html` / `html/*.dc.html`. Viewport chuẩn **1920×1080** trước; responsive sau khi section pass 1920. CMS rule (`cms-ui-fidelity`) giữ nguyên.
+
+## Workflow (một section / một vòng)
+
+```
+Chọn section → Checklist vs SoT → Fix pattern/CSS → Đo @1920 → A approve → section kế
+```
+
+Cấm sửa 4–5 section rồi báo xong. Mỗi section phải tick checklist + re-measure.
+
+## Checklist (mọi section)
+
+1. **Cấu trúc DOM** — thứ tự khối; số cột/card; cùng hàng vs xếp dọc.
+2. **Spacing @1920** — section pad (`clamp` → max); gap; margin intentional; pad trong card.
+3. **Typography** — Newsreader vs Be Vietnam Pro; size/lh/tracking/weight/transform.
+4. **Color & surface** — bg/text/border/opacity đúng token.
+5. **Media** — aspect-ratio, object-fit/position; full-bleed vs inset; WP image không phá.
+6. **Interaction** — hover CTA/chip/tile; selected state; underline offset.
+7. **WP interference** — kill `is-layout-flex` / default heading-p margin trong scope section; `align-items` đúng SoT (`stretch` ≠ `end` khi cột phải cao bằng nhau).
+8. **DoD** — computed ≤1px tol + screenshot; **A gõ approve** mới sang section kế.
+
+## Báo cáo mỗi gate
+
+```
+Section: <n> <name> @1920
+Checklist: structure / spacing / type / color / media / interaction / WP
+Fails: (actual vs SoT)
+Fixes: (file + thay đổi)
+Re-measure: pass/fail
+Status: chờ A approve
+```
+
+## Bài học bắt buộc (Home)
+
+- Rule CSS chung cho nhiều section dễ gán sai `align-items` / `gap` / `minmax` — **override riêng** từng mosaic/grid SoT.
+- WP `img:first-child` trong mỗi cột = mọi ảnh; chọn theo `.shot--tall` / column `:first-child`.
+- Figure + `<a>` bọc ảnh: `position:absolute; inset:0` trên link/img trong khung `aspect-ratio`.
+- Form: honeypot không chiếm grid; submit/input/chip `!important` khi theme đè.
+
+## Pages / class prefix
+
+| Page | SoT | Prefix |
+|------|-----|--------|
+| Home `/` | `html/Home.html` | `.s-home-*` |
+| New Crop `/new-crop/` | `html/New Crop.dc.html` (+ visual `html/Soul - Mua vu moi.html`) | `.s-newcrop-*` |
+| Our Story `/our-story/` | `html/Our Story.dc.html` | `.s-story-*` |
+| Coffee Solutions `/coffee-solutions/` | `html/Coffee Solutions.dc.html` | `.s-sol-*` |
+| Spaces `/spaces/` | `html/Spaces.dc.html` | `.s-space-*` |

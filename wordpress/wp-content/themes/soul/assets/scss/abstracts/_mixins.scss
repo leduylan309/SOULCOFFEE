@@ -1,0 +1,56 @@
+@use 'sass:map';
+@use 'sass:list';
+@use 'variables' as v;
+
+// ---- Responsive ----
+@mixin up($bp)   { @media (min-width: map.get(v.$breakpoints, $bp)) { @content; } }
+@mixin down($bp) { @media (max-width: map.get(v.$breakpoints, $bp) - 0.02px) { @content; } }
+
+// ---- Type ----
+@mixin display($key) {
+  $t: map.get(v.$type-display, $key);
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: list.nth($t, 1);
+  line-height: list.nth($t, 2);
+  @if list.nth($t, 3) != 0 { letter-spacing: list.nth($t, 3); }
+  text-wrap: balance;
+}
+
+@mixin text($key) {
+  $t: map.get(v.$type-text, $key);
+  font-family: var(--font-sans);
+  font-size: list.nth($t, 1);
+  line-height: list.nth($t, 2);
+}
+
+@mixin label($key) {
+  $t: map.get(v.$type-label, $key);
+  font-family: var(--font-sans);
+  font-size: list.nth($t, 1);
+  letter-spacing: list.nth($t, 2);
+  font-weight: list.nth($t, 3);
+  text-transform: uppercase;
+}
+
+// ---- Layout ----
+/// Intrinsic two-up grid used by every section header / text+media split.
+@mixin auto-grid($min: 380px, $gap: var(--block-gap)) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, #{$min}), 1fr));
+  gap: $gap;
+}
+
+@mixin section($bg: transparent, $y: var(--section-y)) {
+  background: $bg;
+  padding: $y var(--gutter);
+}
+
+@mixin cover-img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+@mixin ratio($key) { aspect-ratio: #{map.get(v.$ratios, $key)}; overflow: hidden; }
+
+@mixin visually-hidden { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0 0 0 0); white-space: nowrap; }
+
+// ---- States (instant swaps, no transitions) ----
+@mixin hover { &:hover, &:focus-visible { @content; } }

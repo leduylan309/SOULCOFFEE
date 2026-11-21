@@ -19,7 +19,7 @@ while (have_posts()) :
 		'type'  => $meta['badge'],
 	];
 	?>
-	<article <?php post_class('soul-container soul-pdp'); ?>>
+	<article <?php post_class('soul-container soul-pdp soul-page-shell'); ?> data-section="pdp-detail<?php echo $meta['quote_only'] ? '-quote' : ''; ?>">
 		<div class="soul-pdp__grid">
 			<div class="soul-pdp__gallery">
 				<?php if (has_post_thumbnail()) : ?>
@@ -84,7 +84,7 @@ while (have_posts()) :
 					<p class="soul-soldout"><?php esc_html_e('Hết hàng', 'soul'); ?></p>
 				<?php endif; ?>
 
-				<div class="entry-content soul-content"><?php the_content(); ?></div>
+				<div class="entry-content soul-content" data-section="pdp-story"><?php the_content(); ?></div>
 			</div>
 		</div>
 
@@ -103,7 +103,7 @@ while (have_posts()) :
 		]);
 		if ($related->have_posts()) :
 			?>
-			<section class="soul-related">
+			<section class="soul-related" data-section="pdp-related">
 				<h2><?php esc_html_e('Sản phẩm liên quan', 'soul'); ?></h2>
 				<div class="soul-product-grid">
 					<?php

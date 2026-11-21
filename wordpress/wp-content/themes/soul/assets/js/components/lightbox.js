@@ -21,7 +21,9 @@ function getViewer() {
 export default class Lightbox extends Component {
   static defaults = { label: '' };
   init() {
+    // Prefer explicit items; else editable core Image blocks inside the gallery group.
     this.items = this.$$('[data-lightbox-item]');
+    if (!this.items.length) this.items = this.$$('.wp-block-image, figure');
     this.items.forEach((it, i) => this.on(it, 'click', (e) => { e.preventDefault(); this.open(i); }));
   }
   open(i) {

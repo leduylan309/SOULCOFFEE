@@ -7,14 +7,8 @@
  * Post Types: page
  */
 ?>
-<!-- wp:group {"align":"full","className":"is-style-surface-ink","layout":{"type":"constrained"}} -->
-<div class="wp-block-group alignfull is-style-surface-ink"><!-- wp:paragraph {"className":"soul-eyebrow"} -->
-<p class="soul-eyebrow">New crop</p>
-<!-- /wp:paragraph -->
-<!-- wp:heading {"level":1} -->
-<h1 class="wp-block-heading">Mùa vụ mới · Soulful</h1>
-<!-- /wp:heading -->
-<!-- wp:paragraph -->
-<p>Cay · Nồng · Thơm · Ngọt — chỉnh copy/ảnh trong editor.</p>
-<!-- /wp:paragraph --></div>
-<!-- /wp:group -->
+<!-- wp:pattern {"slug":"soul/newcrop-opening-split"} /-->
+<!-- wp:pattern {"slug":"soul/newcrop-season-story"} /-->
+<!-- wp:pattern {"slug":"soul/newcrop-message"} /-->
+<!-- wp:pattern {"slug":"soul/newcrop-collection"} /-->
+<!-- wp:pattern {"slug":"soul/newcrop-closing"} /-->

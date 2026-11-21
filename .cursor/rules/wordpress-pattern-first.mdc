@@ -8,7 +8,10 @@ alwaysApply: false
 
 Follow the personal skill **wordpress-pattern-first** (`~/.cursor/skills/wordpress-pattern-first/SKILL.md`) for all WordPress theme / Gutenberg / pattern work.
 
-- Prefer unsynced patterns + core blocks + block styles.
-- Custom blocks only for hero video/overlay, tabs, forms, CPT queries, or hard templateLock.
-- No `page-*.php` HTML clones; no one custom block per SCSS file; no marketing copy in `wp:html`.
+**Also obey always-on rule `cms-ui-fidelity`:** editor canvas = front UI 100%.
+
+- Prefer unsynced patterns + core blocks + block styles (Admin edits text/images/buttons/links).
+- Custom blocks only: forms (`soul/lead-form`), ATC (`soul/add-to-cart`), hero video/overlay, tabs, CPT queries, hard templateLock.
+- No `page-*.php` HTML clones; no one custom block per SCSS file; **no marketing `wp:html`**.
+- Fidelity via className `s-home-*` / surface styles on Group/Columns + shared CSS (CMS = UI).
 - Update `PATTERN-SYSTEM/` catalogs when adding patterns or blocks in this repo.

@@ -1,0 +1,595 @@
+/* Coffee Solutions — fidelity vs html/Coffee Solutions.dc.html @1920. Prefix: .s-sol-* */
+
+body [class*="s-sol-"] h1.wp-block-heading,
+body [class*="s-sol-"] h2.wp-block-heading,
+body [class*="s-sol-"] h3.wp-block-heading,
+body [class*="s-sol-"] p {
+  margin-block-start: 0;
+}
+body [class*="s-sol-"] .wp-block-image {
+  margin-bottom: 0;
+}
+
+.s-sol-eye {
+  margin: 0 !important;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--soul-clay, #8e4b33);
+}
+.s-sol-eye--bar {
+  display: flex !important;
+  align-items: center;
+  gap: 14px;
+}
+.s-sol-eye--bar::before {
+  content: "";
+  display: inline-block;
+  width: 28px;
+  height: 2px;
+  background: currentColor;
+  flex: 0 0 auto;
+}
+.s-sol-eye--yellow {
+  color: var(--soul-yellow, #ffd35b);
+}
+.s-sol-arrow {
+  flex: 0 0 auto;
+  font-family: var(--font-ui, "Be Vietnam Pro", sans-serif);
+  font-size: 12px;
+  font-weight: 400;
+  letter-spacing: 0;
+  text-transform: none;
+  line-height: 1;
+}
+.s-sol-h2 {
+  margin: 12px 0 0 !important;
+  font-family: var(--font-display, Newsreader, Georgia, serif);
+  font-weight: 400;
+  font-size: clamp(34px, 4.2vw, 60px);
+  line-height: 1.02;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+.s-sol-p {
+  margin: 0 !important;
+  max-width: 54ch;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--soul-muted, #514b42);
+  text-wrap: pretty;
+}
+body .wp-block-columns.s-sol-head.is-layout-flex,
+body .s-sol-head {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
+  gap: 20px clamp(28px, 4vw, 64px) !important;
+  align-items: end !important;
+  margin: 0 !important;
+}
+/* Capacity head → stats: SoT/DS clamp(32px,4vw,56px) — must beat .s-sol-head { margin:0 } */
+body .s-sol-cap .wp-block-columns.s-sol-head.is-layout-flex,
+body .s-sol-cap .s-sol-head {
+  margin: 0 0 clamp(32px, 4vw, 56px) !important;
+}
+
+/* ---------- 01 Hero ---------- */
+body .wp-block-columns.s-sol-hero.is-layout-flex,
+body .s-sol-hero {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 440px), 1fr));
+  gap: 0 !important;
+  align-items: stretch !important;
+  min-height: min(82vh, 780px);
+  margin: 0 !important;
+  border-bottom: 1px solid rgba(39, 41, 45, 0.14);
+  background: var(--soul-paper, #f4efe5);
+}
+body .s-sol-hero > .wp-block-column {
+  margin: 0 !important;
+  width: auto !important;
+  max-width: none !important;
+}
+body .s-sol-hero__copy {
+  display: flex !important;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: clamp(36px, 5vw, 72px) clamp(16px, 4vw, 64px) clamp(32px, 4vw, 56px);
+}
+.s-sol-hero__crumb {
+  margin: 0 !important;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--soul-ink, #27292d);
+}
+.s-sol-hero__crumb a {
+  color: var(--soul-stone-500, #7c7365);
+  text-decoration: none;
+}
+.s-sol-hero__crumb a:hover {
+  color: var(--soul-clay, #8e4b33);
+}
+body .s-sol-hero__body {
+  padding: clamp(32px, 6vh, 64px) 0;
+}
+.s-sol-hero__title {
+  margin: 20px 0 0 !important;
+  max-width: 12ch;
+  font-family: var(--font-display, Newsreader, Georgia, serif);
+  font-weight: 400;
+  font-size: var(--type-hero, clamp(46px, 6.2vw, 100px));
+  line-height: var(--lh-hero, 1.05);
+  letter-spacing: var(--ls-display, -0.03em);
+  text-wrap: balance;
+}
+.s-sol-hero__lead {
+  margin: 28px 0 0 !important;
+  max-width: 50ch;
+  font-size: clamp(15px, 1.15vw, 17px);
+  line-height: 1.7;
+  color: var(--soul-muted, #514b42);
+  text-wrap: pretty;
+}
+body .s-sol-hero__ctas {
+  display: flex !important;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 36px 0 0 !important;
+}
+body .s-sol-hero__ctas .wp-block-button {
+  margin: 0 !important;
+}
+body .s-sol-hero__ctas .wp-block-button__link {
+  display: inline-flex !important;
+  align-items: center;
+  gap: 10px;
+  height: 50px;
+  padding: 0 26px !important;
+  border-radius: 0 !important;
+  font-size: 12.5px !important;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 500 !important;
+  text-decoration: none !important;
+  box-shadow: none !important;
+}
+body .s-sol-hero__cta--ink .wp-block-button__link {
+  background: var(--soul-ink, #27292d) !important;
+  color: var(--soul-paper, #f4efe5) !important;
+}
+body .s-sol-hero__cta--ink .wp-block-button__link:hover {
+  background: var(--soul-yellow, #ffd35b) !important;
+  color: var(--soul-ink, #27292d) !important;
+}
+body .s-sol-hero__cta--ghost .wp-block-button__link {
+  background: transparent !important;
+  color: var(--soul-ink, #27292d) !important;
+  border: 1px solid var(--soul-ink, #27292d) !important;
+}
+body .s-sol-hero__cta--ghost .wp-block-button__link:hover {
+  background: var(--soul-ink, #27292d) !important;
+  color: var(--soul-paper, #f4efe5) !important;
+}
+body .wp-block-columns.s-sol-hero__strip.is-layout-flex,
+body .s-sol-hero__strip {
+  display: flex !important;
+  flex-wrap: wrap !important;
+  gap: 0 !important;
+  margin: 0 !important;
+  border-top: 1px solid rgba(39, 41, 45, 0.16);
+  width: 100%;
+}
+body .s-sol-hero__strip > .wp-block-column {
+  flex: 1 1 110px !important;
+  width: auto !important;
+  margin: 0 !important;
+}
+body .s-sol-hero__strip p {
+  margin: 0 !important;
+  width: 100%;
+}
+body .s-sol-hero__strip a {
+  display: flex !important;
+  gap: 8px;
+  align-items: baseline;
+  width: 100%;
+  padding: 16px 14px 0 0;
+  font-size: 11.5px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: inherit;
+  text-decoration: none;
+}
+body .s-sol-hero__strip a:hover {
+  color: var(--soul-clay, #8e4b33);
+}
+.s-sol-hero__strip .s-sol-n {
+  color: var(--soul-clay, #8e4b33);
+  font-size: 10.5px;
+  letter-spacing: 0.12em;
+}
+body .s-sol-hero__media,
+body .s-sol-hero .wp-block-image.s-sol-hero__media {
+  position: relative;
+  margin: 0 !important;
+  min-height: 420px;
+  height: 100%;
+  background: var(--soul-ink, #27292d);
+}
+body .s-sol-hero__media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ---------- 02 Capacity ---------- */
+body .s-sol-cap.wp-block-group,
+body .s-sol-cap {
+  background: var(--soul-ink, #27292d) !important;
+  color: var(--soul-paper, #f4efe5);
+  padding: clamp(56px, 7vw, 110px) clamp(16px, 4vw, 64px) !important;
+  margin: 0 !important;
+}
+body .s-sol-cap .s-sol-eye {
+  color: var(--soul-yellow, #ffd35b);
+}
+body .s-sol-cap .s-sol-h2 {
+  color: var(--soul-paper, #f4efe5);
+}
+body .s-sol-cap .s-sol-p {
+  color: rgba(244, 239, 229, 0.8);
+}
+body .wp-block-columns.s-sol-cap__stats.is-layout-flex,
+body .s-sol-cap__stats {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 230px), 1fr));
+  gap: 0 clamp(24px, 3vw, 48px) !important;
+  margin: 0 !important;
+}
+body .s-sol-cap__stats > .wp-block-column {
+  min-width: 0 !important;
+}
+body .s-sol-cap__stat {
+  padding: 22px 0 8px;
+  margin: 0 !important;
+  border-top: 1px solid rgba(244, 239, 229, 0.3);
+  display: flex !important;
+  flex-direction: column;
+  gap: 10px;
+  min-width: 0;
+}
+body .s-sol-cap__stat-top {
+  display: flex !important;
+  align-items: baseline;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin: 0 !important;
+  min-width: 0;
+}
+/* Cap SoT 76px — enough to avoid "1.800–2.000" / "10%" collision, keep readable size */
+.s-sol-cap__num {
+  margin: 0 !important;
+  font-family: var(--font-display, Newsreader, Georgia, serif);
+  font-size: clamp(32px, 2.4vw + 0.55rem, 52px);
+  line-height: 0.9;
+  letter-spacing: -0.035em;
+  color: var(--soul-yellow, #ffd35b);
+  white-space: nowrap;
+  max-width: 100%;
+}
+.s-sol-cap__unit {
+  margin: 0 !important;
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--soul-yellow, #ffd35b);
+}
+.s-sol-cap__label {
+  margin: 0 !important;
+  font-size: 13.5px;
+  line-height: 1.5;
+  color: rgba(244, 239, 229, 0.8);
+}
+
+/* ---------- 03 Services ---------- */
+body .s-sol-sv.wp-block-group,
+body .s-sol-sv {
+  padding: clamp(56px, 7vw, 110px) clamp(16px, 4vw, 64px) !important;
+  margin: 0 !important;
+  background: var(--soul-paper, #f4efe5);
+}
+body .s-sol-sv .wp-block-columns.s-sol-head.is-layout-flex,
+body .s-sol-sv .s-sol-head {
+  padding-bottom: 22px;
+  border-bottom: 1px solid var(--soul-ink, #27292d);
+  margin: 0 0 10px !important;
+}
+body .s-sol-sv .s-sol-h2 {
+  font-size: clamp(42px, 5.4vw, 84px);
+  line-height: 0.98;
+  letter-spacing: -0.03em;
+}
+body .s-sol-sv__stack {
+  display: flex !important;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0 !important;
+}
+body .wp-block-columns.s-sol-sv__card.is-layout-flex,
+body .s-sol-sv__card {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 420px), 1fr));
+  gap: 10px !important;
+  margin: 0 !important;
+  align-items: stretch !important;
+  background: var(--soul-sand, #eae3d5);
+}
+body .s-sol-sv__card--paper {
+  background: var(--soul-paper, #f4efe5);
+}
+body .s-sol-sv__card > .wp-block-column {
+  margin: 0 !important;
+  width: auto !important;
+  max-width: none !important;
+}
+body .s-sol-sv__card--flip > .wp-block-column:first-child {
+  order: 2;
+}
+body .s-sol-sv__media,
+body .s-sol-sv .wp-block-image.s-sol-sv__media {
+  position: relative;
+  margin: 0 !important;
+  min-height: 360px;
+  height: 100%;
+  overflow: hidden;
+  background: var(--soul-sand-deep, #e2dacb);
+}
+body .s-sol-sv__media img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+body .s-sol-sv__copy {
+  padding: clamp(24px, 3.4vw, 52px) !important;
+  display: flex !important;
+  flex-direction: column;
+  gap: 18px;
+  margin: 0 !important;
+  height: 100%;
+  box-sizing: border-box;
+}
+body .s-sol-sv__meta {
+  display: flex !important;
+  justify-content: space-between;
+  gap: 12px;
+  margin: 0 !important;
+  font-size: 10.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--soul-clay, #8e4b33);
+}
+.s-sol-sv__meta .s-sol-muted {
+  color: var(--soul-stone-500, #7c7365);
+  margin: 0 !important;
+}
+.s-sol-sv__title {
+  margin: 0 !important;
+  font-family: var(--font-display, Newsreader, Georgia, serif);
+  font-weight: 400;
+  font-size: clamp(30px, 3vw, 42px);
+  line-height: 1;
+  letter-spacing: -0.02em;
+}
+.s-sol-sv__body {
+  margin: 0 !important;
+  max-width: 56ch;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--soul-muted, #514b42);
+  text-wrap: pretty;
+}
+body .s-sol-sv__specs {
+  margin: 4px 0 0 !important;
+  border-top: 1px solid rgba(39, 41, 45, 0.2);
+}
+body .s-sol-sv__spec {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  gap: 16px;
+  padding: 11px 0;
+  margin: 0 !important;
+  border-bottom: 1px solid rgba(39, 41, 45, 0.14);
+}
+.s-sol-sv__spec-k {
+  margin: 0 !important;
+  font-size: 13px;
+  color: var(--soul-muted, #514b42);
+}
+.s-sol-sv__spec-v {
+  margin: 0 !important;
+  font-family: var(--font-display, Newsreader, Georgia, serif);
+  font-size: 19px;
+  line-height: 1.25;
+}
+body .s-sol-sv__links {
+  display: flex !important;
+  flex-wrap: wrap;
+  gap: 18px;
+  margin-top: auto !important;
+  padding-top: 6px;
+}
+body .s-sol-sv__links a {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  font-weight: 500;
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 6px;
+  text-decoration-color: rgba(39, 41, 45, 0.3);
+}
+body .s-sol-sv__links a:hover {
+  text-decoration-color: var(--soul-ink, #27292d);
+}
+body .s-sol-sv__links a.s-sol-sv__shop {
+  color: var(--soul-clay, #8e4b33);
+  text-decoration: none;
+}
+body .s-sol-sv__links a.s-sol-sv__shop:hover {
+  color: var(--soul-ink, #27292d);
+}
+
+/* ---------- 04 Partners ---------- */
+body .s-sol-pt.wp-block-group,
+body .s-sol-pt {
+  background: var(--soul-sand, #eae3d5) !important;
+  padding: clamp(56px, 7vw, 110px) clamp(16px, 4vw, 64px) !important;
+  margin: 0 !important;
+}
+body .s-sol-pt__head {
+  display: flex !important;
+  justify-content: space-between;
+  align-items: end;
+  gap: 20px;
+  flex-wrap: wrap;
+  margin: 0 0 clamp(28px, 3.4vw, 48px) !important;
+}
+.s-sol-pt__count {
+  margin: 0 !important;
+  font-size: 11px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--soul-stone-500, #7c7365);
+}
+body .wp-block-columns.s-sol-pt__grid.is-layout-flex,
+body .s-sol-pt__grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fill, minmax(min(46%, 150px), 1fr));
+  gap: 10px !important;
+  margin: 0 !important;
+}
+body .s-sol-pt__grid > .wp-block-column {
+  margin: 0 !important;
+  width: auto !important;
+  max-width: none !important;
+}
+body .s-sol-pt__logo,
+body .s-sol-pt .wp-block-image.s-sol-pt__logo {
+  aspect-ratio: 3 / 2;
+  margin: 0 !important;
+  background: var(--soul-paper, #f4efe5);
+  display: grid !important;
+  place-items: center;
+  padding: 18px;
+  box-sizing: border-box;
+}
+body .s-sol-pt__logo img {
+  max-width: 100%;
+  max-height: 64px;
+  width: auto;
+  height: auto;
+  object-fit: contain;
+  mix-blend-mode: multiply;
+  display: block;
+}
+
+/* ---------- 05 Contact ---------- */
+body .s-sol-ct.wp-block-group,
+body .s-sol-ct {
+  padding: clamp(56px, 7vw, 110px) clamp(16px, 4vw, 64px) !important;
+  margin: 0 !important;
+  background: var(--soul-paper, #f4efe5);
+}
+body .wp-block-columns.s-sol-ct__grid.is-layout-flex,
+body .s-sol-ct__grid {
+  display: grid !important;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 380px), 1fr));
+  gap: clamp(28px, 4vw, 64px) !important;
+  align-items: start !important;
+  margin: 0 !important;
+}
+body .s-sol-ct__copy {
+  display: flex !important;
+  flex-direction: column;
+  gap: 22px;
+  margin: 0 !important;
+}
+.s-sol-ct__title {
+  margin: 0 !important;
+  font-family: var(--font-display, Newsreader, Georgia, serif);
+  font-weight: 400;
+  font-size: clamp(40px, 4.8vw, 72px);
+  line-height: 1;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+.s-sol-ct__body {
+  margin: 0 !important;
+  max-width: 48ch;
+  font-size: 15px;
+  line-height: 1.7;
+  color: var(--soul-muted, #514b42);
+}
+body .s-sol-ct__contacts {
+  margin: 8px 0 0 !important;
+  border-top: 1px solid var(--soul-ink, #27292d);
+  padding: 0;
+}
+body .s-sol-ct__row {
+  margin: 0 !important;
+}
+body .s-sol-ct__row a {
+  display: grid !important;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: baseline;
+  padding: 14px 0;
+  border-bottom: 1px solid rgba(39, 41, 45, 0.18);
+  color: inherit;
+  text-decoration: none;
+}
+body .s-sol-ct__row a:hover {
+  color: var(--soul-clay, #8e4b33);
+}
+.s-sol-ct__k {
+  display: block;
+  margin: 0 !important;
+  font-size: 10.5px;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--soul-stone-500, #7c7365);
+}
+.s-sol-ct__v {
+  display: block;
+  margin: 0 !important;
+  font-family: var(--font-display, Newsreader, Georgia, serif);
+  font-size: 22px;
+  line-height: 1.2;
+}
+body .s-sol-ct__form-wrap {
+  background: var(--soul-sand, #eae3d5) !important;
+  padding: clamp(22px, 3vw, 40px) !important;
+  margin: 0 !important;
+}
+/* Reuse home form chrome inside solutions contact */
+body .s-sol-ct .s-home-form,
+body .s-sol-ct .wp-block-soul-lead-form.s-home-form {
+  background: transparent !important;
+  padding: 0 !important;
+  margin: 0 !important;
+}
+body .s-sol-ct .s-home-form > h3 {
+  margin: 0 0 22px !important;
+  font-family: var(--font-display, Newsreader, Georgia, serif);
+  font-weight: 400;
+  font-size: clamp(26px, 2.4vw, 34px);
+  line-height: 1.1;
+}

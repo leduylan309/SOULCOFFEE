@@ -1,57 +1,68 @@
 <?php
 /**
- * Footer + overlays.
+ * Footer + overlays — DS SiteFooter / drawers / search.
  *
  * @package Soul
  */
 $shop = get_post_type_archive_link('soul_product') ?: home_url('/products/');
 $checkout = get_permalink((int) get_option('soul_checkout_page_id')) ?: home_url('/checkout/');
+$soulful = get_term_by('slug', 'soulful-flavours', 'soul_collection');
+$soulful_url = ($soulful && ! is_wp_error(get_term_link($soulful))) ? get_term_link($soulful) : $shop;
+$spaces = get_post_type_archive_link('soul_space') ?: home_url('/spaces/');
+$blog = get_permalink((int) get_option('page_for_posts')) ?: home_url('/blog/');
 ?>
 </main>
-<footer class="soul-footer">
-	<div class="soul-footer__grid">
+<footer class="l-footer soul-footer">
+	<div class="l-footer__cols soul-footer__grid">
 		<div>
-			<p class="soul-footer__label"><?php esc_html_e('Shop', 'soul'); ?></p>
-			<ul>
+			<img class="l-footer__logo" src="<?php echo esc_url(soul_logo_uri('soul-logo-full-yellow.svg')); ?>" alt="SOUL" width="120" height="auto">
+		</div>
+		<div>
+			<p class="l-footer__head soul-footer__label"><?php esc_html_e('Shop', 'soul'); ?></p>
+			<ul class="l-footer__links">
 				<li><a href="<?php echo esc_url($shop); ?>"><?php esc_html_e('Tất cả sản phẩm', 'soul'); ?></a></li>
-				<li><a href="<?php
-					$soulful = get_term_by('slug', 'soulful-flavours', 'soul_collection');
-					echo esc_url($soulful ? get_term_link($soulful) : $shop);
-				?>"><?php esc_html_e('Soulful Collection', 'soul'); ?></a></li>
+				<li><a href="<?php echo esc_url($soulful_url); ?>"><?php esc_html_e('Soulful Collection', 'soul'); ?></a></li>
+				<li><a href="<?php echo esc_url(home_url('/new-crop/')); ?>"><?php esc_html_e('Mùa vụ mới', 'soul'); ?></a></li>
 			</ul>
 		</div>
 		<div>
-			<p class="soul-footer__label"><?php esc_html_e('Khám phá', 'soul'); ?></p>
-			<ul>
+			<p class="l-footer__head soul-footer__label"><?php esc_html_e('Khám phá', 'soul'); ?></p>
+			<ul class="l-footer__links">
 				<li><a href="<?php echo esc_url(home_url('/our-story/')); ?>"><?php esc_html_e('Câu chuyện của Soul', 'soul'); ?></a></li>
-				<li><a href="<?php echo esc_url(get_post_type_archive_link('soul_space') ?: home_url('/spaces/')); ?>"><?php esc_html_e('Cửa hàng', 'soul'); ?></a></li>
-				<li><a href="<?php echo esc_url(get_permalink((int) get_option('page_for_posts')) ?: home_url('/blog/')); ?>"><?php esc_html_e('Blog', 'soul'); ?></a></li>
+				<li><a href="<?php echo esc_url($spaces); ?>"><?php esc_html_e('Cửa hàng', 'soul'); ?></a></li>
+				<li><a href="<?php echo esc_url($blog); ?>"><?php esc_html_e('Blog', 'soul'); ?></a></li>
 				<li><a href="<?php echo esc_url(home_url('/order-lookup/')); ?>"><?php echo esc_html(soul_t(['vi' => 'Tra cứu đơn', 'en' => 'Order lookup'])); ?></a></li>
 			</ul>
 		</div>
 		<div>
-			<p class="soul-footer__label"><?php esc_html_e('Đối tác', 'soul'); ?></p>
-			<ul>
+			<p class="l-footer__head soul-footer__label"><?php esc_html_e('Đối tác', 'soul'); ?></p>
+			<ul class="l-footer__links">
 				<li><a href="<?php echo esc_url(home_url('/coffee-solutions/')); ?>"><?php esc_html_e('Giải pháp cà phê', 'soul'); ?></a></li>
+				<li><a href="<?php echo esc_url(home_url('/coffee-solutions/#contact')); ?>"><?php esc_html_e('Mua sỉ / liên hệ', 'soul'); ?></a></li>
 			</ul>
 		</div>
 		<div>
-			<p class="soul-footer__label"><?php esc_html_e('Hỗ trợ', 'soul'); ?></p>
-			<ul>
+			<p class="l-footer__head soul-footer__label"><?php esc_html_e('Hỗ trợ', 'soul'); ?></p>
+			<ul class="l-footer__links">
 				<li><a href="<?php echo esc_url(home_url('/help/')); ?>"><?php esc_html_e('Câu hỏi thường gặp', 'soul'); ?></a></li>
+				<li><a href="<?php echo esc_url(home_url('/help/#shipping')); ?>"><?php esc_html_e('Giao hàng', 'soul'); ?></a></li>
+				<li><a href="<?php echo esc_url(home_url('/help/#returns')); ?>"><?php esc_html_e('Đổi trả', 'soul'); ?></a></li>
 				<li><a href="<?php echo esc_url($checkout); ?>"><?php esc_html_e('Giỏ hàng / Đặt hàng', 'soul'); ?></a></li>
 			</ul>
 		</div>
 	</div>
-	<p class="soul-footer__tag"><?php esc_html_e('Crafted by Vietnamese Soul. Buôn Ma Thuột, Việt Nam.', 'soul'); ?></p>
+	<div class="l-footer__bar">
+		<span><?php esc_html_e('Crafted by Vietnamese Soul. Buôn Ma Thuột, Việt Nam.', 'soul'); ?></span>
+		<span>© <?php echo esc_html(gmdate('Y')); ?> SOUL Fine Robusta</span>
+	</div>
 </footer>
 
 <div id="soul-search" class="soul-search-overlay" data-component="modal" hidden>
 	<button type="button" class="soul-search-overlay__close" data-close aria-label="<?php esc_attr_e('Đóng', 'soul'); ?>">×</button>
 	<form class="soul-search-overlay__form" role="search" method="get" action="<?php echo esc_url(home_url('/')); ?>">
 		<label class="screen-reader-text" for="soul-q"><?php esc_html_e('Tìm kiếm', 'soul'); ?></label>
-		<input id="soul-q" type="search" name="s" placeholder="<?php esc_attr_e('Tìm cà phê, cửa hàng, bài viết…', 'soul'); ?>" autofocus>
-		<button type="submit" class="soul-btn soul-btn--primary"><?php esc_html_e('Tìm', 'soul'); ?></button>
+		<input id="soul-q" class="c-search-field c-search-field--hero" type="search" name="s" placeholder="<?php esc_attr_e('Tìm cà phê, cửa hàng, bài viết…', 'soul'); ?>" autofocus>
+		<button type="submit" class="c-btn"><?php esc_html_e('Tìm', 'soul'); ?></button>
 	</form>
 </div>
 
@@ -60,7 +71,12 @@ $checkout = get_permalink((int) get_option('soul_checkout_page_id')) ?: home_url
 	<nav aria-label="<?php esc_attr_e('Mobile', 'soul'); ?>">
 		<a href="<?php echo esc_url(home_url('/')); ?>"><?php echo esc_html(soul_t(['vi' => 'Trang chủ', 'en' => 'Home'])); ?></a>
 		<a href="<?php echo esc_url($shop); ?>"><?php echo esc_html(soul_t(['vi' => 'Sản phẩm', 'en' => 'Shop'])); ?></a>
-		<a href="<?php echo esc_url(get_permalink((int) get_option('page_for_posts')) ?: home_url('/blog/')); ?>"><?php esc_html_e('Blog', 'soul'); ?></a>
+		<a href="<?php echo esc_url(home_url('/new-crop/')); ?>"><?php echo esc_html(soul_t(['vi' => 'Mùa vụ mới', 'en' => 'New Crop'])); ?></a>
+		<a href="<?php echo esc_url(home_url('/our-story/')); ?>"><?php echo esc_html(soul_t(['vi' => 'Về Soul', 'en' => 'Our Story'])); ?></a>
+		<a href="<?php echo esc_url(home_url('/coffee-solutions/')); ?>"><?php echo esc_html(soul_t(['vi' => 'Giải pháp', 'en' => 'Solutions'])); ?></a>
+		<a href="<?php echo esc_url($spaces); ?>"><?php echo esc_html(soul_t(['vi' => 'Cửa hàng', 'en' => 'Spaces'])); ?></a>
+		<a href="<?php echo esc_url($blog); ?>"><?php esc_html_e('Blog', 'soul'); ?></a>
+		<a href="<?php echo esc_url(home_url('/help/')); ?>"><?php echo esc_html(soul_t(['vi' => 'Hỗ trợ', 'en' => 'Help'])); ?></a>
 		<a href="<?php echo esc_url($checkout); ?>"><?php echo esc_html(soul_t(['vi' => 'Đặt hàng', 'en' => 'Checkout'])); ?></a>
 		<a href="<?php echo esc_url(home_url('/order-lookup/')); ?>"><?php echo esc_html(soul_t(['vi' => 'Tra cứu đơn', 'en' => 'Order lookup'])); ?></a>
 	</nav>
@@ -90,7 +106,7 @@ $checkout = get_permalink((int) get_option('soul_checkout_page_id')) ?: home_url
 	</template>
 	<footer class="soul-drawer__foot">
 		<p class="soul-muted"><?php esc_html_e('Không thanh toán online — gửi đơn để Soul xác nhận.', 'soul'); ?></p>
-		<a class="soul-btn soul-btn--primary" href="<?php echo esc_url($checkout); ?>"><?php esc_html_e('Gửi đơn hàng', 'soul'); ?></a>
+		<a class="c-btn soul-btn soul-btn--primary" href="<?php echo esc_url($checkout); ?>"><?php esc_html_e('Gửi đơn hàng', 'soul'); ?></a>
 	</footer>
 </aside>
 <div class="soul-scrim" id="soul-cart-scrim" hidden></div>

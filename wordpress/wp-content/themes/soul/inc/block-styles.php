@@ -11,7 +11,10 @@ add_action('init', static function (): void {
 	$styles = [
 		['core/button', 'primary', __('Primary ink', 'soul')],
 		['core/button', 'outline', __('Outline', 'soul')],
+		['core/button', 'outline-dark', __('Outline on ink', 'soul')],
 		['core/button', 'yellow', __('Yellow fill', 'soul')],
+		['core/button', 'rail-nav', __('Rail nav', 'soul')],
+		['core/group', 'home-section', __('Home section shell', 'soul')],
 		['core/group', 'surface-paper', __('Surface paper', 'soul')],
 		['core/group', 'surface-sand', __('Surface sand', 'soul')],
 		['core/group', 'surface-ink', __('Surface ink', 'soul')],

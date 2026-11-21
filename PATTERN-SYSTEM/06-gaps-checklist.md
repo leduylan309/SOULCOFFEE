@@ -43,6 +43,18 @@ Nguồn: [`docs/BRD.md`](../docs/BRD.md) · Plan: [`docs/ROADMAP.md`](../docs/RO
 - [ ] Polylang full content (vẫn backlog)
 - [ ] F-72 ảnh web-optimize hàng loạt
 
+## Phase 5 — Page fidelity
+
+Tracker: [`docs/PAGE-FIDELITY-CHECKLIST.md`](../docs/PAGE-FIDELITY-CHECKLIST.md)
+
+- [x] Wave 1 Home + chrome + DS CSS
+- [x] Wave 2 marketing pages
+- [x] Wave 3 commerce templates
+- [x] Wave 4 blog / search / 404
+- [x] Account skipped (F-61)
+- [x] Home 100% fidelity pass (`home-sections.css` + 9 patterns + DS sync)
+- [ ] F-72 ảnh web-optimize
+
 ## Cấm lệch BRD
 
 - Không thêm WooCommerce / payment gateway nếu chưa sửa BRD.

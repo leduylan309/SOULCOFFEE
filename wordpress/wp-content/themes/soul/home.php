@@ -6,7 +6,7 @@
  */
 get_header();
 ?>
-<section class="soul-container soul-blog">
+<section class="soul-container soul-blog soul-page-shell" data-section="blog-listing">
 	<header class="soul-page__header">
 		<p class="soul-eyebrow"><?php echo esc_html(soul_t(['vi' => 'Journal', 'en' => 'Journal'])); ?></p>
 		<h1><?php echo esc_html(soul_t(['vi' => 'Blog', 'en' => 'Blog'])); ?></h1>

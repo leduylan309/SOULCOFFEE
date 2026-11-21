@@ -13,7 +13,7 @@ if (is_wp_error($base)) {
 	$base = $shop;
 }
 ?>
-<section class="soul-container soul-shop">
+<section class="soul-container soul-shop soul-page-shell" data-section="shop-listing">
 	<header class="soul-page__header">
 		<p class="soul-eyebrow"><?php esc_html_e('Soul Shop', 'soul'); ?></p>
 		<h1><?php
@@ -62,7 +62,10 @@ if (is_wp_error($base)) {
 				<?php get_template_part('template-parts/product', 'card'); ?>
 			<?php endwhile; ?>
 		<?php else : ?>
-			<p><?php esc_html_e('Không có sản phẩm phù hợp.', 'soul'); ?></p>
+			<div class="soul-empty" data-section="shop-empty">
+				<p><?php esc_html_e('Không có sản phẩm phù hợp.', 'soul'); ?></p>
+				<p><a class="c-btn" href="<?php echo esc_url($shop); ?>"><?php esc_html_e('Xem tất cả sản phẩm ↗', 'soul'); ?></a></p>
+			</div>
 		<?php endif; ?>
 	</div>
 	<?php the_posts_pagination(); ?>

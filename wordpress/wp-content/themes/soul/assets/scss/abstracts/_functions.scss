@@ -1,0 +1,25 @@
+@use 'sass:map';
+@use 'sass:list';
+@use 'variables' as v;
+
+/// Raw palette colour.  color('yellow') → #FFD35B
+@function color($name) {
+  @if not map.has-key(v.$palette, $name) { @error 'Unknown colour: #{$name}'; }
+  @return map.get(v.$palette, $name);
+}
+
+/// Ink / paper at a documented alpha step.  ink(14) → rgba(39,41,45,.14)
+@function ink($step)   { @return rgba(color('ink'),   map.get(v.$ink-alphas, $step)); }
+@function paper($step) { @return rgba(color('paper'), map.get(v.$paper-alphas, $step)); }
+
+/// CSS custom property reference.  token('text-primary') → var(--text-primary)
+@function token($name) { @return var(--#{$name}); }
+
+/// Spacing step (only documented values).  space(14) → var(--space-14)
+@function space($n) {
+  @if not list.index(v.$spaces, $n) { @error 'space(#{$n}) is not on the scale #{v.$spaces}'; }
+  @return var(--space-#{$n});
+}
+
+@function layout($key) { @return var(--#{$key}); }
+@function z($layer)    { @return map.get(v.$z, $layer); }

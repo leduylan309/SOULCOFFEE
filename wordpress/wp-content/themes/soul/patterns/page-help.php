@@ -7,9 +7,7 @@
  * Post Types: page
  */
 ?>
-<!-- wp:heading {"level":1} -->
-<h1 class="wp-block-heading">Hỗ trợ</h1>
-<!-- /wp:heading -->
-<!-- wp:paragraph -->
-<p>FAQ, giao hàng, đổi trả, thanh toán (không gateway), liên hệ — chỉnh trong editor sau khi insert.</p>
-<!-- /wp:paragraph -->
+<!-- wp:pattern {"slug":"soul/help-hero"} /-->
+<!-- wp:pattern {"slug":"soul/help-faq"} /-->
+<!-- wp:pattern {"slug":"soul/help-policy"} /-->
+<!-- wp:pattern {"slug":"soul/help-contact"} /-->

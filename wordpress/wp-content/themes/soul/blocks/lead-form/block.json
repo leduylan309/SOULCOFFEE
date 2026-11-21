@@ -1,0 +1,25 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "soul/lead-form",
+  "title": "Form Soul (newsletter / liên hệ)",
+  "category": "soul",
+  "icon": "email",
+  "description": "Form newsletter hoặc B2B — Admin chọn loại và tiêu đề; gửi qua REST.",
+  "keywords": ["form", "newsletter", "contact", "soul"],
+  "textdomain": "soul",
+  "attributes": {
+    "kind": { "type": "string", "default": "newsletter" },
+    "title": { "type": "string", "default": "Form liên hệ" },
+    "source": { "type": "string", "default": "home-b2b" },
+    "submitLabel": { "type": "string", "default": "" },
+    "emailPlaceholder": { "type": "string", "default": "Email của bạn" }
+  },
+  "supports": {
+    "html": false,
+    "className": true,
+    "align": false
+  },
+  "editorScript": "file:./edit.js",
+  "render": "file:./render.php"
+}

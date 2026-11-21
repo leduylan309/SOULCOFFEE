@@ -1,0 +1,63 @@
+/**
+ * Editor canvas bridges only — keep section design in shared CSS.
+ * Goal: Gutenberg preview === front UI for patterns.
+ */
+
+.editor-styles-wrapper {
+  background: var(--soul-paper, #f4efe5);
+  color: var(--soul-ink, #27292d);
+  font-family: var(--font-sans, "Be Vietnam Pro", system-ui, sans-serif);
+  font-size: 15px;
+  line-height: 1.7;
+  padding: 0 !important;
+  max-width: none !important;
+}
+
+.editor-styles-wrapper .is-root-container,
+.editor-styles-wrapper .block-editor-block-list__layout.is-root-container {
+  max-width: none !important;
+  width: 100% !important;
+  margin: 0 !important;
+  padding: 0 !important;
+}
+
+/* Stacked fidelity sections: no WP default block gap */
+.editor-styles-wrapper .is-root-container > .wp-block {
+  margin-block: 0;
+  max-width: none !important;
+}
+
+.editor-styles-wrapper .wp-block-html,
+.editor-styles-wrapper .wp-block-group.alignfull,
+.editor-styles-wrapper .alignfull {
+  max-width: none !important;
+  width: 100% !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
+}
+
+/* Home / semantic sections must paint edge-to-edge in canvas */
+.editor-styles-wrapper [class^="s-home-"],
+.editor-styles-wrapper [class*=" s-home-"],
+.editor-styles-wrapper [class^="s-newcrop-"],
+.editor-styles-wrapper [class*=" s-newcrop-"],
+.editor-styles-wrapper [class^="s-story-"],
+.editor-styles-wrapper [class*=" s-story-"],
+.editor-styles-wrapper [class^="s-sol-"],
+.editor-styles-wrapper [class*=" s-sol-"],
+.editor-styles-wrapper [class^="s-space-"],
+.editor-styles-wrapper [class*=" s-space-"] {
+  max-width: none !important;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.editor-styles-wrapper .wp-block-html > [class^="s-home-"],
+.editor-styles-wrapper .wp-block-html > [class*=" s-home-"] {
+  margin: 0;
+}
+
+/* Keep pattern inserter preview readable */
+.block-editor-block-preview__content [class^="s-home-"] {
+  pointer-events: none;
+}

@@ -1,0 +1,28 @@
+{
+  "$schema": "https://schemas.wp.org/trunk/block.json",
+  "apiVersion": 3,
+  "name": "soul/add-to-cart",
+  "title": "Thêm vào giỏ",
+  "category": "soul",
+  "icon": "cart",
+  "description": "Nút thêm sản phẩm vào giỏ — Admin chỉnh tên, giá, ảnh, nhãn.",
+  "keywords": ["cart", "atc", "soul", "giỏ"],
+  "textdomain": "soul",
+  "attributes": {
+    "label": { "type": "string", "default": "Thêm vào giỏ" },
+    "productId": { "type": "string", "default": "" },
+    "productName": { "type": "string", "default": "" },
+    "price": { "type": "number", "default": 0 },
+    "imageUrl": { "type": "string", "default": "" },
+    "productType": { "type": "string", "default": "" },
+    "openDrawer": { "type": "boolean", "default": true },
+    "variant": { "type": "string", "default": "card" }
+  },
+  "supports": {
+    "html": false,
+    "className": true,
+    "align": false
+  },
+  "editorScript": "file:./edit.js",
+  "render": "file:./render.php"
+}

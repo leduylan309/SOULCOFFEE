@@ -1,13 +1,14 @@
 # Design system — SOUL Fine Robusta
 
-Source of truth (prototype): [`html/`](../html/)  
-- Tokens: `html/tokens/*.css`  
-- SCSS: `html/scss/` → `html/dist/soul.css`  
-- Spec: `html/readme.md`, `html/Soul Design System.dc.html`  
+Source of truth (prototype): [`html/`](../html/) — updated Nov 2026 (`Soul Design System.dc.html` v1.0).  
+- Tokens: `html/tokens/*.css` · `html/dist/soul-tokens.css`  
+- SCSS: `html/scss/` → `html/dist/soul.css` / `soul.min.css`  
+- Spec: `html/readme.md`, `html/Soul Design System.dc.html` (§12 = 93 sections / 12 pages + chrome)  
+- Section cards: `html/components/sections/page-*.card.html`  
 - Components (React specimens): `html/components/`  
 - Vanilla runtime: `html/js/`
 
-Khi có theme: mirror tokens vào `theme.json` + `sass/`; load `editor-styles`.
+Theme mirror: `wordpress/wp-content/themes/soul/assets/css/soul.css` + `soul-tokens.css` (+ `theme-chrome.css` WP overlays). Sync from `html/dist/` when DS updates.
 
 ---
 

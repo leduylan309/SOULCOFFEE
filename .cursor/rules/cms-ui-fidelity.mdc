@@ -1,0 +1,24 @@
+---
+description: Bắt buộc CMS (Gutenberg) và UI (front) hiển thị 100% giống nhau qua patterns editable
+alwaysApply: true
+---
+
+# CMS ↔ UI fidelity (bắt buộc 100%)
+
+Editor canvas và front phải **trùng layout**. Pattern = single source. **Admin không đụng HTML/CSS.**
+
+## Hard rules
+
+1. **Editable patterns** — Copy, ảnh, nút, link = core blocks (`heading`, `paragraph`, `image`, `buttons`, `columns`, `group`). Cấm `wp:html` cho marketing copy.
+2. **Custom block chỉ khi bắt buộc** — Form REST → `soul/lead-form`; ATC → `soul/add-to-cart`. Admin chỉnh qua Inspector (không code).
+3. **Một CSS stack** — Front enqueue = `add_editor_style`: tokens → soul → section CSS → theme-chrome → editor-bridge.
+4. **Full-bleed** — `.s-home-*` / `.s-newcrop-*` / `.s-story-*` / `.s-sol-*` / `.s-space-*` / `alignfull` full width trong editor; không bóp bằng `soul-container`.
+5. **SoT visual** — `html/*.html` / `*.dc.html`; className `s-home-*` / `s-newcrop-*` / `s-story-*` / `s-sol-*` / `s-space-*` trên Group/Columns giữ fidelity.
+6. **DoD** — Admin đổi text/ảnh/URL trong editor → front khớp; không mở Custom HTML.
+7. **Fidelity gate** — Duyệt từng section @1920 theo rule `html-fidelity-gate` (checklist → fix → đo → A approve). Không pass hàng loạt.
+
+## Cấm
+
+- Pattern marketing bằng Custom HTML.
+- CSS chỉ-editor đổi design section.
+- `page-{slug}.php` HTML clone tách pattern.
