@@ -1,51 +1,76 @@
 <?php
 /**
- * Product card.
+ * Product card — SoT Shop.dc.html listing card + quick-add.
  *
  * @package Soul
  */
-$meta = soul_get_product_meta(get_the_ID());
-$img  = get_the_post_thumbnail_url(get_the_ID(), 'medium_large') ?: '';
-$solutions = home_url('/coffee-solutions/#contact');
+$pid   = (int) get_the_ID();
+$meta  = soul_get_product_meta($pid);
+$img   = get_the_post_thumbnail_url($pid, 'medium_large') ?: '';
+$kind  = soul_shop_product_kind($pid);
+$code  = soul_shop_product_kind_code($pid);
+$opts  = soul_shop_product_opts($pid);
+$badge = soul_shop_product_badge($pid);
+$sold  = ! $meta['in_stock'];
+$quote = $meta['quote_only'] || ($code === 'gb' && $meta['price'] <= 0);
+$unit  = ($code === 'gb' && ! $quote) ? __(' / kg', 'soul') : '';
+
+$pick = soul_shop_product_pick_info($pid);
 $payload = [
-	'id'    => $meta['sku'] ?: (string) get_the_ID(),
-	'sku'   => $meta['sku'] ?: (string) get_the_ID(),
+	'id'    => $meta['sku'] ?: (string) $pid,
+	'sku'   => $meta['sku'] ?: (string) $pid,
 	'name'  => get_the_title(),
 	'img'   => $img,
 	'price' => $meta['price'],
-	'type'  => $meta['badge'],
+	'type'  => $kind,
+	'kind'  => $code,
+	'opts'  => $opts,
+	'brew'  => $pick['brew'],
+	'facts' => $pick['facts'],
 ];
+
+$btn_label = $quote ? __('Liên hệ', 'soul') : ($sold ? __('Hết hàng', 'soul') : '+ ' . __('Thêm', 'soul'));
 ?>
-<article <?php post_class('soul-card'); ?>>
-	<a class="soul-card__media" href="<?php the_permalink(); ?>">
+<article <?php post_class('s-shop-card'); ?> data-shop-card data-name="<?php echo esc_attr(mb_strtolower(get_the_title())); ?>">
+	<a class="s-shop-card__media<?php echo $sold ? ' is-sold' : ''; ?>" href="<?php the_permalink(); ?>" aria-label="<?php the_title_attribute(); ?>">
 		<?php if (has_post_thumbnail()) : ?>
-			<?php the_post_thumbnail('medium_large'); ?>
-		<?php else : ?>
-			<span class="soul-media-well"></span>
+			<?php the_post_thumbnail('medium_large', ['loading' => 'lazy', 'alt' => '']); ?>
+		<?php endif; ?>
+		<?php if ($badge) : ?>
+			<span class="s-shop-card__badge" style="background:<?php echo esc_attr($badge[1]); ?>;color:<?php echo esc_attr($badge[2]); ?>"><?php echo esc_html($badge[0]); ?></span>
 		<?php endif; ?>
 	</a>
-	<div class="soul-card__body">
-		<?php if ($meta['badge']) : ?>
-			<p class="soul-eyebrow"><?php echo esc_html($meta['badge']); ?></p>
-		<?php endif; ?>
-		<h2 class="soul-card__title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h2>
-		<?php if ($meta['notes']) : ?>
-			<p class="soul-notes"><?php echo esc_html($meta['notes']); ?></p>
-		<?php endif; ?>
-		<p class="soul-price"><?php echo esc_html(soul_format_vnd($meta['price'])); ?></p>
-		<div class="soul-card__actions">
-			<a class="soul-text-link" href="<?php the_permalink(); ?>"><?php esc_html_e('Chi tiết', 'soul'); ?> ↗</a>
-			<?php if ($meta['quote_only']) : ?>
-				<a class="soul-btn soul-btn--outline soul-btn--sm" href="<?php echo esc_url($solutions); ?>"><?php esc_html_e('Báo giá', 'soul'); ?></a>
-			<?php elseif ($meta['in_stock']) : ?>
-				<button
-					type="button"
-					class="soul-btn soul-btn--primary soul-btn--sm"
-					data-component="add-to-cart"
-					data-open-drawer="true"
-					data-product="<?php echo esc_attr(wp_json_encode($payload, JSON_UNESCAPED_UNICODE)); ?>"
-				><?php esc_html_e('Thêm', 'soul'); ?></button>
+	<p class="s-shop-card__kind"><?php echo esc_html($kind); ?></p>
+	<h3 class="s-shop-card__title"><a href="<?php the_permalink(); ?>"><?php the_title(); ?></a></h3>
+	<div class="s-shop-card__foot">
+		<span class="s-shop-card__price">
+			<?php if ($quote) : ?>
+				<?php esc_html_e('Liên hệ', 'soul'); ?>
+			<?php else : ?>
+				<?php echo esc_html(soul_format_vnd($meta['price'])); ?><span class="s-shop-card__unit"><?php echo esc_html($unit); ?></span>
 			<?php endif; ?>
-		</div>
+		</span>
+		<?php if ($quote) : ?>
+			<a class="s-shop-card__btn" href="<?php the_permalink(); ?>"><?php echo esc_html($btn_label); ?></a>
+		<?php elseif ($sold) : ?>
+			<button type="button" class="s-shop-card__btn" disabled aria-label="<?php esc_attr_e('Hết hàng', 'soul'); ?>"><?php echo esc_html($btn_label); ?></button>
+		<?php elseif ($opts !== []) : ?>
+			<button
+				type="button"
+				class="s-shop-card__btn"
+				data-shop-quick
+				data-product="<?php echo esc_attr(wp_json_encode($payload, JSON_UNESCAPED_UNICODE)); ?>"
+				aria-label="<?php echo esc_attr(sprintf(/* translators: product name */ __('Thêm vào giỏ: %s', 'soul'), get_the_title())); ?>"
+			><?php echo esc_html($btn_label); ?></button>
+		<?php else : ?>
+			<button
+				type="button"
+				class="s-shop-card__btn"
+				data-component="add-to-cart"
+				data-open-drawer="true"
+				data-product="<?php echo esc_attr(wp_json_encode($payload, JSON_UNESCAPED_UNICODE)); ?>"
+				aria-label="<?php echo esc_attr(sprintf(/* translators: product name */ __('Thêm vào giỏ: %s', 'soul'), get_the_title())); ?>"
+			><?php echo esc_html($btn_label); ?></button>
+		<?php endif; ?>
 	</div>
 </article>

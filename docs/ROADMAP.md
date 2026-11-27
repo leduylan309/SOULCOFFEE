@@ -68,7 +68,8 @@ Nguồn yêu cầu: [`BRD.md`](BRD.md).
 
 - [x] Blog page + 5 categories + sample posts
 - [x] Search results (post/page/product/space) + header overlay
-- [x] VI/EN chrome toggle (cookie) — full content Polylang = Phase 4+
+- [x] VI/EN chrome toggle (cookie) — superseded by Polylang
+- [x] Polylang Free: `/en/` + CPT/tax/menus + EN content bootstrap (Phase 4 baseline)
 - [x] Order lookup page + REST
 - [x] N-03 SEO lightweight (meta + core sitemap) — chuyển/hoàn tất ở Phase 4
 
@@ -83,7 +84,7 @@ Nguồn yêu cầu: [`BRD.md`](BRD.md).
 **Deliverables**
 
 - [x] F-29 VAT checkbox + company/MST/email/address trên checkout → `soul_vat` meta
-- [x] F-71 Export CSV từ admin list `soul_order`
+- [x] F-71 Export CSV từ admin list `soul_order` (date range + filter status/payment; cột shipping/promo/payment_status)
 - [x] N-03 Meta description + SEO box + core XML sitemap (product/space)
 - [x] N-01/N-04 Skip link, focus-visible, Esc overlays; honeypot + REST throttle
 - [x] F-35 `/new-crop/` seed + page pattern

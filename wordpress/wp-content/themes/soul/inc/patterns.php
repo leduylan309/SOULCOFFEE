@@ -12,6 +12,8 @@ add_action('init', static function (): void {
 		'soul-pages'   => __('SOUL Pages', 'soul'),
 		'soul-layout'  => __('SOUL Layout', 'soul'),
 		'soul-cards'   => __('SOUL Cards', 'soul'),
+		'soul-blog'    => __('SOUL Blog Article', 'soul'),
+		'soul-shop'    => __('SOUL Shop Product', 'soul'),
 		'soul-content' => __('SOUL Content', 'soul'),
 		'soul-cta'     => __('SOUL CTAs', 'soul'),
 		'soul-connect' => __('SOUL Connect', 'soul'),

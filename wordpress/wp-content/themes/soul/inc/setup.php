@@ -24,6 +24,11 @@ add_action('after_setup_theme', static function (): void {
 		'assets/css/solutions-sections.css',
 		'assets/css/spaces-sections.css',
 		'assets/css/blog-sections.css',
+		'assets/css/help-sections.css',
+		'assets/css/shop-sections.css',
+		'assets/css/checkout-sections.css',
+		'assets/css/404-sections.css',
+		'assets/css/account-sections.css',
 		'assets/css/theme-chrome.css',
 		'assets/css/editor-bridge.css',
 	]);
@@ -32,14 +37,61 @@ add_action('after_setup_theme', static function (): void {
 	add_theme_support('wp-block-styles');
 
 	register_nav_menus([
-		'primary' => __('Primary', 'soul'),
-		'footer'  => __('Footer', 'soul'),
+		'primary'         => __('Primary (header + mobile)', 'soul'),
+		'footer_shop'     => __('Footer — Shop', 'soul'),
+		'footer_explore'  => __('Footer — Khám phá', 'soul'),
+		'footer_partners' => __('Footer — Đối tác', 'soul'),
+		'footer_support'  => __('Footer — Hỗ trợ', 'soul'),
 	]);
 });
+
+/**
+ * Render a footer column menu or fallback list.
+ *
+ * @param string               $location Theme location.
+ * @param string               $heading  Column label.
+ * @param list<array{0:string,1:string}> $fallback [[label, url], ...].
+ */
+function soul_footer_col(string $location, string $heading, array $fallback): void {
+	echo '<div>';
+	echo '<p class="l-footer__head soul-footer__label">' . esc_html($heading) . '</p>';
+	if (has_nav_menu($location)) {
+		wp_nav_menu([
+			'theme_location' => $location,
+			'container'      => false,
+			'menu_class'     => 'l-footer__links',
+			'depth'          => 1,
+			'fallback_cb'    => false,
+		]);
+	} else {
+		echo '<ul class="l-footer__links">';
+		foreach ($fallback as $row) {
+			printf(
+				'<li><a href="%s">%s</a></li>',
+				esc_url($row[1]),
+				esc_html($row[0])
+			);
+		}
+		echo '</ul>';
+	}
+	echo '</div>';
+}
 
 add_filter('body_class', static function (array $classes): array {
 	$classes[] = 'soul-theme';
 	return $classes;
+});
+
+/** Avoid invalid `wordpress@localhost` From (PHPMailer rejects it). */
+add_filter('wp_mail_from', static function (string $from): string {
+	if ($from !== '' && is_email($from) && ! str_ends_with(strtolower($from), '@localhost')) {
+		return $from;
+	}
+	$admin = (string) get_option('admin_email');
+	if ($admin !== '' && is_email($admin) && ! str_ends_with(strtolower($admin), '@localhost')) {
+		return $admin;
+	}
+	return 'noreply@soul.local';
 });
 
 /** Local Mailpit SMTP when DEBUG (docker service `mailpit:1025`). */

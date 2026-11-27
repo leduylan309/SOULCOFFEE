@@ -1,0 +1,233 @@
+/* SOUL Orders admin — list + detail */
+
+.soul-badge {
+  display: inline-block;
+  padding: 2px 8px;
+  border-radius: 999px;
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.6;
+  white-space: nowrap;
+}
+.soul-badge--new { background: #e8f0fe; color: #1a56db; }
+.soul-badge--confirmed { background: #fef3c7; color: #92400e; }
+.soul-badge--shipping { background: #e0e7ff; color: #3730a3; }
+.soul-badge--done { background: #d1fae5; color: #065f46; }
+.soul-badge--cancelled { background: #f3f4f6; color: #6b7280; }
+.soul-badge--paid { background: #d1fae5; color: #065f46; }
+.soul-badge--unpaid { background: #fee2e2; color: #991b1b; }
+
+.soul-order-cust { line-height: 1.45; }
+.soul-order-cust a { text-decoration: none; }
+
+/* Force KPI/chart onto its own row below bulk + filters */
+body.post-type-soul_order.edit-php .tablenav.top .alignleft.actions {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 6px;
+  width: 100%;
+  max-width: 100%;
+  float: none;
+  margin-bottom: 4px;
+}
+body.post-type-soul_order.edit-php .tablenav.top {
+  height: auto;
+  padding-bottom: 8px;
+}
+.soul-order-ops-banner {
+  display: grid;
+  grid-template-columns: minmax(280px, 1fr) minmax(320px, 1.4fr);
+  gap: 16px;
+  flex: 0 0 100%;
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  order: 99;
+  margin: 20px 0 8px;
+  padding-top: 20px;
+  border-top: 1px solid #c3c4c7;
+  clear: both;
+}
+.soul-order-kpis {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 10px;
+}
+.soul-order-kpi {
+  background: #fff;
+  border: 1px solid #c3c4c7;
+  border-radius: 6px;
+  padding: 12px 14px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+}
+.soul-order-kpi__label {
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #646970;
+  margin-bottom: 6px;
+}
+.soul-order-kpi__count {
+  font-size: 13px;
+  color: #1d2327;
+}
+.soul-order-kpi__rev {
+  font-size: 18px;
+  font-weight: 600;
+  margin-top: 4px;
+}
+.soul-order-kpi__paid {
+  font-size: 12px;
+  color: #646970;
+  margin-top: 4px;
+}
+.soul-order-chart-wrap {
+  background: #fff;
+  border: 1px solid #c3c4c7;
+  border-radius: 6px;
+  padding: 10px 12px;
+  height: 160px;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.04);
+}
+
+/* Detail */
+.soul-order-admin__header {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  gap: 16px;
+  align-items: flex-end;
+  padding-bottom: 16px;
+  margin-bottom: 16px;
+  border-bottom: 1px solid #dcdcde;
+}
+.soul-order-admin__code {
+  font-size: 20px;
+  font-weight: 600;
+}
+.soul-order-admin__total {
+  font-size: 28px;
+  font-weight: 600;
+  margin-top: 4px;
+}
+.soul-order-admin__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+}
+.soul-order-admin__actions label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  font-weight: 600;
+}
+.soul-order-admin__grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 12px;
+  margin-bottom: 12px;
+}
+.soul-order-card {
+  background: #f6f7f7;
+  border: 1px solid #dcdcde;
+  border-radius: 6px;
+  padding: 14px 16px;
+}
+.soul-order-card h3 {
+  margin: 0 0 10px;
+  font-size: 13px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: #646970;
+}
+.soul-order-card--wide {
+  margin-bottom: 12px;
+}
+.soul-order-lines__img img {
+  width: 48px;
+  height: 48px;
+  object-fit: cover;
+  border-radius: 4px;
+  display: block;
+}
+.soul-order-totals {
+  margin-top: 12px;
+  margin-left: auto;
+  width: min(100%, 320px);
+}
+.soul-order-totals th {
+  text-align: left;
+  font-weight: 500;
+  padding: 4px 8px 4px 0;
+}
+.soul-order-totals td {
+  text-align: right;
+  padding: 4px 0;
+}
+.soul-order-totals__grand th,
+.soul-order-totals__grand td {
+  font-size: 16px;
+  font-weight: 700;
+  border-top: 1px solid #c3c4c7;
+  padding-top: 8px;
+}
+.soul-order-notes {
+  background: #fff;
+  border: 1px solid #dcdcde;
+  padding: 10px 12px;
+  white-space: pre-wrap;
+  font-family: Menlo, Consolas, monospace;
+  font-size: 12px;
+  max-height: 200px;
+  overflow: auto;
+}
+
+.soul-file-count {
+  white-space: nowrap;
+}
+.soul-paperwork-list {
+  list-style: none;
+  margin: 0 0 12px;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.soul-paperwork-list li {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+  background: #fff;
+  border: 1px solid #dcdcde;
+  border-radius: 4px;
+  padding: 8px 12px;
+}
+.soul-paperwork-type {
+  display: inline-block;
+  min-width: 40px;
+  padding: 1px 6px;
+  border-radius: 3px;
+  background: #1d2327;
+  color: #fff;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-align: center;
+}
+.soul-paperwork-remove {
+  margin-left: auto !important;
+  color: #b32d2e !important;
+}
+
+@media (max-width: 1100px) {
+  .soul-order-ops-banner {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 782px) {
+  .soul-order-kpis {
+    grid-template-columns: 1fr;
+  }
+}

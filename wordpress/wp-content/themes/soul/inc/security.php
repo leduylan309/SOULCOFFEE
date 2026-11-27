@@ -50,8 +50,21 @@ add_filter('wp_kses_allowed_html', static function (array $tags, string $context
  */
 function soul_rest_guard(\WP_REST_Request $request) {
 	$hp = (string) ($request->get_param('website') ?? '');
+	if ($hp === '') {
+		$json = $request->get_json_params();
+		if (is_array($json)) {
+			$hp = (string) ($json['website'] ?? '');
+		}
+	}
 	if ($hp !== '') {
 		return new \WP_Error('soul_spam', __('Rejected.', 'soul'), ['status' => 400]);
+	}
+
+	if (function_exists('soul_recaptcha_verify_request')) {
+		$rc = soul_recaptcha_verify_request($request);
+		if (is_wp_error($rc)) {
+			return $rc;
+		}
 	}
 
 	$ip  = isset($_SERVER['REMOTE_ADDR']) ? sanitize_text_field(wp_unslash($_SERVER['REMOTE_ADDR'])) : '0';
@@ -74,8 +87,24 @@ add_filter('rest_pre_dispatch', static function ($result, $server, $request) {
 		'/soul/v1/newsletter',
 		'/soul/v1/contact',
 		'/soul/v1/order-lookup',
+		'/soul/v1/auth/login',
+		'/soul/v1/auth/register',
+		'/soul/v1/auth/recover',
 	];
-	if (! in_array($route, $guarded, true)) {
+	// Prefix match for account mutating routes.
+	$guarded_prefix = [
+		'/soul/v1/account/',
+	];
+	$needs_guard = in_array($route, $guarded, true);
+	if (! $needs_guard) {
+		foreach ($guarded_prefix as $prefix) {
+			if (str_starts_with($route, $prefix)) {
+				$needs_guard = true;
+				break;
+			}
+		}
+	}
+	if (! $needs_guard) {
 		return $result;
 	}
 	if ($request->get_method() !== 'POST') {

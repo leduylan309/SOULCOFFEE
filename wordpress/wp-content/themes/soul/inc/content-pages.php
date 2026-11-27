@@ -85,12 +85,27 @@ function soul_page_coffee_solutions_content(): string {
 }
 
 function soul_page_help_content(): string {
-	return soul_compose_patterns([
-		'help-hero',
+	$hero  = trim(soul_compose_patterns(['help-hero']));
+	$aside = trim(soul_compose_patterns(['help-aside']));
+	$main  = trim(soul_compose_patterns([
 		'help-faq',
-		'help-policy',
+		'help-shipping',
+		'help-returns',
+		'help-payment',
+		'help-privacy',
+		'help-terms',
 		'help-contact',
-	]);
+	]));
+
+	return $hero . "\n\n" . '<!-- wp:columns {"align":"full","className":"s-help-layout"} -->
+<div class="wp-block-columns alignfull s-help-layout"><!-- wp:column {"width":"280px","className":"s-help-aside"} -->
+<div class="wp-block-column s-help-aside" style="flex-basis:280px">' . $aside . '</div>
+<!-- /wp:column -->
+
+<!-- wp:column {"className":"s-help-main"} -->
+<div class="wp-block-column s-help-main">' . $main . '</div>
+<!-- /wp:column --></div>
+<!-- /wp:columns -->';
 }
 
 function soul_page_new_crop_content(): string {

@@ -1,4 +1,6 @@
-// Bind [data-soul-form] → REST newsletter / contact.
+// Bind [data-soul-form] → REST newsletter / contact (+ reCAPTCHA v3 when enabled).
+import { getRecaptchaToken } from '../services/recaptcha.js';
+
 export default function bootForms() {
   if (!window.SoulTheme?.restUrl) return;
 
@@ -21,6 +23,8 @@ export default function bootForms() {
         msg.textContent = '';
       }
       try {
+        const action = kind === 'newsletter' ? 'newsletter' : 'contact';
+        payload.recaptchaToken = await getRecaptchaToken(action);
         const endpoint = kind === 'newsletter' ? 'newsletter' : 'contact';
         const res = await fetch(window.SoulTheme.restUrl + endpoint, {
           method: 'POST',

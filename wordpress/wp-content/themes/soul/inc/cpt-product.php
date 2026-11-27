@@ -15,12 +15,24 @@ add_action('init', static function (): void {
 			'add_new_item'  => __('Add Product', 'soul'),
 			'edit_item'     => __('Edit Product', 'soul'),
 		],
-		'public'       => true,
-		'has_archive'  => true,
-		'rewrite'      => ['slug' => 'products', 'with_front' => false],
-		'menu_icon'    => 'dashicons-carrot',
-		'show_in_rest' => true,
+		'public'            => true,
+		'has_archive'       => true,
+		'show_in_nav_menus' => true,
+		'rewrite'           => ['slug' => 'products', 'with_front' => false],
+		'menu_icon'         => 'dashicons-carrot',
+		'show_in_rest'      => true,
 		'supports'     => ['title', 'editor', 'thumbnail', 'excerpt', 'custom-fields'],
+		/** Editor = cột phải mô tả only (cột trái «Về sản phẩm» nằm PHP front). */
+		'template'      => [
+			[
+				'core/paragraph',
+				[
+					'placeholder' => __('Chèn pattern Shop (Lead, Ảnh, Split, Slideshow…) — chỉ cột phải PDP.', 'soul'),
+					'className'   => 's-shop-story__p',
+				],
+			],
+		],
+		'template_lock' => false,
 	]);
 
 	register_taxonomy('soul_collection', 'soul_product', [
@@ -30,6 +42,7 @@ add_action('init', static function (): void {
 		],
 		'public'            => true,
 		'hierarchical'      => true,
+		'show_in_nav_menus' => true,
 		'rewrite'           => ['slug' => 'collections', 'with_front' => false],
 		'show_in_rest'      => true,
 		'show_admin_column' => true,
@@ -154,6 +167,8 @@ add_action('pre_get_posts', static function (\WP_Query $q): void {
 	$sort = isset($_GET['sort']) ? sanitize_key((string) $_GET['sort']) : 'feat';
 	switch ($sort) {
 		case 'new':
+			// SoT: san-pham-moi first — handled in posts_clauses.
+			$q->set('soul_shop_sort', 'new');
 			$q->set('orderby', 'date');
 			$q->set('order', 'DESC');
 			break;
@@ -168,7 +183,29 @@ add_action('pre_get_posts', static function (\WP_Query $q): void {
 			$q->set('order', 'DESC');
 			break;
 		default:
+			// SoT: san-pham-noi-bat first — handled in posts_clauses.
+			$q->set('soul_shop_sort', 'feat');
 			$q->set('orderby', 'menu_order title');
 			$q->set('order', 'ASC');
 	}
 });
+
+/** SoT feat/new: prioritize collection membership. */
+add_filter('posts_clauses', static function (array $clauses, \WP_Query $q): array {
+	$mode = $q->get('soul_shop_sort');
+	if (! $mode || is_admin()) {
+		return $clauses;
+	}
+	global $wpdb;
+	$slug = $mode === 'new' ? 'san-pham-moi' : 'san-pham-noi-bat';
+	$alias = 'soul_sort_' . $mode;
+	$clauses['join'] .= $wpdb->prepare(
+		" LEFT JOIN {$wpdb->term_relationships} {$alias}_tr ON ({$wpdb->posts}.ID = {$alias}_tr.object_id)
+		  LEFT JOIN {$wpdb->term_taxonomy} {$alias}_tt ON ({$alias}_tr.term_taxonomy_id = {$alias}_tt.term_taxonomy_id AND {$alias}_tt.taxonomy = 'soul_collection')
+		  LEFT JOIN {$wpdb->terms} {$alias}_t ON ({$alias}_tt.term_id = {$alias}_t.term_id AND {$alias}_t.slug = %s) ",
+		$slug
+	);
+	$clauses['groupby'] = "{$wpdb->posts}.ID";
+	$clauses['orderby'] = "MAX({$alias}_t.term_id) IS NOT NULL DESC, " . $clauses['orderby'];
+	return $clauses;
+}, 10, 2);

@@ -608,3 +608,11 @@ body .s-sol-ct .s-home-form > h3 {
   font-size: clamp(26px, 2.4vw, 34px);
   line-height: 1.1;
 }
+
+/* —— Responsive polish —— */
+@media (max-width: 520px) {
+  body .s-sol-sv__spec {
+    grid-template-columns: 1fr !important;
+    gap: 4px;
+  }
+}

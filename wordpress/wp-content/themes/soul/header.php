@@ -7,17 +7,10 @@
 $c = soul_chrome_strings();
 $lang = soul_get_lang();
 $shop = get_post_type_archive_link('soul_product') ?: home_url('/products/');
-$soulful = get_term_by('slug', 'soulful-flavours', 'soul_collection');
-$soulful_url = $soulful ? get_term_link($soulful) : $shop;
-if (is_wp_error($soulful_url)) {
-	$soulful_url = $shop;
-}
 $spaces = get_post_type_archive_link('soul_space') ?: home_url('/spaces/');
 $blog = get_permalink((int) get_option('page_for_posts')) ?: home_url('/blog/');
-$rang = get_term_by('slug', 'ca-phe-rang', 'soul_collection');
-$green = get_term_by('slug', 'ca-phe-nhan-xanh', 'soul_collection');
-$rang_url = ($rang && ! is_wp_error(get_term_link($rang))) ? get_term_link($rang) : $shop;
-$green_url = ($green && ! is_wp_error(get_term_link($green))) ? get_term_link($green) : $shop;
+$account_id = (int) get_option('soul_account_page_id');
+$account    = ($account_id > 0) ? (get_permalink($account_id) ?: home_url('/account/')) : home_url('/account/');
 ?><!DOCTYPE html>
 <html <?php language_attributes(); ?> data-soul-lang="<?php echo esc_attr($lang); ?>">
 <head>
@@ -30,6 +23,8 @@ $green_url = ($green && ! is_wp_error(get_term_link($green))) ? get_term_link($g
 	$data_page = '';
 	if (is_page_template('templates/checkout.php')) {
 		$data_page = 'checkout';
+	} elseif (is_page_template('templates/account.php')) {
+		$data_page = 'account';
 	} elseif (is_singular('soul_product')) {
 		$data_page = 'product';
 	} elseif (is_post_type_archive('soul_product') || is_tax('soul_collection')) {
@@ -38,6 +33,8 @@ $green_url = ($green && ! is_wp_error(get_term_link($green))) ? get_term_link($g
 		$data_page = 'home';
 	} elseif (is_home() || is_category() || is_singular('post')) {
 		$data_page = 'blog';
+	} elseif (is_page('help')) {
+		$data_page = 'help';
 	} elseif (is_search()) {
 		$data_page = 'search';
 	}
@@ -54,20 +51,21 @@ $green_url = ($green && ! is_wp_error(get_term_link($green))) ? get_term_link($g
 			<button type="button" class="c-icon-btn l-header__burger soul-nav__burger" data-open="mobile-menu" aria-label="<?php echo esc_attr(soul_t($c['menu'])); ?>">
 				<span class="soul-burger-icon" aria-hidden="true"></span>
 			</button>
-			<a class="l-header__logo soul-brand" href="<?php echo esc_url(home_url('/')); ?>" aria-label="SOUL">
+			<a class="l-header__logo soul-brand" href="<?php echo esc_url( function_exists( 'pll_home_url' ) ? pll_home_url() : home_url( '/' ) ); ?>" aria-label="SOUL">
 				<img src="<?php echo esc_url(soul_logo_uri('soul-elephant-ink.svg')); ?>" alt="" width="30" height="30">
 				<img class="soul-brand__word" src="<?php echo esc_url(soul_logo_uri('soul-wordmark-ink.svg')); ?>" alt="SOUL" height="15">
 			</a>
 			<div class="l-header__nav soul-nav__links">
-				<?php if (has_nav_menu('primary')) : ?>
+				<?php if (has_nav_menu('primary') && class_exists('Soul_Primary_Walker')) : ?>
 					<?php
 					wp_nav_menu([
 						'theme_location' => 'primary',
 						'container'      => false,
-						'menu_class'     => 'soul-menu',
-						'depth'          => 2,
-						'link_before'    => '',
-						'link_after'     => '',
+						'menu_class'     => 'l-header__menu',
+						'items_wrap'     => '<ul class="%2$s">%3$s</ul>',
+						'depth'          => 3,
+						'fallback_cb'    => false,
+						'walker'         => new Soul_Primary_Walker(),
 					]);
 					?>
 				<?php else : ?>
@@ -82,44 +80,27 @@ $green_url = ($green && ! is_wp_error(get_term_link($green))) ? get_term_link($g
 			</div>
 		</div>
 		<div class="l-header__tools soul-nav__utils">
-			<div class="soul-lang c-lang" data-component="lang-toggle" role="group" aria-label="Language">
-				<a class="soul-lang__btn<?php echo $lang === 'vi' ? ' is-on' : ''; ?>" href="<?php echo esc_url(add_query_arg('soul_lang', 'vi')); ?>">VI</a>
-				<a class="soul-lang__btn<?php echo $lang === 'en' ? ' is-on' : ''; ?>" href="<?php echo esc_url(add_query_arg('soul_lang', 'en')); ?>">EN</a>
-			</div>
+			<?php
+			if ( function_exists( 'soul_pll_language_switcher' ) ) {
+				soul_pll_language_switcher();
+			}
+			?>
 			<button type="button" class="c-icon-btn soul-icon-btn" data-open="soul-search" aria-label="<?php echo esc_attr(soul_t($c['search'])); ?>">
 				<svg width="17" height="17" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="7" cy="7" r="5"></circle><path d="M11 11l4 4"></path></svg>
 			</button>
-			<button type="button" class="c-icon-btn soul-icon-btn soul-cart-btn" data-open="soul-cart" aria-label="<?php echo esc_attr(soul_t($c['cart'])); ?>">
+			<a class="c-icon-btn soul-icon-btn soul-account-btn" href="<?php echo esc_url($account); ?>" aria-label="<?php echo esc_attr(soul_t($c['account'])); ?>">
+				<svg width="18" height="18" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><circle cx="8" cy="5.5" r="3"></circle><path d="M2.5 15c.6-3 2.8-4.6 5.5-4.6s4.9 1.6 5.5 4.6"></path></svg>
+			</a>
+			<button type="button" class="soul-cart-btn" data-open="soul-cart" aria-label="<?php echo esc_attr(soul_t($c['cart'])); ?>">
 				<span class="soul-cart-btn__label"><?php echo esc_html(soul_t($c['cart'])); ?></span>
 				<span class="c-cart-count soul-cart-btn__count" data-cart-count>0</span>
 			</button>
 		</div>
 	</nav>
-	<div class="l-mega" data-mega="shop" hidden>
-		<div class="l-mega__inner">
-			<div>
-				<div class="l-mega__head"><?php esc_html_e('Cà phê rang', 'soul'); ?></div>
-				<ul class="l-mega__list">
-					<li><a href="<?php echo esc_url($rang_url); ?>"><?php esc_html_e('Cà phê rang', 'soul'); ?></a></li>
-					<li><a href="<?php echo esc_url($shop); ?>"><?php esc_html_e('Tất cả sản phẩm', 'soul'); ?></a></li>
-				</ul>
-			</div>
-			<div>
-				<div class="l-mega__head"><?php esc_html_e('Nhân xanh', 'soul'); ?></div>
-				<ul class="l-mega__list">
-					<li><a href="<?php echo esc_url($green_url); ?>"><?php esc_html_e('Cà phê nhân xanh', 'soul'); ?></a></li>
-					<li><a href="<?php echo esc_url($shop); ?>"><?php esc_html_e('Xem tất cả ↗', 'soul'); ?></a></li>
-				</ul>
-			</div>
-			<a class="l-mega__feature" href="<?php echo esc_url($soulful_url); ?>">
-				<div class="l-mega__feature-copy">
-					<div class="l-mega__feature-eye"><?php esc_html_e('Mùa vụ mới', 'soul'); ?></div>
-					<div class="l-mega__feature-title">Soulful Collection 2026</div>
-					<div class="l-mega__feature-meta">Cay · Nồng · Thơm · Ngọt</div>
-					<div class="l-mega__feature-cta"><?php esc_html_e('Khám phá ↗', 'soul'); ?></div>
-				</div>
-			</a>
-		</div>
-	</div>
+	<?php
+	if ( function_exists( 'soul_render_shop_mega' ) ) {
+		soul_render_shop_mega();
+	}
+	?>
 </header>
 <main id="main" class="soul-main">

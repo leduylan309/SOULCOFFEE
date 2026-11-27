@@ -56,6 +56,10 @@ function soul_run_seed(): void {
 			'meta'   => 'Buôn Ma Thuột · Robusta TR · Khô (Natural) · Rang đậm vừa',
 			'cols'   => ['ca-phe-rang', 'ca-phe-pha-phin', 'san-pham-noi-bat'],
 			'image'  => 'featured/phin_finero.jpg',
+			'story'  => [
+				'Fine Robusta từ Buôn Ma Thuột, chọn lọc theo mùa vụ và sơ chế Natural để giữ vị cacao, mật ong và hậu ngọt đậm đặc trưng của vùng.',
+				'Rang dành cho phin Việt: đậm, tròn và dễ pha tại nhà. Chọn nguyên hạt để xay trước khi pha, hoặc xay sẵn theo độ mịn phin.',
+			],
 		],
 		[
 			'title'  => 'Premium Coffee — Robusta',
@@ -109,7 +113,9 @@ function soul_run_seed(): void {
 			'post_status'  => 'publish',
 			'post_title'   => $p['title'],
 			'post_name'    => $p['sku'],
-			'post_content' => '<!-- wp:paragraph --><p>' . esc_html($p['notes']) . '</p><!-- /wp:paragraph -->',
+			'post_content' => ! empty($p['story']) && is_array($p['story'])
+				? soul_shop_story_blocks($p['story'])
+				: '<!-- wp:paragraph {"className":"s-shop-story__p"} --><p class="s-shop-story__p">' . esc_html($p['notes']) . '</p><!-- /wp:paragraph -->',
 			'post_excerpt' => $p['meta'],
 		]);
 		if (is_wp_error($id) || ! $id) {

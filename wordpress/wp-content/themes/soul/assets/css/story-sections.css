@@ -885,3 +885,14 @@ body .s-story-next__body {
   text-underline-offset: 6px;
   text-decoration-color: rgba(39, 41, 45, 0.3);
 }
+
+/* —— Responsive polish —— */
+@media (max-width: 599px) {
+  body .s-story-fr__tall--offset {
+    margin-top: 0 !important;
+  }
+  body .s-story-fr__caprow {
+    flex-direction: column;
+    gap: 6px;
+  }
+}

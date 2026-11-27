@@ -48,7 +48,11 @@
 .editor-styles-wrapper [class^="s-space-"],
 .editor-styles-wrapper [class*=" s-space-"],
 .editor-styles-wrapper [class^="s-blog-"],
-.editor-styles-wrapper [class*=" s-blog-"] {
+.editor-styles-wrapper [class*=" s-blog-"],
+.editor-styles-wrapper [class^="s-help-"],
+.editor-styles-wrapper [class*=" s-help-"],
+.editor-styles-wrapper [class^="s-shop-"],
+.editor-styles-wrapper [class*=" s-shop-"] {
   max-width: none !important;
   width: 100%;
   box-sizing: border-box;
@@ -98,4 +102,21 @@
   margin-right: 0 !important;
   padding-left: 0 !important;
   padding-right: 0 !important;
+}
+
+/* Product CPT editor = front .s-shop-story__body column only (sand). */
+.editor-styles-wrapper.s-shop-product-canvas {
+  background: var(--soul-sand, #eae3d5) !important;
+}
+.editor-styles-wrapper.s-shop-product-canvas .is-root-container {
+  max-width: 720px !important;
+  width: 100% !important;
+  margin-inline: auto !important;
+  padding: clamp(40px, 6vw, 80px) clamp(16px, 3vw, 24px) !important;
+  box-sizing: border-box;
+}
+.editor-styles-wrapper.s-shop-product-canvas .is-root-container > .wp-block {
+  max-width: none !important;
+  margin-left: 0 !important;
+  margin-right: 0 !important;
 }

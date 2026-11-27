@@ -7,6 +7,42 @@
 
 declare(strict_types=1);
 
+/** Related posts picker — stored as post meta, edited in Document sidebar. */
+add_action('init', static function (): void {
+	register_post_meta('post', 'soul_related_posts', [
+		'type'              => 'array',
+		'single'            => true,
+		'default'           => [],
+		'show_in_rest'      => [
+			'schema' => [
+				'type'  => 'array',
+				'items' => [
+					'type' => 'integer',
+				],
+			],
+		],
+		'auth_callback'     => static function (): bool {
+			return current_user_can('edit_posts');
+		},
+		'sanitize_callback' => static function ($value) {
+			if (! is_array($value)) {
+				return [];
+			}
+			$out = [];
+			foreach ($value as $id) {
+				$id = (int) $id;
+				if ($id > 0) {
+					$out[] = $id;
+				}
+				if (count($out) >= 3) {
+					break;
+				}
+			}
+			return array_values(array_unique($out));
+		},
+	]);
+});
+
 /** Default starter blocks for new posts (unlocked). */
 add_action('init', static function (): void {
 	$obj = get_post_type_object('post');
@@ -47,9 +83,15 @@ add_action('add_meta_boxes', static function (): void {
 			echo '<li><strong>' . esc_html__('Ảnh đại diện', 'soul') . '</strong> → ' . esc_html__('ảnh bìa (Upload / Thư viện).', 'soul') . '</li>';
 			echo '<li><strong>' . esc_html__('Đoạn trích', 'soul') . '</strong> → ' . esc_html__('dòng lead dưới tiêu đề.', 'soul') . '</li>';
 			echo '<li>' . esc_html__('Chuyên mục + Tags → chip / sidebar.', 'soul') . '</li>';
-			echo '<li>' . esc_html__('Nội dung: Patterns → SOUL Content (Note, Steps, Facts, Apply, List).', 'soul') . '</li>';
+			echo '<li><strong>' . esc_html__('Bài liên quan', 'soul') . '</strong> → ' . esc_html__('panel bên phải (tối đa 3). Để trống = bài mới nhất cùng chuyên mục.', 'soul') . '</li>';
+			echo '<li><strong>' . esc_html__('Patterns → SOUL Blog Article', 'soul') . '</strong></li>';
 			echo '</ol>';
-			echo '<p class="description" style="margin-top:10px;">' . esc_html__('Không dùng Custom HTML. Đổi ảnh card listing cũng bằng Ảnh đại diện.', 'soul') . '</p>';
+			echo '<p class="description" style="margin:8px 0 0;line-height:1.5;">'
+				. esc_html__('Khối: Mở đầu, Mục, Lead, List, Steps, Facts/Thông số, Note, Mẹo, Tasting, Apply, CTA, Award, Ảnh, Gallery, Quote, Divider.', 'soul')
+				. '<br>'
+				. esc_html__('Tổ hợp: Lô origin · Hướng dẫn pha · Công thức pha · Nhiệm vụ · Yêu cầu · Tin tuyển dụng.', 'soul')
+				. '</p>';
+			echo '<p class="description" style="margin-top:8px;">' . esc_html__('Không dùng Custom HTML / pattern Home–Newsletter. Ảnh bìa = Ảnh đại diện.', 'soul') . '</p>';
 		},
 		'post',
 		'side',
@@ -57,7 +99,7 @@ add_action('add_meta_boxes', static function (): void {
 	);
 });
 
-/** Editor assets: canvas class + article-only bridge. */
+/** Editor assets: canvas class + related-posts panel. */
 add_action('enqueue_block_editor_assets', static function (): void {
 	$screen = function_exists('get_current_screen') ? get_current_screen() : null;
 	if (! $screen || $screen->post_type !== 'post') {
@@ -67,6 +109,24 @@ add_action('enqueue_block_editor_assets', static function (): void {
 		'soul-blog-editor',
 		SOUL_URI . '/assets/js/blog-editor.js',
 		['wp-data', 'wp-dom-ready', 'wp-edit-post'],
+		SOUL_VERSION,
+		true
+	);
+	wp_enqueue_script(
+		'soul-blog-related',
+		SOUL_URI . '/assets/js/blog-related.js',
+		[
+			'wp-element',
+			'wp-plugins',
+			'wp-edit-post',
+			'wp-editor',
+			'wp-components',
+			'wp-data',
+			'wp-core-data',
+			'wp-api-fetch',
+			'wp-i18n',
+			'wp-compose',
+		],
 		SOUL_VERSION,
 		true
 	);

@@ -2643,3 +2643,35 @@ body .s-home-nl > .wp-block-columns {
   color: var(--soul-ink, #27292d) !important;
   border-radius: 0;
 }
+
+/* —— Responsive polish —— */
+@media (max-width: 599px) {
+  body .s-home-hero .s-home-hero__ctas,
+  body .s-home-hero .s-home-hero__ctas.wp-block-buttons {
+    margin-top: 28px;
+    display: flex !important;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+  }
+  body .s-home-hero .s-home-hero__ctas .wp-block-button {
+    width: 100%;
+    margin: 0;
+  }
+  body .s-home-hero .s-home-hero__ctas .wp-block-button__link {
+    width: 100%;
+    justify-content: center;
+  }
+  body .s-home-coll__links.wp-block-group,
+  body .s-home-coll__links {
+    grid-template-columns: 1fr !important;
+    gap: 0 !important;
+  }
+  body .s-home-album__shot--offset,
+  body .s-home-album .s-home-album__shot--offset {
+    margin-top: 0 !important;
+  }
+  body .s-home-awards__photos {
+    grid-template-columns: 1fr 1fr;
+  }
+}

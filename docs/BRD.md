@@ -206,7 +206,7 @@ Mỗi feature: **ID · Mô tả · Acceptance · Ưu tiên · Phụ thuộc**.
 | F-22 | Checkout page | Xem dòng hàng + form: tên, email, SĐT, địa chỉ, ghi chú | P0 |
 | F-23 | Payment preference | Radio: `cod` \| `bank` — lưu meta đơn, **không** charge | P0 |
 | F-24 | REST tạo đơn | `POST /wp-json/soul/v1/checkout` → CPT `soul_order` + mã `SOUL-{id}` | P0 |
-| F-25 | Admin Orders | List: mã, status, total; detail: customer, lines; status new/processing/done/cancelled | P0 |
+| F-25 | Admin Orders | List: mã, khách, status badge, payment, ship, total + filter/bulk; detail: customer/geo, shipping, VAT, lines/totals, tracking, notes; status `new\|confirmed\|shipping\|done\|cancelled` + `payment_status` unpaid/paid | P0 |
 | F-26 | Email thông báo | `wp_mail` admin khi đơn mới (Mailpit local) | P0 |
 | F-27 | Validation | Bắt buộc name + email hợp lệ + phone + address; giỏ không rỗng | P0 |
 | F-28 | Thank-you state | Hiện mã đơn; clear cart | P0 |
@@ -245,7 +245,7 @@ Mỗi feature: **ID · Mô tả · Acceptance · Ưu tiên · Phụ thuộc**.
 
 | ID | Feature | Acceptance | Prio |
 |---|---|---|---|
-| F-60 | VI/EN toggle | Toàn site copy; URL strategy (Polylang/WPML hoặc tương đương) | P2 |
+| F-60 | VI/EN toggle | Polylang Free: VI default + `/en/`; CPT/tax/menus dịch; orders không dịch; theme UI theo lang | P2 |
 | F-61 | Account | Login/orders — **không bắt buộc v1**; có thể tra cứu mã đơn bằng email | P3 |
 | F-62 | Order lookup | Form: email + mã đơn → xem status (không full account) | P2 |
 
@@ -386,7 +386,7 @@ Chi tiết: `html/readme.md` (local) · `PATTERN-SYSTEM/04-design-system.md`.
 | Patterns starters (home/story/solutions) | Partial |
 | Full Home §3.6 / Story / Spaces / Help / Blog | Not done |
 | Cart drawer / filters / quote-only | Not done |
-| i18n / account | Not done |
+| i18n / account | Polylang baseline done; account EN via localized JS |
 | `html/` gitignored | Done |
 
 → Thực thi tiếp **chỉ theo** [`ROADMAP.md`](ROADMAP.md) bám BRD này.

@@ -13,11 +13,12 @@ add_action('init', static function (): void {
 			'name'          => __('Spaces', 'soul'),
 			'singular_name' => __('Space', 'soul'),
 		],
-		'public'       => true,
-		'has_archive'  => true,
-		'rewrite'      => ['slug' => 'spaces', 'with_front' => false],
-		'menu_icon'    => 'dashicons-store',
-		'show_in_rest' => true,
+		'public'            => true,
+		'has_archive'       => true,
+		'show_in_nav_menus' => true,
+		'rewrite'           => ['slug' => 'spaces', 'with_front' => false],
+		'menu_icon'         => 'dashicons-store',
+		'show_in_rest'      => true,
 		'supports'     => ['title', 'editor', 'thumbnail', 'excerpt', 'page-attributes'],
 	]);
 });

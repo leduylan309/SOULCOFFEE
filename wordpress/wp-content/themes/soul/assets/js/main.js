@@ -2,29 +2,34 @@
 import { registerMany, mount, observe } from './core/registry.js';
 import { apply as applyI18n } from './core/i18n.js';
 import { cart, localAdapter } from './services/cart.js';
+import { getRecaptchaToken, recaptchaEnabled } from './services/recaptcha.js';
 import { bus } from './core/events.js';
 
+const v = () => (window.SoulTheme && window.SoulTheme.ver) || Date.now();
+const mod = (path) => () => import(`${path}?v=${v()}`);
+
 registerMany({
-  'modal':        () => import('./components/modal.js'),
-  'header':       () => import('./components/header.js'),
-  'cart-drawer':  () => import('./components/cart-drawer.js'),
-  'add-to-cart':  () => import('./components/add-to-cart.js'),
-  'toast':        () => import('./components/toast.js'),
-  'lightbox':     () => import('./components/lightbox.js'),
-  'rail':         () => import('./components/rail.js'),
-  'chip-group':   () => import('./components/chip-group.js'),
-  'flavour-tabs': () => import('./components/flavour-tabs.js'),
-  'stepper':      () => import('./components/stepper.js'),
-  'form':         () => import('./components/form.js'),
-  'lang-toggle':  () => import('./components/lang-toggle.js'),
-  'search':       () => import('./components/search.js')
+  'modal':        mod('./components/modal.js'),
+  'header':       mod('./components/header.js'),
+  'cart-drawer':  mod('./components/cart-drawer.js'),
+  'add-to-cart':  mod('./components/add-to-cart.js'),
+  'toast':        mod('./components/toast.js'),
+  'lightbox':     mod('./components/lightbox.js'),
+  'rail':         mod('./components/rail.js'),
+  'chip-group':   mod('./components/chip-group.js'),
+  'flavour-tabs': mod('./components/flavour-tabs.js'),
+  'stepper':      mod('./components/stepper.js'),
+  'form':         mod('./components/form.js'),
+  'search':       mod('./components/search.js')
 });
 
 const pages = {
-  home: () => import('./pages/home.js'),
-  product: () => import('./pages/product.js'),
-  collection: () => import('./pages/collection.js'),
-  checkout: () => import('./pages/checkout.js')
+  home:       mod('./pages/home.js'),
+  product:    mod('./pages/product.js'),
+  collection: mod('./pages/collection.js'),
+  checkout:   mod('./pages/checkout.js'),
+  account:    mod('./pages/account.js'),
+  help:       mod('./pages/help.js')
 };
 
 async function boot() {
@@ -64,4 +69,4 @@ async function boot() {
 
 document.readyState === 'loading' ? document.addEventListener('DOMContentLoaded', boot) : boot();
 
-window.Soul = { cart, mount };
+window.Soul = { cart, mount, getRecaptchaToken, recaptchaEnabled };

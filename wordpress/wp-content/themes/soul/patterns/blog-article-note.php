@@ -1,10 +1,11 @@
 <?php
 /**
- * Title: Blog article — Note
+ * Title: Blog · Ghi chú (note)
  * Slug: soul/blog-article-note
  * Categories: soul-blog, soul-content
+ * Keywords: blog, note, ghi chú
  * Post Types: post
- * Description: Khối ghi chú dashed (SoT note).
+ * Description: Khối ghi chú viền nét đứt (SoT note).
  */
 ?>
 <!-- wp:group {"className":"s-blog-note is-style-blog-note","layout":{"type":"default"}} -->

@@ -54,3 +54,5 @@ Status: chờ A approve
 | Coffee Solutions `/coffee-solutions/` | `html/Coffee Solutions.dc.html` | `.s-sol-*` |
 | Spaces `/spaces/` | `html/Spaces.dc.html` | `.s-space-*` |
 | Blog `/blog/` | `html/Blog.dc.html` | `.s-blog-*` |
+| Help `/help/` | `html/Help.dc.html` | `.s-help-*` |
+| Shop `/products/` | `html/Shop.dc.html` | `.s-shop-*` |

@@ -676,3 +676,25 @@ body .s-space-br-others__meta {
   font-size: 12.5px;
   color: var(--soul-muted, #514b42);
 }
+
+/* —— Responsive polish —— */
+@media (max-width: 699px) {
+  body .wp-block-columns.s-space-br-hero.is-layout-flex,
+  body .s-space-br-hero {
+    min-height: 0;
+  }
+  .s-space-hub-card__media {
+    min-height: 240px;
+  }
+  .s-space-hub-card__fact,
+  body .s-space-br-hero__fact {
+    grid-template-columns: 1fr;
+    gap: 4px;
+  }
+  .s-space-hub-card__copy {
+    padding: 22px 20px 24px;
+  }
+  .s-space-hub-card__title {
+    font-size: clamp(28px, 8vw, 40px);
+  }
+}

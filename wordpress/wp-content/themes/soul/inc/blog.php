@@ -332,41 +332,96 @@ function soul_blog_adjacent(int $post_id): array {
 }
 
 /**
+ * Related posts for single: manual pick (post meta) → same category latest → tags → any latest.
+ *
  * @return list<array{title:string,excerpt:string,img:string,date:string,cat:string,cat_url:string,url:string}>
  */
 function soul_blog_related(int $post_id, int $limit = 3): array {
 	$cat = soul_blog_primary_cat($post_id);
-	$ids = [];
-	if ($cat) {
+	$ids = soul_blog_related_manual_ids($post_id, $limit);
+
+	if (count($ids) < $limit && $cat) {
 		$q = new WP_Query([
-			'post_type'      => 'post',
-			'posts_per_page' => $limit,
-			'post__not_in'   => [$post_id],
-			'category_name'  => $cat->slug,
-			'orderby'        => 'date',
-			'order'          => 'DESC',
-			'fields'         => 'ids',
+			'post_type'              => 'post',
+			'posts_per_page'         => $limit - count($ids),
+			'post__not_in'           => array_merge([$post_id], $ids),
+			'category_name'          => $cat->slug,
+			'orderby'                => 'date',
+			'order'                  => 'DESC',
+			'fields'                 => 'ids',
+			'no_found_rows'          => true,
+			'update_post_meta_cache' => false,
+			'update_post_term_cache' => false,
 		]);
-		$ids = $q->posts;
+		$ids = array_merge($ids, array_map('intval', $q->posts));
 	}
+
 	if (count($ids) < $limit) {
 		$tags = wp_get_post_tags($post_id, ['fields' => 'ids']);
 		if ($tags) {
 			$q2 = new WP_Query([
-				'post_type'      => 'post',
-				'posts_per_page' => $limit - count($ids),
-				'post__not_in'   => array_merge([$post_id], $ids),
-				'tag__in'        => $tags,
-				'fields'         => 'ids',
+				'post_type'              => 'post',
+				'posts_per_page'         => $limit - count($ids),
+				'post__not_in'           => array_merge([$post_id], $ids),
+				'tag__in'                => $tags,
+				'orderby'                => 'date',
+				'order'                  => 'DESC',
+				'fields'                 => 'ids',
+				'no_found_rows'          => true,
+				'update_post_meta_cache' => false,
+				'update_post_term_cache' => false,
 			]);
-			$ids = array_merge($ids, $q2->posts);
+			$ids = array_merge($ids, array_map('intval', $q2->posts));
 		}
 	}
+
+	if (count($ids) < $limit) {
+		$q3 = new WP_Query([
+			'post_type'              => 'post',
+			'posts_per_page'         => $limit - count($ids),
+			'post__not_in'           => array_merge([$post_id], $ids),
+			'orderby'                => 'date',
+			'order'                  => 'DESC',
+			'fields'                 => 'ids',
+			'no_found_rows'          => true,
+			'update_post_meta_cache' => false,
+			'update_post_term_cache' => false,
+		]);
+		$ids = array_merge($ids, array_map('intval', $q3->posts));
+	}
+
 	$out = [];
 	foreach (array_slice($ids, 0, $limit) as $pid) {
 		$out[] = soul_blog_card((int) $pid, $cat ? $cat->slug : null);
 	}
 	return $out;
+}
+
+/**
+ * Manually curated related post IDs from CMS (published posts only).
+ *
+ * @return list<int>
+ */
+function soul_blog_related_manual_ids(int $post_id, int $limit = 3): array {
+	$raw = get_post_meta($post_id, 'soul_related_posts', true);
+	if (! is_array($raw) || $raw === []) {
+		return [];
+	}
+	$ids = [];
+	foreach ($raw as $item) {
+		$pid = (int) $item;
+		if ($pid <= 0 || $pid === $post_id) {
+			continue;
+		}
+		if (get_post_type($pid) !== 'post' || get_post_status($pid) !== 'publish') {
+			continue;
+		}
+		$ids[] = $pid;
+		if (count($ids) >= $limit) {
+			break;
+		}
+	}
+	return $ids;
 }
 
 /** Ensure H2 in content have ids for TOC anchors. */

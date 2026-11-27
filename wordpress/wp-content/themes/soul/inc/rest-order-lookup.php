@@ -42,15 +42,24 @@ add_action('rest_api_init', static function (): void {
 				return new \WP_Error('soul_not_found', __('Không tìm thấy đơn.', 'soul'), ['status' => 404]);
 			}
 
-			$items = get_post_meta($post_id, 'soul_items', true);
+			$items  = get_post_meta($post_id, 'soul_items', true);
+			$status = function_exists('soul_order_get_status')
+				? soul_order_get_status($post_id)
+				: (string) get_post_meta($post_id, 'soul_status', true);
+			$pay_st = function_exists('soul_order_get_payment_status')
+				? soul_order_get_payment_status($post_id)
+				: (string) get_post_meta($post_id, 'soul_payment_status', true);
 			return [
-				'ok'     => true,
-				'code'   => (string) get_post_meta($post_id, 'soul_order_code', true),
-				'status' => (string) get_post_meta($post_id, 'soul_status', true),
-				'total'  => (int) get_post_meta($post_id, 'soul_total', true),
-				'payment'=> (string) get_post_meta($post_id, 'soul_payment', true),
-				'items'  => is_array($items) ? $items : [],
-				'date'   => get_the_date('c', $post_id),
+				'ok'            => true,
+				'code'          => (string) get_post_meta($post_id, 'soul_order_code', true),
+				'status'        => $status,
+				'statusLabel'   => function_exists('soul_order_status_label') ? soul_order_status_label($status) : $status,
+				'payment'       => (string) get_post_meta($post_id, 'soul_payment', true),
+				'paymentStatus' => $pay_st !== '' ? $pay_st : 'unpaid',
+				'total'         => (int) get_post_meta($post_id, 'soul_total', true),
+				'tracking'      => (string) get_post_meta($post_id, 'soul_tracking', true),
+				'items'         => is_array($items) ? $items : [],
+				'date'          => get_the_date('c', $post_id),
 			];
 		},
 	]);

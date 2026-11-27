@@ -12,8 +12,8 @@ Editor canvas và front phải **trùng layout**. Pattern = single source. **Adm
 1. **Editable patterns** — Copy, ảnh, nút, link = core blocks (`heading`, `paragraph`, `image`, `buttons`, `columns`, `group`). Cấm `wp:html` cho marketing copy.
 2. **Custom block chỉ khi bắt buộc** — Form REST → `soul/lead-form`; ATC → `soul/add-to-cart`. Admin chỉnh qua Inspector (không code).
 3. **Một CSS stack** — Front enqueue = `add_editor_style`: tokens → soul → section CSS → theme-chrome → editor-bridge.
-4. **Full-bleed** — `.s-home-*` / `.s-newcrop-*` / `.s-story-*` / `.s-sol-*` / `.s-space-*` / `.s-blog-*` / `alignfull` full width trong editor; không bóp bằng `soul-container`.
-5. **SoT visual** — `html/*.html` / `*.dc.html`; className `s-home-*` / `s-newcrop-*` / `s-story-*` / `s-sol-*` / `s-space-*` / `s-blog-*` trên Group/Columns giữ fidelity.
+4. **Full-bleed** — `.s-home-*` / `.s-newcrop-*` / `.s-story-*` / `.s-sol-*` / `.s-space-*` / `.s-blog-*` / `.s-help-*` / `.s-shop-*` / `alignfull` full width trong editor; không bóp bằng `soul-container`.
+5. **SoT visual** — `html/*.html` / `*.dc.html`; className `s-home-*` / `s-newcrop-*` / `s-story-*` / `s-sol-*` / `s-space-*` / `s-blog-*` / `s-help-*` / `s-shop-*` trên Group/Columns giữ fidelity.
 6. **DoD** — Admin đổi text/ảnh/URL trong editor → front khớp; không mở Custom HTML.
 7. **Fidelity gate** — Duyệt từng section @1920 theo rule `html-fidelity-gate` (checklist → fix → đo → A approve). Không pass hàng loạt.
 

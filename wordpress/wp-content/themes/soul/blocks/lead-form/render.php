@@ -24,6 +24,52 @@ if ($kind === 'newsletter') {
 	return;
 }
 
+if ($kind === 'help' || $source === 'help') {
+	$submit = $submit !== '' ? $submit : __('Gửi lời nhắn', 'soul');
+	$title  = $title !== '' && $title !== __('Form liên hệ', 'soul') ? $title : __('Để lại lời nhắn', 'soul');
+	$wrap   = get_block_wrapper_attributes(['class' => 's-help-form soul-lead-form']);
+	$topics = [
+		'order'   => __('Đơn hàng & giao hàng', 'soul'),
+		'product' => __('Sản phẩm & cách pha', 'soul'),
+		'b2b'     => __('Hợp tác / mua sỉ', 'soul'),
+		'other'   => __('Khác', 'soul'),
+	];
+	?>
+	<form <?php echo $wrap; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?> data-soul-form="contact" data-source="help" novalidate>
+		<h2><?php echo esc_html($title); ?></h2>
+		<label>
+			<span><?php esc_html_e('Chủ đề', 'soul'); ?></span>
+			<select name="topic">
+				<?php foreach ($topics as $val => $label) : ?>
+					<option value="<?php echo esc_attr((string) $val); ?>"><?php echo esc_html($label); ?></option>
+				<?php endforeach; ?>
+			</select>
+		</label>
+		<label>
+			<span><?php esc_html_e('Họ và tên', 'soul'); ?> <span class="req">*</span></span>
+			<input type="text" name="name" required autocomplete="name">
+		</label>
+		<label>
+			<span><?php esc_html_e('Email hoặc số điện thoại', 'soul'); ?> <span class="req">*</span></span>
+			<input type="text" name="email" required autocomplete="email">
+		</label>
+		<label>
+			<span><?php esc_html_e('Mã đơn hàng (nếu có)', 'soul'); ?></span>
+			<input type="text" name="order" autocomplete="off">
+		</label>
+		<label>
+			<span><?php esc_html_e('Nội dung', 'soul'); ?> <span class="req">*</span></span>
+			<textarea name="message" rows="5" required></textarea>
+		</label>
+		<p class="soul-hp" aria-hidden="true"><label>Website<input type="text" name="website" tabindex="-1" autocomplete="off"></label></p>
+		<button type="submit"><?php echo esc_html($submit); ?></button>
+		<p class="s-help-form__note"><?php esc_html_e('Soul phản hồi trong 1 ngày làm việc (T2–T7).', 'soul'); ?></p>
+		<p class="soul-form-msg" hidden></p>
+	</form>
+	<?php
+	return;
+}
+
 $submit = $submit !== '' ? $submit : __('Gửi thông tin', 'soul');
 $interests = $source === 'solutions'
 	? ['Nhân xanh', 'Cà phê rang', 'Đào tạo', 'Workshop & sự kiện', 'Quà tặng doanh nghiệp']

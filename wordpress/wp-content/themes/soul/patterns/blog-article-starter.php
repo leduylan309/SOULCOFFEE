@@ -1,10 +1,11 @@
 <?php
 /**
- * Title: Blog article — Starter
+ * Title: Blog · Mở đầu bài
  * Slug: soul/blog-article-starter
  * Categories: soul-blog, soul-content
+ * Keywords: blog, mở đầu, đoạn, heading
  * Post Types: post
- * Description: Mẫu mở đầu bài — đoạn mở + H2 + đoạn. Ảnh bìa = Featured Image; lead = Excerpt.
+ * Description: Đoạn mở + H2 + đoạn. Ảnh bìa = Ảnh đại diện; lead = Đoạn trích.
  */
 ?>
 <!-- wp:paragraph -->

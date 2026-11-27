@@ -635,6 +635,16 @@ img {
     display: none;
   }
 }
+.l-header__menu {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+}
+.l-nav-item {
+  position: relative;
+}
 .l-header__link {
   display: flex;
   align-items: center;
@@ -644,8 +654,63 @@ img {
   border-bottom: 2px solid transparent;
   white-space: nowrap;
 }
-.l-header__link:hover, .l-header__link:focus-visible {
+.l-header__link > span[aria-hidden="true"] {
+  font-size: 9px;
+  opacity: 0.55;
+  line-height: 1;
+}
+.l-header__link:hover,
+.l-header__link:focus-visible,
+.l-header__link[aria-expanded="true"],
+.l-nav-item:hover > .l-header__link,
+.l-nav-item.is-current > .l-header__link {
   border-bottom-color: var(--soul-yellow);
+}
+/* WP nested dropdown (Appearance → Menus children) */
+.l-nav-dropdown {
+  list-style: none;
+  margin: 0;
+  padding: 10px 0;
+  position: absolute;
+  left: 0;
+  top: 100%;
+  min-width: 220px;
+  background: var(--surface-page);
+  border: 1px solid var(--line-default);
+  box-shadow: var(--shadow-mega);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(4px);
+  transition: opacity 0.15s ease, transform 0.15s ease, visibility 0.15s;
+  z-index: 70;
+}
+.l-nav-item--has-children:hover > .l-nav-dropdown,
+.l-nav-item--has-children:focus-within > .l-nav-dropdown {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+.l-nav-dropdown__link {
+  display: block;
+  padding: 10px 16px;
+  font-family: var(--font-display);
+  font-size: 16px;
+  line-height: 1.25;
+  text-transform: none;
+  letter-spacing: 0;
+  font-weight: 400;
+  white-space: nowrap;
+  color: inherit;
+}
+.l-nav-dropdown__link:hover,
+.l-nav-dropdown__link:focus-visible {
+  color: var(--link-hover);
+}
+/* Shop keeps theme mega — hide native dropdown on desktop */
+@media (min-width: 1180px) {
+  .l-nav-item--mega > .l-nav-dropdown {
+    display: none;
+  }
 }
 .l-header__tools {
   display: flex;
@@ -653,9 +718,16 @@ img {
   gap: 4px;
 }
 @media (min-width: 1180px) {
-  .l-header__burger {
-    display: none;
+  /* After .c-icon-btn { display:grid } — need equal/higher specificity */
+  .l-header__burger,
+  .c-icon-btn.l-header__burger {
+    display: none !important;
   }
+}
+.l-header__burger {
+  margin-left: -10px;
+  flex: 0 0 auto;
+  overflow: visible;
 }
 
 .c-cart-count {
@@ -687,13 +759,23 @@ img {
   max-width: var(--container-max);
   margin: 0 auto;
 }
+.l-mega__inner--flat {
+  grid-template-columns: 1fr;
+}
+.l-mega__list--flat {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 220px), 1fr));
+  gap: 14px clamp(24px, 3vw, 48px);
+}
+.l-mega__col {
+  min-width: 0;
+}
 .l-mega__head {
   font-family: var(--font-sans);
   font-size: 10.5px;
-  letter-spacing: 0.16em;
+  letter-spacing: 0.18em;
   font-weight: 400;
   text-transform: uppercase;
-  letter-spacing: 0.18em;
   color: var(--text-muted);
   padding-bottom: 14px;
   border-bottom: 1px solid var(--line-default);
@@ -712,6 +794,81 @@ img {
 }
 .l-mega__list a:hover, .l-mega__list a:focus-visible {
   color: var(--link-hover);
+}
+.l-mega__cta {
+  margin-top: 10px;
+  padding-top: 14px;
+  border-top: 1px solid var(--line-default);
+}
+.l-mega__cta a {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+/* Feature card — SoT ink panel */
+.l-mega__feature {
+  align-self: stretch;
+  min-width: 0;
+}
+.l-mega__feature-card {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 18px;
+  align-items: end;
+  height: 100%;
+  min-height: 180px;
+  background: var(--soul-ink, #27292D);
+  color: var(--surface-page, #F4EFE5);
+  padding: 18px;
+  text-decoration: none;
+}
+.l-mega__feature-card:hover,
+.l-mega__feature-card:focus-visible {
+  color: var(--surface-page, #F4EFE5);
+}
+.l-mega__feature-img {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  object-fit: cover;
+  display: block;
+}
+.l-mega__feature-copy {
+  min-width: 0;
+}
+.l-mega__feature-eyebrow {
+  font-family: var(--font-sans);
+  font-size: 10.5px;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--soul-gold, #FFD35B);
+}
+.l-mega__feature-title {
+  font-family: var(--font-display);
+  font-size: 24px;
+  line-height: 1.12;
+  font-weight: 400;
+  margin: 10px 0 8px;
+}
+.l-mega__feature-tagline {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  color: rgba(244, 239, 229, 0.75);
+}
+.l-mega__feature-cta {
+  font-family: var(--font-sans);
+  font-size: 12px;
+  margin-top: 14px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+@media (max-width: 900px) {
+  .l-mega__inner {
+    grid-template-columns: 1fr;
+  }
+  .l-mega__feature-card {
+    grid-template-columns: minmax(0, 140px) 1fr;
+  }
 }
 
 .l-footer {
@@ -737,6 +894,28 @@ img {
   letter-spacing: 0.18em;
   color: var(--soul-yellow);
   margin-bottom: 14px;
+}
+.soul-mobile-menu__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+.soul-mobile-menu__list a {
+  display: block;
+  padding: 12px 0;
+}
+.soul-mobile-menu__sub {
+  list-style: none;
+  margin: 0 0 8px;
+  padding: 0 0 0 14px;
+}
+.soul-mobile-menu__sub a {
+  padding: 8px 0;
+  font-size: 0.92em;
+  opacity: 0.85;
 }
 .l-footer__links {
   list-style: none;

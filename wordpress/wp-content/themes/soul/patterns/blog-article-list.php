@@ -1,10 +1,11 @@
 <?php
 /**
- * Title: Blog article — List
+ * Title: Blog · Danh sách gạch
  * Slug: soul/blog-article-list
  * Categories: soul-blog, soul-content
+ * Keywords: blog, list, nhiệm vụ, yêu cầu
  * Post Types: post
- * Description: Danh sách gạch ngang clay (nhiệm vụ / yêu cầu).
+ * Description: Danh sách gạch ngang clay (SoT list) — nhiệm vụ / yêu cầu.
  */
 ?>
 <!-- wp:list {"className":"s-blog-list is-style-blog-list"} -->

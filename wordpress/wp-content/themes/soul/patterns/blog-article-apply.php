@@ -1,10 +1,11 @@
 <?php
 /**
- * Title: Blog article — Apply CTA
+ * Title: Blog · Ứng tuyển (apply)
  * Slug: soul/blog-article-apply
  * Categories: soul-blog, soul-content
+ * Keywords: blog, tuyển dụng, apply, cv
  * Post Types: post
- * Description: Khối ứng tuyển (ink + nút vàng Gửi CV).
+ * Description: CTA ứng tuyển nền ink + nút vàng Gửi CV (SoT apply).
  */
 ?>
 <!-- wp:group {"className":"s-blog-apply is-style-blog-apply","layout":{"type":"flex","flexWrap":"wrap","justifyContent":"space-between"}} -->

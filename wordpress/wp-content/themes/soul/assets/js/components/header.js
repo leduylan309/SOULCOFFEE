@@ -14,7 +14,22 @@ export default class Header extends Component {
       this.on(t, 'focus', show);
       this.on(t, 'click', (e) => { if (window.matchMedia('(hover: none)').matches) { e.preventDefault(); this.current ? this.hide() : show(); } });
     });
-    this.$$('[data-nav-link]:not([data-mega-trigger])').forEach((a) => this.on(a, 'mouseenter', () => this.hide()));
+    // Close mega when hovering other top-level nav links
+    this.$$('.l-header__nav .l-header__link:not([data-mega-trigger]), [data-nav-link]:not([data-mega-trigger])').forEach((a) => {
+      this.on(a, 'mouseenter', () => this.hide());
+      this.on(a, 'focus', () => this.hide());
+    });
+    // Native WP dropdowns: set aria-expanded on parent toggle
+    this.$$('.l-nav-item--has-children:not(.l-nav-item--mega)').forEach((li) => {
+      const link = li.querySelector(':scope > .l-header__link');
+      if (!link) return;
+      this.on(li, 'mouseenter', () => link.setAttribute('aria-expanded', 'true'));
+      this.on(li, 'mouseleave', () => link.setAttribute('aria-expanded', 'false'));
+      this.on(li, 'focusin', () => link.setAttribute('aria-expanded', 'true'));
+      this.on(li, 'focusout', () => {
+        if (!li.contains(document.activeElement)) link.setAttribute('aria-expanded', 'false');
+      });
+    });
     this.on(this.el, 'mouseleave', () => this.hide());
     this.on(document, 'keydown', (e) => { if (e.key === 'Escape') this.hide(); });
     this.on(document, 'click', (e) => { if (!this.el.contains(e.target)) this.hide(); });
